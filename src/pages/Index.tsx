@@ -5,53 +5,85 @@ import { Card } from "@/components/ui/card";
 
 const teamMembers = [
   {
-    name: "Pedro Soares",
-    position: "Guarda-Redes",
-    number: "10",
-    image: "/lovable-uploads/fdb8eb48-29a0-4a02-8d1e-a30eecfa48e8.png",
-    contractImage: "/lovable-uploads/2ebf48ac-7c00-45d7-a177-343ebe1b69f6.png"
+    name: "Pedro Paula",
+    position: "Universal",
+    image: "/lovable-uploads/pp.png",
+    contractImage: "/lovable-uploads/pp-contract.png"
+  },
+  {
+    name: "Francisco Freitas",
+    position: "Universal",
+    image: "/lovable-uploads/ff.png",
+    contractImage: "/lovable-uploads/ff-contract.png"
+  },
+  {
+    name: "Rodrigo Pimentel",
+    position: "Médio",
+    image: "/lovable-uploads/rp.png",
+    contractImage: "/lovable-uploads/rp-contract.png"
   },
   {
     name: "Tiago Pimentel",
+    position: "Defesa",
+    image: "/lovable-uploads/tp.png",
+    contractImage: "/lovable-uploads/tp-contract.png"
+  },
+  {
+    name: "Miguel Pimentel",
+    position: "Avançado",
+    image: "/lovable-uploads/mp.png",
+    contractImage: "/lovable-uploads/mp-contract.png"
+  },
+  {
+    name: "Carlos Guimarães",
+    position: "Avançado",
+    image: "/lovable-uploads/cg.png",
+    contractImage: "/lovable-uploads/cg-contract.png"
+  },
+  {
+    name: "Pedro Soares",
+    position: "Avançado",
+    image: "/lovable-uploads/ps.png",
+    contractImage: "/lovable-uploads/ps-contract.png"
+  },
+  {
+    name: "Nuno Teixeira",
     position: "Guarda-Redes",
-    number: "5",
-    image: "/lovable-uploads/43003c09-106e-4e90-875d-131317a6b0eb.png",
-    contractImage: "/lovable-uploads/2160de16-0a56-4902-bdd0-fee6d3396a27.png"
+    image: "/lovable-uploads/nt.png",
+    contractImage: "/lovable-uploads/nt-contract.png"
   },
   {
-    name: "Melo",
-    position: "Universal",
-    number: "7",
-    image: "/lovable-uploads/fa88278c-cddb-4920-812a-a17dc743d19a.png",
-    contractImage: "/lovable-uploads/0dc06dca-1c67-4c5f-b2b3-b1c7a18e8446.png"
+    name: "Mario Jesus",
+    position: "Defesa",
+    image: "/lovable-uploads/mj.png",
+    contractImage: "/lovable-uploads/mj-contract.png"
   },
   {
-    name: "Teixeira",
-    position: "Universal",
-    number: "8",
-    image: "/lovable-uploads/53329e21-20fc-4c4f-ba94-faae834ddcb2.png",
-    contractImage: "/lovable-uploads/932eb9f6-67c4-425e-a917-3f8257e4914f.png"
+    name: "Sandro Melo",
+    position: "Defesa",
+    image: "/lovable-uploads/sm.png",
+    contractImage: "/lovable-uploads/sm-contract.png"
   },
   {
-    name: "Guimarães",
-    position: "Universal",
-    number: "9",
-    image: "/lovable-uploads/fb993026-d7ad-4b9b-a0c3-370498d3b75d.png",
-    contractImage: "/lovable-uploads/7316a3cf-6948-4713-886e-73ae6fc0609c.png"
+    name: "Micael Tavares",
+    position: "Guarda-Redes",
+    image: "/lovable-uploads/mt.png",
+    contractImage: "/lovable-uploads/mt-contract.png"
   },
   {
-    name: "Carlos",
-    position: "Universal",
-    number: "4",
-    image: "/lovable-uploads/911730c6-4f3a-4cca-a97b-f012ebfe7cc0.png",
-    contractImage: "/lovable-uploads/cd862324-b486-40c6-bad7-a8fb64a16cfa.png"
+    name: "Fabio Larsen",
+    position: "Médio",
+    image: "/lovable-uploads/fl.png",
+    contractImage: "/lovable-uploads/fl-contract.png"
   }
 ];
 
 const staff = [
-  { name: "José Medeiros", role: "Treinador Principal" },
-  { name: "João Tavares", role: "Treinador Adjunto" },
-  { name: "Pedro Silva", role: "Diretor Técnico" },
+  { name: "Herbeto Resendes", role: "Treinador" },
+  { name: "João Oliveira", role: "Diretor" },
+  { name: "João Sardinha", role: "DJ" },
+  { name: "Luis Pacheco", role: "Massagista" },
+  { name: "Fernando Pimentel", role: "Diretor" }
 ];
 
 const events = [
@@ -88,20 +120,19 @@ const PlayerCard = ({ player }) => {
 
   return (
     <Card 
-      className="p-6 hover:shadow-lg transition-shadow cursor-pointer relative overflow-hidden"
+      className="p-6 hover:shadow-lg transition-all duration-300 transform cursor-pointer relative overflow-hidden"
       onClick={() => setShowContract(!showContract)}
     >
-      <img
-        src={showContract ? player.contractImage : player.image}
-        alt={player.name}
-        className="w-full h-64 object-cover mb-4 transition-opacity duration-300"
-      />
-      <div className="text-center">
-        <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-          <span className="text-2xl font-bold text-primary-foreground">{player.number}</span>
+      <div className={`transition-all duration-300 ${showContract ? 'scale-105' : ''}`}>
+        <img
+          src={showContract ? player.contractImage : player.image}
+          alt={player.name}
+          className="w-48 h-48 object-cover mx-auto mb-4 rounded-lg"
+        />
+        <div className="text-center">
+          <h3 className="font-semibold text-xl mb-2">{player.name}</h3>
+          <p className="text-gray-600">{player.position}</p>
         </div>
-        <h3 className="font-semibold text-xl mb-2">{player.name}</h3>
-        <p className="text-gray-600">{player.position}</p>
       </div>
     </Card>
   );
@@ -143,14 +174,14 @@ const Index = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Nossa Equipa</h2>
           
           <h3 className="text-2xl font-semibold mb-6">Jogadores</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
             {teamMembers.map((player) => (
               <PlayerCard key={player.name} player={player} />
             ))}
           </div>
 
           <h3 className="text-2xl font-semibold mb-6">Equipa Técnica</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {staff.map((member) => (
               <Card key={member.name} className="p-6 hover:shadow-lg transition-shadow">
                 <div className="text-center">
