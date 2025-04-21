@@ -6,11 +6,11 @@ export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { name: "About", href: "#about" },
-    { name: "Team", href: "#team" },
-    { name: "Gallery", href: "#gallery" },
-    { name: "Events", href: "#events" },
-    { name: "Contact", href: "#contact" }
+    { name: "Sobre", href: "#about" },
+    { name: "Equipa", href: "#team" },
+    { name: "Galeria", href: "#gallery" },
+    { name: "Jogos", href: "#events" },
+    { name: "Contactos", href: "#contact" }
   ];
 
   return (

@@ -4,37 +4,39 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import { Card } from "@/components/ui/card";
 
 const teamMembers = [
-  { name: "João Silva", position: "Forward", number: "10" },
-  { name: "Miguel Santos", position: "Defense", number: "5" },
-  { name: "Pedro Costa", position: "Goalkeeper", number: "1" },
-  { name: "António Oliveira", position: "Forward", number: "7" },
-  { name: "Manuel Pereira", position: "Defense", number: "3" },
+  { name: "Diogo Sousa", position: "Guarda-Redes", number: "1" },
+  { name: "Pedro Câmara", position: "Guarda-Redes", number: "10" },
+  { name: "João Pedro", position: "Universal", number: "4" },
+  { name: "Tiago Correia", position: "Universal", number: "5" },
+  { name: "Rodrigo Pinto", position: "Universal", number: "7" },
+  { name: "Francisco Medeiros", position: "Universal", number: "8" },
+  { name: "Rui Almeida", position: "Universal", number: "9" },
 ];
 
 const staff = [
-  { name: "Carlos Rodriguez", role: "Head Coach" },
-  { name: "José Fernandes", role: "Assistant Coach" },
-  { name: "Maria Sousa", role: "Physical Therapist" },
+  { name: "José Medeiros", role: "Treinador Principal" },
+  { name: "João Tavares", role: "Treinador Adjunto" },
+  { name: "Pedro Silva", role: "Diretor Técnico" },
 ];
 
 const events = [
   {
-    title: "PDL vs Sporting CP",
+    title: "HC PDL vs GDR Ilha",
     date: "2025-05-01",
     time: "20:00",
-    location: "Pavilhão Municipal",
+    location: "Pavilhão Municipal Sidónio Serpa",
   },
   {
-    title: "PDL vs SL Benfica",
+    title: "CD Povoa vs HC PDL",
     date: "2025-05-15",
     time: "19:30",
-    location: "Pavilhão Municipal",
+    location: "Pavilhão Municipal da Póvoa de Varzim",
   },
   {
-    title: "FC Porto vs PDL",
+    title: "HC PDL vs HC Braga",
     date: "2025-05-29",
     time: "21:00",
-    location: "Dragão Arena",
+    location: "Pavilhão Municipal Sidónio Serpa",
   },
 ];
 
@@ -59,7 +61,7 @@ const Index = () => {
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
               Hóquei Clube Ponta Delgada
             </h1>
-            <p className="text-xl text-gray-600 mb-8">Passion, Pride, and Excellence since 2012</p>
+            <p className="text-xl text-gray-600 mb-8">Paixão, Orgulho e Excelência desde 2012</p>
           </div>
         </div>
       </section>
@@ -67,11 +69,11 @@ const Index = () => {
       {/* About Section */}
       <section id="about" className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-8">About Us</h2>
+          <h2 className="text-3xl font-bold text-center mb-8">Sobre Nós</h2>
           <p className="text-gray-600 text-lg text-center max-w-3xl mx-auto">
-            Founded in 2012, Hóquei Clube Ponta Delgada has been a symbol of sporting excellence in the Azores.
-            Our commitment to developing young talent and promoting hockey in the region has made us one of the
-            most respected clubs in Portugal.
+            Fundado em 2012, o Hóquei Clube de Ponta Delgada tem sido um símbolo de excelência desportiva nos Açores.
+            O nosso compromisso com o desenvolvimento de jovens talentos e a promoção do hóquei na região tornou-nos
+            um dos clubes mais respeitados em Portugal.
           </p>
         </div>
       </section>
@@ -79,9 +81,9 @@ const Index = () => {
       {/* Team Section */}
       <section id="team" className="py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Our Team</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">Nossa Equipa</h2>
           
-          <h3 className="text-2xl font-semibold mb-6">Players</h3>
+          <h3 className="text-2xl font-semibold mb-6">Jogadores</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             {teamMembers.map((member) => (
               <Card key={member.name} className="p-6 hover:shadow-lg transition-shadow">
@@ -96,7 +98,7 @@ const Index = () => {
             ))}
           </div>
 
-          <h3 className="text-2xl font-semibold mb-6">Staff</h3>
+          <h3 className="text-2xl font-semibold mb-6">Equipa Técnica</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {staff.map((member) => (
               <Card key={member.name} className="p-6 hover:shadow-lg transition-shadow">
@@ -113,14 +115,14 @@ const Index = () => {
       {/* Gallery Section */}
       <section id="gallery" className="py-16 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Gallery</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">Galeria</h2>
           <div className="relative w-full overflow-hidden">
             <div className="flex slide">
               {[...galleryImages, ...galleryImages].map((image, index) => (
                 <div key={index} className="flex-shrink-0 w-1/4 px-2">
                   <img
                     src={image}
-                    alt={`Gallery image ${index + 1}`}
+                    alt={`Imagem da galeria ${index + 1}`}
                     className="w-full h-48 object-cover rounded-lg"
                   />
                 </div>
@@ -133,15 +135,15 @@ const Index = () => {
       {/* Events Section */}
       <section id="events" className="py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Upcoming Events</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">Próximos Jogos</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {events.map((event) => (
               <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow">
                 <div>
                   <h3 className="font-semibold text-xl mb-2">{event.title}</h3>
-                  <p className="text-gray-600">Date: {event.date}</p>
-                  <p className="text-gray-600">Time: {event.time}</p>
-                  <p className="text-gray-600">Location: {event.location}</p>
+                  <p className="text-gray-600">Data: {event.date}</p>
+                  <p className="text-gray-600">Hora: {event.time}</p>
+                  <p className="text-gray-600">Local: {event.location}</p>
                 </div>
               </Card>
             ))}
@@ -152,11 +154,11 @@ const Index = () => {
       {/* Contact Section */}
       <section id="contact" className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Contact Us</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">Contactos</h2>
           <div className="text-center">
-            <p className="text-gray-600 mb-2">Email: info@hcpontadelgada.pt</p>
-            <p className="text-gray-600 mb-2">Phone: +351 296 123 456</p>
-            <p className="text-gray-600">Address: Rua do Hóquei, 9500-123 Ponta Delgada, Açores</p>
+            <p className="text-gray-600 mb-2">Email: hoqueiclube.pdl@gmail.com</p>
+            <p className="text-gray-600 mb-2">Telefone: +351 296 382 987</p>
+            <p className="text-gray-600">Morada: Rua do Mercado, 31, 9500-326 Ponta Delgada, Açores</p>
           </div>
         </div>
       </section>
@@ -164,7 +166,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p>&copy; 2025 Hóquei Clube Ponta Delgada. All rights reserved.</p>
+          <p>&copy; 2025 Hóquei Clube Ponta Delgada. Todos os direitos reservados.</p>
         </div>
       </footer>
     </div>
