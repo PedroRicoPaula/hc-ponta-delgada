@@ -1,16 +1,51 @@
-
+import { useState } from 'react';
 import { Navigation } from "@/components/Navigation";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { Card } from "@/components/ui/card";
 
 const teamMembers = [
-  { name: "Diogo Sousa", position: "Guarda-Redes", number: "1" },
-  { name: "Pedro Câmara", position: "Guarda-Redes", number: "10" },
-  { name: "João Pedro", position: "Universal", number: "4" },
-  { name: "Tiago Correia", position: "Universal", number: "5" },
-  { name: "Rodrigo Pinto", position: "Universal", number: "7" },
-  { name: "Francisco Medeiros", position: "Universal", number: "8" },
-  { name: "Rui Almeida", position: "Universal", number: "9" },
+  {
+    name: "Pedro Soares",
+    position: "Guarda-Redes",
+    number: "10",
+    image: "/lovable-uploads/fdb8eb48-29a0-4a02-8d1e-a30eecfa48e8.png",
+    contractImage: "/lovable-uploads/2ebf48ac-7c00-45d7-a177-343ebe1b69f6.png"
+  },
+  {
+    name: "Tiago Pimentel",
+    position: "Guarda-Redes",
+    number: "5",
+    image: "/lovable-uploads/43003c09-106e-4e90-875d-131317a6b0eb.png",
+    contractImage: "/lovable-uploads/2160de16-0a56-4902-bdd0-fee6d3396a27.png"
+  },
+  {
+    name: "Melo",
+    position: "Universal",
+    number: "7",
+    image: "/lovable-uploads/fa88278c-cddb-4920-812a-a17dc743d19a.png",
+    contractImage: "/lovable-uploads/0dc06dca-1c67-4c5f-b2b3-b1c7a18e8446.png"
+  },
+  {
+    name: "Teixeira",
+    position: "Universal",
+    number: "8",
+    image: "/lovable-uploads/53329e21-20fc-4c4f-ba94-faae834ddcb2.png",
+    contractImage: "/lovable-uploads/932eb9f6-67c4-425e-a917-3f8257e4914f.png"
+  },
+  {
+    name: "Guimarães",
+    position: "Universal",
+    number: "9",
+    image: "/lovable-uploads/fb993026-d7ad-4b9b-a0c3-370498d3b75d.png",
+    contractImage: "/lovable-uploads/7316a3cf-6948-4713-886e-73ae6fc0609c.png"
+  },
+  {
+    name: "Carlos",
+    position: "Universal",
+    number: "4",
+    image: "/lovable-uploads/911730c6-4f3a-4cca-a97b-f012ebfe7cc0.png",
+    contractImage: "/lovable-uploads/cd862324-b486-40c6-bad7-a8fb64a16cfa.png"
+  }
 ];
 
 const staff = [
@@ -47,6 +82,30 @@ const galleryImages = [
   "/placeholder.svg",
   "/placeholder.svg",
 ];
+
+const PlayerCard = ({ player }) => {
+  const [showContract, setShowContract] = useState(false);
+
+  return (
+    <Card 
+      className="p-6 hover:shadow-lg transition-shadow cursor-pointer relative overflow-hidden"
+      onClick={() => setShowContract(!showContract)}
+    >
+      <img
+        src={showContract ? player.contractImage : player.image}
+        alt={player.name}
+        className="w-full h-64 object-cover mb-4 transition-opacity duration-300"
+      />
+      <div className="text-center">
+        <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+          <span className="text-2xl font-bold text-primary-foreground">{player.number}</span>
+        </div>
+        <h3 className="font-semibold text-xl mb-2">{player.name}</h3>
+        <p className="text-gray-600">{player.position}</p>
+      </div>
+    </Card>
+  );
+};
 
 const Index = () => {
   return (
@@ -85,16 +144,8 @@ const Index = () => {
           
           <h3 className="text-2xl font-semibold mb-6">Jogadores</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            {teamMembers.map((member) => (
-              <Card key={member.name} className="p-6 hover:shadow-lg transition-shadow">
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold">{member.number}</span>
-                  </div>
-                  <h3 className="font-semibold text-xl mb-2">{member.name}</h3>
-                  <p className="text-gray-600">{member.position}</p>
-                </div>
-              </Card>
+            {teamMembers.map((player) => (
+              <PlayerCard key={player.name} player={player} />
             ))}
           </div>
 

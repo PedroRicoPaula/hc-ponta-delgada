@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
+import { Link } from 'react-router-dom';
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,19 +17,24 @@ export const Navigation = () => {
   return (
     <nav className="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0">
-            <img src="/lovable-uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png" alt="PDL Hockey Club" className="h-12" />
-          </div>
+        <div className="flex items-center justify-between h-20">
+          <Link to="/" className="flex-shrink-0">
+            <img 
+              src="/lovable-uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png" 
+              alt="PDL Hockey Club" 
+              className="h-16 w-auto hover:scale-105 transition-transform"
+            />
+          </Link>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navItems.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-800 hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium"
+                  className="relative text-gray-800 hover:text-primary hover:font-bold px-3 py-2 rounded-md text-sm font-medium group"
                 >
                   {item.name}
+                  <span className="absolute inset-x-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300"></span>
                 </a>
               ))}
             </div>
@@ -51,10 +57,11 @@ export const Navigation = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-gray-800 hover:text-primary block px-3 py-2 rounded-md text-base font-medium"
+                className="relative text-gray-800 hover:text-primary hover:font-bold block px-3 py-2 rounded-md text-base font-medium group"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
+                <span className="absolute inset-x-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300"></span>
               </a>
             ))}
           </div>
