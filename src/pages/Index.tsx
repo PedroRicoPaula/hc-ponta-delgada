@@ -1,7 +1,15 @@
+
 import { useState } from 'react';
 import { Navigation } from "@/components/Navigation";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { Card } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
 
 const teamMembers = [
   {
@@ -108,11 +116,13 @@ const events = [
 ];
 
 const galleryImages = [
-  "/placeholder.svg",
-  "/placeholder.svg",
-  "/placeholder.svg",
-  "/placeholder.svg",
-  "/placeholder.svg",
+  "/lovable-uploads/6f004096-7b4b-46fc-900c-5a739fb46b49.png",
+  "/lovable-uploads/bb357729-6191-4dec-bdc6-e9b22898bd63.png",
+  "/lovable-uploads/18941c1a-b681-46a8-b651-0e812f6192b0.png",
+  "/lovable-uploads/b2a3a926-e3f0-469c-9390-0113bfb380ea.png",
+  "/lovable-uploads/57e06117-8822-4287-8b8c-e947952330c8.png",
+  "/lovable-uploads/cc047543-aa40-46cb-8746-4b1324dba1a4.png",
+  "/lovable-uploads/c36667ca-9257-4046-9d64-b47bc79a4ba3.png"
 ];
 
 const PlayerCard = ({ player }) => {
@@ -120,18 +130,20 @@ const PlayerCard = ({ player }) => {
 
   return (
     <Card 
-      className="p-6 hover:shadow-lg transition-all duration-300 transform cursor-pointer relative overflow-hidden"
+      className="p-4 hover:shadow-lg transition-all duration-300 transform cursor-pointer overflow-hidden"
       onClick={() => setShowContract(!showContract)}
     >
       <div className={`transition-all duration-300 ${showContract ? 'scale-105' : ''}`}>
-        <img
-          src={showContract ? player.contractImage : player.image}
-          alt={player.name}
-          className="w-48 h-48 object-cover mx-auto mb-4 rounded-lg"
-        />
+        <div className="w-36 h-36 mx-auto mb-4 overflow-hidden">
+          <img
+            src={showContract ? player.contractImage : player.image}
+            alt={player.name}
+            className="w-full h-full object-cover rounded-lg"
+          />
+        </div>
         <div className="text-center">
-          <h3 className="font-semibold text-xl mb-2">{player.name}</h3>
-          <p className="text-gray-600">{player.position}</p>
+          <h3 className="font-semibold text-lg mb-1">{player.name}</h3>
+          <p className="text-gray-600 text-sm">{player.position}</p>
         </div>
       </div>
     </Card>
@@ -174,19 +186,19 @@ const Index = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Nossa Equipa</h2>
           
           <h3 className="text-2xl font-semibold mb-6">Jogadores</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
             {teamMembers.map((player) => (
               <PlayerCard key={player.name} player={player} />
             ))}
           </div>
 
           <h3 className="text-2xl font-semibold mb-6">Equipa Técnica</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {staff.map((member) => (
-              <Card key={member.name} className="p-6 hover:shadow-lg transition-shadow">
+              <Card key={member.name} className="p-4 hover:shadow-lg transition-shadow">
                 <div className="text-center">
-                  <h3 className="font-semibold text-xl mb-2">{member.name}</h3>
-                  <p className="text-gray-600">{member.role}</p>
+                  <h3 className="font-semibold text-lg mb-1">{member.name}</h3>
+                  <p className="text-gray-600 text-sm">{member.role}</p>
                 </div>
               </Card>
             ))}
@@ -198,19 +210,25 @@ const Index = () => {
       <section id="gallery" className="py-16 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Galeria</h2>
-          <div className="relative w-full overflow-hidden">
-            <div className="flex slide">
-              {[...galleryImages, ...galleryImages].map((image, index) => (
-                <div key={index} className="flex-shrink-0 w-1/4 px-2">
-                  <img
-                    src={image}
-                    alt={`Imagem da galeria ${index + 1}`}
-                    className="w-full h-48 object-cover rounded-lg"
-                  />
-                </div>
+          <Carousel className="w-full max-w-4xl mx-auto">
+            <CarouselContent>
+              {galleryImages.map((image, index) => (
+                <CarouselItem key={index} className="basis-full md:basis-1/2 lg:basis-1/3">
+                  <div className="p-2">
+                    <img 
+                      src={image} 
+                      alt={`Galeria ${index + 1}`} 
+                      className="w-full h-64 object-cover rounded-lg"
+                    />
+                  </div>
+                </CarouselItem>
               ))}
+            </CarouselContent>
+            <div className="flex justify-center mt-4">
+              <CarouselPrevious className="mx-2 relative static lg:-left-0 translate-y-0" />
+              <CarouselNext className="mx-2 relative static lg:-right-0 translate-y-0" />
             </div>
-          </div>
+          </Carousel>
         </div>
       </section>
 

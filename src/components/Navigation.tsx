@@ -22,7 +22,7 @@ export const Navigation = () => {
             <img 
               src="/lovable-uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png" 
               alt="PDL Hockey Club" 
-              className="h-20 w-auto hover:scale-105 transition-transform"
+              className="h-24 w-auto hover:scale-105 transition-transform"
             />
           </Link>
           <div className="hidden md:block">
@@ -31,10 +31,10 @@ export const Navigation = () => {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="relative text-gray-800 hover:text-primary hover:font-bold px-3 py-2 rounded-md text-sm font-medium group"
+                  className="relative text-gray-800 hover:text-primary hover:font-bold px-3 py-2 rounded-md text-sm font-medium transition-all duration-300"
                 >
                   {item.name}
-                  <span className="absolute inset-x-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300"></span>
+                  <span className="absolute inset-x-0 bottom-0 h-0.5 bg-primary transform scale-x-0 hover:scale-x-100 transition-transform duration-300"></span>
                 </a>
               ))}
             </div>
@@ -57,11 +57,11 @@ export const Navigation = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="relative text-gray-800 hover:text-primary hover:font-bold block px-3 py-2 rounded-md text-base font-medium group"
+                className="relative text-gray-800 hover:text-primary hover:font-bold block px-3 py-2 rounded-md text-base font-medium transition-all duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
-                <span className="absolute inset-x-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300"></span>
+                <span className="absolute inset-x-0 bottom-0 h-0.5 bg-primary transform scale-x-0 hover:scale-x-100 transition-transform duration-300"></span>
               </a>
             ))}
           </div>
