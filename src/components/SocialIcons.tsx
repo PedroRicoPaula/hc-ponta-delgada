@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Facebook, Instagram, Twitter, Youtube, Linkedin } from 'lucide-react';
+import { Facebook, Instagram, Youtube } from 'lucide-react';
 
 export const SocialIcons = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -8,9 +8,7 @@ export const SocialIcons = () => {
   const socialLinks = [
     { name: "Facebook", icon: Facebook, url: "https://facebook.com" },
     { name: "Instagram", icon: Instagram, url: "https://instagram.com" },
-    { name: "Twitter", icon: Twitter, url: "https://twitter.com" },
     { name: "Youtube", icon: Youtube, url: "https://youtube.com" },
-    { name: "Linkedin", icon: Linkedin, url: "https://linkedin.com" },
   ];
 
   return (

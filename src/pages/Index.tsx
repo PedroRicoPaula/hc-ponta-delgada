@@ -13,77 +13,94 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 
+// Random player images array
+const playerImages = [
+  "/lovable-uploads/6f004096-7b4b-46fc-900c-5a739fb46b49.png",
+  "/lovable-uploads/bb357729-6191-4dec-bdc6-e9b22898bd63.png",
+  "/lovable-uploads/18941c1a-b681-46a8-b651-0e812f6192b0.png",
+  "/lovable-uploads/b2a3a926-e3f0-469c-9390-0113bfb380ea.png",
+  "/lovable-uploads/57e06117-8822-4287-8b8c-e947952330c8.png",
+  "/lovable-uploads/cc047543-aa40-46cb-8746-4b1324dba1a4.png",
+  "/lovable-uploads/c36667ca-9257-4046-9d64-b47bc79a4ba3.png"
+];
+
+// Get a random image from the array
+const getRandomImage = () => {
+  const randomIndex = Math.floor(Math.random() * playerImages.length);
+  return playerImages[randomIndex];
+};
+
 const teamMembers = [
   {
     name: "Pedro Paula",
     position: "Universal",
-    image: "/lovable-uploads/pp.png",
+    image: getRandomImage(),
     contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Francisco Freitas",
     position: "Universal",
-    image: "/lovable-uploads/ff.png",
+    image: getRandomImage(),
     contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Rodrigo Pimentel",
     position: "Médio",
-    image: "/lovable-uploads/rp.png",
+    image: getRandomImage(),
     contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Tiago Pimentel",
     position: "Defesa",
-    image: "/lovable-uploads/tp.png",
+    image: getRandomImage(),
     contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Miguel Pimentel",
     position: "Avançado",
-    image: "/lovable-uploads/mp.png",
+    image: getRandomImage(),
     contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Carlos Guimarães",
     position: "Avançado",
-    image: "/lovable-uploads/cg.png",
+    image: getRandomImage(),
     contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Pedro Soares",
     position: "Avançado",
-    image: "/lovable-uploads/ps.png",
+    image: getRandomImage(),
     contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Nuno Teixeira",
     position: "Guarda-Redes",
-    image: "/lovable-uploads/nt.png",
+    image: getRandomImage(),
     contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Mario Jesus",
     position: "Defesa",
-    image: "/lovable-uploads/mj.png",
+    image: getRandomImage(),
     contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Sandro Melo",
     position: "Defesa",
-    image: "/lovable-uploads/sm.png",
+    image: getRandomImage(),
     contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Micael Tavares",
     position: "Guarda-Redes",
-    image: "/lovable-uploads/mt.png",
+    image: getRandomImage(),
     contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Fabio Larsen",
     position: "Médio",
-    image: "/lovable-uploads/fl.png",
+    image: getRandomImage(),
     contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   }
 ];
