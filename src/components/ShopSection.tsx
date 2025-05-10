@@ -1,7 +1,6 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart } from "lucide-react";
 
 interface ShopItem {
   name: string;
@@ -62,8 +61,8 @@ export const ShopSection = () => {
               <CardContent className="p-4">
                 <h3 className="font-semibold text-lg">{item.name}</h3>
                 <p className="text-primary font-bold text-xl mt-2">{item.price}</p>
-                <Button className="mt-4 w-full flex items-center justify-center gap-2 bg-secondary text-white py-2 rounded-md hover:bg-secondary/90 transition-colors">
-                  <ShoppingCart size={18} /> Comprar na secção do clube
+                <Button className="mt-4 w-full flex items-center justify-center bg-secondary text-white py-2 rounded-md hover:bg-secondary/90 transition-colors">
+                  Comprar na secção do clube
                 </Button>
               </CardContent>
             </Card>
