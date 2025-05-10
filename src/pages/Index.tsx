@@ -18,73 +18,73 @@ const teamMembers = [
     name: "Pedro Paula",
     position: "Universal",
     image: "/lovable-uploads/pp.png",
-    contractImage: "/lovable-uploads/pp-contract.png"
+    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Francisco Freitas",
     position: "Universal",
     image: "/lovable-uploads/ff.png",
-    contractImage: "/lovable-uploads/ff-contract.png"
+    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Rodrigo Pimentel",
     position: "Médio",
     image: "/lovable-uploads/rp.png",
-    contractImage: "/lovable-uploads/rp-contract.png"
+    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Tiago Pimentel",
     position: "Defesa",
     image: "/lovable-uploads/tp.png",
-    contractImage: "/lovable-uploads/tp-contract.png"
+    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Miguel Pimentel",
     position: "Avançado",
     image: "/lovable-uploads/mp.png",
-    contractImage: "/lovable-uploads/mp-contract.png"
+    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Carlos Guimarães",
     position: "Avançado",
     image: "/lovable-uploads/cg.png",
-    contractImage: "/lovable-uploads/cg-contract.png"
+    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Pedro Soares",
     position: "Avançado",
     image: "/lovable-uploads/ps.png",
-    contractImage: "/lovable-uploads/ps-contract.png"
+    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Nuno Teixeira",
     position: "Guarda-Redes",
     image: "/lovable-uploads/nt.png",
-    contractImage: "/lovable-uploads/nt-contract.png"
+    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Mario Jesus",
     position: "Defesa",
     image: "/lovable-uploads/mj.png",
-    contractImage: "/lovable-uploads/mj-contract.png"
+    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Sandro Melo",
     position: "Defesa",
     image: "/lovable-uploads/sm.png",
-    contractImage: "/lovable-uploads/sm-contract.png"
+    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Micael Tavares",
     position: "Guarda-Redes",
     image: "/lovable-uploads/mt.png",
-    contractImage: "/lovable-uploads/mt-contract.png"
+    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   },
   {
     name: "Fabio Larsen",
     position: "Médio",
     image: "/lovable-uploads/fl.png",
-    contractImage: "/lovable-uploads/fl-contract.png"
+    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
   }
 ];
 
@@ -136,11 +136,11 @@ const PlayerCard = ({ player }) => {
       onClick={() => setShowContract(!showContract)}
     >
       <div className={`transition-all duration-300 ${showContract ? 'scale-105' : ''}`}>
-        <div className="w-36 h-36 mx-auto mb-4 overflow-hidden">
+        <div className="w-36 h-36 mx-auto mb-4 overflow-hidden rounded-lg">
           <img
             src={showContract ? player.contractImage : player.image}
             alt={player.name}
-            className="w-full h-full object-cover rounded-lg"
+            className="w-full h-full object-cover"
           />
         </div>
         <div className="text-center">
