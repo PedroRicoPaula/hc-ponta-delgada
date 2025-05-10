@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { Navigation } from "@/components/Navigation";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { SocialIcons } from "@/components/SocialIcons";
+import { ShopSection } from "@/components/ShopSection";
 import { Card } from "@/components/ui/card";
 import {
   Carousel,
@@ -154,6 +156,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
+      <SocialIcons />
       <ScrollToTop />
 
       {/* Hero Section */}
@@ -250,6 +253,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Shop Section */}
+      <ShopSection />
 
       {/* Contact Section */}
       <section id="contact" className="py-16">

@@ -11,6 +11,7 @@ export const Navigation = () => {
     { name: "Equipa", href: "#team" },
     { name: "Galeria", href: "#gallery" },
     { name: "Jogos", href: "#events" },
+    { name: "Loja", href: "#shop" },
     { name: "Contactos", href: "#contact" }
   ];
 
@@ -22,7 +23,7 @@ export const Navigation = () => {
             <img 
               src="/lovable-uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png" 
               alt="PDL Hockey Club" 
-              className="h-24 w-auto hover:scale-105 transition-transform"
+              className="h-28 w-auto hover:scale-105 transition-transform"
             />
           </Link>
           <div className="hidden md:block">
@@ -34,7 +35,7 @@ export const Navigation = () => {
                   className="relative text-gray-800 hover:text-primary hover:font-bold px-3 py-2 rounded-md text-sm font-medium transition-all duration-300"
                 >
                   {item.name}
-                  <span className="absolute inset-x-0 bottom-0 h-0.5 bg-primary transform scale-x-0 hover:scale-x-100 transition-transform duration-300"></span>
+                  <span className="absolute inset-x-0 bottom-0 h-0.5 bg-yellow-400 transform scale-x-0 hover:scale-x-100 transition-transform duration-300"></span>
                 </a>
               ))}
             </div>
@@ -61,7 +62,7 @@ export const Navigation = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
-                <span className="absolute inset-x-0 bottom-0 h-0.5 bg-primary transform scale-x-0 hover:scale-x-100 transition-transform duration-300"></span>
+                <span className="absolute inset-x-0 bottom-0 h-0.5 bg-yellow-400 transform scale-x-0 hover:scale-x-100 transition-transform duration-300"></span>
               </a>
             ))}
           </div>
