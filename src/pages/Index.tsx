@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Navigation } from "@/components/Navigation";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SocialIcons } from "@/components/SocialIcons";
-import { ShopSection } from "@/components/ShopSection";
+
 import { Card } from "@/components/ui/card";
 import {
   Carousel,
@@ -13,97 +13,13 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 
-// Random player images array
-const playerImages = [
-  "/lovable-uploads/6f004096-7b4b-46fc-900c-5a739fb46b49.png",
-  "/lovable-uploads/bb357729-6191-4dec-bdc6-e9b22898bd63.png",
-  "/lovable-uploads/18941c1a-b681-46a8-b651-0e812f6192b0.png",
-  "/lovable-uploads/b2a3a926-e3f0-469c-9390-0113bfb380ea.png",
-  "/lovable-uploads/57e06117-8822-4287-8b8c-e947952330c8.png",
-  "/lovable-uploads/cc047543-aa40-46cb-8746-4b1324dba1a4.png",
-  "/lovable-uploads/c36667ca-9257-4046-9d64-b47bc79a4ba3.png"
-];
-
-// Get a random image from the array
-const getRandomImage = () => {
-  const randomIndex = Math.floor(Math.random() * playerImages.length);
-  return playerImages[randomIndex];
+const playersByPosition = {
+  "Guarda-Redes": ["Nuno Teixeira", "Micael Tavares"],
+  "Defesa": ["Tiago Pimentel", "Mario Jesus", "Sandro Melo"],
+  "Médio": ["Rodrigo Pimentel", "Fabio Larsen"],
+  "Avançado": ["Miguel Pimentel", "Carlos Guimarães", "Pedro Soares"],
+  "Universal": ["Pedro Paula", "Francisco Freitas"]
 };
-
-const teamMembers = [
-  {
-    name: "Pedro Paula",
-    position: "Universal",
-    image: getRandomImage(),
-    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
-  },
-  {
-    name: "Francisco Freitas",
-    position: "Universal",
-    image: getRandomImage(),
-    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
-  },
-  {
-    name: "Rodrigo Pimentel",
-    position: "Médio",
-    image: getRandomImage(),
-    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
-  },
-  {
-    name: "Tiago Pimentel",
-    position: "Defesa",
-    image: getRandomImage(),
-    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
-  },
-  {
-    name: "Miguel Pimentel",
-    position: "Avançado",
-    image: getRandomImage(),
-    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
-  },
-  {
-    name: "Carlos Guimarães",
-    position: "Avançado",
-    image: getRandomImage(),
-    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
-  },
-  {
-    name: "Pedro Soares",
-    position: "Avançado",
-    image: getRandomImage(),
-    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
-  },
-  {
-    name: "Nuno Teixeira",
-    position: "Guarda-Redes",
-    image: getRandomImage(),
-    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
-  },
-  {
-    name: "Mario Jesus",
-    position: "Defesa",
-    image: getRandomImage(),
-    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
-  },
-  {
-    name: "Sandro Melo",
-    position: "Defesa",
-    image: getRandomImage(),
-    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
-  },
-  {
-    name: "Micael Tavares",
-    position: "Guarda-Redes",
-    image: getRandomImage(),
-    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
-  },
-  {
-    name: "Fabio Larsen",
-    position: "Médio",
-    image: getRandomImage(),
-    contractImage: "/lovable-uploads/6fcff2e6-86f0-452c-bdd9-9428fbfe04b3.png"
-  }
-];
 
 const staff = [
   { name: "Herbeto Resendes", role: "Treinador" },
@@ -113,7 +29,7 @@ const staff = [
   { name: "Fernando Pimentel", role: "Diretor" }
 ];
 
-const events = [
+const senioresEvents = [
   {
     title: "HC PDL vs GDR Ilha",
     date: "2025-05-01",
@@ -121,16 +37,19 @@ const events = [
     location: "Pavilhão Municipal Sidónio Serpa",
   },
   {
-    title: "CD Povoa vs HC PDL",
-    date: "2025-05-15",
-    time: "19:30",
-    location: "Pavilhão Municipal da Póvoa de Varzim",
-  },
-  {
     title: "HC PDL vs HC Braga",
     date: "2025-05-29",
     time: "21:00",
     location: "Pavilhão Municipal Sidónio Serpa",
+  },
+];
+
+const formacaoEvents = [
+  {
+    title: "CD Povoa vs HC PDL",
+    date: "2025-05-15",
+    time: "19:30",
+    location: "Pavilhão Municipal da Póvoa de Varzim",
   },
 ];
 
@@ -144,30 +63,6 @@ const galleryImages = [
   "/lovable-uploads/c36667ca-9257-4046-9d64-b47bc79a4ba3.png"
 ];
 
-const PlayerCard = ({ player }) => {
-  const [showContract, setShowContract] = useState(false);
-
-  return (
-    <Card 
-      className="p-4 hover:shadow-lg transition-all duration-300 transform cursor-pointer overflow-hidden"
-      onClick={() => setShowContract(!showContract)}
-    >
-      <div className={`transition-all duration-300 ${showContract ? 'scale-105' : ''}`}>
-        <div className="w-36 h-36 mx-auto mb-4 overflow-hidden rounded-lg">
-          <img
-            src={showContract ? player.contractImage : player.image}
-            alt={player.name}
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="text-center">
-          <h3 className="font-semibold text-lg mb-1">{player.name}</h3>
-          <p className="text-gray-600 text-sm">{player.position}</p>
-        </div>
-      </div>
-    </Card>
-  );
-};
 
 const Index = () => {
   return (
@@ -206,9 +101,18 @@ const Index = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Nossa Equipa</h2>
           
           <h3 className="text-2xl font-semibold mb-6">Jogadores</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
-            {teamMembers.map((player) => (
-              <PlayerCard key={player.name} player={player} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
+            {Object.entries(playersByPosition).map(([position, players]) => (
+              <Card key={position} className="p-4 hover:shadow-lg transition-shadow">
+                <div className="text-center">
+                  <h4 className="font-semibold text-lg mb-3 text-primary">{position}</h4>
+                  <ul className="space-y-1">
+                    {players.map((playerName) => (
+                      <li key={playerName} className="text-gray-700">{playerName}</li>
+                    ))}
+                  </ul>
+                </div>
+              </Card>
             ))}
           </div>
 
@@ -256,8 +160,24 @@ const Index = () => {
       <section id="events" className="py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Próximos Jogos</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {events.map((event) => (
+          
+          <h3 className="text-2xl font-semibold mb-6">Seniores</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            {senioresEvents.map((event) => (
+              <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow">
+                <div>
+                  <h3 className="font-semibold text-xl mb-2">{event.title}</h3>
+                  <p className="text-gray-600">Data: {event.date}</p>
+                  <p className="text-gray-600">Hora: {event.time}</p>
+                  <p className="text-gray-600">Local: {event.location}</p>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          <h3 className="text-2xl font-semibold mb-6">Formação</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {formacaoEvents.map((event) => (
               <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow">
                 <div>
                   <h3 className="font-semibold text-xl mb-2">{event.title}</h3>
@@ -270,9 +190,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-
-      {/* Shop Section */}
-      <ShopSection />
 
       {/* Contact Section */}
       <section id="contact" className="py-16">
