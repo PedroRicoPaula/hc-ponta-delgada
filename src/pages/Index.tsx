@@ -65,6 +65,8 @@ const galleryImages = [
 
 
 const Index = () => {
+  // Force refresh - no events variable exists anymore
+  console.log("Index component loaded successfully");
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
