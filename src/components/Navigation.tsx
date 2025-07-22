@@ -11,7 +11,6 @@ export const Navigation = () => {
     { name: "Equipa", href: "#team" },
     { name: "Galeria", href: "#gallery" },
     { name: "Jogos", href: "#events" },
-    { name: "Loja", href: "#shop" },
     { name: "Contactos", href: "#contact" }
   ];
 
@@ -32,10 +31,9 @@ export const Navigation = () => {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="relative text-gray-800 hover:text-primary hover:font-bold px-3 py-2 rounded-md text-sm font-medium transition-all duration-300"
+                  className="story-link relative text-gray-800 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300"
                 >
                   {item.name}
-                  <span className="absolute inset-x-0 bottom-0 h-0.5 bg-yellow-400 transform scale-x-0 hover:scale-x-100 transition-transform duration-300"></span>
                 </a>
               ))}
             </div>
@@ -58,11 +56,10 @@ export const Navigation = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="relative text-gray-800 hover:text-primary hover:font-bold block px-3 py-2 rounded-md text-base font-medium transition-all duration-300"
+                className="story-link text-gray-800 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
-                <span className="absolute inset-x-0 bottom-0 h-0.5 bg-yellow-400 transform scale-x-0 hover:scale-x-100 transition-transform duration-300"></span>
               </a>
             ))}
           </div>
