@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Navigation } from "@/components/Navigation";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SocialIcons } from "@/components/SocialIcons";
+import Autoplay from "embla-carousel-autoplay";
 
 import { Card } from "@/components/ui/card";
 import {
@@ -65,6 +66,23 @@ const galleryImages = [
 
 
 const Index = () => {
+  const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
+  
+  const autoplayPlugin = Autoplay({
+    delay: 3000,
+    stopOnInteraction: false,
+    stopOnMouseEnter: true,
+  });
+
+  const handleCarouselClick = () => {
+    if (isAutoplayPaused) {
+      autoplayPlugin.play();
+    } else {
+      autoplayPlugin.stop();
+    }
+    setIsAutoplayPaused(!isAutoplayPaused);
+  };
+
   // Force refresh - no events variable exists anymore
   console.log("Index component loaded successfully");
   return (
@@ -136,15 +154,29 @@ const Index = () => {
       <section id="gallery" className="py-16 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Galeria</h2>
-          <Carousel className="w-full max-w-4xl mx-auto">
-            <CarouselContent>
+          <div className="text-center mb-4">
+            <p className="text-sm text-gray-600">
+              {isAutoplayPaused ? "Clique para retomar" : "Clique para pausar"} | Arraste para navegar
+            </p>
+          </div>
+          <Carousel 
+            className="w-full max-w-4xl mx-auto cursor-pointer"
+            plugins={[autoplayPlugin]}
+            opts={{
+              align: "start",
+              loop: true,
+              dragFree: true,
+            }}
+            onClick={handleCarouselClick}
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
               {galleryImages.map((image, index) => (
-                <CarouselItem key={index} className="basis-full md:basis-1/2 lg:basis-1/3">
+                <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3">
                   <div className="p-2">
                     <img 
                       src={image} 
                       alt={`Galeria ${index + 1}`} 
-                      className="w-full h-64 object-cover rounded-lg"
+                      className="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-300"
                     />
                   </div>
                 </CarouselItem>
