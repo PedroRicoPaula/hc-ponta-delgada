@@ -31,7 +31,7 @@ export const Navigation = () => {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="story-link relative text-gray-800 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300"
+                  className="relative text-gray-800 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-black after:origin-bottom-left after:transition-transform after:duration-300 hover:after:scale-x-100"
                 >
                   {item.name}
                 </a>
@@ -56,7 +56,7 @@ export const Navigation = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="story-link text-gray-800 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300"
+                className="relative text-gray-800 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-black after:origin-bottom-left after:transition-transform after:duration-300 hover:after:scale-x-100"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
