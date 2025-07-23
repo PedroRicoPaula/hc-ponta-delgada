@@ -32,25 +32,31 @@ const staff = [
 
 const senioresEvents = [
   {
-    title: "HC PDL vs GDR Ilha",
-    date: "2025-05-01",
+    title: "Candelária SC B vs HC PDL",
+    date: "21-06-2025",
     time: "20:00",
-    location: "Pavilhão Municipal Sidónio Serpa",
+    location: "Pavilhão Sidónio Serpa",
   },
   {
-    title: "HC PDL vs HC Braga",
-    date: "2025-05-29",
-    time: "21:00",
-    location: "Pavilhão Municipal Sidónio Serpa",
+    title: "HC PDL vs Candelária SC B",
+    date: "22-06-2025",
+    time: "15:00",
+    location: "Pavilhão Sidónio Serpa",
   },
 ];
 
 const formacaoEvents = [
   {
-    title: "CD Povoa vs HC PDL",
-    date: "2025-05-15",
-    time: "19:30",
-    location: "Pavilhão Municipal da Póvoa de Varzim",
+    title: "HC PDL vs Caldeiras HC",
+    date: "14-05-2025",
+    time: "14:30",
+    location: "Pavilhão Sidónio Serpa",
+  },
+  {
+    title: "Maritimo SC vs HC PDL",
+    date: "15-05-2025",
+    time: "11:30",
+    location: "Pavilhão Carlos Silveira",
   },
 ];
 
@@ -118,7 +124,7 @@ const Index = () => {
       {/* Team Section */}
       <section id="team" className="py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Nossa Equipa</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">Equipa</h2>
           
           <h3 className="text-2xl font-semibold mb-6">Jogadores</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
@@ -156,7 +162,7 @@ const Index = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Galeria</h2>
           <div className="text-center mb-4">
             <p className="text-sm text-gray-600">
-              {isAutoplayPaused ? "Clique para retomar" : "Clique para pausar"} | Arraste para navegar
+              {isAutoplayPaused ? "Clique para retomar" : "Clique para pausar"} | Arrasta para ver mais
             </p>
           </div>
           <Carousel 
