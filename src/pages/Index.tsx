@@ -60,6 +60,20 @@ const formacaoEvents = [
     location: "Pavilhão Carlos Silveira",
     type: "Sub 13",
   },
+  {
+    title: "HC PDL vs Caldeiras HC",
+    date: "16-05-2025",
+    time: "17:30",
+    location: "Pavilhão Sidónio Serpa",
+    type: "Sub15",
+  },
+  {
+    title: "Maritimo SC vs HC PDL",
+    date: "17-05-2025",
+    time: "16:30",
+    location: "Pavilhão Carlos Silveira",
+    type: "Sub 17",
+  },
 ];
 
 const galleryImages = [
