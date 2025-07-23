@@ -6,9 +6,9 @@ export const SocialIcons = () => {
   const [isHovered, setIsHovered] = useState(false);
   
   const socialLinks = [
-    { name: "Facebook", icon: Facebook, url: "https://facebook.com" },
-    { name: "Instagram", icon: Instagram, url: "https://instagram.com" },
-    { name: "Youtube", icon: Youtube, url: "https://youtube.com" },
+    { name: "Facebook", icon: Facebook, url: "https://www.facebook.com/HoqueiClubePDL" },
+    { name: "Instagram", icon: Instagram, url: "https://www.instagram.com/hoqueiclubepdl/" },
+    { name: "Youtube", icon: Youtube, url: "https://www.youtube.com/@HoqueiClubePDL" },
   ];
 
   return (
