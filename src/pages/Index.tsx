@@ -204,9 +204,12 @@ const Index = () => {
           <h3 className="text-2xl font-semibold mb-6">Seniores</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             {senioresEvents.map((event) => (
-              <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow">
+              <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow relative">
+                <div className="absolute top-3 right-3 bg-primary/10 text-primary px-2 py-1 rounded-md text-sm font-medium">
+                  Seniores
+                </div>
                 <div>
-                  <h3 className="font-semibold text-xl mb-2">{event.title}</h3>
+                  <h3 className="font-semibold text-xl mb-2 pr-20">{event.title}</h3>
                   <p className="text-gray-600">Data: {event.date}</p>
                   <p className="text-gray-600">Hora: {event.time}</p>
                   <p className="text-gray-600">Local: {event.location}</p>
@@ -218,9 +221,12 @@ const Index = () => {
           <h3 className="text-2xl font-semibold mb-6">Formação</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {formacaoEvents.map((event) => (
-              <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow">
+              <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow relative">
+                <div className="absolute top-3 right-3 bg-secondary/10 text-secondary px-2 py-1 rounded-md text-sm font-medium">
+                  Formação
+                </div>
                 <div>
-                  <h3 className="font-semibold text-xl mb-2">{event.title}</h3>
+                  <h3 className="font-semibold text-xl mb-2 pr-20">{event.title}</h3>
                   <p className="text-gray-600">Data: {event.date}</p>
                   <p className="text-gray-600">Hora: {event.time}</p>
                   <p className="text-gray-600">Local: {event.location}</p>
