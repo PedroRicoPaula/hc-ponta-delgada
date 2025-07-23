@@ -51,12 +51,14 @@ const formacaoEvents = [
     date: "14-05-2025",
     time: "14:30",
     location: "Pavilhão Sidónio Serpa",
+    type: "Escolares",
   },
   {
     title: "Maritimo SC vs HC PDL",
     date: "15-05-2025",
     time: "11:30",
     location: "Pavilhão Carlos Silveira",
+    type: "Sub 13",
   },
 ];
 
@@ -205,9 +207,9 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             {senioresEvents.map((event) => (
               <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow relative">
-                <div className="absolute top-3 right-3 bg-primary/10 text-primary px-2 py-1 rounded-md text-sm font-medium">
+                {/*<div className="absolute top-3 right-3 bg-primary/10 text-primary px-2 py-1 rounded-md text-sm font-medium">
                   Seniores
-                </div>
+                </div>*/}
                 <div>
                   <h3 className="font-semibold text-xl mb-2 pr-20">{event.title}</h3>
                   <p className="text-gray-600">Data: {event.date}</p>
@@ -223,7 +225,7 @@ const Index = () => {
             {formacaoEvents.map((event) => (
               <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow relative">
                 <div className="absolute top-3 right-3 bg-secondary/10 text-secondary px-2 py-1 rounded-md text-sm font-medium">
-                  Formação
+                  {event.type}
                 </div>
                 <div>
                   <h3 className="font-semibold text-xl mb-2 pr-20">{event.title}</h3>
