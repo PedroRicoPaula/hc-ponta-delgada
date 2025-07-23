@@ -224,7 +224,7 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {formacaoEvents.map((event) => (
               <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow relative">
-                <div className="absolute top-3 right-3 bg-secondary/10 text-secondary px-2 py-1 rounded-md text-sm font-medium">
+                <div className="absolute top-3 right-3 bg-primary/10 text-primary px-2 py-1 rounded-md text-sm font-medium">
                   {event.type}
                 </div>
                 <div>
