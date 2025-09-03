@@ -248,11 +248,11 @@ const Index = () => {
                           className="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
                         />
                       </DialogTrigger>
-                      <DialogContent className="max-w-[80vw] max-h-[80vh] w-auto h-auto p-4 border-0 bg-black/90 flex items-center justify-center [&>button]:absolute [&>button]:right-2 [&>button]:top-2 [&>button]:bg-white/20 [&>button]:text-white [&>button]:hover:bg-white/30 [&>button]:rounded-full [&>button]:p-2 [&>button]:border-0 [&>button]:shadow-lg">
+                      <DialogContent className="max-w-[95vw] max-h-[95vh] md:max-w-[80vw] md:max-h-[80vh] w-auto h-auto p-4 border-0 bg-black/90 flex items-center justify-center [&>button]:absolute [&>button]:right-2 [&>button]:top-2 [&>button]:bg-white/20 [&>button]:text-white [&>button]:hover:bg-white/30 [&>button]:rounded-full [&>button]:p-2 [&>button]:border-0 [&>button]:shadow-lg">
                         <img 
                           src={image} 
                           alt={`Galeria ${index + 1}`} 
-                          className="max-w-full max-h-[70vh] w-auto h-auto object-contain rounded-lg"
+                          className="max-w-full max-h-[85vh] md:max-h-[70vh] w-auto h-auto object-contain rounded-lg"
                         />
                       </DialogContent>
                     </Dialog>
