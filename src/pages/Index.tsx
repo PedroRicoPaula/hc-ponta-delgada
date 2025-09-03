@@ -13,6 +13,11 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "@/components/ui/carousel";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const playersByPosition = {
   "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro"],
@@ -235,11 +240,24 @@ const Index = () => {
               {galleryImages.map((image, index) => (
                 <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3">
                   <div className="p-2">
-                    <img 
-                      src={image} 
-                      alt={`Galeria ${index + 1}`} 
-                      className="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-300"
-                    />
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <img 
+                          src={image} 
+                          alt={`Galeria ${index + 1}`} 
+                          className="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
+                        />
+                      </DialogTrigger>
+                      <DialogContent className="max-w-4xl w-full h-full max-h-[90vh] p-0 border-0 bg-black/95">
+                        <div className="relative w-full h-full flex items-center justify-center p-4">
+                          <img 
+                            src={image} 
+                            alt={`Galeria ${index + 1}`} 
+                            className="max-w-full max-h-full object-contain rounded-lg"
+                          />
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </CarouselItem>
               ))}
