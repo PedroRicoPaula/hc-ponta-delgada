@@ -15,19 +15,17 @@ import {
 } from "@/components/ui/carousel";
 
 const playersByPosition = {
-  "Guarda-Redes": ["Nuno Teixeira", "Micael Tavares"],
-  "Defesa": ["Tiago Pimentel", "Mario Jesus", "Sandro Melo"],
-  "Médio": ["Rodrigo Pimentel", "Fabio Larsen"],
-  "Avançado": ["Miguel Pimentel", "Carlos Guimarães", "Pedro Soares"],
+  "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro"],
+  "Defesa": ["Tiago Pimentel", "Mario Jesus", "Sandro Melo", "Tiago Botelho"],
+  "Médio": ["Alexandre Resendes", "Vicente"],
+  "Avançado": ["Miguel Pimentel", "Carlos Guimarães", "Tiago Leite", "Alexandre Ornelas"],
   "Universal": ["Pedro Paula", "Francisco Freitas"]
 };
 
 const staff = [
   { name: "Herbeto Resendes", role: "Treinador" },
-  { name: "João Oliveira", role: "Diretor" },
-  { name: "João Sardinha", role: "DJ" },
-  { name: "Luis Pacheco", role: "Massagista" },
-  { name: "Fernando Pimentel", role: "Diretor" }
+  { name: "Manuel Ferreira", role: "Diretor" },
+  { name: "Paulo", role: "Preparador Físico" }
 ];
 
 const senioresEvents = [
@@ -83,7 +81,8 @@ const galleryImages = [
   "/lovable-uploads/b2a3a926-e3f0-469c-9390-0113bfb380ea.png",
   "/lovable-uploads/57e06117-8822-4287-8b8c-e947952330c8.png",
   "/lovable-uploads/cc047543-aa40-46cb-8746-4b1324dba1a4.png",
-  "/lovable-uploads/c36667ca-9257-4046-9d64-b47bc79a4ba3.png"
+  "/lovable-uploads/c36667ca-9257-4046-9d64-b47bc79a4ba3.png",
+  "/lovable-uploads/182a9396-5de5-4efe-a1d8-39b0a2180269.png"
 ];
 
 
@@ -137,8 +136,49 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Events Section */}
+      <section id="events" className="py-16 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-12">Próximos Jogos</h2>
+          
+          <h3 className="text-2xl font-semibold mb-6">Seniores</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            {senioresEvents.map((event) => (
+              <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow relative">
+                <div className="absolute top-4 right-4 bg-primary/10 text-primary px-2 py-1 rounded-md text-sm font-medium">
+                  Seniores
+                </div>
+                <div>
+                  <h3 className="font-semibold text-xl mb-2 pr-20">{event.title}</h3>
+                  <p className="text-gray-600">Data: {event.date}</p>
+                  <p className="text-gray-600">Hora: {event.time}</p>
+                  <p className="text-gray-600">Local: {event.location}</p>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          <h3 className="text-2xl font-semibold mb-6">Formação</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {formacaoEvents.map((event) => (
+              <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow relative">
+                <div className="absolute top-4 right-4 bg-primary/10 text-primary px-2 py-1 rounded-md text-sm font-medium">
+                  {event.type}
+                </div>
+                <div>
+                  <h3 className="font-semibold text-xl mb-2 pr-20">{event.title}</h3>
+                  <p className="text-gray-600">Data: {event.date}</p>
+                  <p className="text-gray-600">Hora: {event.time}</p>
+                  <p className="text-gray-600">Local: {event.location}</p>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Team Section */}
-      <section id="team" className="py-16 bg-gray-100">
+      <section id="team" className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Equipa</h2>
           
@@ -212,46 +252,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Events Section */}
-      <section id="events" className="py-16 bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Próximos Jogos</h2>
-          
-          <h3 className="text-2xl font-semibold mb-6">Seniores</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            {senioresEvents.map((event) => (
-              <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow relative">
-                {/*<div className="absolute top-3 right-3 bg-primary/10 text-primary px-2 py-1 rounded-md text-sm font-medium">
-                  Seniores
-                </div>*/}
-                <div>
-                  <h3 className="font-semibold text-xl mb-2 pr-20">{event.title}</h3>
-                  <p className="text-gray-600">Data: {event.date}</p>
-                  <p className="text-gray-600">Hora: {event.time}</p>
-                  <p className="text-gray-600">Local: {event.location}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
-
-          <h3 className="text-2xl font-semibold mb-6">Formação</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {formacaoEvents.map((event) => (
-              <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow relative">
-                <div className="absolute top-3 right-3 bg-primary/10 text-primary px-2 py-1 rounded-md text-sm font-medium">
-                  {event.type}
-                </div>
-                <div>
-                  <h3 className="font-semibold text-xl mb-2 pr-20">{event.title}</h3>
-                  <p className="text-gray-600">Data: {event.date}</p>
-                  <p className="text-gray-600">Hora: {event.time}</p>
-                  <p className="text-gray-600">Local: {event.location}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Contact Section */}
       <section id="contact" className="py-16">
