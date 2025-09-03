@@ -248,14 +248,12 @@ const Index = () => {
                           className="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
                         />
                       </DialogTrigger>
-                      <DialogContent className="max-w-4xl w-full h-full max-h-[90vh] p-0 border-0 bg-black/95">
-                        <div className="relative w-full h-full flex items-center justify-center p-4">
-                          <img 
-                            src={image} 
-                            alt={`Galeria ${index + 1}`} 
-                            className="max-w-full max-h-full object-contain rounded-lg"
-                          />
-                        </div>
+                      <DialogContent className="max-w-[95vw] max-h-[95vh] w-auto h-auto p-2 border-0 bg-black/95 flex items-center justify-center">
+                        <img 
+                          src={image} 
+                          alt={`Galeria ${index + 1}`} 
+                          className="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-lg"
+                        />
                       </DialogContent>
                     </Dialog>
                   </div>
