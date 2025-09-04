@@ -165,19 +165,36 @@ const Index = () => {
 
           <h3 className="text-2xl font-semibold mb-6">Formação</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {formacaoEvents.map((event) => (
-              <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow relative">
-                <div className="absolute top-4 right-4 bg-primary/10 text-primary px-2 py-1 rounded-md text-sm font-medium">
-                  {event.type}
-                </div>
-                <div>
-                  <h3 className="font-semibold text-xl mb-2 pr-20">{event.title}</h3>
-                  <p className="text-gray-600">Data: {event.date}</p>
-                  <p className="text-gray-600">Hora: {event.time}</p>
-                  <p className="text-gray-600">Local: {event.location}</p>
-                </div>
-              </Card>
-            ))}
+            {formacaoEvents.map((event) => {
+              const getEventTypeColor = (type: string) => {
+                switch (type) {
+                  case "Escolares":
+                    return "bg-blue-100 text-blue-700";
+                  case "Sub 13":
+                    return "bg-orange-100 text-orange-700";
+                  case "Sub15":
+                    return "bg-green-100 text-green-700";
+                  case "Sub 17":
+                    return "bg-red-100 text-red-700";
+                  default:
+                    return "bg-primary/10 text-primary";
+                }
+              };
+              
+              return (
+                <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow relative">
+                  <div className={`absolute top-4 right-4 px-2 py-1 rounded-md text-sm font-medium ${getEventTypeColor(event.type)}`}>
+                    {event.type}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-xl mb-2 pr-20">{event.title}</h3>
+                    <p className="text-gray-600">Data: {event.date}</p>
+                    <p className="text-gray-600">Hora: {event.time}</p>
+                    <p className="text-gray-600">Local: {event.location}</p>
+                  </div>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -248,11 +265,11 @@ const Index = () => {
                           className="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
                         />
                       </DialogTrigger>
-                      <DialogContent className="max-w-[95vw] max-h-[95vh] md:max-w-[80vw] md:max-h-[80vh] w-auto h-auto p-4 border-0 bg-black/90 flex items-center justify-center [&>button]:absolute [&>button]:right-2 [&>button]:top-2 [&>button]:bg-white/20 [&>button]:text-white [&>button]:hover:bg-white/30 [&>button]:rounded-full [&>button]:p-2 [&>button]:border-0 [&>button]:shadow-lg">
+                      <DialogContent className="max-w-[98vw] max-h-[98vh] md:max-w-[80vw] md:max-h-[80vh] w-auto h-auto p-2 border-0 bg-black/90 flex items-center justify-center [&>button]:absolute [&>button]:right-2 [&>button]:top-2 [&>button]:bg-white/20 [&>button]:text-white [&>button]:hover:bg-white/30 [&>button]:rounded-full [&>button]:p-2 [&>button]:border-0 [&>button]:shadow-lg">
                         <img 
                           src={image} 
                           alt={`Galeria ${index + 1}`} 
-                          className="max-w-full max-h-[85vh] md:max-h-[70vh] w-auto h-auto object-contain rounded-lg"
+                          className="max-w-full max-h-[92vh] md:max-h-[70vh] w-auto h-auto object-contain rounded-lg"
                         />
                       </DialogContent>
                     </Dialog>
