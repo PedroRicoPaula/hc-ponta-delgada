@@ -1,11 +1,12 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigation } from "@/components/Navigation";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SocialIcons } from "@/components/SocialIcons";
 import Autoplay from "embla-carousel-autoplay";
 
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import {
   Carousel,
   CarouselContent,
@@ -91,8 +92,58 @@ const galleryImages = [
 ];
 
 
+const trainingSchedules = [
+  {
+    type: "Escolares",
+    color: "bg-blue-100 text-blue-700 border-blue-200",
+    sessions: [
+      { day: "Segunda", time: "19:00 - 20:00" },
+      { day: "Sexta", time: "18:00 - 19:00" }
+    ]
+  },
+  {
+    type: "Sub 13",
+    color: "bg-orange-100 text-orange-700 border-orange-200",
+    sessions: [
+      { day: "Quarta", time: "18:30 - 20:00" },
+      { day: "Sexta", time: "19:00 - 20:00" }
+    ]
+  },
+  {
+    type: "Sub15",
+    color: "bg-green-100 text-green-700 border-green-200",
+    sessions: [
+      { day: "Segunda", time: "20:00 - 21:30" },
+      { day: "Sexta", time: "20:00 - 21:30" }
+    ]
+  },
+  {
+    type: "Sub 17",
+    color: "bg-red-100 text-red-700 border-red-200",
+    sessions: [
+      { day: "Terça", time: "19:00 - 20:00" },
+      { day: "Quarta", time: "20:00 - 21:30" },
+      { day: "Sexta", time: "21:30 - 22:30" }
+    ]
+  }
+];
+
+
 const Index = () => {
   const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
+  const [showCookieConsent, setShowCookieConsent] = useState(false);
+
+  useEffect(() => {
+    const cookieConsent = localStorage.getItem('cookie-consent');
+    if (!cookieConsent) {
+      setShowCookieConsent(true);
+    }
+  }, []);
+
+  const acceptCookies = () => {
+    localStorage.setItem('cookie-consent', 'accepted');
+    setShowCookieConsent(false);
+  };
   
   const autoplayPlugin = Autoplay({
     delay: 3000,
@@ -141,8 +192,32 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Training Schedules Section */}
+      <section id="training" className="py-16 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-12">Horários de Treinos</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {trainingSchedules.map((schedule) => (
+              <Card key={schedule.type} className={`p-6 border-2 ${schedule.color} hover:shadow-lg transition-shadow`}>
+                <div className="text-center">
+                  <h3 className="font-bold text-xl mb-4">{schedule.type}</h3>
+                  <div className="space-y-3">
+                    {schedule.sessions.map((session, index) => (
+                      <div key={index} className="bg-white/50 p-3 rounded-lg">
+                        <p className="font-semibold text-sm">{session.day}</p>
+                        <p className="text-sm font-mono">{session.time}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Events Section */}
-      <section id="events" className="py-16 bg-gray-100">
+      <section id="events" className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Próximos Jogos</h2>
           
@@ -322,6 +397,25 @@ const Index = () => {
           <p>&copy; 2025 Hóquei Clube Ponta Delgada. Todos os direitos reservados.</p>
         </div>
       </footer>
+
+      {/* Cookie Consent */}
+      {showCookieConsent && (
+        <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-md bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-50">
+          <div className="flex flex-col space-y-3">
+            <p className="text-sm text-gray-600">
+              Este site utiliza cookies para melhorar a sua experiência de navegação. Ao continuar a navegar, aceita a utilização de cookies.
+            </p>
+            <div className="flex gap-2">
+              <Button 
+                onClick={acceptCookies}
+                className="flex-1 bg-primary hover:bg-primary/90 text-white"
+              >
+                Aceitar
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
