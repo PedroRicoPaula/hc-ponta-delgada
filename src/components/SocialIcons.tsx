@@ -13,7 +13,7 @@ export const SocialIcons = () => {
 
   return (
     <div 
-      className={`fixed left-0 top-3/5 transform -translate-y-1/2 z-40 transition-transform duration-300 ease-in-out ${isHovered ? 'translate-x-2' : '-translate-x-1'}`}
+      className={`fixed left-0 top-1/2 transform -translate-y-1/2 translate-y-8 z-40 transition-transform duration-300 ease-in-out ${isHovered ? 'translate-x-2' : '-translate-x-1'}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
