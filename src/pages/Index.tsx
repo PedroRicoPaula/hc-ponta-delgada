@@ -285,6 +285,24 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Sponsors Section */}
+      <section id="sponsors" className="py-16 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-12">Patrocinadores</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
+            {["Azemad", "HStick", "AutoCordeiro", "Crenku"].map((sponsor) => (
+              <div key={sponsor} className="flex flex-col items-center p-4 hover:scale-105 transition-transform duration-300">
+                <img 
+                  src="/lovable-uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png" 
+                  alt={`${sponsor} Logo`} 
+                  className="h-20 w-auto mb-3 opacity-80 hover:opacity-100 transition-opacity"
+                />
+                <span className="text-gray-700 font-medium text-center">{sponsor}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Contact Section */}
       <section id="contact" className="py-16">
