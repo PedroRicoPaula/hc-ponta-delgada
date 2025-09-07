@@ -144,6 +144,11 @@ const Index = () => {
     localStorage.setItem('cookie-consent', 'accepted');
     setShowCookieConsent(false);
   };
+
+  const rejectCookies = () => {
+    localStorage.setItem('cookie-consent', 'rejected');
+    setShowCookieConsent(false);
+  };
   
   const autoplayPlugin = Autoplay({
     delay: 3000,
@@ -400,17 +405,24 @@ const Index = () => {
 
       {/* Cookie Consent */}
       {showCookieConsent && (
-        <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-md bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-50">
-          <div className="flex flex-col space-y-3">
-            <p className="text-sm text-gray-600">
-              Este site utiliza cookies para melhorar a sua experiência de navegação. Ao continuar a navegar, aceita a utilização de cookies.
+        <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg p-3 z-50">
+          <div className="flex flex-col space-y-2">
+            <p className="text-xs text-gray-600">
+              Este site utiliza cookies para melhorar a sua experiência de navegação.
             </p>
             <div className="flex gap-2">
               <Button 
                 onClick={acceptCookies}
-                className="flex-1 bg-primary hover:bg-primary/90 text-white"
+                className="flex-1 bg-primary hover:bg-primary/90 text-white text-xs py-1 h-8"
               >
                 Aceitar
+              </Button>
+              <Button 
+                onClick={rejectCookies}
+                variant="outline"
+                className="flex-1 text-xs py-1 h-8"
+              >
+                Não aceitar
               </Button>
             </div>
           </div>
