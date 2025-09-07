@@ -44,29 +44,27 @@ export const Navigation = () => {
             <Button
               variant="ghost"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:text-primary hover:bg-gray-100"
+              className="inline-flex items-center justify-center p-3 rounded-md text-gray-800 hover:text-primary hover:bg-gray-100 text-2xl w-12 h-12"
             >
               {isMenuOpen ? "✕" : "☰"}
             </Button>
           </div>
         </div>
       </div>
-      {isMenuOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="relative inline-block text-gray-800 hover:text-primary px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-left after:transition-transform after:duration-300 hover:after:scale-x-100"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </a>
-            ))}
-          </div>
+      <div className={`md:hidden transition-all duration-300 ease-in-out ${isMenuOpen ? 'animate-slide-in-right opacity-100' : 'animate-slide-out-right opacity-0 pointer-events-none'}`}>
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-sm shadow-lg border-t">
+          {navItems.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className="relative inline-block text-gray-800 hover:text-primary px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-left after:transition-transform after:duration-300 hover:after:scale-x-100"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.name}
+            </a>
+          ))}
         </div>
-      )}
+      </div>
     </nav>
   );
 };
