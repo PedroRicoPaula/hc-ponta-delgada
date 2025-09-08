@@ -36,12 +36,14 @@ const staff = [
 
 const senioresEvents = [
   {
+    id: "seniores-1",
     title: "Candelária SC B vs HC PDL",
     date: "21-06-2025",
     time: "20:00",
     location: "Pavilhão Sidónio Serpa",
   },
   {
+    id: "seniores-2",
     title: "HC PDL vs Candelária SC B",
     date: "22-06-2025",
     time: "15:00",
@@ -51,6 +53,7 @@ const senioresEvents = [
 
 const formacaoEvents = [
   {
+    id: "formacao-1",
     title: "HC PDL vs Caldeiras HC",
     date: "14-05-2025",
     time: "14:30",
@@ -58,6 +61,7 @@ const formacaoEvents = [
     type: "Escolares",
   },
   {
+    id: "formacao-2",
     title: "Maritimo SC vs HC PDL",
     date: "15-05-2025",
     time: "11:30",
@@ -65,6 +69,7 @@ const formacaoEvents = [
     type: "Sub 13",
   },
   {
+    id: "formacao-3",
     title: "HC PDL vs Caldeiras HC",
     date: "16-05-2025",
     time: "17:30",
@@ -72,6 +77,7 @@ const formacaoEvents = [
     type: "Sub15",
   },
   {
+    id: "formacao-4",
     title: "Maritimo SC vs HC PDL",
     date: "17-05-2025",
     time: "16:30",
@@ -174,7 +180,7 @@ const Index = () => {
       <ScrollToTop />
 
       {/* Hero Section */}
-      <section className="pt-20 pb-12 bg-gradient-to-b from-primary/20 to-transparent">
+      <header className="pt-20 pb-12 bg-gradient-to-b from-primary/20 to-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
@@ -183,19 +189,20 @@ const Index = () => {
             <p className="text-xl text-gray-600 mb-8">Paixão, Orgulho e Excelência desde 2012</p>
           </div>
         </div>
-      </section>
+      </header>
 
       {/* About Section */}
-      <section id="about" className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-8">Sobre Nós</h2>
-          <p className="text-gray-600 text-lg text-center max-w-3xl mx-auto">
-            Fundado em 2012, o Hóquei Clube de Ponta Delgada tem sido um símbolo de excelência desportiva nos Açores.
-            O nosso compromisso com o desenvolvimento de jovens talentos e a promoção do hóquei na região tornou-nos
-            um dos clubes mais respeitados em Portugal.
-          </p>
-        </div>
-      </section>
+      <main>
+        <section id="about" className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-center mb-8">Sobre Nós</h2>
+            <p className="text-gray-600 text-lg text-center max-w-3xl mx-auto">
+              Fundado em 2012, o Hóquei Clube de Ponta Delgada tem sido um símbolo de excelência desportiva nos Açores.
+              O nosso compromisso com o desenvolvimento de jovens talentos e a promoção do hóquei na região tornou-nos
+              um dos clubes mais respeitados em Portugal.
+            </p>
+          </div>
+        </section>
 
       {/* Training Schedules Section */}
       <section id="training" className="py-16 bg-gray-100">
@@ -229,7 +236,7 @@ const Index = () => {
           <h3 className="text-2xl font-semibold mb-6">Seniores</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             {senioresEvents.map((event) => (
-              <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow relative">
+              <Card key={event.id} className="p-6 hover:shadow-lg transition-shadow relative">
                 <div className="absolute top-4 right-4 bg-primary/10 text-primary px-2 py-1 rounded-md text-sm font-medium">
                   Seniores
                 </div>
@@ -262,7 +269,7 @@ const Index = () => {
               };
               
               return (
-                <Card key={event.title} className="p-6 hover:shadow-lg transition-shadow relative">
+                <Card key={event.id} className="p-6 hover:shadow-lg transition-shadow relative">
                   <div className={`absolute top-4 right-4 px-2 py-1 rounded-md text-sm font-medium ${getEventTypeColor(event.type)}`}>
                     {event.type}
                   </div>
@@ -341,14 +348,14 @@ const Index = () => {
                       <DialogTrigger asChild>
                         <img 
                           src={image} 
-                          alt={`Galeria ${index + 1}`} 
+                          alt={`Hóquei Clube Ponta Delgada - Momento ${index + 1} dos nossos treinos e jogos`} 
                           className="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
                         />
                       </DialogTrigger>
                       <DialogContent className="max-w-[98vw] max-h-[98vh] md:max-w-[80vw] md:max-h-[80vh] w-auto h-auto p-2 border-0 bg-black/90 flex items-center justify-center [&>button]:absolute [&>button]:right-2 [&>button]:top-2 [&>button]:bg-white/20 [&>button]:text-white [&>button]:hover:bg-white/30 [&>button]:rounded-full [&>button]:p-2 [&>button]:border-0 [&>button]:shadow-lg">
                         <img 
                           src={image} 
-                          alt={`Galeria ${index + 1}`} 
+                          alt={`Hóquei Clube Ponta Delgada - Momento ${index + 1} dos nossos treinos e jogos`} 
                           className="max-w-full max-h-[92vh] md:max-h-[70vh] w-auto h-auto object-contain rounded-lg"
                         />
                       </DialogContent>
@@ -395,6 +402,7 @@ const Index = () => {
           </div>
         </div>
       </section>
+      </main>
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-8">
