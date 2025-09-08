@@ -20,7 +20,14 @@ export const Navigation = () => {
     <nav className="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex-shrink-0" onClick={() => window.location.reload()}>
+          <Link 
+            to="/" 
+            className="flex-shrink-0" 
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'instant' });
+              window.location.reload();
+            }}
+          >
             <img 
               src="/lovable-uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png" 
               alt="PDL Hockey Club" 

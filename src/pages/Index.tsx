@@ -138,6 +138,7 @@ const trainingSchedules = [
 const Index = () => {
   const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
   const [showCookieConsent, setShowCookieConsent] = useState(false);
+  const [openSchedules, setOpenSchedules] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {
     const cookieConsent = localStorage.getItem('cookie-consent');
@@ -171,6 +172,13 @@ const Index = () => {
     setIsAutoplayPaused(!isAutoplayPaused);
   };
 
+  const toggleSchedule = (type: string) => {
+    setOpenSchedules(prev => ({
+      ...prev,
+      [type]: !prev[type]
+    }));
+  };
+
   // Force refresh - no events variable exists anymore
   console.log("Index component loaded successfully");
   return (
@@ -191,6 +199,23 @@ const Index = () => {
         </div>
       </header>
 
+      {/* Scroll Indicator */}
+      <div className="flex justify-center py-8">
+        <div className="animate-bounce">
+          <svg 
+            className="w-6 h-10 text-primary opacity-70" 
+            fill="none" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth="2" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path d="M12 6v6m0 0v6m0-6l4-4m-4 4L8 8"></path>
+          </svg>
+        </div>
+      </div>
+
       {/* About Section */}
       <main>
         <section id="about" className="py-16">
@@ -208,7 +233,9 @@ const Index = () => {
       <section id="training" className="py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Horários de Treinos</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          {/* Desktop View */}
+          <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {trainingSchedules.map((schedule) => (
               <Card key={schedule.type} className={`p-6 border-2 ${schedule.color} hover:shadow-lg transition-shadow`}>
                 <div className="text-center">
@@ -216,6 +243,34 @@ const Index = () => {
                   <div className="space-y-3">
                     {schedule.sessions.map((session, index) => (
                       <div key={index} className="bg-white/50 p-3 rounded-lg">
+                        <p className="font-semibold text-sm">{session.day}</p>
+                        <p className="text-sm font-mono">{session.time}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          {/* Mobile View - Collapsible */}
+          <div className="md:hidden space-y-4">
+            {trainingSchedules.map((schedule) => (
+              <Card key={schedule.type} className={`border-2 ${schedule.color} overflow-hidden`}>
+                <Button
+                  onClick={() => toggleSchedule(schedule.type)}
+                  className={`w-full p-4 text-left flex justify-between items-center ${schedule.color} hover:opacity-90 transition-all`}
+                  variant="ghost"
+                >
+                  <h3 className="font-bold text-lg">{schedule.type}</h3>
+                  <span className={`transform transition-transform duration-200 ${openSchedules[schedule.type] ? 'rotate-180' : 'rotate-0'}`}>
+                    ↓
+                  </span>
+                </Button>
+                <div className={`transition-all duration-300 ease-in-out ${openSchedules[schedule.type] ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
+                  <div className="p-4 bg-white/50 space-y-3">
+                    {schedule.sessions.map((session, index) => (
+                      <div key={index} className="bg-white/70 p-3 rounded-lg">
                         <p className="font-semibold text-sm">{session.day}</p>
                         <p className="text-sm font-mono">{session.time}</p>
                       </div>
