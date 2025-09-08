@@ -95,7 +95,7 @@ const galleryImages = [
 const trainingSchedules = [
   {
     type: "Escolares",
-    color: "bg-blue-100 text-blue-700 border-blue-200",
+    color: "bg-yellow-100 text-yellow-700 border-yellow-200",
     sessions: [
       { day: "Segunda", time: "19:00 - 20:00" },
       { day: "Sexta", time: "18:00 - 19:00" }
@@ -103,7 +103,7 @@ const trainingSchedules = [
   },
   {
     type: "Sub 13",
-    color: "bg-orange-100 text-orange-700 border-orange-200",
+    color: "bg-green-100 text-green-700 border-green-200",
     sessions: [
       { day: "Quarta", time: "18:30 - 20:00" },
       { day: "Sexta", time: "19:00 - 20:00" }
@@ -111,7 +111,7 @@ const trainingSchedules = [
   },
   {
     type: "Sub15",
-    color: "bg-green-100 text-green-700 border-green-200",
+    color: "bg-blue-100 text-blue-700 border-blue-200",
     sessions: [
       { day: "Segunda", time: "20:00 - 21:30" },
       { day: "Sexta", time: "20:00 - 21:30" }
@@ -119,7 +119,7 @@ const trainingSchedules = [
   },
   {
     type: "Sub 17",
-    color: "bg-red-100 text-red-700 border-red-200",
+    color: "bg-purple-100 text-purple-700 border-purple-200",
     sessions: [
       { day: "Terça", time: "19:00 - 20:00" },
       { day: "Quarta", time: "20:00 - 21:30" },
@@ -249,13 +249,13 @@ const Index = () => {
               const getEventTypeColor = (type: string) => {
                 switch (type) {
                   case "Escolares":
-                    return "bg-blue-100 text-blue-700";
+                    return "bg-yellow-100 text-yellow-700";
                   case "Sub 13":
-                    return "bg-orange-100 text-orange-700";
-                  case "Sub15":
                     return "bg-green-100 text-green-700";
+                  case "Sub15":
+                    return "bg-blue-100 text-blue-700";
                   case "Sub 17":
-                    return "bg-red-100 text-red-700";
+                    return "bg-purple-100 text-purple-700";
                   default:
                     return "bg-primary/10 text-primary";
                 }
