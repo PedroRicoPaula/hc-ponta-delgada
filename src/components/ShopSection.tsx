@@ -53,6 +53,7 @@ export const ShopSection = () => {
                   src={item.image} 
                   alt={item.name} 
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  loading="lazy"
                 />
                 <div className="absolute top-2 right-2 bg-primary text-black font-semibold px-2 py-1 rounded-md text-sm">
                   {item.category}

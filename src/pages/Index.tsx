@@ -422,6 +422,7 @@ const Index = () => {
                           src={image} 
                           alt={`Hóquei Clube Ponta Delgada - Momento ${index + 1} dos nossos treinos e jogos`} 
                           className="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
+                          loading="lazy"
                         />
                       </DialogTrigger>
                       <DialogContent className="max-w-[98vw] max-h-[98vh] md:max-w-[80vw] md:max-h-[80vh] w-auto h-auto p-2 border-0 bg-black/90 flex items-center justify-center [&>button]:absolute [&>button]:right-2 [&>button]:top-2 [&>button]:bg-white/20 [&>button]:text-white [&>button]:hover:bg-white/30 [&>button]:rounded-full [&>button]:p-2 [&>button]:border-0 [&>button]:shadow-lg">
@@ -429,6 +430,7 @@ const Index = () => {
                           src={image} 
                           alt={`Hóquei Clube Ponta Delgada - Momento ${index + 1} dos nossos treinos e jogos`} 
                           className="max-w-full max-h-[92vh] md:max-h-[70vh] w-auto h-auto object-contain rounded-lg"
+                          loading="lazy"
                         />
                       </DialogContent>
                     </Dialog>
@@ -455,6 +457,7 @@ const Index = () => {
                   src="/lovable-uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png" 
                   alt={`${sponsor} Logo`} 
                   className="h-20 w-auto mb-3 opacity-80 hover:opacity-100 transition-opacity"
+                  loading="lazy"
                 />
                 <span className="text-gray-700 font-medium text-center">{sponsor}</span>
               </div>

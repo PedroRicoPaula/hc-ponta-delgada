@@ -32,6 +32,7 @@ export const Navigation = () => {
               src="/lovable-uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png" 
               alt="PDL Hockey Club" 
               className="h-12 w-auto hover:scale-105 transition-transform"
+              loading="lazy"
             />
           </Link>
           <div className="hidden md:block">
