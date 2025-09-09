@@ -202,17 +202,7 @@ const Index = () => {
       {/* Scroll Indicator */}
       <div className="flex justify-center py-8">
         <div className="animate-bounce">
-          <svg 
-            className="w-6 h-10 text-primary opacity-70" 
-            fill="none" 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            strokeWidth="2" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor"
-          >
-            <path d="M12 6v6m0 0v6m0-6l4-4m-4 4L8 8"></path>
-          </svg>
+          <div className="text-4xl opacity-70">🖱️</div>
         </div>
       </div>
 
