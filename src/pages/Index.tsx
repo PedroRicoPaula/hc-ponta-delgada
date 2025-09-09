@@ -203,9 +203,9 @@ const Index = () => {
       <div className="flex justify-center py-8">
         <div className="animate-bounce">
           <img 
-            src="/lovable-uploads/5e647820-7a12-438e-b0df-98bc5a8480f2.png" 
+            src="/lovable-uploads/1b04c933-6b2c-4626-8dee-1c4cea8b3a45.png" 
             alt="Scroll para ver mais conteúdo" 
-            className="w-12 h-12 opacity-70"
+            className="w-16 h-16 opacity-70"
           />
         </div>
       </div>
