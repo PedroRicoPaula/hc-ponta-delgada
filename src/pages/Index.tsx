@@ -203,15 +203,20 @@ const Index = () => {
       <div className="flex justify-center py-8">
         <div className="animate-bounce">
           <svg 
-            className="w-6 h-10 text-primary opacity-70" 
+            className="w-8 h-12 text-primary opacity-70" 
             fill="none" 
             strokeLinecap="round" 
             strokeLinejoin="round" 
             strokeWidth="2" 
-            viewBox="0 0 24 24" 
+            viewBox="0 0 32 48" 
             stroke="currentColor"
           >
-            <path d="M12 6v6m0 0v6m0-6l4-4m-4 4L8 8"></path>
+            {/* Mouse body */}
+            <rect x="8" y="8" width="16" height="32" rx="8" ry="8" fill="none" stroke="currentColor"/>
+            {/* Scroll wheel indicator */}
+            <circle cx="16" cy="18" r="2" fill="currentColor" className="animate-pulse"/>
+            {/* Scroll line */}
+            <path d="M16 22v6" stroke="currentColor" strokeWidth="1.5"/>
           </svg>
         </div>
       </div>
