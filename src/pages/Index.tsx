@@ -33,7 +33,7 @@ const staff = [
   { name: "João Oliveira", role: "Diretor" },
   { name: "Paulo Benjamim", role: "Diretor" },
   { name: "Fernando Pimentel", role: "Diretor" },
-  { name: "Paulo", role: "Preparador Físico" },
+  { name: "Paulo Correia", role: "Preparador Físico" },
   { name: "João Sardinha", role: "Segurança" }
 ];
 
