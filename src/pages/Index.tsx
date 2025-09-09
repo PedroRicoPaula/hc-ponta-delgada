@@ -55,22 +55,31 @@ const senioresEvents = [
 ];
 
 const formacaoEvents = [
-  {
+  /*{
     id: "formacao-1",
     title: "HC PDL vs Caldeiras HC",
     date: "14-05-2025",
     time: "14:30",
     location: "Pavilhão Sidónio Serpa",
     type: "Escolares",
+  },*/
+  {
+    id: "formacao-1",
+    title: "HC PDL vs CHC",
+    date: "27-09-2025",
+    time: "14:30",
+    location: "CD Ribeira Grande",
+    type: "Sub 13",
   },
   {
     id: "formacao-2",
-    title: "Maritimo SC vs HC PDL",
+    title: "HC PDL - MSC",
     date: "15-05-2025",
     time: "11:30",
-    location: "Pavilhão Carlos Silveira",
+    location: "CD Ribeira Grande",
     type: "Sub 13",
   },
+  /*
   {
     id: "formacao-3",
     title: "HC PDL vs Caldeiras HC",
@@ -86,7 +95,7 @@ const formacaoEvents = [
     time: "16:30",
     location: "Pavilhão Carlos Silveira",
     type: "Sub 17",
-  },
+  },*/
 ];
 
 const galleryImages = [
