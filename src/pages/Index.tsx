@@ -21,8 +21,8 @@ import {
 } from "@/components/ui/dialog";
 
 const playersByPosition = {
-  "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro"],
-  "Defesa": ["Tiago Pimentel", "Mario Jesus", "Sandro Melo", "Tiago Botelho"],
+  "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro", "Miguel Santos"],
+  "Defesa": ["Tiago Pimentel", "Mario Jesus", "Tiago Botelho"],
   "Médio": ["Alexandre Resendes", "Vicente"],
   "Avançado": ["Miguel Pimentel", "Carlos Guimarães", "Tiago Leite", "Alexandre Ornelas"],
   "Universal": ["Pedro Paula", "Francisco Freitas"]
@@ -30,8 +30,11 @@ const playersByPosition = {
 
 const staff = [
   { name: "Herbeto Resendes", role: "Treinador" },
-  { name: "Manuel Ferreira", role: "Diretor" },
-  { name: "Paulo", role: "Preparador Físico" }
+  { name: "João Oliveira", role: "Diretor" },
+  { name: "Paulo Benjamim", role: "Diretor" },
+  { name: "Fernando Pimentel", role: "Diretor" },
+  { name: "Paulo", role: "Preparador Físico" },
+  { name: "João Sardinha", role: "Segurança" }
 ];
 
 const senioresEvents = [
