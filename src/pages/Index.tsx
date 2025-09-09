@@ -202,7 +202,11 @@ const Index = () => {
       {/* Scroll Indicator */}
       <div className="flex justify-center py-8">
         <div className="animate-bounce">
-          <div className="text-4xl opacity-70">🖱️</div>
+          <img 
+            src="/lovable-uploads/5e647820-7a12-438e-b0df-98bc5a8480f2.png" 
+            alt="Scroll para ver mais conteúdo" 
+            className="w-12 h-12 opacity-70"
+          />
         </div>
       </div>
 
