@@ -40,16 +40,16 @@ const staff = [
 const senioresEvents = [
   {
     id: "seniores-1",
-    title: "Candelária SC B vs HC PDL",
-    date: "21-06-2025",
-    time: "20:00",
+    title: "HC PDL vs HC Vasco da Gama",
+    date: "12-10-2025",
+    time: "17:00",
     location: "Pavilhão Sidónio Serpa",
   },
   {
     id: "seniores-2",
-    title: "HC PDL vs Candelária SC B",
-    date: "22-06-2025",
-    time: "15:00",
+    title: "HC PDL vs Juv. Azeitonense",
+    date: "02-11-2025",
+    time: "17:00",
     location: "Pavilhão Sidónio Serpa",
   },
 ];
@@ -305,7 +305,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Próximos Jogos</h2>
           
-          <h3 className="text-2xl font-semibold mb-6">Seniores</h3>
+          <h3 className="text-2xl font-semibold mb-6">Seniores (Casa)</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             {senioresEvents.map((event) => (
               <Card key={event.id} className="p-6 hover:shadow-lg transition-shadow relative">
