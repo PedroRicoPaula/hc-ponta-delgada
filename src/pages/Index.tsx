@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Navigation } from "@/components/Navigation";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SocialIcons } from "@/components/SocialIcons";
+import { RollerHockeyGame } from "@/components/RollerHockeyGame";
 import Autoplay from "embla-carousel-autoplay";
 
 import { Card } from "@/components/ui/card";
@@ -198,6 +199,7 @@ const Index = () => {
       <Navigation />
       <SocialIcons />
       <ScrollToTop />
+      <RollerHockeyGame />
 
       {/* Hero Section */}
       <header className="pt-20 pb-12 bg-gradient-to-b from-primary/20 to-transparent">
