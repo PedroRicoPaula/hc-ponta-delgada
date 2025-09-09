@@ -74,8 +74,8 @@ const formacaoEvents = [
   {
     id: "formacao-2",
     title: "HC PDL - MSC",
-    date: "15-05-2025",
-    time: "11:30",
+    date: "28-09-2025",
+    time: "10:00",
     location: "CD Ribeira Grande",
     type: "Sub 13",
   },
