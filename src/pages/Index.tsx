@@ -469,7 +469,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Patrocinadores</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
-            {["Azemad", "HStick", "AutoCordeiro", "Crenku"].map((sponsor) => (
+            {["Azemad", "AutoCordeiro", "Crenku"].map((sponsor) => (
               <div key={sponsor} className="flex flex-col items-center p-4 hover:scale-105 transition-transform duration-300">
                 <img 
                   src="/lovable-uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png" 
