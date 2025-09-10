@@ -3,7 +3,9 @@ import { useState, useEffect } from 'react';
 import { Navigation } from "@/components/Navigation";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SocialIcons } from "@/components/SocialIcons";
+import { RollerHockeyGame } from "@/components/RollerHockeyGame";
 import Autoplay from "embla-carousel-autoplay";
+import { Gamepad2 } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -151,6 +153,7 @@ const Index = () => {
   const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
   const [showCookieConsent, setShowCookieConsent] = useState(false);
   const [openSchedules, setOpenSchedules] = useState<{ [key: string]: boolean }>({});
+  const [isGameOpen, setIsGameOpen] = useState(false);
 
   useEffect(() => {
     const cookieConsent = localStorage.getItem('cookie-consent');
@@ -198,6 +201,21 @@ const Index = () => {
       <Navigation />
       <SocialIcons />
       <ScrollToTop />
+
+      {/* Floating Game Button */}
+      <button
+        onClick={() => setIsGameOpen(true)}
+        className="fixed right-4 top-1/2 -translate-y-1/2 z-40 bg-gradient-to-b from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground p-3 rounded-l-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-x-1 group"
+        style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+      >
+        <div className="flex flex-col items-center gap-2">
+          <Gamepad2 className="h-6 w-6 group-hover:animate-pulse" />
+          <span className="font-semibold text-sm tracking-wide">MINI JOGO</span>
+        </div>
+      </button>
+
+      {/* Roller Hockey Game Overlay */}
+      <RollerHockeyGame isOpen={isGameOpen} onClose={() => setIsGameOpen(false)} />
 
       {/* Hero Section */}
       <header className="pt-20 pb-12 bg-gradient-to-b from-primary/20 to-transparent">
