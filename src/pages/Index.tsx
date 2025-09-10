@@ -469,15 +469,25 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Patrocinadores</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8 items-center justify-items-center">
-            {["Azemad", "AutoCordeiro", "Crenku"].map((sponsor) => (
-              <div key={sponsor} className="flex flex-col items-center p-4 hover:scale-105 transition-transform duration-300">
-                <img 
-                  src="/lovable-uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png" 
-                  alt={`${sponsor} Logo`} 
-                  className="h-20 w-auto mb-3 opacity-80 hover:opacity-100 transition-opacity"
-                  loading="lazy"
-                />
-                <span className="text-gray-700 font-medium text-center">{sponsor}</span>
+            {[
+              { name: "Azemad", logo: "/lovable-uploads/AzemadLogo.png" },
+              { name: "AutoCordeiro", logo: "/lovable-uploads/AutoCordeiroLogo.png" },
+              { name: "Crenku", logo: "/lovable-uploads/CrenkuLogo.png" },
+            ].map((sponsor) => (
+              <div
+                key={sponsor.name}
+                className="flex flex-col items-center p-4 hover:scale-105 transition-transform duration-300"
+              >
+                {/* Logo container ensures uniform size */}
+                <div className="h-20 w-40 flex items-center justify-center">
+                  <img
+                    src={sponsor.logo}
+                    alt={`${sponsor.name} Logo`}
+                    className="max-h-full max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity"
+                    loading="lazy"
+                  />
+                </div>
+                <span className="text-gray-700 font-medium text-center mt-3">{sponsor.name}</span>
               </div>
             ))}
           </div>
