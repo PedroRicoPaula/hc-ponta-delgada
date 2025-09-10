@@ -3,81 +3,82 @@ import { X, Zap, Trophy, Target } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card } from '@/components/ui/card';
-
 const playersByPosition = {
   "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro", "Miguel Santos"],
-  "Jogadores": [
-    "Tiago Pimentel", "Mario Jesus", "Tiago Botelho", 
-    "Alexandre Resendes", "Vicente", "Alexandre Ornelas",
-    "Miguel Pimentel", "Carlos Guimarães", "Tiago Leite", "Pedro Soares",
-    "Pedro Paula", "Francisco Freitas"
-  ]
+  "Jogadores": ["Tiago Pimentel", "Mario Jesus", "Tiago Botelho", "Alexandre Resendes", "Vicente", "Alexandre Ornelas", "Miguel Pimentel", "Carlos Guimarães", "Tiago Leite", "Pedro Soares", "Pedro Paula", "Francisco Freitas"]
 };
-
 interface TeamState {
   goalkeeper: string;
   players: string[];
 }
-
 interface GameResult {
   team1Percentage: number;
   team2Percentage: number;
   winner: 'Team 1' | 'Team 2' | 'Draw';
 }
-
 interface RollerHockeyGameProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
-export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onClose }) => {
-  const [team1, setTeam1] = useState<TeamState>({ goalkeeper: '', players: ['', '', '', ''] });
-  const [team2, setTeam2] = useState<TeamState>({ goalkeeper: '', players: ['', '', '', ''] });
+export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
+  isOpen,
+  onClose
+}) => {
+  const [team1, setTeam1] = useState<TeamState>({
+    goalkeeper: '',
+    players: ['', '', '', '']
+  });
+  const [team2, setTeam2] = useState<TeamState>({
+    goalkeeper: '',
+    players: ['', '', '', '']
+  });
   const [gameResult, setGameResult] = useState<GameResult | null>(null);
-
   const handleReset = () => {
-    setTeam1({ goalkeeper: '', players: ['', '', '', ''] });
-    setTeam2({ goalkeeper: '', players: ['', '', '', ''] });
+    setTeam1({
+      goalkeeper: '',
+      players: ['', '', '', '']
+    });
+    setTeam2({
+      goalkeeper: '',
+      players: ['', '', '', '']
+    });
     setGameResult(null);
   };
-
   const handleClose = () => {
     handleReset();
     onClose();
   };
-
   const updateTeam1Goalkeeper = (goalkeeper: string) => {
-    setTeam1(prev => ({ ...prev, goalkeeper }));
+    setTeam1(prev => ({
+      ...prev,
+      goalkeeper
+    }));
   };
-
   const updateTeam1Player = (index: number, player: string) => {
     setTeam1(prev => ({
       ...prev,
       players: prev.players.map((p, i) => i === index ? player : p)
     }));
   };
-
   const updateTeam2Goalkeeper = (goalkeeper: string) => {
-    setTeam2(prev => ({ ...prev, goalkeeper }));
+    setTeam2(prev => ({
+      ...prev,
+      goalkeeper
+    }));
   };
-
   const updateTeam2Player = (index: number, player: string) => {
     setTeam2(prev => ({
       ...prev,
       players: prev.players.map((p, i) => i === index ? player : p)
     }));
   };
-
   const isTeamComplete = (team: TeamState) => {
     return team.goalkeeper && team.players.every(player => player);
   };
-
   const canPlay = isTeamComplete(team1) && isTeamComplete(team2);
-
   const playGame = () => {
     const team1Percentage = Math.floor(Math.random() * 101);
     const team2Percentage = 100 - team1Percentage;
-    
     let winner: 'Team 1' | 'Team 2' | 'Draw';
     if (team1Percentage > team2Percentage) {
       winner = 'Team 1';
@@ -86,44 +87,27 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
     } else {
       winner = 'Draw';
     }
-
     setGameResult({
       team1Percentage,
       team2Percentage,
       winner
     });
   };
-
   const getAvailablePlayers = (currentTeam: 'team1' | 'team2', position: 'goalkeeper' | number) => {
     const otherTeam = currentTeam === 'team1' ? team2 : team1;
     const currentTeamState = currentTeam === 'team1' ? team1 : team2;
-    
     if (position === 'goalkeeper') {
       const usedGoalkeepers = [otherTeam.goalkeeper, currentTeamState.goalkeeper].filter(Boolean);
       return playersByPosition["Guarda-Redes"].filter(gk => !usedGoalkeepers.includes(gk) || gk === currentTeamState.goalkeeper);
     } else {
-      const allUsedPlayers = [
-        ...otherTeam.players,
-        ...currentTeamState.players.filter((_, i) => i !== position)
-      ].filter(Boolean);
+      const allUsedPlayers = [...otherTeam.players, ...currentTeamState.players.filter((_, i) => i !== position)].filter(Boolean);
       return playersByPosition.Jogadores.filter(player => !allUsedPlayers.includes(player));
     }
   };
-
-  return (
-    <div
-      className={`fixed inset-y-0 right-0 z-50 bg-background shadow-2xl transition-transform duration-500 ease-out ${
-        isOpen ? 'translate-x-0' : 'translate-x-full'
-      } w-full sm:w-[32rem] lg:w-[40rem] overflow-y-auto`}
-    >
+  return <div className={`fixed inset-y-0 right-0 z-50 bg-background shadow-2xl transition-transform duration-500 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'} w-full sm:w-[32rem] lg:w-[40rem] overflow-y-auto`}>
       <div className="relative h-full bg-gradient-to-br from-primary/5 via-background to-primary/10">
         {/* Close Button */}
-        <Button
-          onClick={handleClose}
-          variant="ghost"
-          size="sm"
-          className="absolute top-4 right-4 z-10 bg-background/80 hover:bg-background rounded-full p-2"
-        >
+        <Button onClick={handleClose} variant="ghost" size="sm" className="absolute top-4 right-4 z-10 bg-background/80 hover:bg-background rounded-full p-2">
           <X className="h-5 w-5" />
         </Button>
 
@@ -154,9 +138,7 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
                     <SelectValue placeholder="Selecionar..." />
                   </SelectTrigger>
                   <SelectContent>
-                    {getAvailablePlayers('team1', 'goalkeeper').map((gk) => (
-                      <SelectItem key={gk} value={gk} className="text-sm">{gk}</SelectItem>
-                    ))}
+                    {getAvailablePlayers('team1', 'goalkeeper').map(gk => <SelectItem key={gk} value={gk} className="text-sm">{gk}</SelectItem>)}
                   </SelectContent>
                 </Select>
               </div>
@@ -164,23 +146,14 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
               {/* Players */}
               <div className="space-y-2">
                 <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Jogadores</label>
-                {team1.players.map((player, index) => (
-                  <Select
-                    key={index}
-                    value={player}
-                    onValueChange={(value) => updateTeam1Player(index, value)}
-                  >
+                {team1.players.map((player, index) => <Select key={index} value={player} onValueChange={value => updateTeam1Player(index, value)}>
                     <SelectTrigger className="h-9 text-sm">
                       <SelectValue placeholder={`Jogador ${index + 1}`} />
                     </SelectTrigger>
                     <SelectContent>
-                      {getAvailablePlayers('team1', index).map((p) => (
-                        <SelectItem key={p} value={p} className="text-sm">{p}</SelectItem>
-                      ))}
+                      {getAvailablePlayers('team1', index).map(p => <SelectItem key={p} value={p} className="text-sm">{p}</SelectItem>)}
                     </SelectContent>
-                  </Select>
-                ))
-                }
+                  </Select>)}
               </div>
             </Card>
 
@@ -199,9 +172,7 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
                     <SelectValue placeholder="Selecionar..." />
                   </SelectTrigger>
                   <SelectContent>
-                    {getAvailablePlayers('team2', 'goalkeeper').map((gk) => (
-                      <SelectItem key={gk} value={gk} className="text-sm">{gk}</SelectItem>
-                    ))}
+                    {getAvailablePlayers('team2', 'goalkeeper').map(gk => <SelectItem key={gk} value={gk} className="text-sm">{gk}</SelectItem>)}
                   </SelectContent>
                 </Select>
               </div>
@@ -209,47 +180,30 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
               {/* Players */}
               <div className="space-y-2">
                 <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Jogadores</label>
-                {team2.players.map((player, index) => (
-                  <Select
-                    key={index}
-                    value={player}
-                    onValueChange={(value) => updateTeam2Player(index, value)}
-                  >
+                {team2.players.map((player, index) => <Select key={index} value={player} onValueChange={value => updateTeam2Player(index, value)}>
                     <SelectTrigger className="h-9 text-sm">
                       <SelectValue placeholder={`Jogador ${index + 1}`} />
                     </SelectTrigger>
                     <SelectContent>
-                      {getAvailablePlayers('team2', index).map((p) => (
-                        <SelectItem key={p} value={p} className="text-sm">{p}</SelectItem>
-                      ))}
+                      {getAvailablePlayers('team2', index).map(p => <SelectItem key={p} value={p} className="text-sm">{p}</SelectItem>)}
                     </SelectContent>
-                  </Select>
-                ))
-                }
+                  </Select>)}
               </div>
             </Card>
           </div>
 
           {/* Play Button */}
           <div className="text-center">
-            <Button
-              onClick={playGame}
-              disabled={!canPlay}
-              size="lg"
-              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold px-8 py-3 transition-all duration-300 transform hover:scale-105 disabled:transform-none disabled:opacity-50"
-            >
+            <Button onClick={playGame} disabled={!canPlay} size="lg" className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold px-8 py-3 transition-all duration-300 transform hover:scale-105 disabled:transform-none disabled:opacity-50">
               <Zap className="h-5 w-5 mr-2" />
               Jogar!
             </Button>
-            {!canPlay && (
-              <p className="text-xs text-muted-foreground mt-2">Seleciona todos os jogadores para começar</p>
-            )}
+            {!canPlay && <p className="text-xs text-muted-foreground mt-2">Seleciona todos os jogadores para começar</p>}
           </div>
 
           {/* Results Display Area */}
           <Card className="p-6 min-h-[120px] bg-gradient-to-br from-muted/30 to-muted/10 border-dashed border-2">
-            {gameResult ? (
-              <div className="text-center space-y-4">
+            {gameResult ? <div className="text-center space-y-4">
                 <div className="flex items-center justify-center gap-2 mb-4">
                   <Trophy className="h-6 w-6 text-primary" />
                   <h4 className="text-lg font-semibold">Resultado</h4>
@@ -278,14 +232,11 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
                     {gameResult.winner === 'Draw' ? '🤝 Empate!' : `🏆 ${gameResult.winner} Venceu!`}
                   </span>
                 </div>
-              </div>
-            ) : (
-              <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
+              </div> : <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
                 <Target className="h-12 w-12 mb-3 opacity-50" />
                 <p className="text-center font-medium">Área de Resultados</p>
                 <p className="text-sm text-center">Os resultados aparecerão aqui após o jogo</p>
-              </div>
-            )}
+              </div>}
           </Card>
         </div>
 
@@ -294,9 +245,8 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
           <div className="text-6xl">🏒</div>
         </div>
         <div className="absolute top-20 right-8 opacity-10">
-          <div className="text-4xl">⚫</div>
+          
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
