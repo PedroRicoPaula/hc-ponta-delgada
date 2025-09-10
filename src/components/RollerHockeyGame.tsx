@@ -18,7 +18,7 @@ interface TeamState {
 interface GameResult {
   team1Score: number;
   team2Score: number;
-  winner: 'Team 1' | 'Team 2' | 'Draw';
+  winner: 'Equipa 1' | 'Equipa 2' | 'Empate';
 }
 
 interface RollerHockeyGameProps {
@@ -79,15 +79,15 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
 
   const canPlay = isTeamComplete(team1) && isTeamComplete(team2);
 
-  // UPDATED: playGame now uses random scores
+  // playGame agora retorna nomes em PT-PT
   const playGame = () => {
     const team1Score = Math.floor(Math.random() * 11); // 0-10
     const team2Score = Math.floor(Math.random() * 11);
 
-    let winner: 'Team 1' | 'Team 2' | 'Draw';
-    if (team1Score > team2Score) winner = 'Team 1';
-    else if (team2Score > team1Score) winner = 'Team 2';
-    else winner = 'Draw';
+    let winner: 'Equipa 1' | 'Equipa 2' | 'Empate';
+    if (team1Score > team2Score) winner = 'Equipa 1';
+    else if (team2Score > team1Score) winner = 'Equipa 2';
+    else winner = 'Empate';
 
     setGameResult({ team1Score, team2Score, winner });
   };
@@ -118,7 +118,7 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
             <Target className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
             <h2 className="text-xl sm:text-2xl font-bold text-foreground">Mini Jogo</h2>
           </div>
-          <p className="text-muted-foreground text-xs sm:text-sm">Seleciona os teus "Starting 5" e vê quem ganha!</p>
+          <p className="text-muted-foreground text-xs sm:text-sm">Seleciona os teus "5 Iniciais" e vê quem ganha!</p>
         </div>
 
         <div className="px-4 pb-4 sm:px-6 sm:pb-6 space-y-3 sm:space-y-6">
@@ -286,7 +286,7 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
-                  <div className={`p-2.5 sm:p-3 rounded-lg ${gameResult.winner === 'Team 1' ? 'bg-blue-100 border-2 border-blue-500' : 'bg-muted'}`}>
+                  <div className={`p-2.5 sm:p-3 rounded-lg ${gameResult.winner === 'Equipa 1' ? 'bg-blue-100 border-2 border-blue-500' : 'bg-muted'}`}>
                     <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
                       <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-blue-500 rounded-full"></div>
                       <span className="font-medium text-xs sm:text-sm">Equipa 1</span>
@@ -294,7 +294,7 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
                     <div className="text-xl sm:text-2xl font-bold text-center">{gameResult.team1Score}</div>
                   </div>
 
-                  <div className={`p-2.5 sm:p-3 rounded-lg ${gameResult.winner === 'Team 2' ? 'bg-red-100 border-2 border-red-500' : 'bg-muted'}`}>
+                  <div className={`p-2.5 sm:p-3 rounded-lg ${gameResult.winner === 'Equipa 2' ? 'bg-red-100 border-2 border-red-500' : 'bg-muted'}`}>
                     <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
                       <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
                       <span className="font-medium text-xs sm:text-sm">Equipa 2</span>
@@ -305,7 +305,7 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
 
                 <div className="text-center">
                   <span className="text-base sm:text-lg font-semibold text-primary">
-                    {gameResult.winner === 'Draw' ? '🤝 Empate!' : `🏆 ${gameResult.winner} Venceu!`}
+                    {gameResult.winner === 'Empate' ? '🤝 Empate!' : `🏆 ${gameResult.winner} Venceu!`}
                   </span>
                 </div>
               </div>
