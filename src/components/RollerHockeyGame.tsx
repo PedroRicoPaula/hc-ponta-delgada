@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const playersByPosition = {
   "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro", "Miguel Santos"],
@@ -146,7 +147,9 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
                         <SelectValue placeholder="Selecionar..." />
                       </SelectTrigger>
                       <SelectContent>
+                        <ScrollArea className="h-32">
                         {getAvailablePlayers('team1', 'goalkeeper').map(gk => <SelectItem key={gk} value={gk} className="text-xs">{gk}</SelectItem>)}
+                        </ScrollArea>
                       </SelectContent>
                     </Select>
                   </div>
@@ -159,7 +162,9 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
                           <SelectValue placeholder={`J${index + 1}`} />
                         </SelectTrigger>
                         <SelectContent>
+                          <ScrollArea className="h-32">
                           {getAvailablePlayers('team1', index).map(p => <SelectItem key={p} value={p} className="text-xs">{p}</SelectItem>)}
+                          </ScrollArea>
                         </SelectContent>
                       </Select>)}
                     </div>
@@ -177,7 +182,9 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
                         <SelectValue placeholder="Selecionar..." />
                       </SelectTrigger>
                       <SelectContent>
+                        <ScrollArea className="h-32">
                         {getAvailablePlayers('team2', 'goalkeeper').map(gk => <SelectItem key={gk} value={gk} className="text-xs">{gk}</SelectItem>)}
+                        </ScrollArea>
                       </SelectContent>
                     </Select>
                   </div>
@@ -190,7 +197,9 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
                           <SelectValue placeholder={`J${index + 1}`} />
                         </SelectTrigger>
                         <SelectContent>
+                          <ScrollArea className="h-32">
                           {getAvailablePlayers('team2', index).map(p => <SelectItem key={p} value={p} className="text-xs">{p}</SelectItem>)}
+                          </ScrollArea>
                         </SelectContent>
                       </Select>)}
                     </div>
@@ -216,7 +225,9 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
                     <SelectValue placeholder="Selecionar..." />
                   </SelectTrigger>
                   <SelectContent>
+                    <ScrollArea className="h-32">
                     {getAvailablePlayers('team1', 'goalkeeper').map(gk => <SelectItem key={gk} value={gk} className="text-sm">{gk}</SelectItem>)}
+                    </ScrollArea>
                   </SelectContent>
                 </Select>
               </div>
@@ -228,7 +239,9 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
                     <SelectValue placeholder={`Jogador ${index + 1}`} />
                   </SelectTrigger>
                   <SelectContent>
+                    <ScrollArea className="h-32">
                     {getAvailablePlayers('team1', index).map(p => <SelectItem key={p} value={p} className="text-sm">{p}</SelectItem>)}
+                    </ScrollArea>
                   </SelectContent>
                 </Select>)}
               </div>
@@ -248,7 +261,9 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
                     <SelectValue placeholder="Selecionar..." />
                   </SelectTrigger>
                   <SelectContent>
+                    <ScrollArea className="h-32">
                     {getAvailablePlayers('team2', 'goalkeeper').map(gk => <SelectItem key={gk} value={gk} className="text-sm">{gk}</SelectItem>)}
+                    </ScrollArea>
                   </SelectContent>
                 </Select>
               </div>
@@ -260,7 +275,9 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
                     <SelectValue placeholder={`Jogador ${index + 1}`} />
                   </SelectTrigger>
                   <SelectContent>
+                    <ScrollArea className="h-32">
                     {getAvailablePlayers('team2', index).map(p => <SelectItem key={p} value={p} className="text-sm">{p}</SelectItem>)}
+                    </ScrollArea>
                   </SelectContent>
                 </Select>)}
               </div>
