@@ -36,9 +36,13 @@ export const SocialIcons = () => {
       {/* Barra lateral - Mobile (toggle) */}
       <div
         ref={containerRef}
-        className={`fixed top-1/2 -translate-y-1/2 z-40 bg-white/90 backdrop-blur-sm rounded-r-lg shadow-lg flex flex-col gap-4 p-3 transition-transform duration-300 ease-in-out sm:hidden
-        ${open ? "translate-x-0" : "-translate-x-full"}`}
-        style={{ left: "48px" }} // 👉 desloca a barra para a direita do botão
+        className={`fixed top-1/2 -translate-y-1/2 z-40 bg-white/90 backdrop-blur-sm rounded-r-lg shadow-lg flex flex-col gap-4 p-3 transition-transform duration-300 ease-in-out sm:hidden`}
+        style={{
+          left: "48px", // 👉 afasta a barra do botão
+          transform: open
+            ? "translateY(-50%) translateX(0)"
+            : "translateY(-50%) translateX(-120%)", // 👉 começa escondida
+        }}
       >
         {socialLinks.map((social) => (
           <a 
