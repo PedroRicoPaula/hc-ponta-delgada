@@ -99,6 +99,31 @@ const formacaoEvents = [
   },
 ];
 
+// Comunicados
+const comunicados = [
+  {
+    id: 1,
+    titulo: "Início dos Treinos 2025",
+    data: "10/09/2025",
+    conteudo:
+      "Os treinos oficiais do Hóquei Clube Ponta Delgada terão início no dia 15 de setembro de 2025, às 18h00 no Pavilhão Municipal. Contamos com a presença de todos os atletas!",
+  },
+  {
+    id: 2,
+    titulo: "Resultado do Jogo",
+    data: "12/09/2025",
+    conteudo:
+      "O Hóquei Clube Ponta Delgada venceu o Clube X por 5-3 num jogo cheio de emoção! Parabéns a toda a equipa pelo excelente desempenho.",
+  },
+  {
+    id: 3,
+    titulo: "Evento do Clube",
+    data: "20/09/2025",
+    conteudo:
+      "No próximo sábado, dia 20, vamos realizar um convívio com sócios e atletas no nosso espaço social. Haverá churrasco, música e sorteio de brindes. Participa!",
+  },
+];
+
 const galleryImages = [
   "/lovable-uploads/6f004096-7b4b-46fc-900c-5a739fb46b49.png",
   "/lovable-uploads/bb357729-6191-4dec-bdc6-e9b22898bd63.png",
@@ -244,10 +269,22 @@ const Index = () => {
               <X className="h-6 w-6" />
             </button>
             <h2 className="text-2xl font-bold mb-4">Comunicados</h2>
-            <div className="flex flex-col items-center justify-center h-[calc(100%-50px)] text-center text-gray-500">
-              <Megaphone className="w-16 h-16 mb-4 text-gray-300" />
-              <p>Neste momento não existem comunicados.</p>
-            </div>
+            <div className="h-[calc(100%-50px)] overflow-y-auto pr-2 space-y-4">
+            {comunicados.map((comunicado) => (
+              <div 
+                key={comunicado.id} 
+                className="p-4 border rounded-lg shadow-sm hover:shadow-md transition bg-gray-50"
+              >
+                <h3 className="text-lg font-semibold text-primary mb-1">
+                  {comunicado.titulo}
+                </h3>
+                <p className="text-sm text-gray-500 mb-2">{comunicado.data}</p>
+                <p className="text-gray-700 text-sm leading-relaxed">
+                  {comunicado.conteudo}
+                </p>
+              </div>
+            ))}
+          </div>
           </div>
         </div>
       </>
