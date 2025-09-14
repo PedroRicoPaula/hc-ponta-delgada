@@ -206,10 +206,10 @@ const Index = () => {
       {/* Comunicados Button */}
       <button
         onClick={() => setIsComunicadosOpen(true)}
-        className="fixed right-4 top-[calc(50%-120px)] z-40 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-l-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 group"
+        className="fixed right-4 top-[calc(50%-120px)] z-40 bg-blue-500 hover:bg-blue-600 text-white p-2 sm:p-3 rounded-l-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 group"
         aria-label="Ver comunicados"
       >
-        <Megaphone className="h-6 w-6 group-hover:animate-pulse" />
+        <Megaphone className="h-5 w-5 sm:h-6 sm:w-6 group-hover:animate-pulse" />
       </button>
       
       {/* Floating Game Button */}
