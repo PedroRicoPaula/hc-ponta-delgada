@@ -443,11 +443,11 @@ const Index = () => {
                           loading="lazy"
                         />
                       </DialogTrigger>
-                      <DialogContent className="max-w-[98vw] max-h-[98vh] md:max-w-[80vw] md:max-h-[80vh] w-auto h-auto p-2 border-0 bg-black/90 flex items-center justify-center [&>button]:absolute [&>button]:right-2 [&>button]:top-2 [&>button]:bg-white/20 [&>button]:text-white [&>button]:hover:bg-white/30 [&>button]:rounded-full [&>button]:p-2 [&>button]:border-0 [&>button]:shadow-lg">
+                      <DialogContent className="max-w-full max-h-screen sm:max-w-[98vw] sm:max-h-[98vh] md:max-w-[80vw] md:max-h-[80vh] w-auto h-auto p-0 sm:p-2 border-0 bg-black/90 flex items-center justify-center [&>button]:absolute [&>button]:right-3 [&>button]:top-3 [&>button]:bg-black/50 [&>button]:text-white [&>button]:hover:bg-black/70 [&>button]:rounded-full [&>button]:p-2.5 sm:[&>button]:p-2 [&>button]:border-0 [&>button]:shadow-lg">
                         <img 
                           src={image} 
                           alt={`Hóquei Clube Ponta Delgada - Momento ${index + 1} dos nossos treinos e jogos`} 
-                          className="max-w-full max-h-[92vh] md:max-h-[70vh] w-auto h-auto object-contain rounded-lg"
+                          className="max-w-full max-h-[98vh] md:max-h-[75vh] w-auto h-auto object-contain sm:rounded-lg"
                           loading="lazy"
                         />
                       </DialogContent>
