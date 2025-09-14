@@ -57,14 +57,6 @@ const senioresEvents = [
 ];
 
 const formacaoEvents = [
-  /*{
-    id: "formacao-1",
-    title: "HC PDL vs Caldeiras HC",
-    date: "14-05-2025",
-    time: "14:30",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Escolares",
-  },*/
   {
     id: "formacao-1",
     title: "HC PDL vs Caldeiras HC",
@@ -154,14 +146,6 @@ const trainingSchedules = [
       { day: "Sexta", time: "19:00 - 20:30" }
     ]
   },
-  {/*{
-    type: "Sub15",
-    color: "bg-blue-100 text-blue-700 border-blue-200",
-    sessions: [
-      { day: "Segunda", time: "20:00 - 21:30" },
-      { day: "Sexta", time: "20:00 - 21:30" }
-    ]
-  },*/}
   {
     type: "Sub 17",
     color: "bg-purple-100 text-purple-700 border-purple-200",
