@@ -8,7 +8,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 
 const playersByPosition = {
   "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro", "Miguel Santos"],
-  "Jogadores": ["Tiago Pimentel", "Mario Jesus", "Alexandre Resendes", "Vicente", "Alexandre Ornelas", "Miguel Pimentel", "Carlos Guimarães", "Tiago Leite", "Pedro Soares", "Pedro Paula", "Francisco Freitas"]
+  "Jogadores": ["Tiago Pimentel", "Mario Jesus", "Alexandre Resendes", "Vicente", "Alexandre Ornelas", "Miguel Pimentel", "Carlos Guimarães", "Tiago Leite", "Pedro Paula", "Francisco Freitas"]
 };
 
 interface TeamState {
@@ -336,9 +336,9 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
           </Card>
         </div>
 
-        <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 opacity-10">
+        {/*<div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 opacity-10">
           <div className="text-4xl sm:text-6xl">🏒</div>
-        </div>
+        </div>*/}
       </div>
     </div>
   );
