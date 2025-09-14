@@ -8,7 +8,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 
 const playersByPosition = {
   "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro", "Miguel Santos"],
-  "Jogadores": ["Tiago Pimentel", "Mario Jesus", "Tiago Botelho", "Alexandre Resendes", "Vicente", "Alexandre Ornelas", "Miguel Pimentel", "Carlos Guimarães", "Tiago Leite", "Pedro Soares", "Pedro Paula", "Francisco Freitas"]
+  "Jogadores": ["Tiago Pimentel", "Mario Jesus", "Alexandre Resendes", "Vicente", "Alexandre Ornelas", "Miguel Pimentel", "Carlos Guimarães", "Tiago Leite", "Pedro Soares", "Pedro Paula", "Francisco Freitas"]
 };
 
 interface TeamState {
