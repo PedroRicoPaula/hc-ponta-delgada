@@ -203,9 +203,10 @@ const Index = () => {
       <SocialIcons />
       <ScrollToTop />
 
+      {/* Comunicados Button */}
       <button
         onClick={() => setIsComunicadosOpen(true)}
-        className="fixed right-4 top-[calc(50%-80px)] z-40 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-l-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 group"
+        className="fixed right-4 top-[calc(50%-120px)] z-40 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-l-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 group"
         aria-label="Ver comunicados"
       >
         <Megaphone className="h-6 w-6 group-hover:animate-pulse" />
@@ -274,7 +275,7 @@ const Index = () => {
               </p>
               <div className="bg-gray-100 p-3 rounded-lg">
                 <p className="text-sm font-semibold text-gray-700">IBAN</p>
-                <p className="text-lg font-mono tracking-wider text-gray-900">PT50 0000 0000 0000 0000 0000 0</p>
+                <p className="text-lg font-mono tracking-wider text-gray-900">PT50 ...</p>
               </div>
             </div>
         </div>
