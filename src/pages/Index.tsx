@@ -24,8 +24,8 @@ import {
 
 const playersByPosition = {
   "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro", "Miguel Santos"],
-  "Defesa": ["Tiago Pimentel", "Mario Jesus"],
-  "Médio": ["Alexandre Resendes", "Vicente", "Alexandre Ornelas"],
+  "Defesa": ["Tiago Pimentel", "Mario Jesus", "Vicente Correia"],
+  "Médio": ["Alexandre Resendes", "Alexandre Ornelas"],
   "Avançado": ["Miguel Pimentel", "Carlos Guimarães", "Tiago Leite"],
   "Universal": ["Pedro Paula", "Francisco Freitas"]
 };
