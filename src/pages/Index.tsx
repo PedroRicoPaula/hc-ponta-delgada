@@ -5,7 +5,7 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import { SocialIcons } from "@/components/SocialIcons";
 import { RollerHockeyGame } from "@/components/RollerHockeyGame";
 import Autoplay from "embla-carousel-autoplay";
-import { Gamepad2 } from "lucide-react";
+import { Gamepad2, Megaphone, Heart, X } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -153,6 +153,8 @@ const Index = () => {
   const [showCookieConsent, setShowCookieConsent] = useState(false);
   const [openSchedules, setOpenSchedules] = useState<{ [key: string]: boolean }>({});
   const [isGameOpen, setIsGameOpen] = useState(false);
+  const [isComunicadosOpen, setIsComunicadosOpen] = useState(false);
+  const [isDonationsOpen, setIsDonationsOpen] = useState(false);
 
   useEffect(() => {
     const cookieConsent = localStorage.getItem('cookie-consent');
@@ -201,6 +203,14 @@ const Index = () => {
       <SocialIcons />
       <ScrollToTop />
 
+      <button
+        onClick={() => setIsComunicadosOpen(true)}
+        className="fixed right-4 top-[calc(50%-80px)] z-40 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-l-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 group"
+        aria-label="Ver comunicados"
+      >
+        <Megaphone className="h-6 w-6 group-hover:animate-pulse" />
+      </button>
+      
       {/* Floating Game Button */}
       <button
         onClick={() => setIsGameOpen(true)}
@@ -215,6 +225,60 @@ const Index = () => {
 
       {/* Roller Hockey Game Overlay */}
       <RollerHockeyGame isOpen={isGameOpen} onClose={() => setIsGameOpen(false)} />
+
+      <>
+        <div 
+          className={`fixed inset-0 bg-black/60 z-50 transition-opacity duration-300 ${isComunicadosOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          onClick={() => setIsComunicadosOpen(false)}
+        />
+        <div
+          className={`fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${isComunicadosOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        >
+          <div className="p-6 relative h-full">
+            <button
+              onClick={() => setIsComunicadosOpen(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
+              aria-label="Fechar comunicados"
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <h2 className="text-2xl font-bold mb-4">Comunicados</h2>
+            <div className="flex flex-col items-center justify-center h-[calc(100%-50px)] text-center text-gray-500">
+              <Megaphone className="w-16 h-16 mb-4 text-gray-300" />
+              <p>Neste momento não existem comunicados.</p>
+            </div>
+          </div>
+        </div>
+      </>
+
+      <>
+        <div
+          className={`fixed inset-0 bg-black/60 z-50 transition-opacity duration-300 ${isDonationsOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          onClick={() => setIsDonationsOpen(false)}
+        />
+        <div
+          className={`fixed bottom-0 left-0 right-0 bg-white shadow-t-2xl z-50 transform transition-transform duration-300 ease-in-out ${isDonationsOpen ? 'translate-y-0' : 'translate-y-full'} p-6 rounded-t-2xl max-w-2xl mx-auto`}
+        >
+          <button
+              onClick={() => setIsDonationsOpen(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
+              aria-label="Fechar doações"
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <div className="text-center">
+              <Heart className="mx-auto h-12 w-12 text-primary mb-3" />
+              <h2 className="text-2xl font-bold mb-2">Apoie o Clube!</h2>
+              <p className="text-gray-600 mb-4">
+                A sua doação ajuda a financiar os nossos equipamentos, viagens e a formação dos nossos jovens atletas. Qualquer contribuição faz a diferença. Obrigado pelo seu apoio!
+              </p>
+              <div className="bg-gray-100 p-3 rounded-lg">
+                <p className="text-sm font-semibold text-gray-700">IBAN</p>
+                <p className="text-lg font-mono tracking-wider text-gray-900">PT50 0000 0000 0000 0000 0000 0</p>
+              </div>
+            </div>
+        </div>
+      </>
 
       {/* Hero Section */}
       <header className="pt-20 pb-12 bg-gradient-to-b from-primary/20 to-transparent">
@@ -509,7 +573,14 @@ const Index = () => {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p>&copy; 2025 Hóquei Clube Ponta Delgada. Todos os direitos reservados.</p>
+          <p className="mb-4">&copy; 2025 Hóquei Clube Ponta Delgada. Todos os direitos reservados.</p>
+          <Button 
+            variant="outline" 
+            className="bg-transparent border-primary text-primary hover:bg-primary hover:text-white"
+            onClick={() => setIsDonationsOpen(true)}
+          >
+            <Heart className="mr-2 h-4 w-4" /> Fazer uma Doação
+          </Button>
         </div>
       </footer>
 
