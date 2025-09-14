@@ -289,6 +289,11 @@ const Index = () => {
               Hóquei Clube Ponta Delgada
             </h1>
             <p className="text-xl text-gray-600 mb-8">Paixão, Orgulho e Excelência desde 2012</p>
+            <img
+              src="/lovable-uploads/PDL24-25V2.jpg" 
+              alt="Hóquei Clube Ponta Delgada"
+              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
           </div>
         </div>
       </header>
