@@ -103,24 +103,24 @@ const formacaoEvents = [
 const comunicados = [
   {
     id: 1,
-    titulo: "Início dos Treinos 2025",
-    data: "10/09/2025",
+    titulo: "Alteração de Horários Formação",
+    data: "14/09/2025",
     conteudo:
-      "Os treinos oficiais do Hóquei Clube Ponta Delgada terão início no dia 15 de setembro de 2025, às 18h00 no Pavilhão Municipal. Contamos com a presença de todos os atletas!",
+      "Foi feita uma alteração aos horários de treinos devido ao encerramento do escalão dos sub15",
   },
   {
     id: 2,
-    titulo: "Resultado do Jogo",
-    data: "12/09/2025",
+    titulo: "Jogos dos Seniores",
+    data: "10/09/2025",
     conteudo:
-      "O Hóquei Clube Ponta Delgada venceu o Clube X por 5-3 num jogo cheio de emoção! Parabéns a toda a equipa pelo excelente desempenho.",
+      "O Hóquei Clube Ponta Delgada irá começar a participação no campeonato nacional a dia 4 de Outubro de 2025 fora contra o HC Santiago.",
   },
   {
     id: 3,
-    titulo: "Evento do Clube",
-    data: "20/09/2025",
+    titulo: "Início dos Treinos 2025",
+    data: "1/09/2025",
     conteudo:
-      "No próximo sábado, dia 20, vamos realizar um convívio com sócios e atletas no nosso espaço social. Haverá churrasco, música e sorteio de brindes. Participa!",
+      "Os treinos oficiais do Hóquei Clube Ponta Delgada terão início no dia 8 de setembro de 2025, às 19h00 no Pavilhão Sidónio Serpa. Contamos com a presença de todos os atletas!",
   },
 ];
 
@@ -141,7 +141,7 @@ const trainingSchedules = [
     type: "Escolares",
     color: "bg-yellow-100 text-yellow-700 border-yellow-200",
     sessions: [
-      { day: "Segunda", time: "19:00 - 20:00" },
+      { day: "Terça", time: "19:00 - 20:00" },
       { day: "Sexta", time: "18:00 - 19:00" }
     ]
   },
@@ -149,25 +149,26 @@ const trainingSchedules = [
     type: "Sub 13",
     color: "bg-green-100 text-green-700 border-green-200",
     sessions: [
-      { day: "Quarta", time: "18:30 - 20:00" },
-      { day: "Sexta", time: "19:00 - 20:00" }
+      { day: "Segunda", time: "19:00 - 20:00" },
+      { day: "Quarta", time: "18:30 - 19:30" },
+      { day: "Sexta", time: "19:00 - 20:30" }
     ]
   },
-  {
+  {/*{
     type: "Sub15",
     color: "bg-blue-100 text-blue-700 border-blue-200",
     sessions: [
       { day: "Segunda", time: "20:00 - 21:30" },
       { day: "Sexta", time: "20:00 - 21:30" }
     ]
-  },
+  },*/}
   {
     type: "Sub 17",
     color: "bg-purple-100 text-purple-700 border-purple-200",
     sessions: [
-      { day: "Terça", time: "19:00 - 20:00" },
-      { day: "Quarta", time: "20:00 - 21:30" },
-      { day: "Sexta", time: "21:30 - 22:30" }
+      { day: "Segunda", time: "20:00 - 21:30" },
+      { day: "Quarta", time: "19:30 - 21:00" },
+      { day: "Sexta", time: "20:30 - 22:00" }
     ]
   }
 ];
