@@ -361,7 +361,7 @@ const Index = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Horários de Treinos</h2>
           
           {/* Desktop View */}
-          <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
             {trainingSchedules.map((schedule) => (
               <Card key={schedule.type} className={`p-6 border-2 ${schedule.color} hover:shadow-lg transition-shadow`}>
                 <div className="text-center">
