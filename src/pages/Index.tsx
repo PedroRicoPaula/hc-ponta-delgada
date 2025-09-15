@@ -5,7 +5,7 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import { SocialIcons } from "@/components/SocialIcons";
 import { RollerHockeyGame } from "@/components/RollerHockeyGame";
 import Autoplay from "embla-carousel-autoplay";
-import { Gamepad2, Megaphone, Heart, X } from "lucide-react";
+import { Gamepad2, Megaphone, Heart, X, Copy } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -295,9 +295,24 @@ const Index = () => {
               <p className="text-gray-600 mb-4">
                 A sua doação ajuda a financiar os nossos equipamentos, viagens e a formação dos nossos jovens atletas. Qualquer contribuição faz a diferença. Obrigado pelo seu apoio!
               </p>
-              <div className="bg-gray-100 p-3 rounded-lg">
+              <div className="bg-gray-100 p-3 rounded-lg flex items-center justify-between">
+              <div>
                 <p className="text-sm font-semibold text-gray-700">IBAN</p>
-                <p className="text-lg font-mono tracking-wider text-gray-900">PT50 0010 0000 4864 9200 0010 7</p>
+                <p className="text-lg font-mono tracking-wider text-gray-900">
+                  PT50 0010 0000 4864 9200 0010 7
+                </p>
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="ml-3 hover:bg-gray-200"
+                onClick={() =>
+                  navigator.clipboard.writeText("PT50001000004864920000107")
+                }
+                aria-label="Copiar IBAN"
+              >
+                <Copy className="h-5 w-5 text-gray-600" />
+              </Button>
               </div>
             </div>
         </div>
