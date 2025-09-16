@@ -36,7 +36,7 @@ export const SocialIcons = () => {
       {/* MOBILE: wrapper (botão + painel ao lado) */}
       <div
         ref={wrapperRef}
-        className="fixed left-0 top-1/2 transform -translate-y-1/2 z-50 sm:hidden"
+        className="fixed left-0 top-[60%] transform -translate-y-1/2 z-50 sm:hidden"
         aria-hidden={false}
       >
         <div className="flex items-center gap-2 ml-1">
