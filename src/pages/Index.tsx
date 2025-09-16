@@ -222,7 +222,7 @@ const Index = () => {
       {/* Comunicados Button */}
       <button
         onClick={() => setIsComunicadosOpen(true)}
-        className="fixed right-4 top-[calc(50%-120px)] z-40 bg-blue-500 hover:bg-blue-600 text-white p-2 sm:p-3 rounded-l-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 group"
+        className="fixed right-4 top-[calc(40%-120px)] sm:top-[calc(50%-120px)] z-40 bg-blue-500 hover:bg-blue-600 text-white p-2 sm:p-3 rounded-l-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 group"
         aria-label="Ver comunicados"
       >
         <Megaphone className="h-5 w-5 sm:h-6 sm:w-6 group-hover:animate-pulse" />
@@ -231,7 +231,7 @@ const Index = () => {
       {/* Floating Game Button */}
       <button
         onClick={() => setIsGameOpen(true)}
-        className="fixed right-4 top-1/2 -translate-y-1/2 z-40 bg-gradient-to-b from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground p-2 sm:p-3 rounded-l-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-x-1 group"
+        className="fixed right-4 top-[45%] sm:top-1/2 -translate-y-1/2 z-40 bg-gradient-to-b from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground p-2 sm:p-3 rounded-l-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-x-1 group"
         style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
       >
         <div className="flex flex-col items-center gap-2">
