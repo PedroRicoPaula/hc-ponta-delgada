@@ -58,7 +58,7 @@ const senioresEvents = [
 const formacaoEvents = [
   {
     id: "formacao-1",
-    title: "HC PDL vs Caldeiras HC",
+    title: "Hóquei Clube PDL vs Caldeiras HC",
     date: "27/09/2025",
     time: "14:30",
     location: "CD Ribeira Grande",
@@ -66,7 +66,7 @@ const formacaoEvents = [
   },
   {
     id: "formacao-2",
-    title: "HC PDL - MSC",
+    title: "Hóquei Clube PDL vs Marítimo SC",
     date: "28/09/2025",
     time: "10:00",
     location: "CD Ribeira Grande",
@@ -74,7 +74,7 @@ const formacaoEvents = [
   },
   {
     id: "formacao-3",
-    title: "Maritimo SC vs HC PDL",
+    title: "Maritimo SC vs Hóquei Clube PDL",
     date: "28/09/2025",
     time: "11:30",
     location: "CD Ribeira Grande",
@@ -82,7 +82,7 @@ const formacaoEvents = [
   },
   {
     id: "formacao-4",
-    title: "Caldeiras HC - PDL",
+    title: "Caldeiras HC vs Hóquei Clube PDL",
     date: "28/09/2025",
     time: "18:30",
     location: "CD Ribeira Grande",
