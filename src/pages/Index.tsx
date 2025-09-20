@@ -94,10 +94,10 @@ const formacaoEvents = [
 const comunicados = [
   {
     id: 1,
-    titulo: "Alteração de Horários Formação",
-    data: "14/09/2025",
+    titulo: "Torneio das Vindimas",
+    data: "19/09/2025",
     conteudo:
-      "Foi feita uma alteração aos horários de treinos devido ao encerramento do escalão dos sub15",
+      "Participação da equipa senior no torneio das vindimas contra o Candelária SC 27 e 28",
   },
   {
     id: 2,
@@ -105,13 +105,6 @@ const comunicados = [
     data: "10/09/2025",
     conteudo:
       "O Hóquei Clube Ponta Delgada irá começar a participação no campeonato nacional a dia 4 de Outubro de 2025 fora contra o HC Santiago.",
-  },
-  {
-    id: 3,
-    titulo: "Início dos Treinos 2025",
-    data: "1/09/2025",
-    conteudo:
-      "Os treinos oficiais do Hóquei Clube Ponta Delgada terão início no dia 8 de setembro de 2025, às 19h00 no Pavilhão Sidónio Serpa. Contamos com a presença de todos os atletas!",
   },
 ];
 
