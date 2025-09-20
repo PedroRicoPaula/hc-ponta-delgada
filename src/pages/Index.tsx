@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Navigation } from "@/components/Navigation";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SocialIcons } from "@/components/SocialIcons";
@@ -158,6 +159,7 @@ const Index = () => {
   const [isComunicadosOpen, setIsComunicadosOpen] = useState(false);
   const [isDonationsOpen, setIsDonationsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [isMapDialogOpen, setIsMapDialogOpen] = useState(false);
 
   useEffect(() => {
     const cookieConsent = localStorage.getItem('cookie-consent');
@@ -204,10 +206,43 @@ const Index = () => {
     setTimeout(() => setCopied(false), 2000);
   }
 
+  // Shared animation variants for sections (slower and with variations)
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 32 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 2.0 }
+    }
+  };
+  const sectionLeft = {
+    hidden: { opacity: 0, x: -40 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 2.0 }
+    }
+  };
+  const sectionRight = {
+    hidden: { opacity: 0, x: 40 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 2.0 }
+    }
+  };
+  const sectionFade = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { duration: 2.0 }
+    }
+  };
+
   // Force refresh - no events variable exists anymore
   console.log("Index component loaded successfully");
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       <Navigation />
       <SocialIcons />
       <ScrollToTop />
@@ -215,7 +250,7 @@ const Index = () => {
       {/* Comunicados Button */}
       <button
         onClick={() => setIsComunicadosOpen(true)}
-        className="fixed right-4 top-[calc(40%-120px)] sm:top-[calc(50%-120px)] z-40 bg-blue-500 hover:bg-blue-600 text-white p-2 sm:p-3 rounded-l-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 group"
+        className="fixed right-4 top-[calc(35%-120px)] sm:top-[calc(50%-120px)] z-40 bg-blue-500 hover:bg-blue-600 text-white p-2 sm:p-3 rounded-l-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 group"
         aria-label="Ver comunicados"
       >
         <Megaphone className="h-5 w-5 sm:h-6 sm:w-6 group-hover:animate-pulse" />
@@ -309,7 +344,13 @@ const Index = () => {
       </>
 
       {/* Hero Section */}
-      <header className="pt-20 pb-12 bg-gradient-to-b from-primary/20 to-transparent">
+      <motion.header
+        className="pt-20 pb-12 bg-gradient-to-b from-primary/20 to-transparent"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionFade}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
@@ -323,7 +364,7 @@ const Index = () => {
             />
           </div>
         </div>
-      </header>
+      </motion.header>
 
       {/* Scroll Indicator */}
       <div className="flex justify-center py-8">
@@ -349,7 +390,14 @@ const Index = () => {
 
       {/* About Section */}
       <main>
-        <section id="about" className="py-16">
+        <motion.section
+          id="about"
+          className="py-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariants}
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-center mb-8">Sobre Nós</h2>
             <p className="text-gray-600 text-lg text-center max-w-3xl mx-auto">
@@ -358,10 +406,17 @@ const Index = () => {
               um dos clubes mais respeitados em Portugal.
             </p>
           </div>
-        </section>
+        </motion.section>
 
       {/* Training Schedules Section */}
-      <section id="training" className="py-16 bg-gray-100">
+      <motion.section
+        id="training"
+        className="py-16 bg-gray-100"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionLeft}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Horários de Treinos</h2>
           
@@ -412,10 +467,17 @@ const Index = () => {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Events Section */}
-      <section id="events" className="py-16">
+      <motion.section
+        id="events"
+        className="py-16"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionRight}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Próximos Jogos</h2>
           
@@ -470,10 +532,17 @@ const Index = () => {
             })}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Team Section */}
-      <section id="team" className="py-16">
+      <motion.section
+        id="team"
+        className="py-16"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Equipa</h2>
           
@@ -505,10 +574,17 @@ const Index = () => {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Gallery Section */}
-      <section id="gallery" className="py-16 overflow-hidden">
+      <motion.section
+        id="gallery"
+        className="py-16 overflow-hidden"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionFade}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Galeria</h2>
           <div className="text-center mb-4">
@@ -558,21 +634,31 @@ const Index = () => {
             </div>
           </Carousel>
         </div>
-      </section>
+      </motion.section>
 
       {/* Sponsors Section */}
-      <section id="sponsors" className="py-16 bg-gray-100">
+      <motion.section
+        id="sponsors"
+        className="py-16 bg-gray-100"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionLeft}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Patrocinadores</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8 items-center justify-items-center">
             {[
-              { name: "Azemad", logo: "/lovable-uploads/AzemadLogo.jpg" },
-              { name: "AutoCordeiro", logo: "/lovable-uploads/AutoCordeiroLogo.png" },
-              { name: "Crenku", logo: "/lovable-uploads/CrenkuLogo.png" },
+              { name: "Azemad", logo: "/lovable-uploads/AzemadLogo.jpg", url: "https://azemad.com/" },
+              { name: "AutoCordeiro", logo: "/lovable-uploads/AutoCordeiroLogo.png", url: "https://www.facebook.com/crenku/?locale=pt_PT" },
+              { name: "Crenku", logo: "/lovable-uploads/CrenkuLogo.png", url: "https://www.facebook.com/engenhososdesafios/?locale=pt_PT" },
             ].map((sponsor) => (
-              <div
+              <a
                 key={sponsor.name}
-                className="flex flex-col items-center p-4 hover:scale-105 transition-transform duration-300"
+                href={sponsor.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center p-4 hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-md"
               >
                 {/* Logo container ensures uniform size */}
                 <div className="h-20 w-40 flex items-center justify-center">
@@ -584,23 +670,81 @@ const Index = () => {
                   />
                 </div>
                 <span className="text-gray-700 font-medium text-center mt-3">{sponsor.name}</span>
-              </div>
+              </a>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-16">
+      <motion.section
+        id="contact"
+        className="py-16"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionRight}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Contactos</h2>
           <div className="text-center">
-            <p className="text-gray-600 mb-2">Email: hoqueiclube.pdl@gmail.com</p>
-            <p className="text-gray-600 mb-2">Telefone: +351 296 382 987</p>
-            <p className="text-gray-600">Morada: Rua do Mercado, 31, 9500-326 Ponta Delgada, Açores</p>
+            <p className="text-gray-700 mb-2">
+              <span className="font-semibold">Email:</span>
+              {" "}
+              <a href="mailto:hoqueiclube.pdl@gmail.com" className="text-primary hover:underline">
+                hoqueiclube.pdl@gmail.com
+              </a>
+            </p>
+            <p className="text-gray-700 mb-2">
+              <span className="font-semibold">Telefone:</span>
+              {" "}
+              <a href="tel:+351296382987" className="text-primary hover:underline">
+                +351 296 382 987
+              </a>
+            </p>
+            <p className="text-gray-700">
+              <span className="font-semibold">Morada:</span>
+              {" "}
+              <button
+                type="button"
+                onClick={() => setIsMapDialogOpen(true)}
+                className="text-primary hover:underline"
+              >
+                Rua do Mercado, 31, 9500-326 Ponta Delgada, Açores
+              </button>
+            </p>
+            <img
+              src="/lovable-uploads/PavilhaoSidonioSerpa.jpg"
+              alt="Pavilhão Sidónio Serpa"
+              className="mx-auto mt-6 w-full max-w-3xl h-48 md:h-64 object-cover rounded-lg shadow"
+              loading="lazy"
+            />
           </div>
         </div>
-      </section>
+      </motion.section>
+      {/* Map confirmation dialog */}
+      <Dialog open={isMapDialogOpen} onOpenChange={setIsMapDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <div className="space-y-3">
+            <h3 className="text-lg font-semibold">Abrir no Google Maps</h3>
+            <p className="text-sm text-gray-600">
+              Vai sair do site do Hóquei Clube PDL e abrir a morada no Google Maps.
+            </p>
+            <div className="flex justify-end gap-2 pt-2">
+              <Button variant="outline" onClick={() => setIsMapDialogOpen(false)}>Cancelar</Button>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Rua%20do%20Mercado%2C%2031%2C%209500-326%20Ponta%20Delgada%2C%20A%C3%A7ores"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-4 py-2 rounded-md bg-primary text-white hover:bg-primary/90"
+                onClick={() => setIsMapDialogOpen(false)}
+              >
+                Continuar para Google Maps
+              </a>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
       </main>
 
       {/* Footer */}
