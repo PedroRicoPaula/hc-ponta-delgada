@@ -360,7 +360,7 @@ const Index = () => {
             <img
               src="/lovable-uploads/PDL24-25V2.png" 
               alt="Hóquei Clube Ponta Delgada"
-              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+              className="mx-auto h-auto object-contain rounded-lg shadow-lg max-w-full md:max-w-[480px]"
             />
           </div>
         </div>
