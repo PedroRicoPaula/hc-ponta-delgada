@@ -24,19 +24,19 @@ import {
 
 const playersByPosition = {
   "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro", "Miguel Santos"],
-  "Defesa": ["Tiago Pimentel", "Mario Jesus", "Vicente Correia"],
+  "Defesa": ["Tiago Pimentel", "Mario Jesus"],
   "Médio": ["Alexandre Resendes", "Alexandre Ornelas"],
   "Avançado": ["Miguel Pimentel", "Carlos Guimarães", "Tiago Leite"],
-  "Universal": ["Pedro Paula", "Francisco Freitas"]
+  "Universal": ["Pedro Paula", "Francisco Freitas", "Vicente Correia"]
 };
 
 const staff = [
-  { name: "Herbeto Resendes", role: "Treinador" },
+  { name: "Herberto Resendes", role: "Treinador" },
   { name: "João Oliveira", role: "Diretor" },
   { name: "Paulo Benjamim", role: "Diretor" },
   { name: "Fernando Pimentel", role: "Diretor" },
   { name: "Paulo Correia", role: "Preparador Físico" },
-  { name: "João Sardinha", role: "Segurança" }
+  { name: "João Sardinha", role: "Diretor de Campo" }
 ];
 
 const senioresEvents = [
@@ -95,10 +95,10 @@ const formacaoEvents = [
 const comunicados = [
   {
     id: 1,
-    titulo: "Torneio das Vindimas",
-    data: "19/09/2025",
+    titulo: "Torneio Cidade Ribeira Grande",
+    data: "26/09/2025",
     conteudo:
-      "Participação da equipa senior no torneio das vindimas contra o Candelária SC 27 e 28",
+      "Participação dos nossos escalões de Sub 13 e Sub 17 no torneio Cidade Ribeira Grande. Datas: 27 e 28 de Setembro",
   },
   {
     id: 2,
@@ -710,7 +710,7 @@ const Index = () => {
                 onClick={() => setIsMapDialogOpen(true)}
                 className="text-primary hover:underline"
               >
-                Rua do Mercado, 31, 9500-326 Ponta Delgada, Açores
+                R. Vítor Câmara Bloco 1 R/C Drt, 9500-234 Ponta Delgada
               </button>
             </p>
             <img
@@ -733,7 +733,7 @@ const Index = () => {
             <div className="flex justify-end gap-2 pt-2">
               <Button variant="outline" onClick={() => setIsMapDialogOpen(false)}>Cancelar</Button>
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Rua%20do%20Mercado%2C%2031%2C%209500-326%20Ponta%20Delgada%2C%20A%C3%A7ores"
+                href="https://www.google.com/maps/place/Associa%C3%A7%C3%A3o+de+Patinagem+de+S%C3%A3o+Miguel/@37.7396264,-25.6821403,21z/data=!4m9!1m2!2m1!1sRua+V%C3%ADtor+C%C3%A2mara,+Bloco+1,+1%C2%BA+dto+9500-234+Ponta+Delgada,+Portugal!3m5!1s0xb432b002173d3ed:0xe3f60e54475d900!8m2!3d37.7396517!4d-25.6820182!16s%2Fg%2F11vy_y1hlz?entry=ttu&g_ep=EgoyMDI1MDkyNC4wIKXMDSoASAFQAw%3D%3D"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-4 py-2 rounded-md bg-primary text-white hover:bg-primary/90"
