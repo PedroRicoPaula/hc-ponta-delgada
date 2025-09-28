@@ -95,10 +95,10 @@ const formacaoEvents = [
 const comunicados = [
   {
     id: 1,
-    titulo: "Torneio Cidade Ribeira Grande",
-    data: "26/09/2025",
+    titulo: "VENCEDORES Sub13 e Sub17",
+    data: "28/09/2025",
     conteudo:
-      "Participação dos nossos escalões de Sub 13 e Sub 17 no torneio Cidade Ribeira Grande. Datas: 27 e 28 de Setembro",
+      "Os escalões de formação Sub-13 e Sub-17 do Hóquei Clube PDL sagraram-se vencedores do Torneio Cidade da Ribeira Grande, que teve lugar nos dias 27 e 28 de setembro. O torneio foi organizado pelo Caldeiras Hóquei Clube (CHC) e contou ainda com a participação do Marítimo Sport Club (MSC). Esta conquista reflete o empenho, a dedicação e o talento dos nossos jovens atletas, bem como o trabalho desenvolvido pela equipa técnica e pelo clube na promoção e valorização da formação desportiva.",
   },
   {
     id: 2,
@@ -117,7 +117,8 @@ const galleryImages = [
   "/lovable-uploads/57e06117-8822-4287-8b8c-e947952330c8.png",
   "/lovable-uploads/cc047543-aa40-46cb-8746-4b1324dba1a4.png",
   "/lovable-uploads/c36667ca-9257-4046-9d64-b47bc79a4ba3.png",
-  "/lovable-uploads/182a9396-5de5-4efe-a1d8-39b0a2180269.png"
+  "/lovable-uploads/182a9396-5de5-4efe-a1d8-39b0a2180269.png",
+  "/lovable-uploads/TorneioCidadeRG_PDL_Campeao_Sub13_Sub17.jpeg"
 ];
 
 
