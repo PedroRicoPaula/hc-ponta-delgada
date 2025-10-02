@@ -62,7 +62,7 @@ const formacaoEvents = [
     title: "Hóquei Clube PDL vs Maritimo SC",
     date: "26/10/2025",
     time: "09:30",
-    location: "CD Ribeira Grande",
+    location: "Pavilhão Sidónio Serpa",
     type: "Sub 13",
   },
   {
@@ -70,7 +70,7 @@ const formacaoEvents = [
     title: "Hóquei Clube PDL vs Maritimo SC",
     date: "26/10/2025",
     time: "11:30",
-    location: "CD Ribeira Grande",
+    location: "Pavilhão Sidónio Serpa",
     type: "Sub 17",
   },
 ];
