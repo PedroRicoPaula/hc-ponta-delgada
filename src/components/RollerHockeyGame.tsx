@@ -20,12 +20,33 @@ interface GameResult {
   team1Score: number;
   team2Score: number;
   winner: 'Equipa 1' | 'Equipa 2' | 'Empate';
+  team1Scorers: string[];
+  team2Scorers: string[];
 }
 
 interface RollerHockeyGameProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+// Helper function to format names (e.g., "Pedro Paula" -> "Pedro P.")
+const formatScorerName = (name: string): string => {
+  if (!name) return '';
+  const parts = name.split(' ');
+  if (parts.length > 1) {
+    return `${parts[0]} ${parts[parts.length - 1].charAt(0)}.`;
+  }
+  return name;
+};
+
+// Helper function to count goals for each player
+const aggregateScorers = (scorers: string[]): Map<string, number> => {
+  return scorers.reduce((acc, name) => {
+    acc.set(name, (acc.get(name) || 0) + 1);
+    return acc;
+  }, new Map<string, number>());
+};
+
 
 export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
   isOpen,
@@ -80,17 +101,28 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
 
   const canPlay = isTeamComplete(team1) && isTeamComplete(team2);
 
-  // playGame agora retorna nomes em PT-PT
   const playGame = () => {
     const team1Score = Math.floor(Math.random() * 11); // 0-10
     const team2Score = Math.floor(Math.random() * 11);
+
+    const team1Scorers: string[] = [];
+    for (let i = 0; i < team1Score; i++) {
+      const randomPlayerIndex = Math.floor(Math.random() * team1.players.length);
+      team1Scorers.push(team1.players[randomPlayerIndex]);
+    }
+
+    const team2Scorers: string[] = [];
+    for (let i = 0; i < team2Score; i++) {
+      const randomPlayerIndex = Math.floor(Math.random() * team2.players.length);
+      team2Scorers.push(team2.players[randomPlayerIndex]);
+    }
 
     let winner: 'Equipa 1' | 'Equipa 2' | 'Empate';
     if (team1Score > team2Score) winner = 'Equipa 1';
     else if (team2Score > team1Score) winner = 'Equipa 2';
     else winner = 'Empate';
 
-    setGameResult({ team1Score, team2Score, winner });
+    setGameResult({ team1Score, team2Score, winner, team1Scorers, team2Scorers });
   };
 
   const getAvailablePlayers = (currentTeam: 'team1' | 'team2', position: 'goalkeeper' | number) => {
@@ -143,7 +175,7 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
                   <div className="space-y-1.5">
                     <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Guarda-Redes</label>
                     <Select value={team1.goalkeeper} onValueChange={updateTeam1Goalkeeper}>
-                      <SelectTrigger className="h-8 text-xs">
+                      <SelectTrigger className="h-8 w-full text-xs text-left">
                         <SelectValue placeholder="Selecionar..." />
                       </SelectTrigger>
                       <SelectContent>
@@ -158,7 +190,7 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
                     <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Jogadores</label>
                     <div className="grid grid-cols-2 gap-2">
                       {team1.players.map((player, index) => <Select key={index} value={player} onValueChange={value => updateTeam1Player(index, value)}>
-                        <SelectTrigger className="h-8 text-xs">
+                        <SelectTrigger className="h-8 w-full text-xs text-left">
                           <SelectValue placeholder={`J${index + 1}`} />
                         </SelectTrigger>
                         <SelectContent>
@@ -178,7 +210,7 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
                   <div className="space-y-1.5">
                     <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Guarda-Redes</label>
                     <Select value={team2.goalkeeper} onValueChange={updateTeam2Goalkeeper}>
-                      <SelectTrigger className="h-8 text-xs">
+                      <SelectTrigger className="h-8 w-full text-xs text-left">
                         <SelectValue placeholder="Selecionar..." />
                       </SelectTrigger>
                       <SelectContent>
@@ -193,7 +225,7 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
                     <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Jogadores</label>
                     <div className="grid grid-cols-2 gap-2">
                       {team2.players.map((player, index) => <Select key={index} value={player} onValueChange={value => updateTeam2Player(index, value)}>
-                        <SelectTrigger className="h-8 text-xs">
+                        <SelectTrigger className="h-8 w-full text-xs text-left">
                           <SelectValue placeholder={`J${index + 1}`} />
                         </SelectTrigger>
                         <SelectContent>
@@ -221,7 +253,7 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
               <div className="space-y-2">
                 <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Guarda-Redes</label>
                 <Select value={team1.goalkeeper} onValueChange={updateTeam1Goalkeeper}>
-                  <SelectTrigger className="h-9 text-sm">
+                  <SelectTrigger className="h-9 w-full text-sm text-left">
                     <SelectValue placeholder="Selecionar..." />
                   </SelectTrigger>
                   <SelectContent>
@@ -235,7 +267,7 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
               <div className="space-y-2">
                 <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Jogadores</label>
                 {team1.players.map((player, index) => <Select key={index} value={player} onValueChange={value => updateTeam1Player(index, value)}>
-                  <SelectTrigger className="h-9 text-sm">
+                  <SelectTrigger className="h-9 w-full text-sm text-left">
                     <SelectValue placeholder={`Jogador ${index + 1}`} />
                   </SelectTrigger>
                   <SelectContent>
@@ -257,7 +289,7 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
               <div className="space-y-2">
                 <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Guarda-Redes</label>
                 <Select value={team2.goalkeeper} onValueChange={updateTeam2Goalkeeper}>
-                  <SelectTrigger className="h-9 text-sm">
+                  <SelectTrigger className="h-9 w-full text-sm text-left">
                     <SelectValue placeholder="Selecionar..." />
                   </SelectTrigger>
                   <SelectContent>
@@ -271,7 +303,7 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
               <div className="space-y-2">
                 <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Jogadores</label>
                 {team2.players.map((player, index) => <Select key={index} value={player} onValueChange={value => updateTeam2Player(index, value)}>
-                  <SelectTrigger className="h-9 text-sm">
+                  <SelectTrigger className="h-9 w-full text-sm text-left">
                     <SelectValue placeholder={`Jogador ${index + 1}`} />
                   </SelectTrigger>
                   <SelectContent>
@@ -294,29 +326,59 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
           </div>
 
           {/* Results Display */}
-          <Card className="p-4 sm:p-6 min-h-[100px] sm:min-h-[120px] bg-gradient-to-br from-muted/30 to-muted/10 border-dashed border-2">
+          <Card className="p-4 sm:p-6 min-h-[120px] bg-gradient-to-br from-muted/30 to-muted/10 border-dashed border-2">
             {gameResult ? (
-              <div className="text-center space-y-3 sm:space-y-4">
-                <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
+              <div className="text-center space-y-4">
+                <div className="flex items-center justify-center gap-2 mb-4">
                   <Trophy className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                   <h4 className="text-base sm:text-lg font-semibold">Resultado</h4>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
-                  <div className={`p-2.5 sm:p-3 rounded-lg ${gameResult.winner === 'Equipa 1' ? 'bg-blue-100 border-2 border-blue-500' : 'bg-muted'}`}>
-                    <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4">
+                  {/* Team 1 Result Card */}
+                  <div className={`p-2.5 sm:p-3 rounded-lg text-left ${gameResult.winner === 'Equipa 1' ? 'bg-blue-100 border-2 border-blue-500' : 'bg-muted'}`}>
+                    <div className="flex items-center gap-1.5 sm:gap-2 mb-2">
                       <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-blue-500 rounded-full"></div>
                       <span className="font-medium text-xs sm:text-sm">Equipa 1</span>
                     </div>
-                    <div className="text-xl sm:text-2xl font-bold text-center">{gameResult.team1Score}</div>
+                    <div className="mt-1 flex justify-between items-start gap-x-3 sm:gap-x-4">
+                        <div className="text-3xl sm:text-4xl font-bold">{gameResult.team1Score}</div>
+                        {gameResult.team1Scorers.length > 0 && (
+                            <div className="min-w-0 text-right text-xs sm:text-sm text-muted-foreground space-y-0.5">
+                            {Array.from(aggregateScorers(gameResult.team1Scorers).entries())
+                                .sort(([, a], [, b]) => b - a)
+                                .map(([name, count]) => (
+                                <div key={name} className="flex justify-end items-baseline gap-x-1.5">
+                                    <span className="truncate" title={name}>{formatScorerName(name)}</span>
+                                    {count > 1 && <strong className="font-semibold text-foreground flex-shrink-0">{count}x</strong>}
+                                </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                   </div>
 
-                  <div className={`p-2.5 sm:p-3 rounded-lg ${gameResult.winner === 'Equipa 2' ? 'bg-red-100 border-2 border-red-500' : 'bg-muted'}`}>
-                    <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                  {/* Team 2 Result Card */}
+                  <div className={`p-2.5 sm:p-3 rounded-lg text-left ${gameResult.winner === 'Equipa 2' ? 'bg-red-100 border-2 border-red-500' : 'bg-muted'}`}>
+                    <div className="flex items-center gap-1.5 sm:gap-2 mb-2">
                       <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
                       <span className="font-medium text-xs sm:text-sm">Equipa 2</span>
                     </div>
-                    <div className="text-xl sm:text-2xl font-bold text-center">{gameResult.team2Score}</div>
+                     <div className="mt-1 flex justify-between items-start gap-x-3 sm:gap-x-4">
+                        <div className="text-3xl sm:text-4xl font-bold">{gameResult.team2Score}</div>
+                        {gameResult.team2Scorers.length > 0 && (
+                            <div className="min-w-0 text-right text-xs sm:text-sm text-muted-foreground space-y-0.5">
+                            {Array.from(aggregateScorers(gameResult.team2Scorers).entries())
+                                .sort(([, a], [, b]) => b - a)
+                                .map(([name, count]) => (
+                                <div key={name} className="flex justify-end items-baseline gap-x-1.5">
+                                    <span className="truncate" title={name}>{formatScorerName(name)}</span>
+                                    {count > 1 && <strong className="font-semibold text-foreground flex-shrink-0">{count}x</strong>}
+                                </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                   </div>
                 </div>
 
@@ -335,10 +397,6 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({
             )}
           </Card>
         </div>
-
-        {/*<div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 opacity-10">
-          <div className="text-4xl sm:text-6xl">🏒</div>
-        </div>*/}
       </div>
     </div>
   );
