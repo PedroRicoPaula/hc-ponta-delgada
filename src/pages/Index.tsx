@@ -44,14 +44,14 @@ const senioresEvents = [
     id: "seniores-1",
     title: "HC PDL vs HC Vasco da Gama",
     date: "11/10/2025",
-    time: "17:00",
+    time: "19:30",
     location: "Pavilhão Sidónio Serpa",
   },
   {
     id: "seniores-2",
     title: "HC PDL vs Juv. Azeitonense",
     date: "01/11/2025",
-    time: "17:00",
+    time: "16:00",
     location: "Pavilhão Sidónio Serpa",
   },
 ];
@@ -59,7 +59,7 @@ const senioresEvents = [
 const formacaoEvents = [
   {
     id: "formacao-1",
-    title: "Hóquei Clube PDL vs Maritimo SC",
+    title: "Hóquei Clube PDL vs Caldeiras HC",
     date: "26/10/2025",
     time: "09:30",
     location: "Pavilhão Sidónio Serpa",
