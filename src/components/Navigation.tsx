@@ -20,21 +20,22 @@ export const Navigation = () => {
     <nav className="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link 
-            to="/" 
+          <a 
+            href="#root" // ou qualquer ID que tenhas no topo da página
             className="flex-shrink-0" 
-            onClick={() => {
-              window.scrollTo({ top: 0, behavior: 'instant' });
-              window.location.reload();
+            onClick={(e) => {
+              e.preventDefault(); // Previne o comportamento padrão do link
+              window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll suave para o topo
             }}
           >
             <img 
               src="/lovable-uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png" 
-              alt="PDL Hockey Club" 
+              // ⭐ MELHORIA SEO: alt text mais descritivo
+              alt="Logótipo do Hóquei Clube Ponta Delgada" 
               className="h-12 w-auto hover:scale-105 transition-transform"
               loading="lazy"
             />
-          </Link>
+          </a>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navItems.map((item) => (
@@ -52,7 +53,10 @@ export const Navigation = () => {
             <Button
               variant="ghost"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-3 rounded-md text-gray-800 hover:text-primary hover:bg-gray-100 text-2xl w-12 h-12"
+              className="..."
+              aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu" // Adiciona um ID ao menu mobile
             >
               {isMenuOpen ? "✕" : "☰"}
             </Button>

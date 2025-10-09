@@ -6,6 +6,7 @@ import { SocialIcons } from "@/components/SocialIcons";
 import { RollerHockeyGame } from "@/components/RollerHockeyGame";
 import Autoplay from "embla-carousel-autoplay";
 import { Gamepad2, Megaphone, Heart, X, Copy } from "lucide-react";
+import { Helmet } from 'react-helmet-async';
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -46,6 +47,7 @@ const senioresEvents = [
     date: "11/10/2025",
     time: "19:30",
     location: "Pavilhão Sidónio Serpa",
+    type: "Seniores",
   },
   {
     id: "seniores-2",
@@ -53,6 +55,7 @@ const senioresEvents = [
     date: "01/11/2025",
     time: "16:00",
     location: "Pavilhão Sidónio Serpa",
+    type: "Seniores",
   },
 ];
 
@@ -224,10 +227,85 @@ const Index = () => {
     }
   };
 
+  // Função para converter data DD/MM/YYYY para formato ISO
+  const toISOString = (dateStr, timeStr = '00:00') => {
+    const [day, month, year] = dateStr.split('/');
+    return new Date(`${year}-${month}-${day}T${timeStr}`).toISOString();
+  };
+  
+  // Schema para os próximos jogos
+  const eventsSchema = [
+    ...senioresEvents,
+    ...formacaoEvents
+  ].map(event => {
+    // Lógica simples para extrair o nome do adversário. Pode precisar de ser ajustada.
+    const awayTeamName = event.title.includes('vs') ? event.title.split('vs ')[1] : 'Adversário a definir';
+    
+    return {
+      "@context": "https://schema.org",
+      "@type": "SportsEvent",
+      "name": event.title,
+      "startDate": toISOString(event.date, event.time),
+      "location": {
+        "@type": "Place",
+        "name": event.location,
+        "address": "Pavilhão Sidónio Serpa, Rua do Mercado, 31, 9500-326 Ponta Delgada"
+      },
+      "homeTeam": {
+        "@type": "SportsTeam",
+        "name": "Hóquei Clube Ponta Delgada"
+      },
+      "awayTeam": {
+        "@type": "SportsTeam",
+        "name": awayTeamName
+      },
+      "description": `Jogo de hóquei em patins da categoria ${event.type} em Ponta Delgada, Açores.`   
+    };
+  });
+
+  // Schema para os comunicados (notícias)
+  const newsSchema = comunicados.map(comunicado => ({
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": comunicado.titulo,
+    "datePublished": toISOString(comunicado.data),
+    "articleBody": comunicado.conteudo,
+    "author": {
+      "@type": "Organization",
+      "name": "Hóquei Clube Ponta Delgada",
+      "url": "https://hc-ponta-delgada.lovable.app/"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Hóquei Clube Ponta Delgada",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://hc-ponta-delgada.lovable.app/lovable-uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png"
+        }
+    }
+  }));
+  
   // Force refresh - no events variable exists anymore
-  console.log("Index component loaded successfully");
+  //console.log("Index component loaded successfully");
   return (
     <div className="min-h-screen bg-gray-50 overflow-x-hidden">
+      {/* --- ⭐ MELHORIA SEO: HEAD COM METATAGS E JSON-LD --- */}
+      <Helmet>
+            <title>Hóquei Clube Ponta Delgada - Hóquei em Patins nos Açores</title>
+            <meta name="description" content="Site oficial do Hóquei Clube de Ponta Delgada. Acompanhe os jogos, resultados, equipas e notícias do clube de hóquei em patins dos Açores." />
+            <meta name="keywords" content="hóquei em patins, Ponta Delgada, Açores, desporto, clube, formação, seniores, treinos, patins, HCPDL, HoqueiClubePDL, São Miguel, campeonato nacional, resultados hóquei, plantel hcpdl, pavilhão sidónio serpa" />
+            <link rel="canonical" href="https://hc-ponta-delgada.lovable.app/" />
+            
+            {/* --- Dados Estruturados (JSON-LD) --- */}
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsSchema) }}
+            />
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(newsSchema) }}
+            />
+        </Helmet>
       <Navigation />
       <SocialIcons />
       <ScrollToTop />
@@ -344,7 +422,7 @@ const Index = () => {
             <p className="text-xl text-gray-600 mb-8">Paixão, Orgulho e Excelência desde 2012</p>
             <img
               src="/lovable-uploads/PDL24-25V2.png" 
-              alt="Hóquei Clube Ponta Delgada"
+              alt="Equipa sénior do Hóquei Clube Ponta Delgada para a época 2025-2026"
               className="mx-auto h-auto object-contain rounded-lg shadow-lg max-w-full md:max-w-[480px]"
             />
           </div>
@@ -650,7 +728,7 @@ const Index = () => {
                 <div className="h-20 w-40 flex items-center justify-center">
                   <img
                     src={sponsor.logo}
-                    alt={`${sponsor.name} Logo`}
+                    alt={`Logótipo do patrocinador ${sponsor.name}`}
                     className="max-h-full max-w-full object-contain opacity-70 hover:opacity-100 transition-opacity"
                     loading="lazy"
                   />
@@ -701,7 +779,7 @@ const Index = () => {
             </p>
             <img
               src="/lovable-uploads/PavilhaoSidonioSerpa.jpg"
-              alt="Pavilhão Sidónio Serpa"
+              alt="Fachada do Pavilhão Sidónio Serpa, casa do Hóquei Clube Ponta Delgada"
               className="mx-auto mt-6 w-full max-w-3xl h-48 md:h-64 object-cover rounded-lg shadow"
               loading="lazy"
             />
