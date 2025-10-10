@@ -27,7 +27,7 @@ const playersByPosition = {
   "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro", "Miguel Santos"],
   "Defesa": ["Tiago Pimentel", "Mario Jesus"],
   "Médio": ["Alexandre Resendes", "Alexandre Ornelas"],
-  "Avançado": ["Miguel Pimentel", "Carlos Guimarães", "Tiago Leite"],
+  "Avançado": ["Miguel Pimentel", "Carlos Guimarães", "Tiago Leite", "Pedro Soares"],
   "Universal": ["Pedro Paula", "Francisco Freitas", "Vicente Correia"]
 };
 
