@@ -13,14 +13,13 @@ export const staff = [
   { name: "João Oliveira", role: "Diretor" },
   { name: "Paulo Benjamim", role: "Diretor" },
   { name: "Fernando Pimentel", role: "Diretor" },
-  { name: "Paulo Correia", role: "Preparador Físico" },
-  { name: "João Sardinha", role: "Diretor de Campo" }
+  { name: "Paulo Correia", role: "Preparador Físico" }
 ];
 
 export const senioresEvents = [
   {
     id: "seniores-1",
-    title: "HC PDL vs HC Vasco da Gama",
+    title: "HC PDL 5 - 3 HC Vasco da Gama",
     date: "11/10/2025",
     time: "19:30",
     location: "Pavilhão Sidónio Serpa",
@@ -58,18 +57,17 @@ export const formacaoEvents = [
 export const comunicados = [
   {
     id: 1,
+    titulo: "Treinos Cancelados 13 a 15 de Outubro",
+    data: "12/10/2025",
+    conteudo: "Informamos que os treinos regulares estão cancelados na próxima semana de 13 a 15 de Outubro, por imposição do serviço de desporto, voltamos dia 17 (Sexta-Feira).",
+  },
+  {
+    id: 2,
     titulo: "VENCEDORES Sub13 e Sub17",
     data: "28/09/2025",
     conteudo:
       "Os escalões de formação Sub-13 e Sub-17 do Hóquei Clube PDL sagraram-se vencedores do Torneio Cidade da Ribeira Grande...",
-  },
-  {
-    id: 2,
-    titulo: "Jogos dos Seniores",
-    data: "10/09/2025",
-    conteudo:
-      "O Hóquei Clube Ponta Delgada irá começar a participação no campeonato nacional a dia 4 de Outubro de 2025 fora contra o HC Santiago.",
-  },
+  }
 ];
 
 export const galleryImages = [
