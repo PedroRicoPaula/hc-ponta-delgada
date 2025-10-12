@@ -19,7 +19,7 @@ export const staff = [
 export const senioresEvents = [
   {
     id: "seniores-1",
-    title: "HC PDL 5 - 3 HC Vasco da Gama",
+    title: "Hóquei Clube PDL 5 - 3 HC Vasco da Gama",
     date: "11/10/2025",
     time: "19:30",
     location: "Pavilhão Sidónio Serpa",
@@ -27,7 +27,7 @@ export const senioresEvents = [
   },
   {
     id: "seniores-2",
-    title: "HC PDL vs Juv. Azeitonense",
+    title: "Hóquei Clube PDL vs Juv. Azeitonense",
     date: "01/11/2025",
     time: "16:00",
     location: "Pavilhão Sidónio Serpa",
