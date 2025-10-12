@@ -1,156 +1,61 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
+
+// Core Layout & UI Components
 import { Navigation } from "@/components/Navigation";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SocialIcons } from "@/components/SocialIcons";
+import { Footer } from '@/components/Footer';
+import { CookieConsent } from '@/components/CookieConsent';
+import { FloatingActionButtons } from '@/components/FloatingActionButtons';
+
+// Overlay & Panel Components
 import { RollerHockeyGame } from "@/components/RollerHockeyGame";
-import Autoplay from "embla-carousel-autoplay";
-import { Gamepad2, Megaphone, Heart, X, Copy } from "lucide-react";
-import { Helmet } from 'react-helmet-async';
+import { DonationsModal } from '@/components/DonationsModal';
+import { ComunicadosPanel } from '@/components/ComunicadosPanel';
 
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@/components/ui/carousel";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+// Section Components
+import { HeroSection } from '@/components/sections/HeroSection';
+import { AboutSection } from '@/components/sections/AboutSection';
+import { TrainingSchedulesSection } from '@/components/sections/TrainingSchedulesSection';
+import { EventsSection } from '@/components/sections/EventsSection';
+import { TeamSection } from '@/components/sections/TeamSection';
+import { GallerySection } from '@/components/sections/GallerySection';
+import { SponsorsSection } from '@/components/sections/SponsorsSection';
+import { ContactSection } from '@/components/sections/ContactSection';
 
-const playersByPosition = {
-  "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro", "Miguel Santos"],
-  "Defesa": ["Tiago Pimentel", "Mario Jesus"],
-  "Médio": ["Alexandre Resendes", "Alexandre Ornelas"],
-  "Avançado": ["Miguel Pimentel", "Carlos Guimarães", "Tiago Leite", "Pedro Soares"],
-  "Universal": ["Pedro Paula", "Francisco Freitas", "Vicente Correia"]
-};
+// Data
+import { senioresEvents, formacaoEvents, comunicados } from '@/data/siteData';
+import { generateEventsSchema, generateNewsSchema } from '@/lib/seo';
 
-const staff = [
-  { name: "Herberto Resendes", role: "Treinador" },
-  { name: "João Oliveira", role: "Diretor" },
-  { name: "Paulo Benjamim", role: "Diretor" },
-  { name: "Fernando Pimentel", role: "Diretor" },
-  { name: "Paulo Correia", role: "Preparador Físico" },
-  { name: "João Sardinha", role: "Diretor de Campo" }
-];
-
-const senioresEvents = [
-  {
-    id: "seniores-1",
-    title: "HC PDL vs HC Vasco da Gama",
-    date: "11/10/2025",
-    time: "19:30",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Seniores",
-  },
-  {
-    id: "seniores-2",
-    title: "HC PDL vs Juv. Azeitonense",
-    date: "01/11/2025",
-    time: "16:00",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Seniores",
-  },
-];
-
-const formacaoEvents = [
-  {
-    id: "formacao-1",
-    title: "Hóquei Clube PDL vs Caldeiras HC",
-    date: "26/10/2025",
-    time: "09:30",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Sub 13",
-  },
-  {
-    id: "formacao-2",
-    title: "Hóquei Clube PDL vs Maritimo SC",
-    date: "26/10/2025",
-    time: "11:30",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Sub 17",
-  },
-];
-
-// Comunicados
-const comunicados = [
-  {
-    id: 1,
-    titulo: "VENCEDORES Sub13 e Sub17",
-    data: "28/09/2025",
-    conteudo:
-      "Os escalões de formação Sub-13 e Sub-17 do Hóquei Clube PDL sagraram-se vencedores do Torneio Cidade da Ribeira Grande, que teve lugar nos dias 27 e 28 de setembro. O torneio foi organizado pelo Caldeiras Hóquei Clube (CHC) e contou ainda com a participação do Marítimo Sport Club (MSC). Esta conquista reflete o empenho, a dedicação e o talento dos nossos jovens atletas, bem como o trabalho desenvolvido pela equipa técnica e pelo clube na promoção e valorização da formação desportiva.",
-  },
-  {
-    id: 2,
-    titulo: "Jogos dos Seniores",
-    data: "10/09/2025",
-    conteudo:
-      "O Hóquei Clube Ponta Delgada irá começar a participação no campeonato nacional a dia 4 de Outubro de 2025 fora contra o HC Santiago.",
-  },
-];
-
-const galleryImages = [
-  "/lovable-uploads/6f004096-7b4b-46fc-900c-5a739fb46b49.png",
-  "/lovable-uploads/bb357729-6191-4dec-bdc6-e9b22898bd63.png",
-  "/lovable-uploads/18941c1a-b681-46a8-b651-0e812f6192b0.png",
-  "/lovable-uploads/b2a3a926-e3f0-469c-9390-0113bfb380ea.png",
-  "/lovable-uploads/57e06117-8822-4287-8b8c-e947952330c8.png",
-  "/lovable-uploads/cc047543-aa40-46cb-8746-4b1324dba1a4.png",
-  "/lovable-uploads/c36667ca-9257-4046-9d64-b47bc79a4ba3.png",
-  "/lovable-uploads/182a9396-5de5-4efe-a1d8-39b0a2180269.png",
-  "/lovable-uploads/TorneioCidadeRG_PDL_Campeao_Sub13_Sub17.jpeg"
-];
-
-
-const trainingSchedules = [
-  {
-    type: "Escolares",
-    color: "bg-yellow-100 text-yellow-700 border-yellow-200",
-    sessions: [
-      { day: "Terça", time: "19:00 - 20:00" },
-      { day: "Sexta", time: "18:00 - 19:00" }
-    ]
-  },
-  {
-    type: "Sub 13",
-    color: "bg-green-100 text-green-700 border-green-200",
-    sessions: [
-      { day: "Segunda", time: "19:00 - 20:00" },
-      { day: "Quarta", time: "18:30 - 19:30" },
-      { day: "Sexta", time: "19:00 - 20:30" }
-    ]
-  },
-  {
-    type: "Sub 17",
-    color: "bg-purple-100 text-purple-700 border-purple-200",
-    sessions: [
-      { day: "Segunda", time: "20:00 - 21:30" },
-      { day: "Quarta", time: "19:30 - 21:00" },
-      { day: "Sexta", time: "20:30 - 22:00" }
-    ]
-  }
-];
-
+const ScrollIndicator = () => (
+  <div className="flex justify-center py-8">
+    <div className="animate-bounce">
+      <svg 
+        className="w-8 h-12 text-primary opacity-70" 
+        fill="none" 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+        strokeWidth="2" 
+        viewBox="0 0 32 48" 
+        stroke="currentColor"
+      >
+        <rect x="8" y="8" width="16" height="32" rx="8" ry="8" fill="none" stroke="currentColor"/>
+        <circle cx="16" cy="18" r="2" fill="currentColor" className="animate-pulse"/>
+        <path d="M16 22v6" stroke="currentColor" strokeWidth="1.5"/>
+      </svg>
+    </div>
+  </div>
+);
 
 const Index = () => {
-  const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
+  // --- STATE MANAGEMENT ---
   const [showCookieConsent, setShowCookieConsent] = useState(false);
-  const [openSchedules, setOpenSchedules] = useState<{ [key: string]: boolean }>({});
   const [isGameOpen, setIsGameOpen] = useState(false);
-  const [isComunicadosOpen, setIsComunicadosOpen] = useState(false);
   const [isDonationsOpen, setIsDonationsOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const [isMapDialogOpen, setIsMapDialogOpen] = useState(false);
+  const [isComunicadosOpen, setIsComunicadosOpen] = useState(false);
 
+  // --- EFFECTS ---
   useEffect(() => {
     const cookieConsent = localStorage.getItem('cookie-consent');
     if (!cookieConsent) {
@@ -158,6 +63,7 @@ const Index = () => {
     }
   }, []);
 
+  // --- HANDLERS ---
   const acceptCookies = () => {
     localStorage.setItem('cookie-consent', 'accepted');
     setShowCookieConsent(false);
@@ -167,703 +73,56 @@ const Index = () => {
     localStorage.setItem('cookie-consent', 'rejected');
     setShowCookieConsent(false);
   };
-  
-  const autoplayPlugin = useRef(
-    Autoplay({
-      delay: 3000,
-      stopOnInteraction: false,
-      stopOnMouseEnter: true,
-    })
-  ).current;
 
-  const handleCarouselClick = () => {
-    if (isAutoplayPaused) {
-      autoplayPlugin.play();
-    } else {
-      autoplayPlugin.stop();
-    }
-    setIsAutoplayPaused(!isAutoplayPaused);
-  };
+  // --- SEO DATA ---
+  // It's good practice to move schema generation logic to a utility file
+  // e.g., src/lib/seo.ts, but keeping it here is fine too.
+  const eventsSchema = generateEventsSchema(senioresEvents, formacaoEvents);
+  const newsSchema = generateNewsSchema(comunicados);
 
-  const toggleSchedule = (type: string) => {
-    setOpenSchedules(prev => ({
-      ...prev,
-      [type]: !prev[type]
-    }));
-  };
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText("PT50001000004864920000107");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  }
-
-  // Shared animation variants for sections (slower and with variations)
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 32 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 2.0 }
-    }
-  };
-  const sectionLeft = {
-    hidden: { opacity: 0, x: -40 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 2.0 }
-    }
-  };
-  const sectionRight = {
-    hidden: { opacity: 0, x: 40 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 2.0 }
-    }
-  };
-  const sectionFade = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 2.0 }
-    }
-  };
-
-  // Função para converter data DD/MM/YYYY para formato ISO
-  const toISOString = (dateStr, timeStr = '00:00') => {
-    const [day, month, year] = dateStr.split('/');
-    return new Date(`${year}-${month}-${day}T${timeStr}`).toISOString();
-  };
-  
-  // Schema para os próximos jogos
-  const eventsSchema = [
-    ...senioresEvents,
-    ...formacaoEvents
-  ].map(event => {
-    // Lógica simples para extrair o nome do adversário. Pode precisar de ser ajustada.
-    const awayTeamName = event.title.includes('vs') ? event.title.split('vs ')[1] : 'Adversário a definir';
-    
-    return {
-      "@context": "https://schema.org",
-      "@type": "SportsEvent",
-      "name": event.title,
-      "startDate": toISOString(event.date, event.time),
-      "location": {
-        "@type": "Place",
-        "name": event.location,
-        "address": "Pavilhão Sidónio Serpa, Rua do Mercado, 31, 9500-326 Ponta Delgada"
-      },
-      "homeTeam": {
-        "@type": "SportsTeam",
-        "name": "Hóquei Clube Ponta Delgada"
-      },
-      "awayTeam": {
-        "@type": "SportsTeam",
-        "name": awayTeamName
-      },
-      "description": `Jogo de hóquei em patins da categoria ${event.type} em Ponta Delgada, Açores.`   
-    };
-  });
-
-  // Schema para os comunicados (notícias)
-  const newsSchema = comunicados.map(comunicado => ({
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    "headline": comunicado.titulo,
-    "datePublished": toISOString(comunicado.data),
-    "articleBody": comunicado.conteudo,
-    "author": {
-      "@type": "Organization",
-      "name": "Hóquei Clube Ponta Delgada",
-      "url": "https://hc-ponta-delgada.lovable.app/"
-    },
-    "publisher": {
-        "@type": "Organization",
-        "name": "Hóquei Clube Ponta Delgada",
-        "logo": {
-            "@type": "ImageObject",
-            "url": "https://hc-ponta-delgada.lovable.app/lovable-uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png"
-        }
-    }
-  }));
-  
-  // Force refresh - no events variable exists anymore
-  //console.log("Index component loaded successfully");
   return (
     <div className="min-h-screen bg-gray-50 overflow-x-hidden">
-      {/* --- ⭐ MELHORIA SEO: HEAD COM METATAGS E JSON-LD --- */}
       <Helmet>
-            <title>Hóquei Clube Ponta Delgada - Hóquei em Patins nos Açores</title>
-            <meta name="description" content="Site oficial do Hóquei Clube de Ponta Delgada. Acompanhe os jogos, resultados, equipas e notícias do clube de hóquei em patins dos Açores." />
-            <meta name="keywords" content="hóquei em patins, Ponta Delgada, Açores, desporto, clube, formação, seniores, treinos, patins, HCPDL, HoqueiClubePDL, São Miguel, campeonato nacional, resultados hóquei, plantel hcpdl, pavilhão sidónio serpa" />
-            <link 
-              rel="preload" 
-              fetchPriority="high"
-              as="image" 
-              href="/lovable-uploads/PDL24-25V2.png" 
-              type="image/png" 
-            />
-            <link rel="canonical" href="https://hoqueiclubepdl.com/" />
-            
-            {/* --- Dados Estruturados (JSON-LD) --- */}
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsSchema) }}
-            />
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(newsSchema) }}
-            />
-        </Helmet>
+        <title>Hóquei Clube Ponta Delgada - Hóquei em Patins nos Açores</title>
+        <meta name="description" content="Site oficial do Hóquei Clube de Ponta Delgada..." />
+        <meta name="keywords" content="hóquei em patins, Ponta Delgada, Açores..." />
+        <link rel="preload" fetchPriority="high" as="image" href="/lovable-uploads/PDL24-25V2.png" type="image/png" />
+        <link rel="canonical" href="https://hoqueiclubepdl.com/" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(newsSchema) }} />
+      </Helmet>
+
+      {/* Core Layout & UI */}
       <Navigation />
       <SocialIcons />
       <ScrollToTop />
+      <FloatingActionButtons 
+        onOpenGame={() => setIsGameOpen(true)}
+        onOpenComunicados={() => setIsComunicadosOpen(true)}
+      />
 
-      {/* Comunicados Button */}
-      <button
-        onClick={() => setIsComunicadosOpen(true)}
-        className="fixed right-4 top-[calc(35%-120px)] sm:top-[calc(50%-120px)] z-40 bg-blue-500 hover:bg-blue-600 text-white p-2 sm:p-3 rounded-l-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 group"
-        aria-label="Ver comunicados"
-      >
-        <Megaphone className="h-5 w-5 sm:h-6 sm:w-6 group-hover:animate-pulse" />
-      </button>
-      
-      {/* Floating Game Button */}
-      <button
-        onClick={() => setIsGameOpen(true)}
-        className="fixed right-4 top-[55%] sm:top-1/2 -translate-y-1/2 z-40 bg-gradient-to-b from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground p-2 sm:p-3 rounded-l-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-x-1 group"
-        style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
-      >
-        <div className="flex flex-col items-center gap-2">
-          <Gamepad2 className="h-5 w-5 sm:h-6 sm:w-6 group-hover:animate-pulse" />
-          <span className="hidden sm:block font-semibold text-sm tracking-wide">MINI JOGO</span>
-        </div>
-      </button>
-
-      {/* Roller Hockey Game Overlay */}
-      <RollerHockeyGame isOpen={isGameOpen} onClose={() => setIsGameOpen(false)} />
-      <>
-        <div 
-          className={`fixed inset-0 bg-black/60 z-50 transition-opacity duration-300 ${isComunicadosOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-          onClick={() => setIsComunicadosOpen(false)}
-        />
-        <div
-          className={`fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${isComunicadosOpen ? 'translate-x-0' : 'translate-x-full'}`}
-        >
-          <div className="p-6 relative h-full">
-            <button
-              onClick={() => setIsComunicadosOpen(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
-              aria-label="Fechar comunicados"
-            >
-              <X className="h-6 w-6" />
-            </button>
-            <h2 className="text-2xl font-bold mb-4">Comunicados</h2>
-            <div className="h-[calc(100%-50px)] overflow-y-auto pr-2 space-y-4">
-            {comunicados.map((comunicado) => (
-              <div 
-                key={comunicado.id} 
-                className="p-4 border rounded-lg shadow-sm hover:shadow-md transition bg-gray-50"
-              >
-                <h3 className="text-lg font-semibold text-primary mb-1">
-                  {comunicado.titulo}
-                </h3>
-                <p className="text-sm text-gray-500 mb-2">{comunicado.data}</p>
-                <p className="text-gray-700 text-sm leading-relaxed">
-                  {comunicado.conteudo}
-                </p>
-              </div>
-            ))}
-          </div>
-          </div>
-        </div>
-      </>
-
-      <>
-        {/* Modal Doações */}
-      <div className={`fixed inset-0 bg-black/60 z-50 transition-opacity duration-300 ${isDonationsOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setIsDonationsOpen(false)} />
-      <div className={`fixed bottom-0 left-0 right-0 bg-white shadow-t-2xl z-50 transform transition-transform duration-300 ease-in-out ${isDonationsOpen ? 'translate-y-0' : 'translate-y-full'} p-6 rounded-t-2xl max-w-2xl mx-auto`}>
-        <button onClick={() => setIsDonationsOpen(false)} className="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
-          <X className="h-6 w-6" />
-        </button>
-        <div className="text-center">
-          <Heart className="mx-auto h-12 w-12 text-primary mb-3" />
-          <h2 className="text-2xl font-bold mb-2">Apoie o Clube!</h2>
-          <p className="text-gray-600 mb-4">
-            A sua doação ajuda a financiar os nossos equipamentos, viagens e a formação dos nossos jovens atletas. Qualquer contribuição faz a diferença. Obrigado pelo seu apoio!
-          </p>
-
-          {/* IBAN com botão copiar */}
-          <div className="bg-gray-100 p-3 rounded-lg relative inline-block">
-            {copied && (
-              <span className="absolute -top-6 right-3 text-xs text-green-600 font-medium">
-                Copiado!
-              </span>
-            )}
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-semibold text-gray-700">IBAN</p>
-                <p className="text-lg font-mono tracking-wider text-gray-900">PT50 0010 0000 4864 9200 0010 7</p>
-              </div>
-              <Button variant="ghost" size="icon" className="ml-3 hover:bg-gray-200" onClick={handleCopy} aria-label="Copiar IBAN">
-                <Copy className="h-5 w-5 text-gray-600" />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-      </>
-
-      {/* Hero Section */}
-      <motion.header
-        className="pt-20 pb-12 bg-gradient-to-b from-primary/20 to-transparent"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionFade}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
-              Hóquei Clube Ponta Delgada
-            </h1>
-            <p className="text-xl text-gray-600 mb-8">Paixão, Orgulho e Excelência desde 2012</p>
-            <img
-              src="/lovable-uploads/PDL24-25V2.png" 
-              alt="Equipa sénior do Hóquei Clube Ponta Delgada para a época 2025-2026"
-              className="mx-auto h-auto object-contain rounded-lg shadow-lg max-w-full md:max-w-[480px]"
-              width="1000"
-              height="667"
-            />
-          </div>
-        </div>
-      </motion.header>
-
-      {/* Scroll Indicator */}
-      <div className="flex justify-center py-8">
-        <div className="animate-bounce">
-          <svg 
-            className="w-8 h-12 text-primary opacity-70" 
-            fill="none" 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            strokeWidth="2" 
-            viewBox="0 0 32 48" 
-            stroke="currentColor"
-          >
-            {/* Mouse body */}
-            <rect x="8" y="8" width="16" height="32" rx="8" ry="8" fill="none" stroke="currentColor"/>
-            {/* Scroll wheel indicator */}
-            <circle cx="16" cy="18" r="2" fill="currentColor" className="animate-pulse"/>
-            {/* Scroll line */}
-            <path d="M16 22v6" stroke="currentColor" strokeWidth="1.5"/>
-          </svg>
-        </div>
-      </div>
-
-      {/* About Section */}
+      {/* Main Page Sections */}
       <main>
-        <motion.section
-          id="about"
-          className="py-16"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-center mb-8">Sobre Nós</h2>
-            <p className="text-gray-600 text-lg text-center max-w-3xl mx-auto">
-              Fundado em 2012, o Hóquei Clube de Ponta Delgada tem sido um símbolo de excelência desportiva nos Açores.
-              O nosso compromisso com o desenvolvimento de jovens talentos e a promoção do hóquei na região tornou-nos
-              um dos clubes mais respeitados em Portugal.
-            </p>
-          </div>
-        </motion.section>
-
-      {/* Training Schedules Section */}
-      <motion.section
-        id="training"
-        className="py-16 bg-gray-100"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionLeft}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Horários de Treinos</h2>
-          
-          {/* Desktop View */}
-          <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
-            {trainingSchedules.map((schedule) => (
-              <Card key={schedule.type} className={`p-6 border-2 ${schedule.color} hover:shadow-lg transition-shadow`}>
-                <div className="text-center">
-                  <h3 className="font-bold text-xl mb-4">{schedule.type}</h3>
-                  <div className="space-y-3">
-                    {schedule.sessions.map((session, index) => (
-                      <div key={index} className="bg-white/50 p-3 rounded-lg">
-                        <p className="font-semibold text-sm">{session.day}</p>
-                        <p className="text-sm font-mono">{session.time}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-
-          {/* Mobile View - Collapsible */}
-          <div className="md:hidden space-y-4">
-            {trainingSchedules.map((schedule) => (
-              <Card key={schedule.type} className={`border-2 ${schedule.color} overflow-hidden`}>
-                <Button
-                  onClick={() => toggleSchedule(schedule.type)}
-                  className={`w-full p-4 text-left flex justify-between items-center ${schedule.color} hover:opacity-90 transition-all`}
-                  variant="ghost"
-                >
-                  <h3 className="font-bold text-lg">{schedule.type}</h3>
-                  <span className={`transform transition-transform duration-200 ${openSchedules[schedule.type] ? 'rotate-180' : 'rotate-0'}`}>
-                    ↓
-                  </span>
-                </Button>
-                <div className={`transition-all duration-300 ease-in-out ${openSchedules[schedule.type] ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
-                  <div className="p-4 bg-white/50 space-y-3">
-                    {schedule.sessions.map((session, index) => (
-                      <div key={index} className="bg-white/70 p-3 rounded-lg">
-                        <p className="font-semibold text-sm">{session.day}</p>
-                        <p className="text-sm font-mono">{session.time}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Events Section */}
-      <motion.section
-        id="events"
-        className="py-16"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionRight}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Próximos Jogos</h2>
-          
-          <h3 className="text-2xl font-semibold mb-6">Seniores (Casa)</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            {senioresEvents.map((event) => (
-              <Card key={event.id} className="p-6 hover:shadow-lg transition-shadow relative">
-                <div className="absolute top-4 right-4 bg-primary/10 text-primary px-2 py-1 rounded-md text-sm font-medium">
-                  Seniores
-                </div>
-                <div>
-                  <h3 className="font-semibold text-xl mb-2 pr-20">{event.title}</h3>
-                  <p className="text-gray-600">Data: {event.date}</p>
-                  <p className="text-gray-600">Hora: {event.time}</p>
-                  <p className="text-gray-600">Local: {event.location}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
-
-          <h3 className="text-2xl font-semibold mb-6">Formação</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {formacaoEvents.map((event) => {
-              const getEventTypeColor = (type: string) => {
-                switch (type) {
-                  case "Escolares":
-                    return "bg-yellow-100 text-yellow-700";
-                  case "Sub 13":
-                    return "bg-green-100 text-green-700";
-                  case "Sub15":
-                    return "bg-blue-100 text-blue-700";
-                  case "Sub 17":
-                    return "bg-purple-100 text-purple-700";
-                  default:
-                    return "bg-primary/10 text-primary";
-                }
-              };
-              
-              return (
-                <Card key={event.id} className="p-6 hover:shadow-lg transition-shadow relative">
-                  <div className={`absolute top-4 right-4 px-2 py-1 rounded-md text-sm font-medium ${getEventTypeColor(event.type)}`}>
-                    {event.type}
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-xl mb-2 pr-20">{event.title}</h3>
-                    <p className="text-gray-600">Data: {event.date}</p>
-                    <p className="text-gray-600">Hora: {event.time}</p>
-                    <p className="text-gray-600">Local: {event.location}</p>
-                  </div>
-                </Card>
-              );
-            })}
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Team Section */}
-      <motion.section
-        id="team"
-        className="py-16"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Equipa</h2>
-          
-          <h3 className="text-2xl font-semibold mb-6">Jogadores</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
-            {Object.entries(playersByPosition).map(([position, players]) => (
-              <Card key={position} className="p-4 hover:shadow-lg transition-shadow">
-                <div className="text-center">
-                  <h4 className="font-semibold text-lg mb-3 text-primary">{position}</h4>
-                  <ul className="space-y-1">
-                    {players.map((playerName) => (
-                      <li key={playerName} className="text-gray-700">{playerName}</li>
-                    ))}
-                  </ul>
-                </div>
-              </Card>
-            ))}
-          </div>
-
-          <h3 className="text-2xl font-semibold mb-6">Equipa Técnica</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {staff.map((member) => (
-              <Card key={member.name} className="p-4 hover:shadow-lg transition-shadow">
-                <div className="text-center">
-                  <h3 className="font-semibold text-lg mb-1">{member.name}</h3>
-                  <p className="text-gray-600 text-sm">{member.role}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Gallery Section */}
-      <motion.section
-        id="gallery"
-        className="py-16 overflow-hidden"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionFade}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Galeria</h2>
-          <div className="text-center mb-4">
-            <p className="text-sm text-gray-600">
-              {isAutoplayPaused ? "Clique para retomar" : "Clique para pausar"} | Arrasta para ver mais
-            </p>
-          </div>
-          <Carousel 
-            className="w-full max-w-4xl mx-auto cursor-pointer"
-            plugins={[autoplayPlugin]}
-            opts={{
-              align: "start",
-              loop: true,
-              dragFree: true,
-            }}
-            onClick={handleCarouselClick}
-          >
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {galleryImages.map((image, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3">
-                  <div className="p-2 bg-white/5 rounded-lg">
-                    <Dialog>
-                      <VisuallyHidden>
-                        <DialogTitle>Imagem da Galeria Ampliada</DialogTitle>
-                      </VisuallyHidden>
-                      <DialogTrigger asChild>
-                        <img 
-                          src={image} 
-                          alt={`Hóquei Clube Ponta Delgada - Momento ${index + 1} dos nossos treinos e jogos`} 
-                          className="w-full h-64 object-contain rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
-                          loading="lazy"
-                        />
-                      </DialogTrigger>
-                      <DialogContent className="max-w-full max-h-screen sm:max-w-[98vw] sm:max-h-[98vh] md:max-w-[80vw] md:max-h-[80vh] w-auto h-auto p-0 sm:p-2 border-0 bg-black/90 flex items-center justify-center [&>button]:absolute [&>button]:right-3 [&>button]:top-3 [&>button]:bg-black/50 [&>button]:text-white [&>button]:hover:bg-black/70 [&>button]:rounded-full [&>button]:p-2.5 sm:[&>button]:p-2 [&>button]:border-0 [&>button]:shadow-lg">
-                        <img 
-                          src={image} 
-                          alt={`Hóquei Clube Ponta Delgada - Momento ${index + 1} dos nossos treinos e jogos`} 
-                          className="max-w-full max-h-[98vh] md:max-h-[75vh] w-auto h-auto object-contain sm:rounded-lg"
-                          loading="lazy"
-                        />
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <div className="flex justify-center mt-4">
-              <CarouselPrevious className="mx-2 relative static lg:-left-0 translate-y-0" />
-              <CarouselNext className="mx-2 relative static lg:-right-0 translate-y-0" />
-            </div>
-          </Carousel>
-        </div>
-      </motion.section>
-
-      {/* Sponsors Section */}
-      <motion.section
-        id="sponsors"
-        className="py-16 bg-gray-100"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionLeft}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Patrocinadores</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
-            {[
-              { name: "Azemad", logo: "/lovable-uploads/AzemadLogo.jpg", url: "https://azemad.com/" },
-              { name: "AutoCordeiro", logo: "/lovable-uploads/AutoCordeiroLogo.png", url: "https://www.facebook.com/crenku/?locale=pt_PT" },
-              { name: "Crenku", logo: "/lovable-uploads/CrenkuLogo.png", url: "https://www.facebook.com/engenhososdesafios/?locale=pt_PT" },
-              { name: "Catchawards", logo: "/lovable-uploads/catchawards.png", url: "https://www.catchawardsportugal.pt/" },
-            ].map((sponsor) => (
-              <a
-                key={sponsor.name}
-                href={sponsor.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center p-4 hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-md"
-              >
-                {/* Logo container ensures uniform size */}
-                <div className="h-20 w-40 flex items-center justify-center">
-                  <img
-                    src={sponsor.logo}
-                    alt={`Logótipo do patrocinador ${sponsor.name}`}
-                    className="max-h-full max-w-full object-contain opacity-70 hover:opacity-100 transition-opacity"
-                    loading="lazy"
-                  />
-                </div>
-                <span className="text-gray-700 font-medium text-center mt-3">{sponsor.name}</span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Contact Section */}
-      <motion.section
-        id="contact"
-        className="py-16"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionRight}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Contactos</h2>
-          <div className="text-center">
-            <p className="text-gray-700 mb-2">
-              <span className="font-semibold">Email:</span>
-              {" "}
-              <a href="mailto:hoqueiclube.pdl@gmail.com" className="text-primary hover:underline">
-                hoqueiclube.pdl@gmail.com
-              </a>
-            </p>
-            <p className="text-gray-700 mb-2">
-              <span className="font-semibold">Telefone:</span>
-              {" "}
-              <a href="tel:+351296382987" className="text-primary hover:underline">
-                +351 296 382 987
-              </a>
-            </p>
-            <p className="text-gray-700">
-              <span className="font-semibold">Morada:</span>
-              {" "}
-              <button
-                type="button"
-                onClick={() => setIsMapDialogOpen(true)}
-                className="text-primary hover:underline"
-              >
-                R. Vítor Câmara Bloco 1 R/C Drt, 9500-234 Ponta Delgada
-              </button>
-            </p>
-            <img
-              src="/lovable-uploads/PavilhaoSidonioSerpa.jpg"
-              alt="Fachada do Pavilhão Sidónio Serpa, casa do Hóquei Clube Ponta Delgada"
-              className="mx-auto mt-6 w-full max-w-3xl h-48 md:h-64 object-cover rounded-lg shadow"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </motion.section>
-      {/* Map confirmation dialog */}
-      <Dialog open={isMapDialogOpen} onOpenChange={setIsMapDialogOpen}>
-        <DialogContent className="sm:max-w-md">
-          <div className="space-y-3">
-            <h3 className="text-lg font-semibold">Abrir no Google Maps</h3>
-            <p className="text-sm text-gray-600">
-              Vai sair do site do Hóquei Clube PDL e abrir a morada no Google Maps.
-            </p>
-            <div className="flex justify-end gap-2 pt-2">
-              <Button variant="outline" onClick={() => setIsMapDialogOpen(false)}>Cancelar</Button>
-              <a
-                href="https://www.google.com/maps/place/Associa%C3%A7%C3%A3o+de+Patinagem+de+S%C3%A3o+Miguel/@37.7396264,-25.6821403,21z/data=!4m9!1m2!2m1!1sRua+V%C3%ADtor+C%C3%A2mara,+Bloco+1,+1%C2%BA+dto+9500-234+Ponta+Delgada,+Portugal!3m5!1s0xb432b002173d3ed:0xe3f60e54475d900!8m2!3d37.7396517!4d-25.6820182!16s%2Fg%2F11vy_y1hlz?entry=ttu&g_ep=EgoyMDI1MDkyNC4wIKXMDSoASAFQAw%3D%3D"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-4 py-2 rounded-md bg-primary text-white hover:bg-primary/90"
-                onClick={() => setIsMapDialogOpen(false)}
-              >
-                Continuar para Google Maps
-              </a>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+        <HeroSection />
+        <ScrollIndicator />
+        <AboutSection />
+        <TrainingSchedulesSection />
+        <EventsSection />
+        <TeamSection />
+        <GallerySection />
+        <SponsorsSection />
+        <ContactSection />
       </main>
+      
+      <Footer onOpenDonations={() => setIsDonationsOpen(true)} />
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="mb-4">&copy; 2025 Hóquei Clube Ponta Delgada. Todos os direitos reservados.</p>
-          <Button 
-            variant="outline" 
-            className="bg-transparent border-primary text-primary hover:bg-primary hover:text-white"
-            onClick={() => setIsDonationsOpen(true)}
-          >
-            <Heart className="mr-2 h-4 w-4" /> Fazer uma Doação
-          </Button>
-        </div>
-      </footer>
+      {/* Overlays, Modals, and Panels */}
+      <RollerHockeyGame isOpen={isGameOpen} onClose={() => setIsGameOpen(false)} />
+      <DonationsModal isOpen={isDonationsOpen} onClose={() => setIsDonationsOpen(false)} />
+      <ComunicadosPanel isOpen={isComunicadosOpen} onClose={() => setIsComunicadosOpen(false)} data={comunicados} />
 
-      {/* Cookie Consent */}
       {showCookieConsent && (
-        <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg p-3 z-50">
-          <div className="flex flex-col space-y-2">
-            <p className="text-xs text-gray-600">
-              Este site utiliza cookies para melhorar a sua experiência de navegação.
-            </p>
-            <div className="flex gap-2">
-              <Button 
-                onClick={acceptCookies}
-                className="flex-1 bg-primary hover:bg-primary/90 text-white text-xs py-1 h-8"
-              >
-                Aceitar
-              </Button>
-              <Button 
-                onClick={rejectCookies}
-                variant="outline"
-                className="flex-1 text-xs py-1 h-8"
-              >
-                Não aceitar
-              </Button>
-            </div>
-          </div>
-        </div>
+        <CookieConsent onAccept={acceptCookies} onReject={rejectCookies} />
       )}
     </div>
   );
