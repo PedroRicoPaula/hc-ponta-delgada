@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import { X, Zap, Trophy, Target, Users, Shirt } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -77,12 +77,13 @@ const aggregateScorers = (scorers: string[]): Map<string, number> => {
 };
 
 // Componente para mostrar o jogador selecionado com a cor
-const PlayerDisplay = ({ player, placeholder }: { player: PlayerSelection | null, placeholder: string }) => {
-  if (!player?.name) {
-    return <span className="text-muted-foreground">{placeholder}</span>;
-  }
-  return (
-    <div className="flex items-center gap-2">
+const PlayerDisplay = forwardRef<HTMLDivElement, { player: PlayerSelection | null, placeholder: string }>(
+  ({ player, placeholder }, ref) => {
+    if (!player?.name) {
+      return <span className="text-muted-foreground">{placeholder}</span>;
+    }
+    return (
+      <div className="flex items-center gap-2">
       {player.escalao && (
         <span
           className="h-2.5 w-2.5 rounded-full"
@@ -92,7 +93,8 @@ const PlayerDisplay = ({ player, placeholder }: { player: PlayerSelection | null
       <span>{player.name}</span>
     </div>
   );
-};
+}
+);
 
 
 export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onClose }) => {

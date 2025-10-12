@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Navigation } from "@/components/Navigation";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -20,8 +20,10 @@ import {
 import {
   Dialog,
   DialogContent,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 const playersByPosition = {
   "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro", "Miguel Santos"],
@@ -166,11 +168,13 @@ const Index = () => {
     setShowCookieConsent(false);
   };
   
-  const autoplayPlugin = Autoplay({
-    delay: 3000,
-    stopOnInteraction: false,
-    stopOnMouseEnter: true,
-  });
+  const autoplayPlugin = useRef(
+    Autoplay({
+      delay: 3000,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    })
+  ).current;
 
   const handleCarouselClick = () => {
     if (isAutoplayPaused) {
@@ -294,7 +298,14 @@ const Index = () => {
             <title>Hóquei Clube Ponta Delgada - Hóquei em Patins nos Açores</title>
             <meta name="description" content="Site oficial do Hóquei Clube de Ponta Delgada. Acompanhe os jogos, resultados, equipas e notícias do clube de hóquei em patins dos Açores." />
             <meta name="keywords" content="hóquei em patins, Ponta Delgada, Açores, desporto, clube, formação, seniores, treinos, patins, HCPDL, HoqueiClubePDL, São Miguel, campeonato nacional, resultados hóquei, plantel hcpdl, pavilhão sidónio serpa" />
-            <link rel="canonical" href="https://hc-ponta-delgada.lovable.app/" />
+            <link 
+              rel="preload" 
+              fetchPriority="high"
+              as="image" 
+              href="/lovable-uploads/PDL24-25V2.png" 
+              type="image/png" 
+            />
+            <link rel="canonical" href="https://hoqueiclubepdl.com/" />
             
             {/* --- Dados Estruturados (JSON-LD) --- */}
             <script
@@ -333,7 +344,6 @@ const Index = () => {
 
       {/* Roller Hockey Game Overlay */}
       <RollerHockeyGame isOpen={isGameOpen} onClose={() => setIsGameOpen(false)} />
-
       <>
         <div 
           className={`fixed inset-0 bg-black/60 z-50 transition-opacity duration-300 ${isComunicadosOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
@@ -424,6 +434,8 @@ const Index = () => {
               src="/lovable-uploads/PDL24-25V2.png" 
               alt="Equipa sénior do Hóquei Clube Ponta Delgada para a época 2025-2026"
               className="mx-auto h-auto object-contain rounded-lg shadow-lg max-w-full md:max-w-[480px]"
+              width="1000"
+              height="667"
             />
           </div>
         </div>
@@ -668,13 +680,16 @@ const Index = () => {
             <CarouselContent className="-ml-2 md:-ml-4">
               {galleryImages.map((image, index) => (
                 <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3">
-                  <div className="p-2">
+                  <div className="p-2 bg-white/5 rounded-lg">
                     <Dialog>
+                      <VisuallyHidden>
+                        <DialogTitle>Imagem da Galeria Ampliada</DialogTitle>
+                      </VisuallyHidden>
                       <DialogTrigger asChild>
                         <img 
                           src={image} 
                           alt={`Hóquei Clube Ponta Delgada - Momento ${index + 1} dos nossos treinos e jogos`} 
-                          className="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
+                          className="w-full h-64 object-contain rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
                           loading="lazy"
                         />
                       </DialogTrigger>
