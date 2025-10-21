@@ -29,7 +29,7 @@ const allPlayersData = {
     },
     "Jogadores": {
       'Sub 11': ["Joana Lourenço", "João Barroso", "Nuno Massa", "Leandro Rodrigues", "Rafael Malheiro", "Tiago Pereira"],
-      'Sub 13': ["Santiago Resendes", "Salvador Resendes", "João Dias", "Guilherme Tavares", "Núria Faria", "Simão Melo"],
+      'Sub 13': ["Santiago Resendes", "Salvador Resendes", "João Dias", "Guilherme Tavares", "Núria Faria", "Simão Melo", "Lourenço Áspera"],
       'Sub 17': ["Gustavo Cordeiro", "Benjamim Castanheira", "Martim Farias", "Miguel Silva", "Pedro Massa", "Gonçalo Cordovil", "Carolina Benjamim", "Kelly Silvestre", "David Oliveira", "Ana Benjamim", "Bernardo Medeiros", "Francisco Feijó", "Marco Pacheco", "Rodrigo Cachapa", "Simão Paupério"],
     }
   }

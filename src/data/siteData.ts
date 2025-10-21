@@ -19,20 +19,20 @@ export const staff = [
 export const senioresEvents = [
   {
     id: "seniores-1",
-    title: "Hóquei Clube PDL 5 - 3 HC Vasco da Gama",
-    date: "11/10/2025",
-    time: "19:30",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Seniores",
-  },
-  {
-    id: "seniores-2",
     title: "Hóquei Clube PDL vs Juv. Azeitonense",
     date: "01/11/2025",
     time: "16:00",
     location: "Pavilhão Sidónio Serpa",
     type: "Seniores",
   },
+  {
+    id: "seniores-1",
+    title: "Taça PT - Hóquei Clube PDL vs HC Vasco da Gama",
+    date: "09/11/2025",
+    time: "16:00",
+    location: "Pavilhão Sidónio Serpa",
+    type: "Seniores",
+  }
 ];
 
 export const formacaoEvents = [
@@ -57,12 +57,6 @@ export const formacaoEvents = [
 export const comunicados = [
   {
     id: 1,
-    titulo: "Treinos Cancelados 13 a 15 de Outubro",
-    data: "12/10/2025",
-    conteudo: "Informamos que os treinos regulares estão cancelados na próxima semana de 13 a 15 de Outubro, por imposição do serviço de desporto, voltamos dia 17 (Sexta-Feira).",
-  },
-  {
-    id: 2,
     titulo: "VENCEDORES Sub13 e Sub17",
     data: "28/09/2025",
     conteudo:
