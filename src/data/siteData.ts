@@ -46,22 +46,6 @@ export const senioresEvents = [
 export const formacaoEvents = [
   {
     id: "formacao-1",
-    title: "Hóquei Clube PDL vs Caldeiras HC",
-    date: "26/10/2025",
-    time: "09:30",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Sub 13",
-  },
-  {
-    id: "formacao-2",
-    title: "Hóquei Clube PDL vs Maritimo SC",
-    date: "26/10/2025",
-    time: "11:30",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Sub 17",
-  },
-  {
-    id: "formacao-3",
     title: "Caldeiras HC vs Hóquei Clube PDL",
     date: "01/11/2025",
     time: "13:30",
@@ -69,7 +53,7 @@ export const formacaoEvents = [
     type: "Sub 11",
   },
   {
-    id: "formacao-4",
+    id: "formacao-2",
     title: "Caldeiras HC vs Hóquei Clube PDL",
     date: "02/11/2025",
     time: "09:30",
@@ -77,7 +61,7 @@ export const formacaoEvents = [
     type: "Sub 13",
   },
   {
-    id: "formacao-5",
+    id: "formacao-3",
     title: "Caldeiras HC vs Hóquei Clube PDL",
     date: "02/11/2025",
     time: "11:30",
@@ -85,7 +69,7 @@ export const formacaoEvents = [
     type: "Sub 17",
   },
   {
-    id: "formacao-6",
+    id: "formacao-4",
     title: "Hóquei Clube PDL vs Caldeiras HC",
     date: "23/11/2025",
     time: "10:00",
@@ -93,7 +77,7 @@ export const formacaoEvents = [
     type: "Sub 13",
   },
   {
-    id: "formacao-6",
+    id: "formacao-5",
     title: "Marítimo SC vs Hóquei Clube PDL",
     date: "30/11/2025",
     time: "11:30",
