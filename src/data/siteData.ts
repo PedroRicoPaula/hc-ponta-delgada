@@ -19,14 +19,6 @@ export const staff = [
 export const senioresEvents = [
   {
     id: "seniores-1",
-    title: "Hóquei Clube PDL vs Juv. Azeitonense",
-    date: "01/11/2025",
-    time: "16:00",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Seniores",
-  },
-  {
-    id: "seniores-2",
     title: "Taça PT - Hóquei Clube PDL vs HC Vasco da Gama",
     date: "08/11/2025",
     time: "16:00",
@@ -34,7 +26,7 @@ export const senioresEvents = [
     type: "Seniores",
   },
   {
-    id: "seniores-3",
+    id: "seniores-2",
     title: "Hóquei Clube PDL vs Stuart HC Massamá",
     date: "08/11/2025",
     time: "16:00",
@@ -46,7 +38,7 @@ export const senioresEvents = [
 export const formacaoEvents = [
   {
     id: "formacao-1",
-    title: "Caldeiras HC vs Hóquei Clube PDL",
+    title: "Caldeiras HC 5 - 9 Hóquei Clube PDL",
     date: "01/11/2025",
     time: "13:30",
     location: "CD Ribeira Grande",
@@ -54,7 +46,7 @@ export const formacaoEvents = [
   },
   {
     id: "formacao-2",
-    title: "Caldeiras HC vs Hóquei Clube PDL",
+    title: "Caldeiras HC 2 - 14 Hóquei Clube PDL",
     date: "02/11/2025",
     time: "09:30",
     location: "CD Ribeira Grande",
@@ -62,7 +54,7 @@ export const formacaoEvents = [
   },
   {
     id: "formacao-3",
-    title: "Caldeiras HC vs Hóquei Clube PDL",
+    title: "Caldeiras HC 5 - 6 Hóquei Clube PDL",
     date: "02/11/2025",
     time: "11:30",
     location: "CD Ribeira Grande",
