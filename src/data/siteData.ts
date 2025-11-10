@@ -19,16 +19,24 @@ export const staff = [
 export const senioresEvents = [
   {
     id: "seniores-1",
-    title: "Taça PT - Hóquei Clube PDL vs HC Vasco da Gama",
-    date: "08/11/2025",
+    title: "Hóquei Clube PDL vs Stuart HC Massamá",
+    date: "22/11/2025",
     time: "16:00",
     location: "Pavilhão Sidónio Serpa",
     type: "Seniores",
   },
   {
     id: "seniores-2",
-    title: "Hóquei Clube PDL vs Stuart HC Massamá",
-    date: "08/11/2025",
+    title: "Taça de Portugal (32 Avos de Final) - Hóquei Clube PDL vs A DEFINIR",
+    date: "29/12/2025",
+    time: "00:00",
+    location: "A DEFINIR",
+    type: "Seniores",
+  },
+  {
+    id: "seniores-3",
+    title: "Hóquei Clube PDL vs UDC Nafarros",
+    date: "13/12/2025",
     time: "16:00",
     location: "Pavilhão Sidónio Serpa",
     type: "Seniores",
@@ -81,7 +89,7 @@ export const formacaoEvents = [
 export const comunicados = [
   {
     id: 1,
-    titulo: "VENCEDORES Sub13 e Sub17",
+    titulo: "VENCEDORES Sub-13 e Sub-17",
     data: "28/09/2025",
     conteudo:
       "Os escalões de formação Sub-13 e Sub-17 do Hóquei Clube PDL sagraram-se vencedores do Torneio Cidade da Ribeira Grande...",
@@ -102,7 +110,7 @@ export const galleryImages = [
 
 export const trainingSchedules = [
   {
-    type: "Escolares",
+    type: "Sub 11",
     color: "bg-yellow-100 text-yellow-700 border-yellow-200",
     sessions: [
       { day: "Terça", time: "19:00 - 20:00" },
