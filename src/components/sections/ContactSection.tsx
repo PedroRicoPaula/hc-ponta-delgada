@@ -27,38 +27,47 @@ export const ContactSection = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Contactos</h2>
-          <div className="text-center">
-            <p className="text-gray-700 mb-2">
-              <span className="font-semibold">Email:</span>
-              {" "}
-              <a href="mailto:hoqueiclube.pdl@gmail.com" className="text-primary hover:underline">
-                hoqueiclube.pdl@gmail.com
-              </a>
-            </p>
-            <p className="text-gray-700 mb-2">
-              <span className="font-semibold">Telefone:</span>
-              {" "}
-              <a href="tel:+351296382987" className="text-primary hover:underline">
-                +351 296 382 987
-              </a>
-            </p>
-            <p className="text-gray-700">
-              <span className="font-semibold">Morada:</span>
-              {" "}
-              <button
-                type="button"
-                onClick={() => setIsMapDialogOpen(true)}
-                className="text-primary hover:underline"
-              >
-                R. Vítor Câmara Bloco 1 R/C Drt, 9500-234 Ponta Delgada
-              </button>
-            </p>
-            <img
-              src="/lovable-uploads/PavilhaoSidonioSerpa.jpg"
-              alt="Fachada do Pavilhão Sidónio Serpa, casa do Hóquei Clube Ponta Delgada"
-              className="mx-auto mt-6 w-full max-w-3xl h-48 md:h-64 object-cover rounded-lg shadow"
-              loading="lazy"
-            />
+
+          {/* Desktop: Image left, Content right | Mobile: Content left (top), Image below */}
+          <div className="flex flex-col md:flex-row md:items-center md:gap-8">
+            {/* Image - First on desktop (left), Second on mobile (below) */}
+            <div className="order-2 md:order-1 md:w-1/2">
+              <img
+                src="/lovable-uploads/PavilhaoSidonioSerpa.jpg"
+                alt="Fachada do Pavilhão Sidónio Serpa, casa do Hóquei Clube Ponta Delgada"
+                className="w-full h-48 md:h-64 object-cover rounded-lg shadow"
+                loading="lazy"
+              />
+            </div>
+
+            {/* Contact Info - Second on desktop (right), First on mobile (top left-aligned) */}
+            <div className="order-1 md:order-2 md:w-1/2 text-left mb-6 md:mb-0">
+              <p className="text-gray-700 mb-2">
+                <span className="font-semibold">Email:</span>
+                {" "}
+                <a href="mailto:hoqueiclube.pdl@gmail.com" className="text-primary hover:underline">
+                  hoqueiclube.pdl@gmail.com
+                </a>
+              </p>
+              <p className="text-gray-700 mb-2">
+                <span className="font-semibold">Telefone:</span>
+                {" "}
+                <a href="tel:+351296382987" className="text-primary hover:underline">
+                  +351 296 382 987
+                </a>
+              </p>
+              <div className="text-gray-700 flex items-start gap-1">
+                <span className="font-semibold whitespace-nowrap">Morada:</span>
+                <button
+                  type="button"
+                  onClick={() => setIsMapDialogOpen(true)}
+                  className="text-primary hover:underline truncate text-left flex-1"
+                  title="R. Vítor Câmara Bloco 1 R/C Drt, 9500-234 Ponta Delgada"
+                >
+                  R. Vítor Câmara Bloco 1 R/C Drt, 9500-234 Ponta Delgada
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </motion.section>
@@ -79,7 +88,7 @@ export const ContactSection = () => {
                 className="inline-flex items-center px-4 py-2 rounded-md bg-primary text-white hover:bg-primary/90"
                 onClick={() => setIsMapDialogOpen(false)}
               >
-                Continuar para Google Maps
+                Google Maps
               </a>
             </div>
           </div>

@@ -237,13 +237,13 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
         </Button>
         
         <div className="p-4 pb-2 sm:p-6 sm:pb-4">
-          <div className="flex items-center justify-between gap-4 mb-1">
+          <div className="flex items-center justify-between gap-4 mb-1 pr-8">
              <div className="flex items-center gap-2">
                 <Target className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
                 <h2 className="text-xl sm:text-2xl font-bold text-foreground">Mini Jogo</h2>
              </div>
              <Select value={selectedCategory} onValueChange={(value: 'Seniores' | 'Formação') => setSelectedCategory(value)}>
-                <SelectTrigger className="w-[140px] h-9 text-xs sm:text-sm">
+                <SelectTrigger className="w-[130px] h-9 text-xs sm:text-sm">
                     <SelectValue placeholder="Selecionar categoria..." />
                 </SelectTrigger>
                 <SelectContent>

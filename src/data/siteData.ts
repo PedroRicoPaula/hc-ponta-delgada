@@ -27,10 +27,10 @@ export const senioresEvents = [
   },
   {
     id: "seniores-2",
-    title: "Taça de Portugal (32 Avos de Final) - Hóquei Clube PDL vs A DEFINIR",
-    date: "29/12/2025",
-    time: "00:00",
-    location: "A DEFINIR",
+    title: "Taça de Portugal (32 Avos de Final) - Hóquei Clube PDL vs HC Marco",
+    date: "29/11/2025",
+    time: "17:00",
+    location: "Pavilhão Sidónio Serpa",
     type: "Seniores",
   },
   {

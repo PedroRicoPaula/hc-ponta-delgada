@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Heart, X, Copy } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface DonationsModalProps {
   isOpen: boolean;
@@ -16,15 +17,25 @@ export const DonationsModal = ({ isOpen, onClose }: DonationsModalProps) => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  if (!isOpen) return null;
-
   return (
-    <>
-      <div 
-        className="fixed inset-0 bg-black/60 z-50 transition-opacity duration-300 opacity-100" 
-        onClick={onClose} 
-      />
-      <div className="fixed bottom-0 left-0 right-0 bg-white shadow-t-2xl z-50 transform transition-transform duration-300 ease-in-out translate-y-0 p-6 rounded-t-2xl max-w-2xl mx-auto">
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-black/60 z-50"
+            onClick={onClose}
+          />
+          <motion.div
+            initial={{ y: '100%', opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: '100%', opacity: 0 }}
+            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+            className="fixed bottom-0 left-0 right-0 bg-white shadow-t-2xl z-50 p-6 rounded-t-2xl max-w-2xl mx-auto"
+          >
         <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
           <X className="h-6 w-6" />
         </button>
@@ -52,7 +63,9 @@ export const DonationsModal = ({ isOpen, onClose }: DonationsModalProps) => {
             </div>
           </div>
         </div>
-      </div>
-    </>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 };

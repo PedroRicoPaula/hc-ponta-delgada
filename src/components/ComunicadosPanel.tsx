@@ -1,4 +1,5 @@
 import { X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Comunicado {
   id: number;
@@ -14,15 +15,25 @@ interface ComunicadosPanelProps {
 }
 
 export const ComunicadosPanel = ({ isOpen, onClose, data }: ComunicadosPanelProps) => {
-  if (!isOpen) return null;
-
   return (
-    <>
-      <div 
-        className="fixed inset-0 bg-black/60 z-50 transition-opacity duration-300 opacity-100"
-        onClick={onClose}
-      />
-      <div className="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out translate-x-0">
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-black/60 z-50"
+            onClick={onClose}
+          />
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+            className="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl z-50"
+          >
         <div className="p-6 relative h-full">
           <button
             onClick={onClose}
@@ -49,7 +60,9 @@ export const ComunicadosPanel = ({ isOpen, onClose, data }: ComunicadosPanelProp
             ))}
           </div>
         </div>
-      </div>
-    </>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 };

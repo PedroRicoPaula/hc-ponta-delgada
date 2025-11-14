@@ -1,7 +1,5 @@
 
 import { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Link } from 'react-router-dom';
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -49,22 +47,45 @@ export const Navigation = () => {
               ))}
             </div>
           </div>
+          {/* Mobile Menu Button - Animated Hamburger to X */}
           <div className="md:hidden">
-            <Button
-              variant="ghost"
+            <button
+              className="text-gray-800 p-2 focus:outline-none"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="..."
               aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
               aria-expanded={isMenuOpen}
-              aria-controls="mobile-menu" // Adiciona um ID ao menu mobile
+              aria-controls="mobile-menu"
             >
-              {isMenuOpen ? "✕" : "☰"}
-            </Button>
+              {/* Use relative positioning on the container */}
+              <div className="w-6 h-6 relative">
+                <span
+                  className={`block absolute w-6 h-0.5 bg-gray-800 transition-all duration-700 ease-in-out ${
+                    isMenuOpen
+                      ? "top-1/2 -translate-y-1/2 rotate-[135deg]" // Rotates 3 * 45deg
+                      : "top-1.5" // Position for hamburger
+                  }`}
+                ></span>
+                <span
+                  className={`block absolute w-6 h-0.5 bg-gray-800 transition-all duration-700 ease-in-out top-1/2 -translate-y-1/2 ${
+                    isMenuOpen
+                      ? "translate-x-12 opacity-0" // Slides 3rem (48px) to the right and fades out
+                      : "opacity-100" // Stays in place and is visible
+                  }`}
+                ></span>
+                <span
+                  className={`block absolute w-6 h-0.5 bg-gray-800 transition-all duration-700 ease-in-out ${
+                    isMenuOpen
+                      ? "top-1/2 -translate-y-1/2 rotate-[-495deg]" // Rotates -135deg + -360deg spin
+                      : "bottom-1.5" // Position for hamburger
+                  }`}
+                ></span>
+              </div>
+            </button>
           </div>
         </div>
       </div>
-      <div className={`md:hidden fixed top-16 left-0 w-full transition-all duration-500 ease-in-out transform ${isMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0 pointer-events-none'}`}>
-        <div className="px-6 py-6 space-y-4 bg-white/95 backdrop-blur-sm shadow-lg border-t min-h-screen">
+      <div className={`md:hidden fixed top-16 right-0 w-1/2 transition-all duration-700 ease-in-out transform ${isMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'}`}>
+        <div className="px-6 py-6 space-y-4 bg-white/95 backdrop-blur-sm shadow-lg border-l min-h-screen">
           {navItems.map((item) => (
             <a
               key={item.name}
