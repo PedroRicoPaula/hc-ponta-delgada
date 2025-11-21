@@ -21,7 +21,7 @@ export const senioresEvents = [
     id: "seniores-1",
     title: "Hóquei Clube PDL vs Stuart HC Massamá",
     date: "22/11/2025",
-    time: "16:00",
+    time: "15:00",
     location: "Pavilhão Sidónio Serpa",
     type: "Seniores",
   },
