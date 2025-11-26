@@ -19,14 +19,6 @@ export const staff = [
 export const senioresEvents = [
   {
     id: "seniores-1",
-    title: "Hóquei Clube PDL vs Stuart HC Massamá",
-    date: "22/11/2025",
-    time: "15:00",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Seniores",
-  },
-  {
-    id: "seniores-2",
     title: "Taça de Portugal (32 Avos de Final) - Hóquei Clube PDL vs HC Marco",
     date: "29/11/2025",
     time: "17:00",
@@ -34,7 +26,7 @@ export const senioresEvents = [
     type: "Seniores",
   },
   {
-    id: "seniores-3",
+    id: "seniores-2",
     title: "Hóquei Clube PDL vs UDC Nafarros",
     date: "13/12/2025",
     time: "16:00",
@@ -70,7 +62,7 @@ export const formacaoEvents = [
   },
   {
     id: "formacao-4",
-    title: "Hóquei Clube PDL vs Caldeiras HC",
+    title: "Hóquei Clube PDL 8 - 3 Caldeiras HC",
     date: "23/11/2025",
     time: "10:00",
     location: "Pavilhão Sidónio Serpa",
