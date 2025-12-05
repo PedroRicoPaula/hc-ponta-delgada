@@ -41,7 +41,7 @@ export const formacaoEvents = [
     title: "Hóquei Clube PDL vs Caldeiras HC",
     date: "13/12/2025",
     time: "18:30",
-    location: "CD Ribeira Grande",
+    location: "Pavilhão Sidónio Serpa",
     type: "Sub 11",
   },
   {
@@ -49,7 +49,7 @@ export const formacaoEvents = [
     title: "Hóquei Clube PDL vs Caldeiras HC",
     date: "14/12/2025",
     time: "11:30",
-    location: "CD Ribeira Grande",
+    location: "Pavilhão Sidónio Serpa",
     type: "Sub 17",
   }
 ];
