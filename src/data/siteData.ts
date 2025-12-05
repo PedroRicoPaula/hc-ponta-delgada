@@ -19,14 +19,6 @@ export const staff = [
 export const senioresEvents = [
   {
     id: "seniores-1",
-    title: "Taça de Portugal (32 Avos de Final) - Hóquei Clube PDL vs HC Marco",
-    date: "29/11/2025",
-    time: "17:00",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Seniores",
-  },
-  {
-    id: "seniores-2",
     title: "Hóquei Clube PDL vs UDC Nafarros",
     date: "13/12/2025",
     time: "16:00",
@@ -38,44 +30,28 @@ export const senioresEvents = [
 export const formacaoEvents = [
   {
     id: "formacao-1",
-    title: "Caldeiras HC 5 - 9 Hóquei Clube PDL",
-    date: "01/11/2025",
-    time: "13:30",
-    location: "CD Ribeira Grande",
-    type: "Sub 11",
-  },
-  {
-    id: "formacao-2",
-    title: "Caldeiras HC 2 - 14 Hóquei Clube PDL",
-    date: "02/11/2025",
+    title: "Caldeiras HC vs Hóquei Clube PDL",
+    date: "07/12/2025",
     time: "09:30",
     location: "CD Ribeira Grande",
     type: "Sub 13",
   },
   {
+    id: "formacao-2",
+    title: "Hóquei Clube PDL vs Caldeiras HC",
+    date: "13/12/2025",
+    time: "18:30",
+    location: "CD Ribeira Grande",
+    type: "Sub 11",
+  },
+  {
     id: "formacao-3",
-    title: "Caldeiras HC 5 - 6 Hóquei Clube PDL",
-    date: "02/11/2025",
+    title: "Hóquei Clube PDL vs Caldeiras HC",
+    date: "14/12/2025",
     time: "11:30",
     location: "CD Ribeira Grande",
     type: "Sub 17",
-  },
-  {
-    id: "formacao-4",
-    title: "Hóquei Clube PDL 8 - 3 Caldeiras HC",
-    date: "23/11/2025",
-    time: "10:00",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Sub 13",
-  },
-  {
-    id: "formacao-5",
-    title: "Marítimo SC vs Hóquei Clube PDL",
-    date: "30/11/2025",
-    time: "11:30",
-    location: "Pavilhão Carlos Silveira",
-    type: "Sub 17",
-  },
+  }
 ];
 
 export const comunicados = [
