@@ -83,7 +83,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 overflow-x-hidden">
-      <HolidayOverlay />
+      {/* <HolidayOverlay /> */}
       <Helmet>
         <title>Hóquei Clube Ponta Delgada - Hóquei em Patins nos Açores</title>
         <meta name="description" content="Site oficial do Hóquei Clube de Ponta Delgada..." />
