@@ -19,7 +19,7 @@ export const staff = [
 export const senioresEvents = [
   {
     id: "seniores-1",
-    title: "Hóquei Clube PDL vs CD Paço de Arcos 'B'",
+    title: "Hóquei Clube PDL 4 - 4 CD Paço de Arcos 'B'",
     date: "04/01/2026",
     time: "15:00",
     location: "Pavilhão Carlos Silveira",
