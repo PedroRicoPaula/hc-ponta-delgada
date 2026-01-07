@@ -280,8 +280,11 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/60 z-50"
+              className="fixed inset-0 bg-black/60 z-50 sm:bg-black/60"
               onClick={() => setIsOpen(false)}
+              style={{ 
+                WebkitTapHighlightColor: 'transparent'
+              }}
             />
 
             {/* Chat Container */}
@@ -290,28 +293,32 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: '100%', opacity: 0 }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed bottom-0 right-0 sm:right-4 w-full sm:w-96 h-[600px] max-h-[80vh] bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl z-50 flex flex-col"
+              className="fixed inset-0 w-screen h-screen sm:bottom-0 sm:inset-auto sm:right-4 sm:w-96 sm:h-[600px] sm:max-h-[80vh] bg-white sm:rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden"
+              style={{
+                maxHeight: '100vh',
+                maxWidth: '100vw'
+              }}
             >
               {/* Header */}
-              <div className="flex items-center justify-between p-4 border-b bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-t-2xl sm:rounded-t-2xl">
+              <div className="flex items-center justify-between p-3 sm:p-4 border-b bg-gradient-to-r from-yellow-500 to-yellow-600 sm:rounded-t-2xl flex-shrink-0">
                 <div className="flex items-center gap-2">
-                  <MessageCircle className="h-5 w-5 text-black" />
-                  <h3 className="font-semibold text-black">Chat de Suporte</h3>
+                  <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5 text-black" />
+                  <h3 className="font-semibold text-sm sm:text-base text-black">Chat de Suporte</h3>
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="text-black hover:bg-black/20 rounded-full p-1 transition-colors"
                   aria-label="Fechar chat"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-4 w-4 sm:h-5 sm:w-5" />
                 </button>
               </div>
 
               {/* Rate Limit Warning */}
               {isInCooldown && (
-                <div className="bg-red-50 border-b border-red-200 p-3 flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-red-600" />
-                  <p className="text-sm text-red-700">
+                <div className="bg-red-50 border-b border-red-200 p-2 sm:p-3 flex items-center gap-2 flex-shrink-0">
+                  <Clock className="h-3 w-3 sm:h-4 sm:w-4 text-red-600" />
+                  <p className="text-xs sm:text-sm text-red-700">
                     Limite atingido. Aguarde {formatCooldownTime(remainingCooldown)}
                   </p>
                 </div>
@@ -319,40 +326,40 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
 
               {/* Message Counter and Clear Button */}
               {!isInCooldown && (
-                <div className="bg-yellow-50 border-b border-yellow-200 p-2 flex items-center justify-between px-4">
-                  <p className="text-xs text-yellow-700">
+                <div className="bg-yellow-50 border-b border-yellow-200 p-2 sm:p-2 flex items-center justify-between px-3 sm:px-4 flex-shrink-0">
+                  <p className="text-xs sm:text-xs text-yellow-700">
                     Mensagens: {rateLimit.count}/{MAX_MESSAGES}
                   </p>
-                  {messages.length > 1 && (
+                  {messages.length >= 1 && (
                     <button
                       onClick={clearChatHistory}
-                      className="text-xs text-yellow-700 hover:text-yellow-900 flex items-center gap-1 hover:bg-yellow-100 px-2 py-1 rounded transition-colors"
+                      className="text-xs sm:text-xs text-yellow-700 hover:text-yellow-900 flex items-center gap-1 hover:bg-yellow-100 px-2 py-1 sm:px-2 sm:py-1 rounded transition-colors"
                       aria-label="Limpar conversa"
                     >
-                      <Trash2 className="h-3 w-3" />
-                      Limpar
+                      <Trash2 className="h-3 w-3 sm:h-3 sm:w-3" />
+                      <span className="whitespace-nowrap">Limpar</span>
                     </button>
                   )}
                 </div>
               )}
 
               {/* Messages Container */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50">
+              <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-2 sm:space-y-3 bg-gray-50">
                 {messages.map((message) => (
                   <div
                     key={message.id}
                     className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className={`max-w-[80%] px-4 py-2 rounded-2xl ${
+                      className={`max-w-[85%] sm:max-w-[80%] px-3 py-2 sm:px-4 sm:py-2 rounded-2xl ${
                         message.sender === 'user'
                           ? 'bg-black text-white rounded-br-sm'
                           : 'bg-gray-100 text-gray-900 rounded-bl-sm'
                       }`}
                     >
-                      <p className="text-sm whitespace-pre-wrap break-words">{message.text}</p>
+                      <p className="text-xs sm:text-sm whitespace-pre-wrap break-words">{message.text}</p>
                       <p
-                        className={`text-xs mt-1 ${
+                        className={`text-[10px] sm:text-xs mt-1 ${
                           message.sender === 'user' ? 'text-gray-300' : 'text-gray-500'
                         }`}
                       >
@@ -368,15 +375,15 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
               </div>
 
               {/* Quick Questions */}
-              <div className="border-t border-b p-3 bg-gray-50">
-                <p className="text-xs text-gray-600 mb-2 font-medium">Perguntas Rápidas:</p>
-                <div className="grid grid-cols-2 gap-2">
+              <div className="border-t border-b p-2 landscape:p-1.5 sm:p-3 bg-gray-50 flex-shrink-0">
+                <p className="text-[10px] sm:text-xs text-gray-600 mb-1.5 landscape:mb-1 sm:mb-2 font-medium px-1">Perguntas Rápidas:</p>
+                <div className="grid grid-cols-2 landscape:grid-cols-4 gap-1.5 landscape:gap-1 sm:gap-2">
                   {QUICK_QUESTIONS.map((question, index) => (
                     <button
                       key={index}
                       onClick={() => handleQuickQuestion(question)}
                       disabled={isLoading || isInCooldown}
-                      className="text-xs px-3 py-2 bg-white border border-gray-300 rounded-lg hover:bg-yellow-50 hover:border-yellow-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-left"
+                      className="text-[10px] landscape:text-[9px] sm:text-xs px-2 py-1.5 landscape:px-1.5 landscape:py-1 sm:px-3 sm:py-2 bg-white border border-gray-300 rounded-lg hover:bg-yellow-50 hover:border-yellow-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-left leading-tight"
                     >
                       {question}
                     </button>
@@ -385,8 +392,8 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
               </div>
 
               {/* Input Area */}
-              <div className="border-t p-4 bg-white rounded-b-2xl sm:rounded-b-2xl">
-                <div className="flex gap-2">
+              <div className="border-t p-2 sm:p-4 bg-white sm:rounded-b-2xl flex-shrink-0">
+                <div className="flex gap-1.5 sm:gap-2">
                   <input
                     type="text"
                     value={inputValue}
@@ -394,18 +401,18 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
                     onKeyPress={handleKeyPress}
                     placeholder="Escreva a sua mensagem..."
                     disabled={isLoading || isInCooldown}
-                    className="flex-1 px-4 py-2 border-2 border-yellow-500 rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="flex-1 px-3 py-2 sm:px-4 sm:py-2 text-sm border-2 border-yellow-500 rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                   />
                   <button
                     onClick={() => sendMessage()}
                     disabled={!inputValue.trim() || isLoading || isInCooldown}
-                    className="bg-yellow-500 hover:bg-yellow-600 text-black border-2 border-black p-2 rounded-full transition-colors disabled:bg-gray-300 disabled:border-gray-400 disabled:cursor-not-allowed flex items-center justify-center min-w-[40px]"
+                    className="bg-yellow-500 hover:bg-yellow-600 text-black border-2 border-black p-2 rounded-full transition-colors disabled:bg-gray-300 disabled:border-gray-400 disabled:cursor-not-allowed flex items-center justify-center min-w-[36px] sm:min-w-[40px]"
                     aria-label="Enviar mensagem"
                   >
                     {isLoading ? (
-                      <Loader2 className="h-5 w-5 animate-spin" />
+                      <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
                     ) : (
-                      <SendHorizonal className="h-5 w-5" />
+                      <SendHorizonal className="h-4 w-4 sm:h-5 sm:w-5" />
                     )}
                   </button>
                 </div>
