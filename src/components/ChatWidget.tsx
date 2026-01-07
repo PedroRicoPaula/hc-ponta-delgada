@@ -7,7 +7,6 @@ import { toast } from 'sonner';
 const WEBHOOK_URL = 'https://hook.eu1.make.com/d7p51kbr34g7rz7v1nijj3mn2wvq486b';
 
 const MAX_MESSAGES = 5;
-const COOLDOWN_TIME = 5 * 60 * 1000; // 5 minutes in milliseconds
 
 // Perguntas recorrentes
 const QUICK_QUESTIONS = [
@@ -26,7 +25,7 @@ interface Message {
 
 interface RateLimitData {
   count: number;
-  cooldownUntil: number | null;
+  lastResetDate: string; // ISO date string (YYYY-MM-DD)
 }
 
 interface ChatWidgetProps {
@@ -38,8 +37,10 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [rateLimit, setRateLimit] = useState<RateLimitData>({ count: 0, cooldownUntil: null });
-  const [remainingCooldown, setRemainingCooldown] = useState<number>(0);
+  const [rateLimit, setRateLimit] = useState<RateLimitData>({ 
+    count: 0, 
+    lastResetDate: new Date().toISOString().split('T')[0]
+  });
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Load messages from localStorage on mount
@@ -58,20 +59,24 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
 
     // Load rate limit data
     const savedRateLimit = localStorage.getItem('hcpdl-chat-ratelimit');
+    const today = new Date().toISOString().split('T')[0];
+    
     if (savedRateLimit) {
       try {
         const data: RateLimitData = JSON.parse(savedRateLimit);
-        // Check if cooldown has expired
-        if (data.cooldownUntil && data.cooldownUntil > Date.now()) {
-          setRateLimit(data);
+        // Check if it's a new day - if so, reset the counter
+        if (data.lastResetDate !== today) {
+          setRateLimit({ count: 0, lastResetDate: today });
+          localStorage.setItem('hcpdl-chat-ratelimit', JSON.stringify({ count: 0, lastResetDate: today }));
         } else {
-          // Reset if cooldown expired
-          setRateLimit({ count: 0, cooldownUntil: null });
-          localStorage.removeItem('hcpdl-chat-ratelimit');
+          setRateLimit(data);
         }
       } catch (error) {
         console.error('Error loading rate limit:', error);
+        setRateLimit({ count: 0, lastResetDate: today });
       }
+    } else {
+      setRateLimit({ count: 0, lastResetDate: today });
     }
   }, []);
 
@@ -94,34 +99,8 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
 
   // Save rate limit to localStorage
   useEffect(() => {
-    if (rateLimit.count > 0 || rateLimit.cooldownUntil) {
-      localStorage.setItem('hcpdl-chat-ratelimit', JSON.stringify(rateLimit));
-    }
+    localStorage.setItem('hcpdl-chat-ratelimit', JSON.stringify(rateLimit));
   }, [rateLimit]);
-
-  // Update remaining cooldown timer
-  useEffect(() => {
-    if (!rateLimit.cooldownUntil) {
-      setRemainingCooldown(0);
-      return;
-    }
-
-    const updateTimer = () => {
-      const remaining = Math.max(0, rateLimit.cooldownUntil! - Date.now());
-      setRemainingCooldown(remaining);
-
-      if (remaining === 0) {
-        // Cooldown expired, reset
-        setRateLimit({ count: 0, cooldownUntil: null });
-        localStorage.removeItem('hcpdl-chat-ratelimit');
-      }
-    };
-
-    updateTimer();
-    const interval = setInterval(updateTimer, 1000);
-
-    return () => clearInterval(interval);
-  }, [rateLimit.cooldownUntil]);
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
@@ -129,18 +108,17 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
   }, [messages]);
 
   const checkRateLimit = (): boolean => {
-    // Check if in cooldown
-    if (rateLimit.cooldownUntil && rateLimit.cooldownUntil > Date.now()) {
-      const remainingMinutes = Math.ceil((rateLimit.cooldownUntil - Date.now()) / 1000 / 60);
-      toast.error(`Limite de mensagens atingido. Tente novamente em ${remainingMinutes} minuto${remainingMinutes > 1 ? 's' : ''}.`);
-      return false;
+    const today = new Date().toISOString().split('T')[0];
+    
+    // Check if it's a new day - if so, reset the counter
+    if (rateLimit.lastResetDate !== today) {
+      setRateLimit({ count: 0, lastResetDate: today });
+      return true;
     }
 
-    // Check if reached limit
+    // Check if reached daily limit
     if (rateLimit.count >= MAX_MESSAGES) {
-      const cooldownUntil = Date.now() + COOLDOWN_TIME;
-      setRateLimit({ count: MAX_MESSAGES, cooldownUntil });
-      toast.error('Atingiu o limite de 5 mensagens. Aguarde 5 minutos para continuar.');
+      toast.error(`Atingiu o limite de ${MAX_MESSAGES} mensagens diárias. Tente novamente amanhã.`);
       return false;
     }
 
@@ -234,12 +212,6 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
     }
   };
 
-  const formatCooldownTime = (ms: number): string => {
-    const minutes = Math.floor(ms / 1000 / 60);
-    const seconds = Math.floor((ms / 1000) % 60);
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-  };
-
   const clearChatHistory = () => {
     // Clear only chat history, keep rate limit data
     localStorage.removeItem('hcpdl-chat-history');
@@ -247,7 +219,7 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
     toast.success('Histórico de conversas limpo!');
   };
 
-  const isInCooldown = rateLimit.cooldownUntil && rateLimit.cooldownUntil > Date.now();
+  const isLimitReached = rateLimit.count >= MAX_MESSAGES;
 
   return (
     <>
@@ -293,14 +265,10 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: '100%', opacity: 0 }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed inset-0 w-screen h-screen sm:bottom-0 sm:inset-auto sm:right-4 sm:w-96 sm:h-[600px] sm:max-h-[80vh] bg-white sm:rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden"
-              style={{
-                maxHeight: '100vh',
-                maxWidth: '100vw'
-              }}
+              className="fixed bottom-0 right-0 sm:right-4 w-full sm:w-96 h-[85vh] max-h-[600px] sm:h-[600px] sm:max-h-[80vh] bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden"
             >
               {/* Header */}
-              <div className="flex items-center justify-between p-3 sm:p-4 border-b bg-gradient-to-r from-yellow-500 to-yellow-600 sm:rounded-t-2xl flex-shrink-0">
+              <div className="flex items-center justify-between p-3 sm:p-4 border-b bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-t-2xl flex-shrink-0">
                 <div className="flex items-center gap-2">
                   <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5 text-black" />
                   <h3 className="font-semibold text-sm sm:text-base text-black">Chat de Suporte</h3>
@@ -315,20 +283,20 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
               </div>
 
               {/* Rate Limit Warning */}
-              {isInCooldown && (
+              {isLimitReached && (
                 <div className="bg-red-50 border-b border-red-200 p-2 sm:p-3 flex items-center gap-2 flex-shrink-0">
                   <Clock className="h-3 w-3 sm:h-4 sm:w-4 text-red-600" />
                   <p className="text-xs sm:text-sm text-red-700">
-                    Limite atingido. Aguarde {formatCooldownTime(remainingCooldown)}
+                    Limite de {MAX_MESSAGES} mensagens diárias atingido. Reseta à meia-noite.
                   </p>
                 </div>
               )}
 
               {/* Message Counter and Clear Button */}
-              {!isInCooldown && (
+              {!isLimitReached && (
                 <div className="bg-yellow-50 border-b border-yellow-200 p-2 sm:p-2 flex items-center justify-between px-3 sm:px-4 flex-shrink-0">
                   <p className="text-xs sm:text-xs text-yellow-700">
-                    Mensagens: {rateLimit.count}/{MAX_MESSAGES}
+                    Mensagens diárias: {rateLimit.count}/{MAX_MESSAGES}
                   </p>
                   {messages.length >= 1 && (
                     <button
@@ -382,7 +350,7 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
                     <button
                       key={index}
                       onClick={() => handleQuickQuestion(question)}
-                      disabled={isLoading || isInCooldown}
+                      disabled={isLoading || isLimitReached}
                       className="text-[10px] landscape:text-[9px] sm:text-xs px-2 py-1.5 landscape:px-1.5 landscape:py-1 sm:px-3 sm:py-2 bg-white border border-gray-300 rounded-lg hover:bg-yellow-50 hover:border-yellow-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-left leading-tight"
                     >
                       {question}
@@ -400,12 +368,12 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyPress={handleKeyPress}
                     placeholder="Escreva a sua mensagem..."
-                    disabled={isLoading || isInCooldown}
+                    disabled={isLoading || isLimitReached}
                     className="flex-1 px-3 py-2 sm:px-4 sm:py-2 text-sm border-2 border-yellow-500 rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                   />
                   <button
                     onClick={() => sendMessage()}
-                    disabled={!inputValue.trim() || isLoading || isInCooldown}
+                    disabled={!inputValue.trim() || isLoading || isLimitReached}
                     className="bg-yellow-500 hover:bg-yellow-600 text-black border-2 border-black p-2 rounded-full transition-colors disabled:bg-gray-300 disabled:border-gray-400 disabled:cursor-not-allowed flex items-center justify-center min-w-[36px] sm:min-w-[40px]"
                     aria-label="Enviar mensagem"
                   >
