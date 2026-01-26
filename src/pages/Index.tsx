@@ -14,7 +14,7 @@ import HolidayOverlay from "@/components/HolidayOverlay";
 import { RollerHockeyGame } from "@/components/RollerHockeyGame";
 import { DonationsModal } from '@/components/DonationsModal';
 import { ComunicadosPanel } from '@/components/ComunicadosPanel';
-import { ChatWidget } from '@/components/ChatWidget';
+// import { ChatWidget } from '@/components/ChatWidget';
 
 // Section Components
 import { HeroSection } from '@/components/sections/HeroSection';
@@ -123,7 +123,7 @@ const Index = () => {
       <RollerHockeyGame isOpen={isGameOpen} onClose={() => setIsGameOpen(false)} />
       <DonationsModal isOpen={isDonationsOpen} onClose={() => setIsDonationsOpen(false)} />
       <ComunicadosPanel isOpen={isComunicadosOpen} onClose={() => setIsComunicadosOpen(false)} data={comunicados} />
-      <ChatWidget />
+      {/* <ChatWidget /> */}
 
       {showCookieConsent && (
         <CookieConsent onAccept={acceptCookies} onReject={rejectCookies} />
