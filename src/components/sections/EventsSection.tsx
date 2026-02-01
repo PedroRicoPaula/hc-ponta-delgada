@@ -2,12 +2,12 @@ import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { senioresEvents, formacaoEvents } from '@/data/siteData';
 
-const sectionRight = {
-    hidden: { opacity: 0, x: 40 },
+  const sectionRight = {
+    hidden: { opacity: 0, x: 20 },
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 2.0 }
+      transition: { duration: 0.8, ease: "easeOut" }
     }
   };
 
@@ -18,7 +18,7 @@ return (
         className="py-16"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: 0.1 }}
         variants={sectionRight}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
