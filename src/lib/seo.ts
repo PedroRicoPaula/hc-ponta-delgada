@@ -15,10 +15,31 @@ interface Comunicado {
   conteudo: string;
 }
 
-// Helper function to convert date strings to ISO format
-const toISOString = (dateStr: string, timeStr: string = '00:00') => {
-  const [day, month, year] = dateStr.split('/');
-  return new Date(`${year}-${month}-${day}T${timeStr}`).toISOString();
+// Helper function to convert date strings to ISO format with error handling
+const toISOString = (dateStr: string, timeStr: string = '00:00'): string => {
+  try {
+    const [day, month, year] = dateStr.split('/');
+    
+    // Validate date parts exist
+    if (!day || !month || !year) {
+      console.warn(`Invalid date format: ${dateStr}`);
+      return new Date().toISOString(); // Fallback to current date
+    }
+    
+    // Create date object
+    const date = new Date(`${year}-${month}-${day}T${timeStr}`);
+    
+    // Check if date is valid
+    if (isNaN(date.getTime())) {
+      console.warn(`Invalid date created from: ${dateStr} ${timeStr}`);
+      return new Date().toISOString(); // Fallback to current date
+    }
+    
+    return date.toISOString();
+  } catch (error) {
+    console.error(`Error parsing date: ${dateStr} ${timeStr}`, error);
+    return new Date().toISOString(); // Fallback to current date
+  }
 };
 
 // Function to generate the schema for game events

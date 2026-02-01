@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, SendHorizonal, Loader2, Clock, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
+import { safeStorage } from '@/lib/safeStorage';
 
 // TODO: Replace with your Make.com webhook URL
 const WEBHOOK_URL = 'https://hook.eu1.make.com/d7p51kbr34g7rz7v1nijj3mn2wvq486b';
@@ -45,7 +46,7 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
 
   // Load messages from localStorage on mount
   useEffect(() => {
-    const saved = localStorage.getItem('hcpdl-chat-history');
+    const saved = safeStorage.getItem('hcpdl-chat-history');
     if (saved) {
       try {
         setMessages(JSON.parse(saved));
@@ -58,7 +59,7 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
     }
 
     // Load rate limit data
-    const savedRateLimit = localStorage.getItem('hcpdl-chat-ratelimit');
+    const savedRateLimit = safeStorage.getItem('hcpdl-chat-ratelimit');
     const today = new Date().toISOString().split('T')[0];
     
     if (savedRateLimit) {
@@ -67,7 +68,7 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
         // Check if it's a new day - if so, reset the counter
         if (data.lastResetDate !== today) {
           setRateLimit({ count: 0, lastResetDate: today });
-          localStorage.setItem('hcpdl-chat-ratelimit', JSON.stringify({ count: 0, lastResetDate: today }));
+          safeStorage.setItem('hcpdl-chat-ratelimit', JSON.stringify({ count: 0, lastResetDate: today }));
         } else {
           setRateLimit(data);
         }
@@ -93,13 +94,13 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
   // Save messages to localStorage whenever they change
   useEffect(() => {
     if (messages.length > 0) {
-      localStorage.setItem('hcpdl-chat-history', JSON.stringify(messages));
+      safeStorage.setItem('hcpdl-chat-history', JSON.stringify(messages));
     }
   }, [messages]);
 
   // Save rate limit to localStorage
   useEffect(() => {
-    localStorage.setItem('hcpdl-chat-ratelimit', JSON.stringify(rateLimit));
+    safeStorage.setItem('hcpdl-chat-ratelimit', JSON.stringify(rateLimit));
   }, [rateLimit]);
 
   // Auto-scroll to bottom when new messages arrive
@@ -214,7 +215,7 @@ export const ChatWidget = ({}: ChatWidgetProps) => {
 
   const clearChatHistory = () => {
     // Clear only chat history, keep rate limit data
-    localStorage.removeItem('hcpdl-chat-history');
+    safeStorage.removeItem('hcpdl-chat-history');
     initializeWelcomeMessage();
     toast.success('Histórico de conversas limpo!');
   };

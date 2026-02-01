@@ -29,6 +29,7 @@ import { ContactSection } from '@/components/sections/ContactSection';
 // Data
 import { senioresEvents, formacaoEvents, comunicados } from '@/data/siteData';
 import { generateEventsSchema, generateNewsSchema } from '@/lib/seo';
+import { safeStorage } from '@/lib/safeStorage';
 
 const ScrollIndicator = () => (
   <div className="flex justify-center py-8">
@@ -59,7 +60,7 @@ const Index = () => {
 
   // --- EFFECTS ---
   useEffect(() => {
-    const cookieConsent = localStorage.getItem('cookie-consent');
+    const cookieConsent = safeStorage.getItem('cookie-consent');
     if (!cookieConsent) {
       setShowCookieConsent(true);
     }
@@ -67,12 +68,12 @@ const Index = () => {
 
   // --- HANDLERS ---
   const acceptCookies = () => {
-    localStorage.setItem('cookie-consent', 'accepted');
+    safeStorage.setItem('cookie-consent', 'accepted');
     setShowCookieConsent(false);
   };
 
   const rejectCookies = () => {
-    localStorage.setItem('cookie-consent', 'rejected');
+    safeStorage.setItem('cookie-consent', 'rejected');
     setShowCookieConsent(false);
   };
 

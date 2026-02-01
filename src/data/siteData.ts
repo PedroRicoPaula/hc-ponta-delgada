@@ -127,7 +127,7 @@ export const formacaoEvents = [
   {
     id: "formacao-9",
     title: "Caldeiras HC vs Hóquei Clube PDL",
-    date: "29/02/2026",
+    date: "01/03/2026",
     time: "18:00",
     location: "Pavilhão Sidónio Serpa",
     type: "Sub 13",
