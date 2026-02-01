@@ -10,18 +10,18 @@ const sectionFade = {
 
 export const HeroSection = () => (
   <motion.header
-    className="pt-20 pb-12 bg-gradient-to-b from-primary/20 to-transparent"
+    className="pt-16 pb-8 md:pt-20 md:pb-12 bg-gradient-to-b from-primary/20 to-transparent"
     initial="hidden"
     whileInView="visible"
     viewport={{ once: true, amount: 0.2 }}
     variants={sectionFade}
   >
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-16">
       <div className="text-center">
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
+        <h1 className="text-3xl md:text-6xl font-bold text-gray-900 mb-2 md:mb-4">
           Hóquei Clube Ponta Delgada
         </h1>
-        <p className="text-xl text-gray-600 mb-8">Paixão, Orgulho e Excelência desde 2012</p>
+        <p className="text-lg md:text-xl text-gray-600 mb-4 md:mb-8">Paixão, Orgulho e Excelência desde 2012</p>
         <img
           src="/uploads/PDL24-25V2.png"
           alt="Equipa sénior do Hóquei Clube Ponta Delgada para a época 2025-2026"

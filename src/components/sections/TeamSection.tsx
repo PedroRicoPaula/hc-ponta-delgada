@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogHeader, 
-  DialogTitle, 
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
   DialogDescription,
   DialogFooter
 } from '@/components/ui/dialog';
@@ -14,12 +14,12 @@ import { BarChart3, ExternalLink, Trophy } from 'lucide-react'; // Adicionei o �
 import { playersByPosition, staff } from '@/data/siteData';
 
 const sectionVariants = {
-    hidden: { opacity: 0, y: 32 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 2.0 }
-    }
+  hidden: { opacity: 0, y: 32 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 2.0 }
+  }
 };
 
 // ✅ NOVO: Definição do tipo para os detalhes do pop-up
@@ -74,7 +74,7 @@ export const TeamSection = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-4">A Nossa Equipa</h2>
-          
+
           {/* ✅ ALTERADO: Container para os dois botões */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
             <Button onClick={() => handleOpenConfirmation('stats')}>
@@ -86,11 +86,15 @@ export const TeamSection = () => {
               Ver Classificação
             </Button>
           </div>
-          
+
           <h3 className="text-2xl font-semibold mb-6">Jogadores</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
             {Object.entries(playersByPosition).map(([position, players]) => (
-              <Card key={position} className="p-4 hover:shadow-lg transition-shadow">
+              <Card
+                key={position}
+                className={`p-4 shadow-lg hover:shadow-yellow-400 active:shadow-yellow-400 transition-all duration-300 ${position === 'Universal' ? 'col-span-2 sm:col-span-1' : 'col-span-1'
+                  }`}
+              >
                 <div className="text-center">
                   <h4 className="font-semibold text-lg mb-3 text-primary">{position}</h4>
                   <ul className="space-y-1">
@@ -105,14 +109,29 @@ export const TeamSection = () => {
 
           <h3 className="text-2xl font-semibold mb-6">Equipa Técnica</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {staff.map((member) => (
-              <Card key={member.name} className="p-4 hover:shadow-lg transition-shadow">
+            {staff.filter(member => member.role !== 'Diretor').map((member) => (
+              <Card key={member.name} className="p-4 shadow-lg hover:shadow-yellow-400 active:shadow-yellow-400 transition-all duration-300">
                 <div className="text-center">
-                  <h3 className="font-semibold text-lg mb-1">{member.name}</h3>
-                  <p className="text-gray-600 text-sm">{member.role}</p>
+                  <h3 className="font-semibold text-lg mb-2">{member.role}</h3>
+                  <p className="text-gray-600 text-sm">{member.name}</p>
                 </div>
               </Card>
             ))}
+
+            {staff.filter(member => member.role === 'Diretor').length > 0 && (
+              <Card className="p-4 shadow-lg hover:shadow-yellow-400 active:shadow-yellow-400 transition-all duration-300">
+                <div className="text-center">
+                  <h3 className="font-semibold text-lg mb-2">Diretores</h3>
+                  <ul className="space-y-1">
+                    {staff.filter(member => member.role === 'Diretor').map((director) => (
+                      <li key={director.name} className="text-gray-600 text-sm">
+                        {director.name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Card>
+            )}
           </div>
         </div>
       </motion.section>

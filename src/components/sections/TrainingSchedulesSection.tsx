@@ -5,13 +5,13 @@ import { trainingSchedules } from '@/data/siteData';
 import { useState } from 'react';
 
 const sectionLeft = {
-    hidden: { opacity: 0, x: -40 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 2.0 }
-    }
-  };
+  hidden: { opacity: 0, x: -40 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 2.0 }
+  }
+};
 
 
 
@@ -23,54 +23,62 @@ export const TrainingSchedulesSection = () => {
     }));
   };
 
-const [openSchedules, setOpenSchedules] = useState<{ [key: string]: boolean }>({});
-return (
+  const [openSchedules, setOpenSchedules] = useState<{ [key: string]: boolean }>({});
+  return (
     <motion.section
-        id="training"
-        className="py-16 bg-gray-100"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionLeft}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Horários de Treinos</h2>
-          
-          {/* Desktop View */}
-          <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
-            {trainingSchedules.map((schedule) => (
-              <Card key={schedule.type} className={`p-6 border-2 ${schedule.color} hover:shadow-lg transition-shadow`}>
-                <div className="text-center">
-                  <h3 className="font-bold text-xl mb-4">{schedule.type}</h3>
-                  <div className="space-y-3">
-                    {schedule.sessions.map((session, index) => (
-                      <div key={index} className="bg-white/50 p-3 rounded-lg">
-                        <p className="font-semibold text-sm">{session.day}</p>
-                        <p className="text-sm font-mono">{session.time}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
+      id="training"
+      className="py-16 bg-gray-100"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={sectionLeft}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl font-bold text-center mb-12">Horários de Treinos</h2>
 
-          {/* Mobile View - Collapsible */}
-          <div className="md:hidden space-y-4">
-            {trainingSchedules.map((schedule) => (
-              <Card key={schedule.type} className={`border-2 ${schedule.color} overflow-hidden`}>
+        {/* Desktop View */}
+        <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
+          {trainingSchedules.map((schedule) => (
+            <Card
+              key={schedule.type}
+              className={`p-6 border-2 ${schedule.color} shadow-lg hover:shadow-yellow-400 active:shadow-yellow-400 transition-all duration-300 group`}
+            >
+              <div className="text-center group-hover:text-black transition-colors duration-300">
+                <h3 className="font-bold text-xl mb-4">{schedule.type}</h3>
+                <div className="space-y-3">
+                  {schedule.sessions.map((session, index) => (
+                    <div key={index} className="bg-white/50 p-3 rounded-lg">
+                      <p className="font-semibold text-sm">{session.day}</p>
+                      <p className="text-sm font-mono">{session.time}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+
+        {/* Mobile View - Collapsible */}
+        <div className="md:hidden space-y-4">
+          {trainingSchedules.map((schedule) => {
+            const isOpen = openSchedules[schedule.type];
+            return (
+              <Card
+                key={schedule.type}
+                className={`border-2 ${schedule.color} shadow-lg hover:shadow-yellow-400 active:shadow-yellow-400 transition-all duration-300 overflow-hidden group ${isOpen ? 'shadow-yellow-400 text-black' : ''}`}
+              >
                 <Button
                   onClick={() => toggleSchedule(schedule.type)}
-                  className={`w-full p-4 text-left flex justify-between items-center ${schedule.color} hover:opacity-90 transition-all`}
+                  className={`w-full p-4 text-left flex justify-between items-center ${schedule.color} hover:opacity-90 transition-all ${isOpen ? 'text-black' : ''} group-hover:text-black`}
                   variant="ghost"
                 >
                   <h3 className="font-bold text-lg">{schedule.type}</h3>
-                  <span className={`transform transition-transform duration-200 ${openSchedules[schedule.type] ? 'rotate-180' : 'rotate-0'}`}>
+                  <span className={`transform transition-transform duration-200 ${isOpen ? 'rotate-180' : 'rotate-0'}`}>
                     ↓
                   </span>
                 </Button>
-                <div className={`transition-all duration-300 ease-in-out ${openSchedules[schedule.type] ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
-                  <div className="p-4 bg-white/50 space-y-3">
+                <div className={`transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
+                  <div className={`p-4 bg-white/50 space-y-3 ${isOpen ? 'text-black' : ''} group-hover:text-black transition-colors duration-300`}>
                     {schedule.sessions.map((session, index) => (
                       <div key={index} className="bg-white/70 p-3 rounded-lg">
                         <p className="font-semibold text-sm">{session.day}</p>
@@ -80,9 +88,10 @@ return (
                   </div>
                 </div>
               </Card>
-            ))}
-          </div>
+            );
+          })}
         </div>
-      </motion.section>
-    );
+      </div>
+    </motion.section>
+  );
 };
