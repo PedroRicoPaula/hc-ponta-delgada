@@ -33,7 +33,7 @@ export const ContactSection = () => {
             {/* Image - First on desktop (left), Second on mobile (below) */}
             <div className="order-2 md:order-1 md:w-1/2">
               <img
-                src="/lovable-uploads/PavilhaoSidonioSerpa.jpg"
+                src="/uploads/PavilhaoSidonioSerpa.jpg"
                 alt="Fachada do Pavilhão Sidónio Serpa, casa do Hóquei Clube Ponta Delgada"
                 className="w-full h-48 md:h-64 object-cover rounded-lg shadow"
                 loading="lazy"

@@ -145,15 +145,15 @@ export const comunicados = [
 ];
 
 export const galleryImages = [
-  "/lovable-uploads/6f004096-7b4b-46fc-900c-5a739fb46b49.png",
-  "/lovable-uploads/bb357729-6191-4dec-bdc6-e9b22898bd63.png",
-  "/lovable-uploads/18941c1a-b681-46a8-b651-0e812f6192b0.png",
-  "/lovable-uploads/b2a3a926-e3f0-469c-9390-0113bfb380ea.png",
-  "/lovable-uploads/57e06117-8822-4287-8b8c-e947952330c8.png",
-  "/lovable-uploads/cc047543-aa40-46cb-8746-4b1324dba1a4.png",
-  "/lovable-uploads/c36667ca-9257-4046-9d64-b47bc79a4ba3.png",
-  "/lovable-uploads/182a9396-5de5-4efe-a1d8-39b0a2180269.png",
-  "/lovable-uploads/TorneioCidadeRG_PDL_Campeao_Sub13_Sub17.jpeg"
+  "/uploads/6f004096-7b4b-46fc-900c-5a739fb46b49.png",
+  "/uploads/bb357729-6191-4dec-bdc6-e9b22898bd63.png",
+  "/uploads/18941c1a-b681-46a8-b651-0e812f6192b0.png",
+  "/uploads/b2a3a926-e3f0-469c-9390-0113bfb380ea.png",
+  "/uploads/57e06117-8822-4287-8b8c-e947952330c8.png",
+  "/uploads/cc047543-aa40-46cb-8746-4b1324dba1a4.png",
+  "/uploads/c36667ca-9257-4046-9d64-b47bc79a4ba3.png",
+  "/uploads/182a9396-5de5-4efe-a1d8-39b0a2180269.png",
+  "/uploads/TorneioCidadeRG_PDL_Campeao_Sub13_Sub17.jpeg"
 ];
 
 export const trainingSchedules = [
@@ -186,9 +186,9 @@ export const trainingSchedules = [
 ];
 
 export const sponsors = [
-    { name: "Azemad", logo: "/lovable-uploads/AzemadLogo.jpg", url: "https://azemad.com/" },
-    { name: "Auto Cordeiro", logo: "/lovable-uploads/AutoCordeiroLogo.png", url: "https://www.facebook.com/crenku/?locale=pt_PT" },
-    { name: "Crenku", logo: "/lovable-uploads/CrenkuLogo.png", url: "https://www.facebook.com/engenhososdesafios/?locale=pt_PT" },
-    { name: "Catchawards", logo: "/lovable-uploads/catchawards.png", url: "https://www.catchawardsportugal.pt/" },
-    { name: "Agência Funerária Lindo", logo: "/lovable-uploads/FunerariaLindoLogo.jpg", url: "https://www.facebook.com/funerarialindo/?locale=pt_PT" },
+    { name: "Azemad", logo: "/uploads/AzemadLogo.jpg", url: "https://azemad.com/" },
+    { name: "Auto Cordeiro", logo: "/uploads/AutoCordeiroLogo.png", url: "https://www.facebook.com/crenku/?locale=pt_PT" },
+    { name: "Crenku", logo: "/uploads/CrenkuLogo.png", url: "https://www.facebook.com/engenhososdesafios/?locale=pt_PT" },
+    { name: "Catchawards", logo: "/uploads/catchawards.png", url: "https://www.catchawardsportugal.pt/" },
+    { name: "Agência Funerária Lindo", logo: "/uploads/FunerariaLindoLogo.jpg", url: "https://www.facebook.com/funerarialindo/?locale=pt_PT" },
 ];

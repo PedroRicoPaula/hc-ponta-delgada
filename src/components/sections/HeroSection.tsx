@@ -23,7 +23,7 @@ export const HeroSection = () => (
         </h1>
         <p className="text-xl text-gray-600 mb-8">Paixão, Orgulho e Excelência desde 2012</p>
         <img
-          src="/lovable-uploads/PDL24-25V2.png"
+          src="/uploads/PDL24-25V2.png"
           alt="Equipa sénior do Hóquei Clube Ponta Delgada para a época 2025-2026"
           className="mx-auto h-auto object-contain rounded-lg shadow-lg max-w-full md:max-w-[480px]"
           width="1000"

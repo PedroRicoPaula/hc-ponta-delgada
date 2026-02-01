@@ -14,25 +14,25 @@ export const ShopSection = () => {
     {
       name: "Stick Profissional",
       price: "129,99€",
-      image: "/lovable-uploads/c36667ca-9257-4046-9d64-b47bc79a4ba3.png",
+      image: "/uploads/c36667ca-9257-4046-9d64-b47bc79a4ba3.png",
       category: "Sticks"
     },
     {
       name: "Bolas Oficiais (6 unid.)",
       price: "24,99€",
-      image: "/lovable-uploads/b2a3a926-e3f0-469c-9390-0113bfb380ea.png",
+      image: "/uploads/b2a3a926-e3f0-469c-9390-0113bfb380ea.png",
       category: "Bolas"
     },
     {
       name: "Equipamento Proteção",
       price: "79,99€",
-      image: "/lovable-uploads/57e06117-8822-4287-8b8c-e947952330c8.png",
+      image: "/uploads/57e06117-8822-4287-8b8c-e947952330c8.png",
       category: "Proteção"
     },
     {
       name: "Luvas Profissionais",
       price: "45,99€", 
-      image: "/lovable-uploads/18941c1a-b681-46a8-b651-0e812f6192b0.png",
+      image: "/uploads/18941c1a-b681-46a8-b651-0e812f6192b0.png",
       category: "Proteção"
     }
   ];

@@ -27,7 +27,7 @@ export const Navigation = () => {
             }}
           >
             <img 
-              src="/lovable-uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png" 
+              src="/uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png" 
               // ⭐ MELHORIA SEO: alt text mais descritivo
               alt="Logótipo do Hóquei Clube Ponta Delgada" 
               className="h-12 w-auto hover:scale-105 transition-transform"

@@ -108,7 +108,7 @@ const HolidayPopup = ({ isOpen, onClose }: HolidayPopupProps) => (
             <X className="h-5 w-5" />
           </button>
           <img
-            src="/lovable-uploads/Natal2025.jpeg"
+            src="/uploads/Natal2025.jpeg"
             alt="Boas festas do Hóquei Clube Ponta Delgada"
             className="mx-auto block w-full rounded-2xl border-2 border-white/20 shadow-2xl"
             loading="eager"

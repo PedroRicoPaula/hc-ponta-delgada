@@ -90,7 +90,7 @@ const Index = () => {
         <title>Hóquei Clube Ponta Delgada - Hóquei em Patins nos Açores</title>
         <meta name="description" content="Site oficial do Hóquei Clube de Ponta Delgada..." />
         <meta name="keywords" content="hóquei em patins, Ponta Delgada, Açores..." />
-        <link rel="preload" fetchPriority="high" as="image" href="/lovable-uploads/PDL24-25V2.png" type="image/png" />
+        <link rel="preload" fetchPriority="high" as="image" href="/uploads/PDL24-25V2.png" type="image/png" />
         <link rel="canonical" href="https://hoqueiclubepdl.com/" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(newsSchema) }} />
