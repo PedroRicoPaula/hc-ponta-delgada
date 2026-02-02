@@ -27,18 +27,18 @@ export const EventsSection = () => {
         <h3 className="text-2xl font-semibold mb-6">Seniores (Casa)</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {senioresEvents.map((event) => (
-            <Card key={event.id} className="p-6 shadow-lg hover:shadow-yellow-400 active:shadow-yellow-400 transition-all duration-300 relative">
+            <Card key={event.id} className="group p-6 shadow-lg hover:shadow-yellow-400 active:shadow-yellow-400 transition-all duration-300 relative">
               <div className="absolute top-4 right-4 bg-primary/10 text-primary px-2 py-1 rounded-md text-sm font-medium">
                 Seniores
               </div>
               <div>
                 <h3 className="font-semibold text-xl mb-2 pr-20">{event.title}</h3>
                 <div className="text-gray-600">
-                  <span className="md:block inline">Data: {event.date}</span>
+                  <span className="md:block inline group-hover:font-bold transition-all duration-300">Data: {event.date}</span>
                   <span className="md:hidden mx-1">-</span>
-                  <span className="md:block inline">Hora: {event.time}</span>
+                  <span className="md:block inline group-hover:font-bold transition-all duration-300">Hora: {event.time}</span>
                 </div>
-                <p className="text-gray-600">Local: {event.location}</p>
+                <p className="text-gray-600 group-hover:font-bold transition-all duration-300">Local: {event.location}</p>
               </div>
             </Card>
           ))}
@@ -63,18 +63,18 @@ export const EventsSection = () => {
             };
 
             return (
-              <Card key={event.id} className="p-6 shadow-lg hover:shadow-yellow-400 active:shadow-yellow-400 transition-all duration-300 relative">
+              <Card key={event.id} className="group p-6 shadow-lg hover:shadow-yellow-400 active:shadow-yellow-400 transition-all duration-300 relative">
                 <div className={`absolute top-4 right-4 px-2 py-1 rounded-md text-sm font-medium ${getEventTypeColor(event.type)}`}>
                   {event.type}
                 </div>
                 <div>
                   <h3 className="font-semibold text-xl mb-2 pr-20">{event.title}</h3>
                   <div className="text-gray-600">
-                    <span className="md:block inline">Data: {event.date}</span>
+                    <span className="md:block inline group-hover:font-bold transition-all duration-300">Data: {event.date}</span>
                     <span className="md:hidden mx-1">-</span>
-                    <span className="md:block inline">Hora: {event.time}</span>
+                    <span className="md:block inline group-hover:font-bold transition-all duration-300">Hora: {event.time}</span>
                   </div>
-                  <p className="text-gray-600">Local: {event.location}</p>
+                  <p className="text-gray-600 group-hover:font-bold transition-all duration-300">Local: {event.location}</p>
                 </div>
               </Card>
             );
