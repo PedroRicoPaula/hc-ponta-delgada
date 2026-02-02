@@ -3,7 +3,7 @@ const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
     '/manifest.json',
-    '/uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png'
+    '/uploads/pdlLogo.png'
 ];
 
 // Install Event

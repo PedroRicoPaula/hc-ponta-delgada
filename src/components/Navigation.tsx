@@ -18,18 +18,18 @@ export const Navigation = () => {
     <nav className="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <a 
+          <a
             href="#root" // ou qualquer ID que tenhas no topo da página
-            className="flex-shrink-0" 
+            className="flex-shrink-0"
             onClick={(e) => {
               e.preventDefault(); // Previne o comportamento padrão do link
               window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll suave para o topo
             }}
           >
-            <img 
-              src="/uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png" 
+            <img
+              src="/uploads/pdlLogo.png"
               // ⭐ MELHORIA SEO: alt text mais descritivo
-              alt="Logótipo do Hóquei Clube Ponta Delgada" 
+              alt="Logótipo do Hóquei Clube Ponta Delgada"
               className="h-12 w-auto hover:scale-105 transition-transform"
               loading="lazy"
             />
@@ -59,25 +59,22 @@ export const Navigation = () => {
               {/* Use relative positioning on the container */}
               <div className="w-6 h-6 relative">
                 <span
-                  className={`block absolute w-6 h-0.5 bg-gray-800 transition-all duration-700 ease-in-out ${
-                    isMenuOpen
+                  className={`block absolute w-6 h-0.5 bg-gray-800 transition-all duration-700 ease-in-out ${isMenuOpen
                       ? "top-1/2 -translate-y-1/2 rotate-[135deg]" // Rotates 3 * 45deg
                       : "top-1.5" // Position for hamburger
-                  }`}
+                    }`}
                 ></span>
                 <span
-                  className={`block absolute w-6 h-0.5 bg-gray-800 transition-all duration-700 ease-in-out top-1/2 -translate-y-1/2 ${
-                    isMenuOpen
+                  className={`block absolute w-6 h-0.5 bg-gray-800 transition-all duration-700 ease-in-out top-1/2 -translate-y-1/2 ${isMenuOpen
                       ? "translate-x-12 opacity-0" // Slides 3rem (48px) to the right and fades out
                       : "opacity-100" // Stays in place and is visible
-                  }`}
+                    }`}
                 ></span>
                 <span
-                  className={`block absolute w-6 h-0.5 bg-gray-800 transition-all duration-700 ease-in-out ${
-                    isMenuOpen
+                  className={`block absolute w-6 h-0.5 bg-gray-800 transition-all duration-700 ease-in-out ${isMenuOpen
                       ? "top-1/2 -translate-y-1/2 rotate-[-495deg]" // Rotates -135deg + -360deg spin
                       : "bottom-1.5" // Position for hamburger
-                  }`}
+                    }`}
                 ></span>
               </div>
             </button>

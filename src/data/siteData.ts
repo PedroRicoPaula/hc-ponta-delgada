@@ -121,14 +121,14 @@ export const comunicados = [
 ];
 
 export const galleryImages = [
-  "/uploads/6f004096-7b4b-46fc-900c-5a739fb46b49.png",
-  "/uploads/bb357729-6191-4dec-bdc6-e9b22898bd63.png",
-  "/uploads/18941c1a-b681-46a8-b651-0e812f6192b0.png",
-  "/uploads/b2a3a926-e3f0-469c-9390-0113bfb380ea.png",
-  "/uploads/57e06117-8822-4287-8b8c-e947952330c8.png",
-  "/uploads/cc047543-aa40-46cb-8746-4b1324dba1a4.png",
-  "/uploads/c36667ca-9257-4046-9d64-b47bc79a4ba3.png",
-  "/uploads/182a9396-5de5-4efe-a1d8-39b0a2180269.png",
+  "/uploads/interregioes2425.png",
+  "/uploads/youtube.png",
+  "/uploads/halloween2425.png",
+  "/uploads/natal2425.png",
+  "/uploads/pascoa2425.png",
+  "/uploads/campeonatoregionalsub132425.png",
+  "/uploads/campeonatoregionalsub152425.png",
+  "/uploads/treinospdl2526.png",
   "/uploads/TorneioCidadeRG_PDL_Campeao_Sub13_Sub17.jpeg"
 ];
 

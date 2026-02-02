@@ -88,7 +88,7 @@ export const generateNewsSchema = (comunicados: Comunicado[]) => {
         "name": "Hóquei Clube Ponta Delgada",
         "logo": {
             "@type": "ImageObject",
-            "url": "https://hoqueiclubepdl.com/uploads/13209336-cce9-4537-b6a8-01a8f59aaada.png"
+            "url": "https://hoqueiclubepdl.com/uploads/pdlLogo.png"
         }
     }
   }));
