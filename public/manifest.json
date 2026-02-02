@@ -2,7 +2,6 @@
     "name": "HC Ponta Delgada",
     "short_name": "HC PDL",
     "description": "Hóquei Clube Ponta Delgada - Hóquei em Patins nos Açores",
-    "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000",

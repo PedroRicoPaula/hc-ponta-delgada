@@ -104,7 +104,7 @@ const TreinosFormacao = () => {
         // Check Auth
 
         // Check Auth
-        const auth = sessionStorage.getItem('auth_treinos');
+        const auth = localStorage.getItem('auth_treinos');
         if (auth === 'true') {
             setIsAuthenticated(true);
         }
@@ -145,7 +145,7 @@ const TreinosFormacao = () => {
         e.preventDefault();
         if (passwordInput === PASSWORD) {
             setIsAuthenticated(true);
-            sessionStorage.setItem('auth_treinos', 'true');
+            localStorage.setItem('auth_treinos', 'true');
             toast.success("Acesso concedido");
         } else {
             toast.error("Password incorreta");
