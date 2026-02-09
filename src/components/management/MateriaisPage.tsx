@@ -316,7 +316,10 @@ export const MateriaisPage = () => {
 
             {/* Create/Edit Dialog */}
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogContent className="max-w-2xl bg-[#1e293b] border-slate-800 text-white rounded-3xl shadow-2xl">
+                <DialogContent
+                    onOpenAutoFocus={(e) => e.preventDefault()}
+                    className="w-[95vw] sm:max-w-2xl bg-[#1e293b] border-slate-800 text-white rounded-3xl shadow-2xl overflow-y-auto max-h-[90vh]"
+                >
                     <DialogHeader>
                         <div className="flex justify-between items-center pr-8">
                             <div>

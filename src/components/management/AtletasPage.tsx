@@ -226,7 +226,10 @@ export const AtletasPage = () => {
 
             {/* Create/Edit Dialog */}
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogContent className="max-w-2xl bg-[#1e293b] border-slate-800 text-white rounded-3xl shadow-2xl overflow-y-auto max-h-[90vh]">
+                <DialogContent
+                    onOpenAutoFocus={(e) => e.preventDefault()}
+                    className="w-[95vw] sm:max-w-2xl bg-[#1e293b] border-slate-800 text-white rounded-3xl shadow-2xl overflow-y-auto max-h-[90vh]"
+                >
                     <DialogHeader>
                         <DialogTitle className="text-2xl font-black text-white">
                             {editingAtleta ? 'Editar Atleta' : 'Novo Atleta'}
@@ -393,17 +396,17 @@ export const AtletasPage = () => {
                             )}
                         </div>
 
-                        <div className="flex justify-end gap-3 pt-6 border-t border-slate-800 sticky bottom-0 bg-[#1e293b] py-4">
+                        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-6 border-t border-slate-800 sticky bottom-0 bg-[#1e293b] py-4">
                             <button
                                 type="button"
                                 onClick={handleCloseDialog}
-                                className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-2xl transition-all"
+                                className="w-full sm:w-auto px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-2xl transition-all"
                             >
                                 Cancelar
                             </button>
                             <button
                                 type="submit"
-                                className="px-8 py-3 bg-yellow-400 hover:bg-yellow-300 text-black font-black rounded-2xl transition-all shadow-[0_0_20px_rgba(250,204,21,0.2)]"
+                                className="w-full sm:w-auto px-8 py-3 bg-yellow-400 hover:bg-yellow-300 text-black font-black rounded-2xl transition-all shadow-[0_0_20px_rgba(250,204,21,0.2)]"
                             >
                                 {editingAtleta ? 'Guardar Alterações' : 'Criar Atleta'}
                             </button>

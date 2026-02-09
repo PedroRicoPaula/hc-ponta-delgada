@@ -307,7 +307,10 @@ export const ViagensPage = () => {
             )}
 
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogContent className="max-w-4xl bg-[#1e293b] border-slate-800 text-white rounded-[2rem] shadow-2xl p-0 overflow-hidden">
+                <DialogContent
+                    onOpenAutoFocus={(e) => e.preventDefault()}
+                    className="w-[95vw] sm:max-w-4xl bg-[#1e293b] border-slate-800 text-white rounded-[2rem] shadow-2xl p-0 overflow-hidden"
+                >
                     <DialogHeader className="p-8 pb-0">
                         <DialogTitle className="text-2xl font-black text-white">
                             {editingViagem ? 'Editar Viagem' : 'Planear Viagem'}

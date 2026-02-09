@@ -179,7 +179,10 @@ export const DirecaoPage = () => {
 
             {/* Create/Edit Dialog */}
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogContent className="max-w-xl bg-[#1e293b] border-slate-800 text-white rounded-[2.5rem] shadow-2xl p-8">
+                <DialogContent
+                    onOpenAutoFocus={(e) => e.preventDefault()}
+                    className="w-[95vw] sm:max-w-xl bg-[#1e293b] border-slate-800 text-white rounded-[2.5rem] shadow-2xl p-8 overflow-y-auto max-h-[90vh]"
+                >
                     <DialogHeader className="mb-8">
                         <DialogTitle className="text-3xl font-black text-white">
                             {editingMembro ? 'Editar Registo' : 'Novo Membro Diretivo'}
@@ -241,17 +244,17 @@ export const DirecaoPage = () => {
                             </div>
                         </div>
 
-                        <div className="flex justify-end gap-3 pt-4">
+                        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4">
                             <button
                                 type="button"
                                 onClick={handleCloseDialog}
-                                className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-2xl transition-all"
+                                className="w-full sm:w-auto px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-2xl transition-all"
                             >
                                 Cancelar
                             </button>
                             <button
                                 type="submit"
-                                className="px-10 py-4 bg-yellow-400 hover:bg-yellow-300 text-black font-black rounded-2xl transition-all shadow-[0_0_20px_rgba(250,204,21,0.2)]"
+                                className="w-full sm:w-auto px-10 py-4 bg-yellow-400 hover:bg-yellow-300 text-black font-black rounded-2xl transition-all shadow-[0_0_20px_rgba(250,204,21,0.2)]"
                             >
                                 {editingMembro ? 'Guardar Alterações' : 'Confirmar Nomeação'}
                             </button>

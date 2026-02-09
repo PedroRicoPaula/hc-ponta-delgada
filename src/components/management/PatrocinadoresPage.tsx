@@ -249,7 +249,10 @@ export const PatrocinadoresPage = () => {
 
             {/* Create/Edit Dialog */}
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-[#1e293b] border-slate-800 text-white rounded-3xl shadow-2xl">
+                <DialogContent
+                    onOpenAutoFocus={(e) => e.preventDefault()}
+                    className="w-[95vw] sm:max-w-2xl bg-[#1e293b] border-slate-800 text-white rounded-3xl shadow-2xl overflow-y-auto max-h-[90vh]"
+                >
                     <DialogHeader>
                         <DialogTitle className="text-2xl font-black text-white">
                             {editingPatrocinador ? 'Editar Patrocinador' : 'Novo Patrocinador'}
@@ -401,17 +404,17 @@ export const PatrocinadoresPage = () => {
                             </div>
                         </div>
 
-                        <div className="flex justify-end gap-3 pt-6 border-t border-slate-800">
+                        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-6 border-t border-slate-800">
                             <button
                                 type="button"
                                 onClick={handleCloseDialog}
-                                className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-2xl transition-all"
+                                className="w-full sm:w-auto px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-2xl transition-all"
                             >
                                 Cancelar
                             </button>
                             <button
                                 type="submit"
-                                className="px-8 py-3 bg-yellow-400 hover:bg-yellow-300 text-black font-black rounded-2xl transition-all shadow-[0_0_20px_rgba(250,204,21,0.2)]"
+                                className="w-full sm:w-auto px-8 py-3 bg-yellow-400 hover:bg-yellow-300 text-black font-black rounded-2xl transition-all shadow-[0_0_20px_rgba(250,204,21,0.2)]"
                             >
                                 {editingPatrocinador ? 'Guardar Alterações' : 'Confirmar Parceria'}
                             </button>

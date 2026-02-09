@@ -31,7 +31,10 @@ export const TrainingModal: React.FC<TrainingModalProps> = ({
 }) => {
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-            <DialogContent className="sm:max-w-md">
+            <DialogContent
+                onOpenAutoFocus={(e) => e.preventDefault()}
+                className="w-[95vw] sm:max-w-md max-h-[90vh] overflow-y-auto"
+            >
                 <DialogHeader>
                     <DialogTitle>{editingId ? 'Editar Treino' : 'Novo Treino'} {categoryName}</DialogTitle>
                 </DialogHeader>

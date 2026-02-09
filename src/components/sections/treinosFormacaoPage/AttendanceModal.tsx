@@ -31,7 +31,10 @@ export const AttendanceModal: React.FC<AttendanceModalProps> = ({
 }) => {
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-            <DialogContent className="sm:max-w-md max-h-[90vh] flex flex-col p-0 overflow-hidden">
+            <DialogContent
+                onOpenAutoFocus={(e) => e.preventDefault()}
+                className="w-[95vw] sm:max-w-md max-h-[90vh] flex flex-col p-0 overflow-hidden"
+            >
                 <DialogHeader className="p-6 pb-2">
                     <DialogTitle>{editingId ? 'Editar Assiduidade' : 'Nova Assiduidade'}</DialogTitle>
                 </DialogHeader>
