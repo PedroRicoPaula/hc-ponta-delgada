@@ -18,19 +18,19 @@ const escalaoConfig: Record<Escalao, { color: string }> = {
 
 const allPlayersData = {
   "Seniores": {
-    "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro", "Miguel Santos"],
-    "Jogadores": ["Tiago Pimentel", "Mario Jesus", "Alexandre Resendes", "Vicente Correia", "Alexandre Ornelas", "Miguel Pimentel", "Carlos Guimarães", "Tiago Leite", "Pedro Paula", "Francisco Freitas", "Pedro Soares"]
+    "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro"],
+    "Jogadores": ["Tiago Pimentel", "Alexandre Resendes", "Alexandre Ornelas", "Miguel Pimentel", "Carlos Guimarães", "Tiago Leite", "Pedro Paula", "Francisco Freitas", "Pedro Soares"]
   },
   "Formação": {
     "Guarda-Redes": {
-      'Sub 11': ["Jonas Oliveira"],
+      'Sub 11': ["Jonas Oliveira", "José Vieira"],
       'Sub 13': ["Santiago Sousa", "Pedro Pacheco"],
       'Sub 17': ["Rafael Rocha", "João Albuquerque", "Gil Ribeiro", "Gonçalo Mendonça"],
     },
     "Jogadores": {
-      'Sub 11': ["Joana Lourenço", "João Barroso", "Nuno Massa", "Leandro Rodrigues", "Rafael Malheiro", "Tiago Pereira"],
-      'Sub 13': ["Santiago Resendes", "Salvador Resendes", "João Dias", "Guilherme Tavares", "Núria Faria", "Simão Melo", "Lourenço Áspera"],
-      'Sub 17': ["Gustavo Cordeiro", "Benjamim Castanheira", "Martim Farias", "Miguel Silva", "Pedro Massa", "Gonçalo Cordovil", "Carolina Benjamim", "Kelly Silvestre", "David Oliveira", "Ana Benjamim", "Bernardo Medeiros", "Francisco Feijó", "Marco Pacheco", "Rodrigo Cachapa", "Simão Paupério"],
+      'Sub 11': ["Joana Lourenço", "João Barroso", "Nuno Massa", "Leandro Rodrigues", "Rafael Malheiro", "Tiago Pereira", "Vasco Lourenço"],
+      'Sub 13': ["Santiago Resendes", "Salvador Resendes", "Guilherme Tavares", "Núria Faria", "Simão Melo", "Lourenço Áspera"],
+      'Sub 17': ["Gustavo Cordeiro", "Benjamim Castanheira", "Martim Farias", "Miguel Silva", "Pedro Massa", "Gonçalo Cordovil", "Carolina Benjamim", "Kelly Silvestre", "David Oliveira", "Ana Benjamim", "Bernardo Medeiros", "Marco Pacheco", "Rodrigo Cachapa"],
     }
   }
 };
@@ -84,16 +84,16 @@ const PlayerDisplay = forwardRef<HTMLDivElement, { player: PlayerSelection | nul
     }
     return (
       <div className="flex items-center gap-2">
-      {player.escalao && (
-        <span
-          className="h-2.5 w-2.5 rounded-full"
-          style={{ backgroundColor: escalaoConfig[player.escalao].color }}
-        />
-      )}
-      <span>{player.name}</span>
-    </div>
-  );
-}
+        {player.escalao && (
+          <span
+            className="h-2.5 w-2.5 rounded-full"
+            style={{ backgroundColor: escalaoConfig[player.escalao].color }}
+          />
+        )}
+        <span>{player.name}</span>
+      </div>
+    );
+  }
 );
 
 
@@ -147,7 +147,7 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
 
     const team1Scorers = Array.from({ length: team1Score }, () => team1PlayerNames[Math.floor(Math.random() * team1PlayerNames.length)]);
     const team2Scorers = Array.from({ length: team2Score }, () => team2PlayerNames[Math.floor(Math.random() * team2PlayerNames.length)]);
-    
+
     let winner: 'Equipa 1' | 'Equipa 2' | 'Empate';
     if (team1Score > team2Score) winner = 'Equipa 1';
     else if (team2Score > team1Score) winner = 'Equipa 2';
@@ -155,25 +155,25 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
 
     setGameResult({ team1Score, team2Score, winner, team1Scorers, team2Scorers });
   };
-  
-  const getAvailablePlayers = (position: 'Guarda-Redes' | 'Jogadores') => {
-      const allSelectedPlayerNames = [
-          team1.goalkeeper?.name,
-          ...team1.players.map(p => p?.name),
-          team2.goalkeeper?.name,
-          ...team2.players.map(p => p?.name)
-      ].filter(Boolean);
 
-      if (selectedCategory === 'Seniores') {
-          const players = allPlayersData.Seniores[position];
-          return players.filter(p => !allSelectedPlayerNames.includes(p));
-      } else { // Formação
-          const escaloes = allPlayersData.Formação[position];
-          return Object.entries(escaloes).map(([escalao, players]) => ({
-              escalao,
-              players: (players as string[]).filter(p => !allSelectedPlayerNames.includes(p))
-          })).filter(group => group.players.length > 0);
-      }
+  const getAvailablePlayers = (position: 'Guarda-Redes' | 'Jogadores') => {
+    const allSelectedPlayerNames = [
+      team1.goalkeeper?.name,
+      ...team1.players.map(p => p?.name),
+      team2.goalkeeper?.name,
+      ...team2.players.map(p => p?.name)
+    ].filter(Boolean);
+
+    if (selectedCategory === 'Seniores') {
+      const players = allPlayersData.Seniores[position];
+      return players.filter(p => !allSelectedPlayerNames.includes(p));
+    } else { // Formação
+      const escaloes = allPlayersData.Formação[position];
+      return Object.entries(escaloes).map(([escalao, players]) => ({
+        escalao,
+        players: (players as string[]).filter(p => !allSelectedPlayerNames.includes(p))
+      })).filter(group => group.players.length > 0);
+    }
   };
 
 
@@ -188,9 +188,9 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
     const availablePlayers = getAvailablePlayers(isGoalkeeper ? 'Guarda-Redes' : 'Jogadores');
 
     const placeholderText = isGoalkeeper
-        ? "Selecionar..."
-        : isMobile ? `J${position + 1}` : `Jogador ${position + 1}`;
-    
+      ? "Selecionar..."
+      : isMobile ? `J${position + 1}` : `Jogador ${position + 1}`;
+
     const triggerClass = isMobile ? "h-8 w-full text-xs text-left" : "h-9 w-full text-sm text-left";
     const itemClass = isMobile ? "text-xs" : "text-sm";
 
@@ -201,33 +201,33 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
       >
         <SelectTrigger className={triggerClass}>
           <SelectValue asChild>
-             <PlayerDisplay player={currentPlayer} placeholder={placeholderText} />
+            <PlayerDisplay player={currentPlayer} placeholder={placeholderText} />
           </SelectValue>
         </SelectTrigger>
         <SelectContent>
-            <ScrollArea className="h-40">
-                {selectedCategory === 'Seniores' ? (
-                    (availablePlayers as string[]).map(p => (
-                        <SelectItem key={p} value={JSON.stringify({ name: p })} className={itemClass}>{p}</SelectItem>
-                    ))
-                ) : (
-                    (availablePlayers as { escalao: string; players: string[] }[]).map(group => (
-                        <SelectGroup key={group.escalao}>
-                            <SelectLabel className={cn(itemClass, "font-semibold")}>{group.escalao}</SelectLabel>
-                            {group.players.map(p => (
-                                <SelectItem key={p} value={JSON.stringify({ name: p, escalao: group.escalao })} className={itemClass}>
-                                    {p}
-                                </SelectItem>
-                            ))}
-                        </SelectGroup>
-                    ))
-                )}
-            </ScrollArea>
+          <ScrollArea className="h-40">
+            {selectedCategory === 'Seniores' ? (
+              (availablePlayers as string[]).map(p => (
+                <SelectItem key={p} value={JSON.stringify({ name: p })} className={itemClass}>{p}</SelectItem>
+              ))
+            ) : (
+              (availablePlayers as { escalao: string; players: string[] }[]).map(group => (
+                <SelectGroup key={group.escalao}>
+                  <SelectLabel className={cn(itemClass, "font-semibold")}>{group.escalao}</SelectLabel>
+                  {group.players.map(p => (
+                    <SelectItem key={p} value={JSON.stringify({ name: p, escalao: group.escalao })} className={itemClass}>
+                      {p}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              ))
+            )}
+          </ScrollArea>
         </SelectContent>
       </Select>
     );
   };
-  
+
 
   return (
     <div className={`fixed inset-y-0 right-0 z-50 bg-background shadow-2xl transition-transform duration-500 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'} w-full sm:w-[32rem] lg:w-[40rem] overflow-y-auto`}>
@@ -235,21 +235,21 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
         <Button onClick={handleClose} variant="ghost" size="sm" className="absolute top-2 right-2 z-10 bg-background/80 hover:bg-background rounded-full p-1.5">
           <X className="h-4 w-4" />
         </Button>
-        
+
         <div className="p-4 pb-2 sm:p-6 sm:pb-4">
           <div className="flex items-center justify-between gap-4 mb-1 pr-8">
-             <div className="flex items-center gap-2">
-                <Target className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
-                <h2 className="text-xl sm:text-2xl font-bold text-foreground">Mini Jogo</h2>
-             </div>
-             <Select value={selectedCategory} onValueChange={(value: 'Seniores' | 'Formação') => setSelectedCategory(value)}>
-                <SelectTrigger className="w-[130px] h-9 text-xs sm:text-sm">
-                    <SelectValue placeholder="Selecionar categoria..." />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="Seniores"><div className="flex items-center gap-2"><Users className="h-4 w-4" />Seniores</div></SelectItem>
-                    <SelectItem value="Formação"><div className="flex items-center gap-2"><Shirt className="h-4 w-4" />Formação</div></SelectItem>
-                </SelectContent>
+            <div className="flex items-center gap-2">
+              <Target className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
+              <h2 className="text-xl sm:text-2xl font-bold text-foreground">Mini Jogo</h2>
+            </div>
+            <Select value={selectedCategory} onValueChange={(value: 'Seniores' | 'Formação') => setSelectedCategory(value)}>
+              <SelectTrigger className="w-[130px] h-9 text-xs sm:text-sm">
+                <SelectValue placeholder="Selecionar categoria..." />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Seniores"><div className="flex items-center gap-2"><Users className="h-4 w-4" />Seniores</div></SelectItem>
+                <SelectItem value="Formação"><div className="flex items-center gap-2"><Shirt className="h-4 w-4" />Formação</div></SelectItem>
+              </SelectContent>
             </Select>
           </div>
           <p className="text-muted-foreground text-xs sm:text-sm">Seleciona os "5 Iniciais" de cada equipa e vê quem ganha!</p>
@@ -274,7 +274,7 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
                   <div className="space-y-1.5">
                     <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Jogadores</label>
                     <div className="grid grid-cols-2 gap-2">
-                        {team1.players.map((_, index) => <div key={index}>{renderPlayerSelect('team1', index, true)}</div>)}
+                      {team1.players.map((_, index) => <div key={index}>{renderPlayerSelect('team1', index, true)}</div>)}
                     </div>
                   </div>
                 </Card>
@@ -290,7 +290,7 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
                   <div className="space-y-1.5">
                     <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Jogadores</label>
                     <div className="grid grid-cols-2 gap-2">
-                        {team2.players.map((_, index) => <div key={index}>{renderPlayerSelect('team2', index, true)}</div>)}
+                      {team2.players.map((_, index) => <div key={index}>{renderPlayerSelect('team2', index, true)}</div>)}
                     </div>
                   </div>
                 </Card>
@@ -326,8 +326,8 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
               </div>
             </Card>
           </div>
-          
-           {/* Play Button */}
+
+          {/* Play Button */}
           <div className="text-center">
             <Button onClick={playGame} disabled={!canPlay} size="lg" className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold px-6 py-2.5 sm:px-8 sm:py-3 transition-all duration-300 transform hover:scale-105 disabled:transform-none disabled:opacity-50">
               <Zap className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
@@ -353,19 +353,19 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
                       <span className="font-medium text-xs sm:text-sm">Equipa 1</span>
                     </div>
                     <div className="mt-1 flex justify-between items-start gap-x-3 sm:gap-x-4">
-                        <div className="text-3xl sm:text-4xl font-bold">{gameResult.team1Score}</div>
-                        {gameResult.team1Scorers.length > 0 && (
-                            <div className="min-w-0 text-right text-xs sm:text-sm text-muted-foreground space-y-0.5">
-                            {Array.from(aggregateScorers(gameResult.team1Scorers).entries())
-                                .sort(([, a], [, b]) => b - a)
-                                .map(([name, count]) => (
-                                <div key={name} className="flex justify-end items-baseline gap-x-1.5">
-                                    <span className="truncate" title={name}>{formatScorerName(name)}</span>
-                                    {count > 1 && <strong className="font-semibold text-foreground flex-shrink-0">{count}x</strong>}
-                                </div>
-                                ))}
-                            </div>
-                        )}
+                      <div className="text-3xl sm:text-4xl font-bold">{gameResult.team1Score}</div>
+                      {gameResult.team1Scorers.length > 0 && (
+                        <div className="min-w-0 text-right text-xs sm:text-sm text-muted-foreground space-y-0.5">
+                          {Array.from(aggregateScorers(gameResult.team1Scorers).entries())
+                            .sort(([, a], [, b]) => b - a)
+                            .map(([name, count]) => (
+                              <div key={name} className="flex justify-end items-baseline gap-x-1.5">
+                                <span className="truncate" title={name}>{formatScorerName(name)}</span>
+                                {count > 1 && <strong className="font-semibold text-foreground flex-shrink-0">{count}x</strong>}
+                              </div>
+                            ))}
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -375,20 +375,20 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
                       <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
                       <span className="font-medium text-xs sm:text-sm">Equipa 2</span>
                     </div>
-                     <div className="mt-1 flex justify-between items-start gap-x-3 sm:gap-x-4">
-                        <div className="text-3xl sm:text-4xl font-bold">{gameResult.team2Score}</div>
-                        {gameResult.team2Scorers.length > 0 && (
-                            <div className="min-w-0 text-right text-xs sm:text-sm text-muted-foreground space-y-0.5">
-                            {Array.from(aggregateScorers(gameResult.team2Scorers).entries())
-                                .sort(([, a], [, b]) => b - a)
-                                .map(([name, count]) => (
-                                <div key={name} className="flex justify-end items-baseline gap-x-1.5">
-                                    <span className="truncate" title={name}>{formatScorerName(name)}</span>
-                                    {count > 1 && <strong className="font-semibold text-foreground flex-shrink-0">{count}x</strong>}
-                                </div>
-                                ))}
-                            </div>
-                        )}
+                    <div className="mt-1 flex justify-between items-start gap-x-3 sm:gap-x-4">
+                      <div className="text-3xl sm:text-4xl font-bold">{gameResult.team2Score}</div>
+                      {gameResult.team2Scorers.length > 0 && (
+                        <div className="min-w-0 text-right text-xs sm:text-sm text-muted-foreground space-y-0.5">
+                          {Array.from(aggregateScorers(gameResult.team2Scorers).entries())
+                            .sort(([, a], [, b]) => b - a)
+                            .map(([name, count]) => (
+                              <div key={name} className="flex justify-end items-baseline gap-x-1.5">
+                                <span className="truncate" title={name}>{formatScorerName(name)}</span>
+                                {count > 1 && <strong className="font-semibold text-foreground flex-shrink-0">{count}x</strong>}
+                              </div>
+                            ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

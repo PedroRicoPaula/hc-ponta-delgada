@@ -2,9 +2,9 @@
 
 export const playersByPosition = {
   "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro"],
-  "Defesa": ["Tiago Pimentel", "Mario Jesus"],
+  "Defesa": ["Tiago Pimentel"],
   "Médio": ["Alexandre Resendes", "Alexandre Ornelas"],
-  "Avançado": ["Miguel Pimentel", "Carlos Guimarães", "Tiago Leite"],
+  "Avançado": ["Miguel Pimentel", "Carlos Guimarães"],
   "Universal": ["Pedro Paula", "Francisco Freitas", "Vicente Correia"]
 };
 
@@ -38,22 +38,6 @@ export const senioresEvents = [
 export const formacaoEvents = [
   {
     id: "formacao-1",
-    title: "Caldeiras HC vs Hóquei Clube PDL",
-    date: "08/02/2026",
-    time: "10:30",
-    location: "CD Ribeira Grande",
-    type: "Sub 11",
-  },
-  {
-    id: "formacao-2",
-    title: "Marítimo SC vs Hóquei Clube PDL",
-    date: "08/02/2026",
-    time: "14:00",
-    location: "Pavilhão Carlos Silveira",
-    type: "Sub 17",
-  },
-  {
-    id: "formacao-3",
     title: "Hóquei Clube PDL vs Caldeiras HC",
     date: "15/02/2026",
     time: "10:00",
@@ -61,7 +45,7 @@ export const formacaoEvents = [
     type: "Sub 13",
   },
   {
-    id: "formacao-4",
+    id: "formacao-2",
     title: "Hóquei Clube PDL vs Caldeiras HC",
     date: "15/02/2026",
     time: "12:00",
@@ -69,7 +53,7 @@ export const formacaoEvents = [
     type: "Sub 17",
   },
   {
-    id: "formacao-5",
+    id: "formacao-3",
     title: "Caldeiras HC vs Hóquei Clube PDL",
     date: "22/02/2026",
     time: "11:30",
@@ -77,7 +61,7 @@ export const formacaoEvents = [
     type: "Sub 17",
   },
   {
-    id: "formacao-6",
+    id: "formacao-4",
     title: "Hóquei Clube PDL vs Caldeiras HC",
     date: "27/02/2026",
     time: "10:00",
@@ -85,7 +69,7 @@ export const formacaoEvents = [
     type: "Sub 13",
   },
   {
-    id: "formacao-7",
+    id: "formacao-5",
     title: "Candelária SC vs Hóquei Clube PDL",
     date: "27/02/2026",
     time: "19:00",
@@ -93,7 +77,7 @@ export const formacaoEvents = [
     type: "Sub 13",
   },
   {
-    id: "formacao-8",
+    id: "formacao-6",
     title: "Hóquei Clube PDL vs Candelária SC",
     date: "28/02/2026",
     time: "18:00",
@@ -101,7 +85,7 @@ export const formacaoEvents = [
     type: "Sub 13",
   },
   {
-    id: "formacao-9",
+    id: "formacao-7",
     title: "Caldeiras HC vs Hóquei Clube PDL",
     date: "01/03/2026",
     time: "18:00",
