@@ -145,7 +145,7 @@ export const SociosPage = () => {
         <div className="space-y-8 animate-in fade-in duration-500">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                 <div>
-                    <h2 className="text-4xl font-black text-white tracking-tight">Sócios</h2>
+                    <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">Sócios</h2>
                     <p className="text-slate-400 mt-1 font-medium">
                         {socios.length} sócio{socios.length !== 1 ? 's' : ''} registado{socios.length !== 1 ? 's' : ''}
                     </p>
@@ -267,13 +267,13 @@ export const SociosPage = () => {
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogContent
                     onOpenAutoFocus={(e) => e.preventDefault()}
-                    className="w-[95vw] sm:max-w-2xl bg-[#1e293b] border-slate-800 text-white rounded-3xl shadow-2xl overflow-y-auto max-h-[90vh]"
+                    className="w-full sm:w-[95vw] md:max-w-2xl bg-[#1e293b] border-slate-800 text-white rounded-none sm:rounded-3xl shadow-2xl p-0 overflow-hidden h-full sm:h-auto sm:max-h-[90vh]"
                 >
-                    <DialogHeader>
-                        <DialogTitle className="text-2xl font-black text-white">
+                    <DialogHeader className="p-5 sm:p-8 pb-0">
+                        <DialogTitle className="text-xl sm:text-2xl font-black text-white">
                             {editingSocio ? 'Editar Sócio' : 'Novo Sócio'}
                         </DialogTitle>
-                        <DialogDescription className="text-slate-400">
+                        <DialogDescription className="text-slate-400 text-sm">
                             {editingSocio
                                 ? `Nº Sócio: #${editingSocio.numeroSocio.toString().padStart(4, '0')}`
                                 : `Nº Sócio: #${getNextNumeroSocio().toString().padStart(4, '0')} (atribuído automaticamente)`
@@ -281,67 +281,70 @@ export const SociosPage = () => {
                         </DialogDescription>
                     </DialogHeader>
 
-                    <form onSubmit={handleSubmit} className="space-y-6 mt-4">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="md:col-span-2">
-                                <Label htmlFor="nome" className="text-slate-400 font-bold mb-2 block">Nome Completo *</Label>
-                                <Input
-                                    id="nome"
-                                    required
-                                    value={formData.nome}
-                                    onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
-                                    className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
-                                />
+                    <form onSubmit={handleSubmit} className="flex flex-col overflow-hidden h-[calc(100vh-80px)] sm:h-auto">
+                        <div className="p-5 sm:p-8 pt-4 space-y-6 overflow-y-auto custom-scrollbar flex-1 sm:max-h-[70vh]">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="md:col-span-2">
+                                    <Label htmlFor="nome" className="text-slate-400 font-bold mb-2 block">Nome Completo *</Label>
+                                    <Input
+                                        id="nome"
+                                        required
+                                        value={formData.nome}
+                                        onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
+                                        className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
+                                    />
+                                </div>
+
+                                <div>
+                                    <Label htmlFor="telefone" className="text-slate-400 font-bold mb-2 block">Telefone</Label>
+                                    <Input
+                                        id="telefone"
+                                        type="tel"
+                                        value={formData.telefone}
+                                        onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
+                                        className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
+                                    />
+                                </div>
+
+                                <div>
+                                    <Label htmlFor="email" className="text-slate-400 font-bold mb-2 block">Email</Label>
+                                    <Input
+                                        id="email"
+                                        type="email"
+                                        value={formData.email}
+                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                        className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
+                                    />
+                                </div>
+
+                                <div className="md:col-span-2">
+                                    <Label htmlFor="morada" className="text-slate-400 font-bold mb-2 block">Morada</Label>
+                                    <Input
+                                        id="morada"
+                                        value={formData.morada}
+                                        onChange={(e) => setFormData({ ...formData, morada: e.target.value })}
+                                        className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
+                                    />
+                                </div>
+
+                                <div>
+                                    <Label htmlFor="quotaMensal" className="text-slate-400 font-bold mb-2 block">Quota Mensal (€) *</Label>
+                                    <Input
+                                        id="quotaMensal"
+                                        type="number"
+                                        step="0.01"
+                                        min="0"
+                                        required
+                                        value={formData.quotaMensal}
+                                        onChange={(e) => setFormData({ ...formData, quotaMensal: parseFloat(e.target.value) || 0 })}
+                                        className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
+                                    />
+                                </div>
                             </div>
 
-                            <div>
-                                <Label htmlFor="telefone" className="text-slate-400 font-bold mb-2 block">Telefone</Label>
-                                <Input
-                                    id="telefone"
-                                    type="tel"
-                                    value={formData.telefone}
-                                    onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
-                                    className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
-                                />
-                            </div>
-
-                            <div>
-                                <Label htmlFor="email" className="text-slate-400 font-bold mb-2 block">Email</Label>
-                                <Input
-                                    id="email"
-                                    type="email"
-                                    value={formData.email}
-                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
-                                />
-                            </div>
-
-                            <div className="md:col-span-2">
-                                <Label htmlFor="morada" className="text-slate-400 font-bold mb-2 block">Morada</Label>
-                                <Input
-                                    id="morada"
-                                    value={formData.morada}
-                                    onChange={(e) => setFormData({ ...formData, morada: e.target.value })}
-                                    className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
-                                />
-                            </div>
-
-                            <div>
-                                <Label htmlFor="quotaMensal" className="text-slate-400 font-bold mb-2 block">Quota Mensal (€) *</Label>
-                                <Input
-                                    id="quotaMensal"
-                                    type="number"
-                                    step="0.01"
-                                    min="0"
-                                    required
-                                    value={formData.quotaMensal}
-                                    onChange={(e) => setFormData({ ...formData, quotaMensal: parseFloat(e.target.value) || 0 })}
-                                    className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
-                                />
-                            </div>
                         </div>
 
-                        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-6 border-t border-slate-800">
+                        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 p-5 sm:p-8 pt-4 sm:pt-6 border-t border-slate-800 bg-[#1e293b] mt-auto">
                             <button
                                 type="button"
                                 onClick={handleCloseDialog}
@@ -364,89 +367,91 @@ export const SociosPage = () => {
             <Dialog open={isQuotasDialogOpen} onOpenChange={setIsQuotasDialogOpen}>
                 <DialogContent
                     onOpenAutoFocus={(e) => e.preventDefault()}
-                    className="w-[95vw] sm:max-w-3xl bg-[#1e293b] border-slate-800 text-white rounded-3xl shadow-2xl overflow-y-auto max-h-[90vh]"
+                    className="w-full sm:w-[95vw] md:max-w-3xl bg-[#1e293b] border-slate-800 text-white rounded-none sm:rounded-3xl shadow-2xl p-0 overflow-hidden h-full sm:h-auto sm:max-h-[90vh]"
                 >
-                    <DialogHeader>
-                        <DialogTitle className="text-2xl font-black text-white">
+                    <DialogHeader className="p-5 sm:p-8 pb-0">
+                        <DialogTitle className="text-xl sm:text-2xl font-black text-white">
                             Gestão de Quotas - <span className="text-yellow-400">{quotasSocio?.nome}</span>
                         </DialogTitle>
-                        <DialogDescription className="text-slate-400">
+                        <DialogDescription className="text-slate-400 text-sm">
                             Registo de pagamentos mensais
                         </DialogDescription>
                     </DialogHeader>
 
-                    {quotasSocio && (
-                        <div className="space-y-8 mt-4">
-                            {/* Year Navigation */}
-                            <div className="flex items-center justify-between bg-slate-900/50 p-4 rounded-2xl border border-slate-800">
-                                <button
-                                    onClick={() => setQuotasYear(quotasYear - 1)}
-                                    className="p-2 hover:bg-slate-800 rounded-xl transition-colors text-slate-400 hover:text-white"
-                                >
-                                    <ChevronLeft className="h-6 w-6" />
-                                </button>
-                                <h3 className="text-3xl font-black text-white tracking-tighter">{quotasYear}</h3>
-                                <button
-                                    onClick={() => setQuotasYear(quotasYear + 1)}
-                                    className="p-2 hover:bg-slate-800 rounded-xl transition-colors text-slate-400 hover:text-white"
-                                >
-                                    <ChevronRight className="h-6 w-6" />
-                                </button>
-                            </div>
+                    <div className="flex flex-col overflow-hidden h-[calc(100vh-80px)] sm:h-auto">
+                        {quotasSocio && (
+                            <div className="p-5 sm:p-8 pt-4 space-y-6 overflow-y-auto custom-scrollbar flex-1 sm:max-h-[70vh]">
+                                {/* Year Navigation */}
+                                <div className="flex items-center justify-between bg-slate-900/50 p-4 rounded-2xl border border-slate-800">
+                                    <button
+                                        onClick={() => setQuotasYear(quotasYear - 1)}
+                                        className="p-2 hover:bg-slate-800 rounded-xl transition-colors text-slate-400 hover:text-white"
+                                    >
+                                        <ChevronLeft className="h-6 w-6" />
+                                    </button>
+                                    <h3 className="text-3xl font-black text-white tracking-tighter">{quotasYear}</h3>
+                                    <button
+                                        onClick={() => setQuotasYear(quotasYear + 1)}
+                                        className="p-2 hover:bg-slate-800 rounded-xl transition-colors text-slate-400 hover:text-white"
+                                    >
+                                        <ChevronRight className="h-6 w-6" />
+                                    </button>
+                                </div>
 
-                            {/* Calendar Grid */}
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                                {meses.map((mes, index) => {
-                                    const mesNum = index + 1;
-                                    const isPaid = getQuotaStatus(mesNum);
+                                {/* Calendar Grid */}
+                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                                    {meses.map((mes, index) => {
+                                        const mesNum = index + 1;
+                                        const isPaid = getQuotaStatus(mesNum);
 
-                                    return (
-                                        <button
-                                            key={mes}
-                                            type="button"
-                                            onClick={() => toggleQuota(mesNum)}
-                                            className={cn(
-                                                "relative group p-4 rounded-2xl border-2 transition-all duration-300 transform hover:scale-105 active:scale-95 overflow-hidden",
-                                                isPaid
-                                                    ? "bg-emerald-500 border-emerald-400 text-white shadow-[0_0_20px_rgba(16,185,129,0.2)]"
-                                                    : "bg-slate-900/50 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200"
-                                            )}
-                                        >
-                                            {isPaid && <div className="absolute top-0 right-0 p-1"><Plus className="w-3 h-3 rotate-45" /></div>}
-                                            <div className="text-xs font-black uppercase tracking-widest">{mes.substring(0, 3)}</div>
-                                            <div className="text-sm font-bold mt-1">
-                                                {isPaid ? 'PAGO' : 'PENDENTE'}
-                                            </div>
-                                        </button>
-                                    );
-                                })}
-                            </div>
+                                        return (
+                                            <button
+                                                key={mes}
+                                                type="button"
+                                                onClick={() => toggleQuota(mesNum)}
+                                                className={cn(
+                                                    "relative group p-4 rounded-2xl border-2 transition-all duration-300 transform hover:scale-105 active:scale-95 overflow-hidden",
+                                                    isPaid
+                                                        ? "bg-emerald-500 border-emerald-400 text-white shadow-[0_0_20px_rgba(16,185,129,0.2)]"
+                                                        : "bg-slate-900/50 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200"
+                                                )}
+                                            >
+                                                {isPaid && <div className="absolute top-0 right-0 p-1"><Plus className="w-3 h-3 rotate-45" /></div>}
+                                                <div className="text-xs font-black uppercase tracking-widest">{mes.substring(0, 3)}</div>
+                                                <div className="text-sm font-bold mt-1">
+                                                    {isPaid ? 'PAGO' : 'PENDENTE'}
+                                                </div>
+                                            </button>
+                                        );
+                                    })}
+                                </div>
 
-                            {/* Summary */}
-                            <div className="bg-yellow-400 rounded-2xl p-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-black">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 bg-black/10 rounded-xl flex items-center justify-center">
-                                        <Calendar className="w-6 h-6" />
+                                {/* Summary */}
+                                <div className="bg-yellow-400 rounded-2xl p-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-black">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-12 h-12 bg-black/10 rounded-xl flex items-center justify-center">
+                                            <Calendar className="w-6 h-6" />
+                                        </div>
+                                        <div>
+                                            <p className="text-[10px] font-black uppercase tracking-widest opacity-60">Meses Liquidados</p>
+                                            <p className="text-2xl font-black">{Object.values(quotasSocio.quotas[quotasYear.toString()] || {}).filter(Boolean).length} de 12</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p className="text-[10px] font-black uppercase tracking-widest opacity-60">Meses Liquidados</p>
-                                        <p className="text-2xl font-black">{Object.values(quotasSocio.quotas[quotasYear.toString()] || {}).filter(Boolean).length} de 12</p>
+                                    <div className="text-center sm:text-right">
+                                        <p className="text-[10px] font-black uppercase tracking-widest opacity-60">Total Pago no Ano</p>
+                                        <p className="text-3xl font-black">€{(Object.values(quotasSocio.quotas[quotasYear.toString()] || {}).filter(Boolean).length * quotasSocio.quotaMensal).toFixed(2)}</p>
                                     </div>
                                 </div>
-                                <div className="text-center sm:text-right">
-                                    <p className="text-[10px] font-black uppercase tracking-widest opacity-60">Total Pago no Ano</p>
-                                    <p className="text-3xl font-black">€{(Object.values(quotasSocio.quotas[quotasYear.toString()] || {}).filter(Boolean).length * quotasSocio.quotaMensal).toFixed(2)}</p>
-                                </div>
                             </div>
+                        )}
+                        <div className="flex justify-end p-5 sm:p-8 pt-4 sm:pt-6 border-t border-slate-800 bg-[#1e293b] mt-auto">
+                            <button
+                                onClick={() => setIsQuotasDialogOpen(false)}
+                                className="w-full sm:w-auto px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-2xl transition-all"
+                            >
+                                Fechar
+                            </button>
                         </div>
-                    )}
-                    <div className="flex justify-end pt-4">
-                        <button
-                            onClick={() => setIsQuotasDialogOpen(false)}
-                            className="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-2xl transition-all"
-                        >
-                            Fechar
-                        </button>
                     </div>
                 </DialogContent>
             </Dialog>

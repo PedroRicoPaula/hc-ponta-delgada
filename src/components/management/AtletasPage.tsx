@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Search, Edit, Trash2, X, Users } from 'lucide-react';
+import { Plus, Search, Edit, Trash2, X, Users, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -21,6 +21,7 @@ import {
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import type { Atleta, Escalao } from '@/lib/managementTypes';
 import { initialAtletas } from './managementData';
+import { cn } from '@/lib/utils';
 
 const escaloes: { value: Escalao; label: string }[] = [
     { value: 'sub11', label: 'Sub 11' },
@@ -37,6 +38,7 @@ export const AtletasPage = () => {
     const [filterEscalao, setFilterEscalao] = useState<string>('all');
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [editingAtleta, setEditingAtleta] = useState<Atleta | null>(null);
+    const [showFormacao, setShowFormacao] = useState(false);
 
     const [formData, setFormData] = useState<Partial<Atleta>>({
         nome: '',
@@ -83,6 +85,7 @@ export const AtletasPage = () => {
             });
         }
         setIsDialogOpen(true);
+        setShowFormacao(atleta ? true : false);
     };
 
     const handleCloseDialog = () => {
@@ -123,7 +126,7 @@ export const AtletasPage = () => {
         <div className="space-y-8 animate-in fade-in duration-500">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                 <div>
-                    <h2 className="text-4xl font-black text-white tracking-tight">Atletas</h2>
+                    <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">Atletas</h2>
                     <p className="text-slate-400 mt-1 font-medium">
                         {atletas.length} atleta{atletas.length !== 1 ? 's' : ''} no sistema
                     </p>
@@ -228,175 +231,197 @@ export const AtletasPage = () => {
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogContent
                     onOpenAutoFocus={(e) => e.preventDefault()}
-                    className="w-[95vw] sm:max-w-2xl bg-[#1e293b] border-slate-800 text-white rounded-3xl shadow-2xl overflow-y-auto max-h-[90vh]"
+                    className="w-full sm:w-[95vw] md:max-w-2xl bg-[#1e293b] border-slate-800 text-white rounded-none sm:rounded-3xl shadow-2xl p-0 overflow-hidden h-full sm:h-auto sm:max-h-[90vh]"
                 >
-                    <DialogHeader>
-                        <DialogTitle className="text-2xl font-black text-white">
+                    <DialogHeader className="p-5 sm:p-8 pb-0">
+                        <DialogTitle className="text-xl sm:text-2xl font-black text-white">
                             {editingAtleta ? 'Editar Atleta' : 'Novo Atleta'}
                         </DialogTitle>
-                        <DialogDescription className="text-slate-400">
+                        <DialogDescription className="text-slate-400 text-sm">
                             Preencha os dados do atleta para o sistema
                         </DialogDescription>
                     </DialogHeader>
 
-                    <form onSubmit={handleSubmit} className="space-y-6 mt-4">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="md:col-span-2">
-                                <Label htmlFor="nome" className="text-slate-400 font-bold mb-2 block">Nome Completo *</Label>
-                                <Input
-                                    id="nome"
-                                    required
-                                    value={formData.nome}
-                                    onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
-                                    className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
-                                />
-                            </div>
+                    <form onSubmit={handleSubmit} className="flex flex-col overflow-hidden h-[calc(100vh-80px)] sm:h-auto">
+                        <div className="p-5 sm:p-8 pt-4 space-y-6 overflow-y-auto custom-scrollbar flex-1 sm:max-h-[70vh]">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                                <div className="md:col-span-2">
+                                    <Label htmlFor="nome" className="text-slate-400 font-bold mb-2 block">Nome Completo *</Label>
+                                    <Input
+                                        id="nome"
+                                        required
+                                        value={formData.nome}
+                                        onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
+                                        className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
+                                    />
+                                </div>
 
-                            <div>
-                                <Label htmlFor="escalao" className="text-slate-400 font-bold mb-2 block">Escalão *</Label>
-                                <Select
-                                    value={formData.escalao}
-                                    onValueChange={(value: Escalao) => setFormData({ ...formData, escalao: value })}
-                                >
-                                    <SelectTrigger className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12">
-                                        <SelectValue />
-                                    </SelectTrigger>
-                                    <SelectContent className="bg-slate-900 border-slate-800 text-slate-300">
-                                        {escaloes.map(e => (
-                                            <SelectItem key={e.value} value={e.value}>{e.label}</SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
-                            </div>
-
-                            <div>
-                                <Label htmlFor="numero" className="text-slate-400 font-bold mb-2 block">Número (Opcional)</Label>
-                                <Input
-                                    id="numero"
-                                    placeholder="Ex: 7"
-                                    value={formData.numero || ''}
-                                    onChange={(e) => setFormData({ ...formData, numero: e.target.value })}
-                                    className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
-                                />
-                            </div>
-
-                            <div>
-                                <Label htmlFor="dataNascimento" className="text-slate-400 font-bold mb-2 block">Data de Nascimento *</Label>
-                                <Input
-                                    id="dataNascimento"
-                                    type="date"
-                                    required
-                                    value={formData.dataNascimento}
-                                    onChange={(e) => setFormData({ ...formData, dataNascimento: e.target.value })}
-                                    className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
-                                />
-                            </div>
-
-                            <div>
-                                <Label htmlFor="telefone" className="text-slate-400 font-bold mb-2 block">Telefone</Label>
-                                <Input
-                                    id="telefone"
-                                    type="tel"
-                                    value={formData.telefone}
-                                    onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
-                                    className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
-                                />
-                            </div>
-
-                            <div>
-                                <Label htmlFor="email" className="text-slate-400 font-bold mb-2 block">Email</Label>
-                                <Input
-                                    id="email"
-                                    type="email"
-                                    value={formData.email}
-                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
-                                />
-                            </div>
-
-                            <div className="md:col-span-2">
-                                <Label htmlFor="morada" className="text-slate-400 font-bold mb-2 block">Morada</Label>
-                                <Input
-                                    id="morada"
-                                    value={formData.morada}
-                                    onChange={(e) => setFormData({ ...formData, morada: e.target.value })}
-                                    className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
-                                />
-                            </div>
-
-                            {/* Campos de Formação */}
-                            {isFormacao && (
-                                <>
-                                    <div className="md:col-span-2 pt-6 border-t border-slate-800">
-                                        <h4 className="font-black text-yellow-500 uppercase tracking-[0.2em] text-[10px] mb-6">Dados de Formação</h4>
+                                <div className="md:col-span-2 grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="escalao" className="text-slate-400 font-bold mb-2 block">Escalão *</Label>
+                                        <Select
+                                            value={formData.escalao}
+                                            onValueChange={(value: Escalao) => setFormData({ ...formData, escalao: value })}
+                                        >
+                                            <SelectTrigger className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12">
+                                                <SelectValue />
+                                            </SelectTrigger>
+                                            <SelectContent className="bg-slate-900 border-slate-800 text-slate-300">
+                                                {escaloes.map(e => (
+                                                    <SelectItem key={e.value} value={e.value}>{e.label}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
                                     </div>
 
-                                    <div>
-                                        <Label htmlFor="escola" className="text-slate-400 font-bold mb-2 block">Escola</Label>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="numero" className="text-slate-400 font-bold mb-2 block">Número</Label>
                                         <Input
-                                            id="escola"
-                                            value={formData.escola}
-                                            onChange={(e) => setFormData({ ...formData, escola: e.target.value })}
-                                            className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
+                                            id="numero"
+                                            placeholder="Ex: 7"
+                                            value={formData.numero || ''}
+                                            onChange={(e) => setFormData({ ...formData, numero: e.target.value })}
+                                            className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
                                         />
                                     </div>
+                                </div>
 
-                                    <div>
-                                        <Label htmlFor="cartaoCidadao" className="text-slate-400 font-bold mb-2 block">CC / BI</Label>
-                                        <Input
-                                            id="cartaoCidadao"
-                                            value={formData.cartaoCidadao}
-                                            onChange={(e) => setFormData({ ...formData, cartaoCidadao: e.target.value })}
-                                            className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
-                                        />
-                                    </div>
+                                <div>
+                                    <Label htmlFor="dataNascimento" className="text-slate-400 font-bold mb-2 block">Data de Nascimento *</Label>
+                                    <Input
+                                        id="dataNascimento"
+                                        type="date"
+                                        required
+                                        value={formData.dataNascimento}
+                                        onChange={(e) => setFormData({ ...formData, dataNascimento: e.target.value })}
+                                        className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
+                                    />
+                                </div>
 
-                                    <div>
-                                        <Label htmlFor="nomePai" className="text-slate-400 font-bold mb-2 block">Nome do Pai</Label>
-                                        <Input
-                                            id="nomePai"
-                                            value={formData.nomePai}
-                                            onChange={(e) => setFormData({ ...formData, nomePai: e.target.value })}
-                                            className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
-                                        />
-                                    </div>
+                                <div>
+                                    <Label htmlFor="telefone" className="text-slate-400 font-bold mb-2 block">Telefone</Label>
+                                    <Input
+                                        id="telefone"
+                                        type="tel"
+                                        value={formData.telefone}
+                                        onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
+                                        className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
+                                    />
+                                </div>
 
-                                    <div>
-                                        <Label htmlFor="telefonePai" className="text-slate-400 font-bold mb-2 block">Telefone Pai</Label>
-                                        <Input
-                                            id="telefonePai"
-                                            type="tel"
-                                            value={formData.telefonePai}
-                                            onChange={(e) => setFormData({ ...formData, telefonePai: e.target.value })}
-                                            className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
-                                        />
-                                    </div>
+                                <div>
+                                    <Label htmlFor="email" className="text-slate-400 font-bold mb-2 block">Email</Label>
+                                    <Input
+                                        id="email"
+                                        type="email"
+                                        value={formData.email}
+                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                        className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
+                                    />
+                                </div>
 
-                                    <div>
-                                        <Label htmlFor="nomeMae" className="text-slate-400 font-bold mb-2 block">Nome da Mãe</Label>
-                                        <Input
-                                            id="nomeMae"
-                                            value={formData.nomeMae}
-                                            onChange={(e) => setFormData({ ...formData, nomeMae: e.target.value })}
-                                            className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
-                                        />
-                                    </div>
+                                <div className="md:col-span-2">
+                                    <Label htmlFor="morada" className="text-slate-400 font-bold mb-2 block">Morada</Label>
+                                    <Input
+                                        id="morada"
+                                        value={formData.morada}
+                                        onChange={(e) => setFormData({ ...formData, morada: e.target.value })}
+                                        className="bg-slate-900/50 border-slate-800 focus:border-yellow-400/50 focus:ring-yellow-400/20 text-white rounded-xl h-12"
+                                    />
+                                </div>
 
-                                    <div>
-                                        <Label htmlFor="telefoneMae" className="text-slate-400 font-bold mb-2 block">Telefone Mãe</Label>
-                                        <Input
-                                            id="telefoneMae"
-                                            type="tel"
-                                            value={formData.telefoneMae}
-                                            onChange={(e) => setFormData({ ...formData, telefoneMae: e.target.value })}
-                                            className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
-                                        />
+                                {/* Campos de Formação */}
+                                {isFormacao && (
+                                    <div className="md:col-span-2">
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowFormacao(!showFormacao)}
+                                            className="w-full flex items-center justify-between p-4 bg-slate-900/50 border border-slate-800 rounded-2xl hover:bg-slate-900/80 transition-all text-left group"
+                                        >
+                                            <div className="flex items-center gap-3">
+                                                <div className="p-2 bg-yellow-400/10 rounded-xl text-yellow-400">
+                                                    <Users className="h-5 w-5" />
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm font-black text-white uppercase tracking-wider">Dados de Formação</p>
+                                                    <p className="text-[10px] text-slate-500 font-medium uppercase tracking-widest mt-0.5">Escola, CC e Dados dos Pais</p>
+                                                </div>
+                                            </div>
+                                            <ChevronDown className={cn("h-5 w-5 text-slate-500 transition-transform duration-300", showFormacao && "rotate-180")} />
+                                        </button>
+
+                                        {showFormacao && (
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 animate-in slide-in-from-top-2 duration-300">
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="escola" className="text-slate-400 font-bold mb-2 block">Escola</Label>
+                                                    <Input
+                                                        id="escola"
+                                                        value={formData.escola}
+                                                        onChange={(e) => setFormData({ ...formData, escola: e.target.value })}
+                                                        className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
+                                                    />
+                                                </div>
+
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="cartaoCidadao" className="text-slate-400 font-bold mb-2 block">CC / BI</Label>
+                                                    <Input
+                                                        id="cartaoCidadao"
+                                                        value={formData.cartaoCidadao}
+                                                        onChange={(e) => setFormData({ ...formData, cartaoCidadao: e.target.value })}
+                                                        className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
+                                                    />
+                                                </div>
+
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="nomePai" className="text-slate-400 font-bold mb-2 block">Nome do Pai</Label>
+                                                    <Input
+                                                        id="nomePai"
+                                                        value={formData.nomePai}
+                                                        onChange={(e) => setFormData({ ...formData, nomePai: e.target.value })}
+                                                        className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
+                                                    />
+                                                </div>
+
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="telefonePai" className="text-slate-400 font-bold mb-2 block">Telefone Pai</Label>
+                                                    <Input
+                                                        id="telefonePai"
+                                                        type="tel"
+                                                        value={formData.telefonePai}
+                                                        onChange={(e) => setFormData({ ...formData, telefonePai: e.target.value })}
+                                                        className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
+                                                    />
+                                                </div>
+
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="nomeMae" className="text-slate-400 font-bold mb-2 block">Nome da Mãe</Label>
+                                                    <Input
+                                                        id="nomeMae"
+                                                        value={formData.nomeMae}
+                                                        onChange={(e) => setFormData({ ...formData, nomeMae: e.target.value })}
+                                                        className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
+                                                    />
+                                                </div>
+
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="telefoneMae" className="text-slate-400 font-bold mb-2 block">Telefone Mãe</Label>
+                                                    <Input
+                                                        id="telefoneMae"
+                                                        type="tel"
+                                                        value={formData.telefoneMae}
+                                                        onChange={(e) => setFormData({ ...formData, telefoneMae: e.target.value })}
+                                                        className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
+                                                    />
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
-                                </>
-                            )}
+                                )}
+                            </div>
+
                         </div>
 
-                        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-6 border-t border-slate-800 sticky bottom-0 bg-[#1e293b] py-4">
+                        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 p-5 sm:p-8 pt-4 sm:pt-6 border-t border-slate-800 bg-[#1e293b] mt-auto">
                             <button
                                 type="button"
                                 onClick={handleCloseDialog}

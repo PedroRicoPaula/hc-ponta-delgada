@@ -218,15 +218,15 @@ const PDLManagement = () => {
                     <div className="fixed bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
 
                     {/* Mobile Header */}
-                    <div className="lg:hidden bg-[#1e293b]/90 backdrop-blur-xl border-b border-slate-800/50 p-4 flex items-center justify-between sticky top-0 z-40">
+                    <div className="lg:hidden bg-[#1e293b]/90 backdrop-blur-xl border-b border-slate-800/50 px-4 py-3 flex items-center justify-between sticky top-0 z-40">
                         <button onClick={() => setMobileMenuOpen(true)} className="p-2 text-slate-400 hover:text-yellow-400 transition-colors">
                             <Menu className="h-6 w-6" />
                         </button>
-                        <h1 className="text-lg font-black text-white tracking-tight">PDL <span className="text-yellow-400">Gestão</span></h1>
+                        <h1 className="text-base font-black text-white tracking-tight">PDL <span className="text-yellow-400">Gestão</span></h1>
                         <div className="w-10" />
                     </div>
 
-                    <div className="p-6 lg:p-10 max-w-7xl mx-auto relative z-10">
+                    <div className="p-4 sm:p-6 lg:p-10 max-w-7xl mx-auto relative z-10 w-full">
                         {renderPage()}
                     </div>
                 </main>

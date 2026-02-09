@@ -162,7 +162,7 @@ export const MateriaisPage = () => {
         <div className="space-y-8 animate-in fade-in duration-500">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                 <div>
-                    <h2 className="text-4xl font-black text-white tracking-tight">Materiais</h2>
+                    <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">Materiais</h2>
                     <p className="text-slate-400 mt-1 font-medium">
                         {materiais.length} {materiais.length !== 1 ? 'itens' : 'item'} no inventário
                     </p>
@@ -318,151 +318,150 @@ export const MateriaisPage = () => {
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogContent
                     onOpenAutoFocus={(e) => e.preventDefault()}
-                    className="w-[95vw] sm:max-w-2xl bg-[#1e293b] border-slate-800 text-white rounded-3xl shadow-2xl overflow-y-auto max-h-[90vh]"
+                    className="w-full sm:w-[95vw] md:max-w-2xl bg-[#1e293b] border-slate-800 text-white rounded-none sm:rounded-3xl shadow-2xl p-0 overflow-hidden h-full sm:h-auto sm:max-h-[90vh]"
                 >
-                    <DialogHeader>
-                        <div className="flex justify-between items-center pr-8">
-                            <div>
-                                <DialogTitle className="text-2xl font-black text-white">
-                                    {editingMaterial ? 'Editar Material' : 'Novo Material'}
-                                </DialogTitle>
-                                <DialogDescription className="text-slate-400">
-                                    Gestão de inventário e atribuições
-                                </DialogDescription>
-                            </div>
-                        </div>
+                    <DialogHeader className="p-5 sm:p-8 pb-0">
+                        <DialogTitle className="text-xl sm:text-2xl font-black text-white">
+                            {editingMaterial ? 'Editar Material' : 'Novo Material'}
+                        </DialogTitle>
+                        <DialogDescription className="text-slate-400 text-sm">
+                            Gestão de inventário e atribuições
+                        </DialogDescription>
                     </DialogHeader>
 
-                    <form onSubmit={handleSubmit} className="space-y-6 mt-4 max-h-[70vh] overflow-y-auto pr-2 custom-scrollbar">
-                        <div className="grid grid-cols-1 gap-6">
-                            {/* Categoria e Tipo em uma linha */}
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="categoria" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Categoria *</Label>
-                                    <Select
-                                        value={formData.categoria}
-                                        onValueChange={(value: MaterialCategoria) => setFormData({ ...formData, categoria: value })}
-                                    >
-                                        <SelectTrigger className="bg-slate-900 border-slate-800 text-white rounded-xl h-12">
-                                            <SelectValue />
-                                        </SelectTrigger>
-                                        <SelectContent className="bg-slate-900 border-slate-800 text-slate-300">
-                                            {categorias.map(c => (
-                                                <SelectItem key={c.value} value={c.value}>{c.label}</SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                </div>
+                    <form onSubmit={handleSubmit} className="flex flex-col overflow-hidden h-[calc(100vh-80px)] sm:h-auto">
+                        <div className="p-5 sm:p-8 pt-4 space-y-6 overflow-y-auto custom-scrollbar flex-1 sm:max-h-[70vh]">
+                            <div className="grid grid-cols-1 gap-6">
+                                {/* Categoria e Tipo em uma linha */}
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="categoria" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Categoria *</Label>
+                                        <Select
+                                            value={formData.categoria}
+                                            onValueChange={(value: MaterialCategoria) => setFormData({ ...formData, categoria: value })}
+                                        >
+                                            <SelectTrigger className="bg-slate-900 border-slate-800 text-white rounded-xl h-12">
+                                                <SelectValue />
+                                            </SelectTrigger>
+                                            <SelectContent className="bg-slate-900 border-slate-800 text-slate-300">
+                                                {categorias.map(c => (
+                                                    <SelectItem key={c.value} value={c.value}>{c.label}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
 
-                                <div className="space-y-2">
-                                    <Label htmlFor="tipo" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Tipo *</Label>
-                                    <Select
-                                        value={formData.tipo}
-                                        onValueChange={(value: MaterialTipo) => setFormData({ ...formData, tipo: value })}
-                                    >
-                                        <SelectTrigger className="bg-slate-900 border-slate-800 text-white rounded-xl h-12">
-                                            <SelectValue />
-                                        </SelectTrigger>
-                                        <SelectContent className="bg-slate-900 border-slate-800 text-slate-300">
-                                            {tipos.map(t => (
-                                                <SelectItem key={t.value} value={t.value}>{t.label}</SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                            </div>
-
-                            <div className="space-y-2">
-                                <Label htmlFor="marca" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Marca</Label>
-                                <Input
-                                    id="marca"
-                                    value={formData.marca || ''}
-                                    onChange={(e) => setFormData({ ...formData, marca: e.target.value })}
-                                    className="bg-slate-900 border-slate-800 text-white rounded-xl h-12"
-                                    placeholder="Ex: Azemad, Reno, etc."
-                                />
-                            </div>
-
-                            {/* Estado e Tamanho em uma linha */}
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="estado" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Estado *</Label>
-                                    <Select
-                                        value={formData.estado}
-                                        onValueChange={(value: MaterialEstado) => setFormData({ ...formData, estado: value })}
-                                    >
-                                        <SelectTrigger className="bg-slate-900 border-slate-800 text-white rounded-xl h-12">
-                                            <SelectValue />
-                                        </SelectTrigger>
-                                        <SelectContent className="bg-slate-900 border-slate-800 text-slate-300">
-                                            {estados.map(e => (
-                                                <SelectItem key={e.value} value={e.value}>{e.label}</SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label htmlFor="tamanho" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Tamanho</Label>
-                                    <Input
-                                        id="tamanho"
-                                        value={formData.tamanho}
-                                        onChange={(e) => setFormData({ ...formData, tamanho: e.target.value })}
-                                        className="bg-slate-900 border-slate-800 text-white rounded-xl h-12"
-                                        placeholder="Ex: M, 42, etc."
-                                    />
-                                </div>
-                            </div>
-
-                            {formData.estado === 'atribuido' && (
-                                <div className="space-y-4 pt-4 border-t border-slate-800/50">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div className="space-y-2">
-                                            <Label className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Filtrar Escalão</Label>
-                                            <Select
-                                                value={atletaFilterEscalao}
-                                                onValueChange={setAtletaFilterEscalao}
-                                            >
-                                                <SelectTrigger className="bg-slate-900 border-slate-800 text-white rounded-xl h-12">
-                                                    <SelectValue placeholder="Todos os Escalões" />
-                                                </SelectTrigger>
-                                                <SelectContent className="bg-slate-900 border-slate-800 text-slate-300">
-                                                    <SelectItem value="all">Todos os Escalões</SelectItem>
-                                                    {escaloes.map(e => (
-                                                        <SelectItem key={e.value} value={e.value}>{e.label}</SelectItem>
-                                                    ))}
-                                                </SelectContent>
-                                            </Select>
-                                        </div>
-                                        <div className="space-y-2">
-                                            <Label htmlFor="atletaId" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Selecionar Atleta *</Label>
-                                            <Select
-                                                value={formData.atletaId}
-                                                onValueChange={(value) => setFormData({ ...formData, atletaId: value })}
-                                            >
-                                                <SelectTrigger className="bg-slate-900 border-slate-800 text-white rounded-xl h-12">
-                                                    <SelectValue placeholder="Selecione um atleta" />
-                                                </SelectTrigger>
-                                                <SelectContent className="bg-slate-900 border-slate-800 text-slate-300">
-                                                    {atletas
-                                                        .filter(a => atletaFilterEscalao === 'all' || a.escalao === atletaFilterEscalao)
-                                                        .map(atleta => (
-                                                            <SelectItem key={atleta.id} value={atleta.id}>
-                                                                {atleta.nome} ({atleta.escalao.replace('sub', 'Sub ')})
-                                                            </SelectItem>
-                                                        ))}
-                                                    {atletas.filter(a => atletaFilterEscalao === 'all' || a.escalao === atletaFilterEscalao).length === 0 && (
-                                                        <SelectItem value="none" disabled>Nenhum atleta encontrado</SelectItem>
-                                                    )}
-                                                </SelectContent>
-                                            </Select>
-                                        </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="tipo" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Tipo *</Label>
+                                        <Select
+                                            value={formData.tipo}
+                                            onValueChange={(value: MaterialTipo) => setFormData({ ...formData, tipo: value })}
+                                        >
+                                            <SelectTrigger className="bg-slate-900 border-slate-800 text-white rounded-xl h-12">
+                                                <SelectValue />
+                                            </SelectTrigger>
+                                            <SelectContent className="bg-slate-900 border-slate-800 text-slate-300">
+                                                {tipos.map(t => (
+                                                    <SelectItem key={t.value} value={t.value}>{t.label}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
                                     </div>
                                 </div>
-                            )}
+
+                                <div className="space-y-2">
+                                    <Label htmlFor="marca" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Marca</Label>
+                                    <Input
+                                        id="marca"
+                                        value={formData.marca || ''}
+                                        onChange={(e) => setFormData({ ...formData, marca: e.target.value })}
+                                        className="bg-slate-900 border-slate-800 text-white rounded-xl h-12"
+                                        placeholder="Ex: Azemad, Reno, etc."
+                                    />
+                                </div>
+
+                                {/* Estado e Tamanho em uma linha */}
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="estado" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Estado *</Label>
+                                        <Select
+                                            value={formData.estado}
+                                            onValueChange={(value: MaterialEstado) => setFormData({ ...formData, estado: value })}
+                                        >
+                                            <SelectTrigger className="bg-slate-900 border-slate-800 text-white rounded-xl h-12">
+                                                <SelectValue />
+                                            </SelectTrigger>
+                                            <SelectContent className="bg-slate-900 border-slate-800 text-slate-300">
+                                                {estados.map(e => (
+                                                    <SelectItem key={e.value} value={e.value}>{e.label}</SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label htmlFor="tamanho" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Tamanho</Label>
+                                        <Input
+                                            id="tamanho"
+                                            value={formData.tamanho}
+                                            onChange={(e) => setFormData({ ...formData, tamanho: e.target.value })}
+                                            className="bg-slate-900 border-slate-800 text-white rounded-xl h-12"
+                                            placeholder="Ex: M, 42, etc."
+                                        />
+                                    </div>
+                                </div>
+
+                                {formData.estado === 'atribuido' && (
+                                    <div className="space-y-4 pt-4 border-t border-slate-800/50">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div className="space-y-2">
+                                                <Label className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Filtrar Escalão</Label>
+                                                <Select
+                                                    value={atletaFilterEscalao}
+                                                    onValueChange={setAtletaFilterEscalao}
+                                                >
+                                                    <SelectTrigger className="bg-slate-900 border-slate-800 text-white rounded-xl h-12">
+                                                        <SelectValue placeholder="Todos os Escalões" />
+                                                    </SelectTrigger>
+                                                    <SelectContent className="bg-slate-900 border-slate-800 text-slate-300">
+                                                        <SelectItem value="all">Todos os Escalões</SelectItem>
+                                                        {escaloes.map(e => (
+                                                            <SelectItem key={e.value} value={e.value}>{e.label}</SelectItem>
+                                                        ))}
+                                                    </SelectContent>
+                                                </Select>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label htmlFor="atletaId" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Selecionar Atleta *</Label>
+                                                <Select
+                                                    value={formData.atletaId}
+                                                    onValueChange={(value) => setFormData({ ...formData, atletaId: value })}
+                                                >
+                                                    <SelectTrigger className="bg-slate-900 border-slate-800 text-white rounded-xl h-12">
+                                                        <SelectValue placeholder="Selecione um atleta" />
+                                                    </SelectTrigger>
+                                                    <SelectContent className="bg-slate-900 border-slate-800 text-slate-300">
+                                                        {atletas
+                                                            .filter(a => atletaFilterEscalao === 'all' || a.escalao === atletaFilterEscalao)
+                                                            .map(atleta => (
+                                                                <SelectItem key={atleta.id} value={atleta.id}>
+                                                                    {atleta.nome} ({atleta.escalao.replace('sub', 'Sub ')})
+                                                                </SelectItem>
+                                                            ))}
+                                                        {atletas.filter(a => atletaFilterEscalao === 'all' || a.escalao === atletaFilterEscalao).length === 0 && (
+                                                            <SelectItem value="none" disabled>Nenhum atleta encontrado</SelectItem>
+                                                        )}
+                                                    </SelectContent>
+                                                </Select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
                         </div>
 
-                        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-6 border-t border-slate-800">
+                        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 p-5 sm:p-8 pt-4 sm:pt-6 border-t border-slate-800 bg-[#1e293b] mt-auto">
                             <button
                                 type="button"
                                 onClick={handleCloseDialog}

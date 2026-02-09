@@ -130,7 +130,7 @@ export const ViagensPage = () => {
         <div className="space-y-8 animate-in fade-in duration-500">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                 <div>
-                    <h2 className="text-4xl font-black text-white tracking-tight">Logística de Viagens</h2>
+                    <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">Logística de Viagens</h2>
                     <p className="text-slate-400 mt-1 font-medium">
                         {viagens.length} itinerário{viagens.length !== 1 ? 's' : ''} planeado{viagens.length !== 1 ? 's' : ''}
                     </p>
@@ -309,196 +309,199 @@ export const ViagensPage = () => {
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogContent
                     onOpenAutoFocus={(e) => e.preventDefault()}
-                    className="w-[95vw] sm:max-w-4xl bg-[#1e293b] border-slate-800 text-white rounded-[2rem] shadow-2xl p-0 overflow-hidden"
+                    className="w-full sm:w-[95vw] md:max-w-4xl bg-[#1e293b] border-slate-800 text-white rounded-none sm:rounded-[2rem] shadow-2xl p-0 overflow-hidden h-full sm:h-auto sm:max-h-[90vh]"
                 >
-                    <DialogHeader className="p-8 pb-0">
-                        <DialogTitle className="text-2xl font-black text-white">
+                    <DialogHeader className="p-5 sm:p-8 pb-0">
+                        <DialogTitle className="text-xl sm:text-2xl font-black text-white">
                             {editingViagem ? 'Editar Viagem' : 'Planear Viagem'}
                         </DialogTitle>
-                        <DialogDescription className="text-slate-400">
+                        <DialogDescription className="text-slate-400 text-sm">
                             Logística e planeamento de deslocação.
                         </DialogDescription>
                     </DialogHeader>
 
-                    <form onSubmit={handleSubmit} className="p-8 pt-4 space-y-6 max-h-[85vh] overflow-y-auto custom-scrollbar">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {/* Básicos */}
-                            <div className="space-y-4 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="adversario" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Adversário *</Label>
-                                    <Input
-                                        id="adversario"
-                                        required
-                                        value={formData.adversario}
-                                        onChange={(e) => setFormData({ ...formData, adversario: e.target.value })}
-                                        className="bg-slate-900 border-slate-800 text-white h-12 rounded-xl"
-                                        placeholder="Clube Adversário"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="pavilhaoUrl" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">URL do Pavilhão (Google Maps)</Label>
-                                    <Input
-                                        id="pavilhaoUrl"
-                                        value={formData.pavilhaoUrl || ''}
-                                        onChange={(e) => setFormData({ ...formData, pavilhaoUrl: e.target.value })}
-                                        className="bg-slate-900 border-slate-800 text-white h-12 rounded-xl"
-                                        placeholder="https://maps.google.com/..."
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Transporte e Horários */}
-                            <div className="space-y-4 md:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-4">
-                                <div className="space-y-2 col-span-2">
-                                    <Label htmlFor="modoTransporte" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Transporte *</Label>
-                                    <Select
-                                        value={formData.modoTransporte}
-                                        onValueChange={(value: ModoTransporte) => setFormData({
-                                            ...formData,
-                                            modoTransporte: value,
-                                            condutores: value === 'carros-alugados' ? formData.condutores : []
-                                        })}
-                                    >
-                                        <SelectTrigger className="bg-slate-900 border-slate-800 text-white h-12 rounded-xl">
-                                            <SelectValue />
-                                        </SelectTrigger>
-                                        <SelectContent className="bg-slate-900 border-slate-800 text-slate-300">
-                                            <SelectItem value="carrinha-clube">Carrinha do Clube</SelectItem>
-                                            <SelectItem value="carros-alugados">Carros Alugados</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                                <div className="space-y-2 col-span-2">
-                                    <Label htmlFor="horaPartida" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Hora Partida *</Label>
-                                    <Input
-                                        id="horaPartida"
-                                        type="time"
-                                        required
-                                        value={formData.horaPartida}
-                                        onChange={(e) => setFormData({ ...formData, horaPartida: e.target.value })}
-                                        className="bg-slate-900 border-slate-800 text-white h-12 rounded-xl [color-scheme:dark]"
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Calendário */}
-                            <div className="space-y-4 md:col-span-2 grid grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="dataIda" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Data Ida *</Label>
-                                    <Input
-                                        id="dataIda"
-                                        type="date"
-                                        required
-                                        value={formData.dataIda}
-                                        onChange={(e) => setFormData({ ...formData, dataIda: e.target.value })}
-                                        className="bg-slate-900 border-slate-800 text-white h-12 rounded-xl [color-scheme:dark]"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="dataVolta" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Data Volta *</Label>
-                                    <Input
-                                        id="dataVolta"
-                                        type="date"
-                                        required
-                                        value={formData.dataVolta}
-                                        onChange={(e) => setFormData({ ...formData, dataVolta: e.target.value })}
-                                        className="bg-slate-900 border-slate-800 text-white h-12 rounded-xl [color-scheme:dark]"
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Seleção de Staff/Condutores - Apenas para carros alugados */}
-                            {formData.modoTransporte === 'carros-alugados' && (
-                                <div className="space-y-4 md:col-span-2">
-                                    <div className="flex items-center justify-between">
-                                        <Label className="text-slate-300 font-bold ml-1 text-[11px] uppercase tracking-[0.2em]">Condutores Disponíveis</Label>
-                                        <span className="text-[10px] font-black text-yellow-400 px-2 py-0.5 bg-yellow-400/10 rounded-lg">Seniores + Direção</span>
-                                    </div>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-900/50 p-4 rounded-3xl border border-slate-800/50 max-h-[300px] overflow-y-auto custom-scrollbar">
-                                        {potentialDrivers.length === 0 ? (
-                                            <p className="col-span-2 text-center text-slate-600 py-4 italic text-sm">Nenhum condutor disponível</p>
-                                        ) : (
-                                            potentialDrivers.map(driver => (
-                                                <div key={driver.id}
-                                                    onClick={() => toggleCondutor(driver.id)}
-                                                    className={cn(
-                                                        "flex items-center justify-between p-3 rounded-2xl transition-all cursor-pointer border group",
-                                                        formData.condutores?.includes(driver.id) ? "bg-yellow-400/10 border-yellow-400/30" : "bg-slate-900 border-slate-800/50 hover:border-slate-700"
-                                                    )}>
-                                                    <div className="flex items-center gap-3">
-                                                        <div className={cn(
-                                                            "w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black",
-                                                            formData.condutores?.includes(driver.id) ? "bg-yellow-400 text-black" : "bg-slate-800 text-slate-500"
-                                                        )}>
-                                                            {driver.nome.charAt(0)}
-                                                        </div>
-                                                        <div className="flex flex-col">
-                                                            <span className="text-xs font-bold text-slate-200">{driver.nome}</span>
-                                                            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-tight">{driver.tipo}</span>
-                                                        </div>
-                                                    </div>
-                                                    <Checkbox checked={formData.condutores?.includes(driver.id)} className="border-slate-700 data-[state=checked]:bg-yellow-400 data-[state=checked]:border-yellow-400" />
-                                                </div>
-                                            ))
-                                        )}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Refeição */}
-                            <div className="md:col-span-2 bg-yellow-400/5 p-6 rounded-[2.5rem] border border-yellow-400/10 space-y-4">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 bg-yellow-400/10 rounded-xl flex items-center justify-center text-yellow-500">
-                                        <Bus className="h-5 w-5" />
-                                    </div>
-                                    <h4 className="font-black text-white text-sm uppercase tracking-widest">Planeamento de Alimentação</h4>
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <form onSubmit={handleSubmit} className="flex flex-col overflow-hidden h-[calc(100vh-80px)] sm:h-auto">
+                        <div className="p-5 sm:p-8 pt-4 space-y-6 overflow-y-auto custom-scrollbar flex-1 sm:max-h-[70vh]">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                                {/* Básicos */}
+                                <div className="space-y-4 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div className="space-y-2">
-                                        <Label htmlFor="refeicaoLocal" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Local</Label>
+                                        <Label htmlFor="adversario" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Adversário *</Label>
                                         <Input
-                                            id="refeicaoLocal"
-                                            value={formData.refeicaoLocal}
-                                            onChange={(e) => setFormData({ ...formData, refeicaoLocal: e.target.value })}
+                                            id="adversario"
+                                            required
+                                            value={formData.adversario}
+                                            onChange={(e) => setFormData({ ...formData, adversario: e.target.value })}
                                             className="bg-slate-900 border-slate-800 text-white h-12 rounded-xl"
+                                            placeholder="Clube Adversário"
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="refeicaoHora" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Hora</Label>
+                                        <Label htmlFor="pavilhaoUrl" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">URL do Pavilhão (Google Maps)</Label>
                                         <Input
-                                            id="refeicaoHora"
+                                            id="pavilhaoUrl"
+                                            value={formData.pavilhaoUrl || ''}
+                                            onChange={(e) => setFormData({ ...formData, pavilhaoUrl: e.target.value })}
+                                            className="bg-slate-900 border-slate-800 text-white h-12 rounded-xl"
+                                            placeholder="https://maps.google.com/..."
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Transporte e Horários */}
+                                <div className="space-y-4 md:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    <div className="space-y-2 col-span-2">
+                                        <Label htmlFor="modoTransporte" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Transporte *</Label>
+                                        <Select
+                                            value={formData.modoTransporte}
+                                            onValueChange={(value: ModoTransporte) => setFormData({
+                                                ...formData,
+                                                modoTransporte: value,
+                                                condutores: value === 'carros-alugados' ? formData.condutores : []
+                                            })}
+                                        >
+                                            <SelectTrigger className="bg-slate-900 border-slate-800 text-white h-12 rounded-xl">
+                                                <SelectValue />
+                                            </SelectTrigger>
+                                            <SelectContent className="bg-slate-900 border-slate-800 text-slate-300">
+                                                <SelectItem value="carrinha-clube">Carrinha do Clube</SelectItem>
+                                                <SelectItem value="carros-alugados">Carros Alugados</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+                                    <div className="space-y-2 col-span-2">
+                                        <Label htmlFor="horaPartida" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Hora Partida *</Label>
+                                        <Input
+                                            id="horaPartida"
                                             type="time"
-                                            value={formData.refeicaoHora}
-                                            onChange={(e) => setFormData({ ...formData, refeicaoHora: e.target.value })}
+                                            required
+                                            value={formData.horaPartida}
+                                            onChange={(e) => setFormData({ ...formData, horaPartida: e.target.value })}
+                                            className="bg-slate-900 border-slate-800 text-white h-12 rounded-xl [color-scheme:dark]"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Calendário */}
+                                <div className="space-y-4 md:col-span-2 grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="dataIda" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Data Ida *</Label>
+                                        <Input
+                                            id="dataIda"
+                                            type="date"
+                                            required
+                                            value={formData.dataIda}
+                                            onChange={(e) => setFormData({ ...formData, dataIda: e.target.value })}
                                             className="bg-slate-900 border-slate-800 text-white h-12 rounded-xl [color-scheme:dark]"
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="refeicaoLink" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Link Maps</Label>
+                                        <Label htmlFor="dataVolta" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Data Volta *</Label>
                                         <Input
-                                            id="refeicaoLink"
-                                            value={formData.refeicaoLink}
-                                            onChange={(e) => setFormData({ ...formData, refeicaoLink: e.target.value })}
-                                            className="bg-slate-900 border-slate-800 text-white h-12 rounded-xl"
+                                            id="dataVolta"
+                                            type="date"
+                                            required
+                                            value={formData.dataVolta}
+                                            onChange={(e) => setFormData({ ...formData, dataVolta: e.target.value })}
+                                            className="bg-slate-900 border-slate-800 text-white h-12 rounded-xl [color-scheme:dark]"
                                         />
                                     </div>
                                 </div>
+
+                                {/* Seleção de Staff/Condutores - Apenas para carros alugados */}
+                                {formData.modoTransporte === 'carros-alugados' && (
+                                    <div className="space-y-4 md:col-span-2">
+                                        <div className="flex items-center justify-between">
+                                            <Label className="text-slate-300 font-bold ml-1 text-[11px] uppercase tracking-[0.2em]">Condutores Disponíveis</Label>
+                                            <span className="text-[10px] font-black text-yellow-400 px-2 py-0.5 bg-yellow-400/10 rounded-lg">Seniores + Direção</span>
+                                        </div>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 bg-slate-900/50 p-3 sm:p-4 rounded-2xl sm:rounded-3xl border border-slate-800/50 max-h-[250px] sm:max-h-[300px] overflow-y-auto custom-scrollbar">
+                                            {potentialDrivers.length === 0 ? (
+                                                <p className="col-span-2 text-center text-slate-600 py-4 italic text-sm">Nenhum condutor disponível</p>
+                                            ) : (
+                                                potentialDrivers.map(driver => (
+                                                    <div key={driver.id}
+                                                        onClick={() => toggleCondutor(driver.id)}
+                                                        className={cn(
+                                                            "flex items-center justify-between p-3 rounded-2xl transition-all cursor-pointer border group",
+                                                            formData.condutores?.includes(driver.id) ? "bg-yellow-400/10 border-yellow-400/30" : "bg-slate-900 border-slate-800/50 hover:border-slate-700"
+                                                        )}>
+                                                        <div className="flex items-center gap-3">
+                                                            <div className={cn(
+                                                                "w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black",
+                                                                formData.condutores?.includes(driver.id) ? "bg-yellow-400 text-black" : "bg-slate-800 text-slate-500"
+                                                            )}>
+                                                                {driver.nome.charAt(0)}
+                                                            </div>
+                                                            <div className="flex flex-col">
+                                                                <span className="text-xs font-bold text-slate-200">{driver.nome}</span>
+                                                                <span className="text-[10px] text-slate-500 font-bold uppercase tracking-tight">{driver.tipo}</span>
+                                                            </div>
+                                                        </div>
+                                                        <Checkbox checked={formData.condutores?.includes(driver.id)} className="border-slate-700 data-[state=checked]:bg-yellow-400 data-[state=checked]:border-yellow-400" />
+                                                    </div>
+                                                ))
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Refeição */}
+                                <div className="md:col-span-2 bg-yellow-400/5 p-4 sm:p-6 rounded-2xl sm:rounded-[2.5rem] border border-yellow-400/10 space-y-4">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 bg-yellow-400/10 rounded-xl flex items-center justify-center text-yellow-500">
+                                            <Bus className="h-5 w-5" />
+                                        </div>
+                                        <h4 className="font-black text-white text-sm uppercase tracking-widest">Planeamento de Alimentação</h4>
+                                    </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div className="space-y-2">
+                                            <Label htmlFor="refeicaoLocal" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Local</Label>
+                                            <Input
+                                                id="refeicaoLocal"
+                                                value={formData.refeicaoLocal}
+                                                onChange={(e) => setFormData({ ...formData, refeicaoLocal: e.target.value })}
+                                                className="bg-slate-900 border-slate-800 text-white h-12 rounded-xl"
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="refeicaoHora" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Hora</Label>
+                                            <Input
+                                                id="refeicaoHora"
+                                                type="time"
+                                                value={formData.refeicaoHora}
+                                                onChange={(e) => setFormData({ ...formData, refeicaoHora: e.target.value })}
+                                                className="bg-slate-900 border-slate-800 text-white h-12 rounded-xl [color-scheme:dark]"
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="refeicaoLink" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Link Maps</Label>
+                                            <Input
+                                                id="refeicaoLink"
+                                                value={formData.refeicaoLink}
+                                                onChange={(e) => setFormData({ ...formData, refeicaoLink: e.target.value })}
+                                                className="bg-slate-900 border-slate-800 text-white h-12 rounded-xl"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Notas */}
+                                <div className="md:col-span-2 space-y-2">
+                                    <Label htmlFor="notas" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Notas Adicionais</Label>
+                                    <Textarea
+                                        id="notas"
+                                        value={formData.notas}
+                                        onChange={(e) => setFormData({ ...formData, notas: e.target.value })}
+                                        className="bg-slate-900 border-slate-800 text-white rounded-2xl min-h-[100px]"
+                                        placeholder="Outros detalhes relevantes..."
+                                    />
+                                </div>
                             </div>
 
-                            {/* Notas */}
-                            <div className="md:col-span-2 space-y-2">
-                                <Label htmlFor="notas" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Notas Adicionais</Label>
-                                <Textarea
-                                    id="notas"
-                                    value={formData.notas}
-                                    onChange={(e) => setFormData({ ...formData, notas: e.target.value })}
-                                    className="bg-slate-900 border-slate-800 text-white rounded-2xl min-h-[100px]"
-                                    placeholder="Outros detalhes relevantes..."
-                                />
-                            </div>
                         </div>
 
-                        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-6 border-t border-slate-800">
+                        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 p-5 sm:p-8 pt-4 sm:pt-6 border-t border-slate-800 bg-[#1e293b] mt-auto">
                             <button
                                 type="button"
                                 onClick={handleCloseDialog}

@@ -120,7 +120,7 @@ export const PatrocinadoresPage = () => {
         <div className="space-y-8 animate-in fade-in duration-500">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                 <div>
-                    <h2 className="text-4xl font-black text-white tracking-tight">Patrocinadores</h2>
+                    <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">Patrocinadores</h2>
                     <p className="text-slate-400 mt-1 font-medium">
                         {patrocinadores.length} parceiro{patrocinadores.length !== 1 ? 's' : ''} •
                         <span className="text-yellow-400 ml-1">Total: €{totalContribuicoes.toFixed(2)}</span>
@@ -251,160 +251,163 @@ export const PatrocinadoresPage = () => {
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogContent
                     onOpenAutoFocus={(e) => e.preventDefault()}
-                    className="w-[95vw] sm:max-w-2xl bg-[#1e293b] border-slate-800 text-white rounded-3xl shadow-2xl overflow-y-auto max-h-[90vh]"
+                    className="w-full sm:w-[95vw] md:max-w-2xl bg-[#1e293b] border-slate-800 text-white rounded-none sm:rounded-3xl shadow-2xl p-0 overflow-hidden h-full sm:h-auto sm:max-h-[90vh]"
                 >
-                    <DialogHeader>
-                        <DialogTitle className="text-2xl font-black text-white">
+                    <DialogHeader className="p-5 sm:p-8 pb-0">
+                        <DialogTitle className="text-xl sm:text-2xl font-black text-white">
                             {editingPatrocinador ? 'Editar Patrocinador' : 'Novo Patrocinador'}
                         </DialogTitle>
-                        <DialogDescription className="text-slate-400">
+                        <DialogDescription className="text-slate-400 text-sm">
                             Gestão de parcerias e patrocínios
                         </DialogDescription>
                     </DialogHeader>
 
-                    <form onSubmit={handleSubmit} className="space-y-6 mt-4">
-                        {/* Logo Upload */}
-                        <div>
-                            <Label className="text-slate-400 font-bold mb-4 block">Logótipo da Empresa</Label>
-                            <div className="mt-2">
-                                {formData.logotipo ? (
-                                    <div className="relative inline-block group">
-                                        <div className="w-40 h-40 bg-white border-2 border-slate-700 rounded-3xl p-4 flex items-center justify-center overflow-hidden">
-                                            <img
-                                                src={formData.logotipo}
-                                                alt="Preview"
-                                                className="max-w-full max-h-full object-contain"
-                                            />
-                                        </div>
-                                        <button
-                                            type="button"
-                                            onClick={handleRemoveLogo}
-                                            className="absolute -top-3 -right-3 h-8 w-8 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center shadow-lg transition-transform group-hover:scale-110 active:scale-90"
-                                        >
-                                            <X className="h-5 w-5" />
-                                        </button>
-                                    </div>
-                                ) : (
-                                    <div className="flex flex-col gap-4">
-                                        <label className="cursor-pointer group">
-                                            <div className="flex flex-col items-center justify-center gap-3 p-8 bg-slate-900/50 hover:bg-slate-900 border-2 border-dashed border-slate-800 hover:border-yellow-400/50 rounded-3xl transition-all">
-                                                <div className="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center text-slate-500 group-hover:scale-110 transition-transform">
-                                                    <Upload className="h-6 w-6" />
-                                                </div>
-                                                <div className="text-center">
-                                                    <p className="text-sm font-bold text-slate-300">Carregar Logótipo</p>
-                                                    <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest mt-1">PNG ou SVG (Máx. 2MB)</p>
-                                                </div>
+                    <form onSubmit={handleSubmit} className="flex flex-col overflow-hidden h-[calc(100vh-80px)] sm:h-auto">
+                        <div className="p-5 sm:p-8 pt-4 space-y-6 overflow-y-auto custom-scrollbar flex-1 sm:max-h-[70vh]">
+                            {/* Logo Upload */}
+                            <div>
+                                <Label className="text-slate-400 font-bold mb-4 block">Logótipo da Empresa</Label>
+                                <div className="mt-2">
+                                    {formData.logotipo ? (
+                                        <div className="relative inline-block group">
+                                            <div className="w-40 h-40 bg-white border-2 border-slate-700 rounded-3xl p-4 flex items-center justify-center overflow-hidden">
+                                                <img
+                                                    src={formData.logotipo}
+                                                    alt="Preview"
+                                                    className="max-w-full max-h-full object-contain"
+                                                />
                                             </div>
-                                            <input
-                                                type="file"
-                                                accept="image/png,image/svg+xml"
-                                                onChange={handleLogoUpload}
-                                                className="hidden"
-                                            />
-                                        </label>
-                                    </div>
-                                )}
+                                            <button
+                                                type="button"
+                                                onClick={handleRemoveLogo}
+                                                className="absolute -top-3 -right-3 h-8 w-8 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center shadow-lg transition-transform group-hover:scale-110 active:scale-90"
+                                            >
+                                                <X className="h-5 w-5" />
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <div className="flex flex-col gap-4">
+                                            <label className="cursor-pointer group">
+                                                <div className="flex flex-col items-center justify-center gap-3 p-8 bg-slate-900/50 hover:bg-slate-900 border-2 border-dashed border-slate-800 hover:border-yellow-400/50 rounded-3xl transition-all">
+                                                    <div className="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center text-slate-500 group-hover:scale-110 transition-transform">
+                                                        <Upload className="h-6 w-6" />
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <p className="text-sm font-bold text-slate-300">Carregar Logótipo</p>
+                                                        <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest mt-1">PNG ou SVG (Máx. 2MB)</p>
+                                                    </div>
+                                                </div>
+                                                <input
+                                                    type="file"
+                                                    accept="image/png,image/svg+xml"
+                                                    onChange={handleLogoUpload}
+                                                    className="hidden"
+                                                />
+                                            </label>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="md:col-span-2">
+                                    <Label htmlFor="nome" className="text-slate-400 font-bold mb-2 block">Nome da Empresa *</Label>
+                                    <Input
+                                        id="nome"
+                                        required
+                                        value={formData.nome}
+                                        onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
+                                        className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
+                                    />
+                                </div>
+
+                                <div>
+                                    <Label htmlFor="website" className="text-slate-400 font-bold mb-2 block">Website</Label>
+                                    <Input
+                                        id="website"
+                                        type="url"
+                                        placeholder="https://..."
+                                        value={formData.website}
+                                        onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                                        className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
+                                    />
+                                </div>
+
+                                <div>
+                                    <Label htmlFor="contribuicao" className="text-slate-400 font-bold mb-2 block">Contribuição Anual (€) *</Label>
+                                    <Input
+                                        id="contribuicao"
+                                        type="number"
+                                        step="0.01"
+                                        min="0"
+                                        required
+                                        value={formData.contribuicao}
+                                        onChange={(e) => setFormData({ ...formData, contribuicao: parseFloat(e.target.value) || 0 })}
+                                        className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12 font-black text-yellow-400"
+                                    />
+                                </div>
+
+                                <div>
+                                    <Label htmlFor="telefone" className="text-slate-400 font-bold mb-2 block">Telefone de Contacto</Label>
+                                    <Input
+                                        id="telefone"
+                                        type="tel"
+                                        value={formData.telefone}
+                                        onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
+                                        className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
+                                    />
+                                </div>
+
+                                <div>
+                                    <Label htmlFor="email" className="text-slate-400 font-bold mb-2 block">Email de Contacto</Label>
+                                    <Input
+                                        id="email"
+                                        type="email"
+                                        value={formData.email}
+                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                        className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
+                                    />
+                                </div>
+
+                                <div>
+                                    <Label htmlFor="dataInicio" className="text-slate-400 font-bold mb-2 block">Data de Início *</Label>
+                                    <Input
+                                        id="dataInicio"
+                                        type="date"
+                                        required
+                                        value={formData.dataInicio}
+                                        onChange={(e) => setFormData({ ...formData, dataInicio: e.target.value })}
+                                        className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12 [color-scheme:dark]"
+                                    />
+                                </div>
+
+                                <div>
+                                    <Label htmlFor="dataFim" className="text-slate-400 font-bold mb-2 block">Data de Fim</Label>
+                                    <Input
+                                        id="dataFim"
+                                        type="date"
+                                        value={formData.dataFim}
+                                        onChange={(e) => setFormData({ ...formData, dataFim: e.target.value })}
+                                        className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12 [color-scheme:dark]"
+                                    />
+                                </div>
+
+                                <div className="md:col-span-2">
+                                    <Label htmlFor="notas" className="text-slate-400 font-bold mb-2 block">Notas Adicionais</Label>
+                                    <Textarea
+                                        id="notas"
+                                        rows={3}
+                                        value={formData.notas}
+                                        onChange={(e) => setFormData({ ...formData, notas: e.target.value })}
+                                        className="bg-slate-900/50 border-slate-800 text-white rounded-2xl p-4 min-h-[100px]"
+                                        placeholder="Ex: Contrapartidas, periodicidade de pagamentos..."
+                                    />
+                                </div>
+                            </div>
+
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="md:col-span-2">
-                                <Label htmlFor="nome" className="text-slate-400 font-bold mb-2 block">Nome da Empresa *</Label>
-                                <Input
-                                    id="nome"
-                                    required
-                                    value={formData.nome}
-                                    onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
-                                    className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
-                                />
-                            </div>
-
-                            <div>
-                                <Label htmlFor="website" className="text-slate-400 font-bold mb-2 block">Website</Label>
-                                <Input
-                                    id="website"
-                                    type="url"
-                                    placeholder="https://..."
-                                    value={formData.website}
-                                    onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                                    className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
-                                />
-                            </div>
-
-                            <div>
-                                <Label htmlFor="contribuicao" className="text-slate-400 font-bold mb-2 block">Contribuição Anual (€) *</Label>
-                                <Input
-                                    id="contribuicao"
-                                    type="number"
-                                    step="0.01"
-                                    min="0"
-                                    required
-                                    value={formData.contribuicao}
-                                    onChange={(e) => setFormData({ ...formData, contribuicao: parseFloat(e.target.value) || 0 })}
-                                    className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12 font-black text-yellow-400"
-                                />
-                            </div>
-
-                            <div>
-                                <Label htmlFor="telefone" className="text-slate-400 font-bold mb-2 block">Telefone de Contacto</Label>
-                                <Input
-                                    id="telefone"
-                                    type="tel"
-                                    value={formData.telefone}
-                                    onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
-                                    className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
-                                />
-                            </div>
-
-                            <div>
-                                <Label htmlFor="email" className="text-slate-400 font-bold mb-2 block">Email de Contacto</Label>
-                                <Input
-                                    id="email"
-                                    type="email"
-                                    value={formData.email}
-                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12"
-                                />
-                            </div>
-
-                            <div>
-                                <Label htmlFor="dataInicio" className="text-slate-400 font-bold mb-2 block">Data de Início *</Label>
-                                <Input
-                                    id="dataInicio"
-                                    type="date"
-                                    required
-                                    value={formData.dataInicio}
-                                    onChange={(e) => setFormData({ ...formData, dataInicio: e.target.value })}
-                                    className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12 [color-scheme:dark]"
-                                />
-                            </div>
-
-                            <div>
-                                <Label htmlFor="dataFim" className="text-slate-400 font-bold mb-2 block">Data de Fim</Label>
-                                <Input
-                                    id="dataFim"
-                                    type="date"
-                                    value={formData.dataFim}
-                                    onChange={(e) => setFormData({ ...formData, dataFim: e.target.value })}
-                                    className="bg-slate-900/50 border-slate-800 text-white rounded-xl h-12 [color-scheme:dark]"
-                                />
-                            </div>
-
-                            <div className="md:col-span-2">
-                                <Label htmlFor="notas" className="text-slate-400 font-bold mb-2 block">Notas Adicionais</Label>
-                                <Textarea
-                                    id="notas"
-                                    rows={3}
-                                    value={formData.notas}
-                                    onChange={(e) => setFormData({ ...formData, notas: e.target.value })}
-                                    className="bg-slate-900/50 border-slate-800 text-white rounded-2xl p-4 min-h-[100px]"
-                                    placeholder="Ex: Contrapartidas, periodicidade de pagamentos..."
-                                />
-                            </div>
-                        </div>
-
-                        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-6 border-t border-slate-800">
+                        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 p-5 sm:p-8 pt-4 sm:pt-6 border-t border-slate-800 bg-[#1e293b] mt-auto">
                             <button
                                 type="button"
                                 onClick={handleCloseDialog}

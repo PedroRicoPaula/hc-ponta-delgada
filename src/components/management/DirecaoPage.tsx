@@ -85,7 +85,7 @@ export const DirecaoPage = () => {
         <div className="space-y-8 animate-in fade-in duration-500">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                 <div>
-                    <h2 className="text-4xl font-black text-white tracking-tight">Órgãos Sociais</h2>
+                    <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">Órgãos Sociais</h2>
                     <p className="text-slate-400 mt-1 font-medium">
                         Corpo Diretivo • {direcao.length} Membro{direcao.length !== 1 ? 's' : ''} em Funções
                     </p>
@@ -181,80 +181,83 @@ export const DirecaoPage = () => {
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogContent
                     onOpenAutoFocus={(e) => e.preventDefault()}
-                    className="w-[95vw] sm:max-w-xl bg-[#1e293b] border-slate-800 text-white rounded-[2.5rem] shadow-2xl p-8 overflow-y-auto max-h-[90vh]"
+                    className="w-full sm:w-[95vw] md:max-w-xl bg-[#1e293b] border-slate-800 text-white rounded-none sm:rounded-[2.5rem] shadow-2xl p-0 overflow-hidden h-full sm:h-auto sm:max-h-[90vh]"
                 >
-                    <DialogHeader className="mb-8">
-                        <DialogTitle className="text-3xl font-black text-white">
+                    <DialogHeader className="p-5 sm:p-8 pb-0">
+                        <DialogTitle className="text-xl sm:text-2xl font-black text-white">
                             {editingMembro ? 'Editar Registo' : 'Novo Membro Diretivo'}
                         </DialogTitle>
-                        <DialogDescription className="text-slate-400 font-medium">
+                        <DialogDescription className="text-slate-400 text-sm">
                             Atualize a composição oficial dos órgãos sociais do clube.
                         </DialogDescription>
                     </DialogHeader>
 
-                    <form onSubmit={handleSubmit} className="space-y-8">
-                        <div className="grid grid-cols-1 gap-6">
-                            <div className="space-y-2">
-                                <Label htmlFor="nome" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Nome Completo *</Label>
-                                <Input
-                                    id="nome"
-                                    required
-                                    value={formData.nome}
-                                    onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
-                                    className="bg-slate-900 border-slate-800 text-white h-14 rounded-2xl focus:ring-yellow-400/20 focus:border-yellow-400/50"
-                                />
-                            </div>
-
-                            <div className="space-y-2">
-                                <Label htmlFor="cargo" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Cargo de Direção *</Label>
-                                <Input
-                                    id="cargo"
-                                    required
-                                    placeholder="Ex: Presidente, Diretor Desportivo, Tesoureiro..."
-                                    value={formData.cargo}
-                                    onChange={(e) => setFormData({ ...formData, cargo: e.target.value })}
-                                    className="bg-slate-900 border-slate-800 text-white h-14 rounded-2xl placeholder:text-slate-700"
-                                />
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-6">
+                    <form onSubmit={handleSubmit} className="flex flex-col overflow-hidden h-[calc(100vh-100px)] sm:h-auto">
+                        <div className="p-5 sm:p-8 pt-4 space-y-6 overflow-y-auto custom-scrollbar flex-1 sm:max-h-[70vh]">
+                            <div className="grid grid-cols-1 gap-6">
                                 <div className="space-y-2">
-                                    <Label htmlFor="telefone" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Telemóvel *</Label>
+                                    <Label htmlFor="nome" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Nome Completo *</Label>
                                     <Input
-                                        id="telefone"
-                                        type="tel"
+                                        id="nome"
                                         required
-                                        value={formData.telefone}
-                                        onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
-                                        className="bg-slate-900 border-slate-800 text-white h-14 rounded-2xl"
+                                        value={formData.nome}
+                                        onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
+                                        className="bg-slate-900 border-slate-800 text-white h-14 rounded-2xl focus:ring-yellow-400/20 focus:border-yellow-400/50"
                                     />
                                 </div>
 
                                 <div className="space-y-2">
-                                    <Label htmlFor="email" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">E-mail *</Label>
+                                    <Label htmlFor="cargo" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Cargo de Direção *</Label>
                                     <Input
-                                        id="email"
-                                        type="email"
+                                        id="cargo"
                                         required
-                                        value={formData.email}
-                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                        className="bg-slate-900 border-slate-800 text-white h-14 rounded-2xl"
+                                        placeholder="Ex: Presidente, Diretor Desportivo, Tesoureiro..."
+                                        value={formData.cargo}
+                                        onChange={(e) => setFormData({ ...formData, cargo: e.target.value })}
+                                        className="bg-slate-900 border-slate-800 text-white h-14 rounded-2xl placeholder:text-slate-700"
                                     />
                                 </div>
+
+                                <div className="grid grid-cols-2 gap-6">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="telefone" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">Telemóvel *</Label>
+                                        <Input
+                                            id="telefone"
+                                            type="tel"
+                                            required
+                                            value={formData.telefone}
+                                            onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
+                                            className="bg-slate-900 border-slate-800 text-white h-14 rounded-2xl"
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label htmlFor="email" className="text-slate-500 font-bold ml-1 text-[10px] uppercase tracking-widest">E-mail *</Label>
+                                        <Input
+                                            id="email"
+                                            type="email"
+                                            required
+                                            value={formData.email}
+                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                            className="bg-slate-900 border-slate-800 text-white h-14 rounded-2xl"
+                                        />
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
 
-                        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4">
+                        <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 p-5 sm:p-8 pt-4 sm:pt-6 border-t border-slate-800 bg-[#1e293b] mt-auto">
                             <button
                                 type="button"
                                 onClick={handleCloseDialog}
-                                className="w-full sm:w-auto px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-2xl transition-all"
+                                className="w-full sm:w-auto px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-2xl transition-all"
                             >
                                 Cancelar
                             </button>
                             <button
                                 type="submit"
-                                className="w-full sm:w-auto px-10 py-4 bg-yellow-400 hover:bg-yellow-300 text-black font-black rounded-2xl transition-all shadow-[0_0_20px_rgba(250,204,21,0.2)]"
+                                className="w-full sm:w-auto px-10 py-3 bg-yellow-400 hover:bg-yellow-300 text-black font-black rounded-2xl transition-all shadow-[0_0_20px_rgba(250,204,21,0.2)]"
                             >
                                 {editingMembro ? 'Guardar Alterações' : 'Confirmar Nomeação'}
                             </button>
