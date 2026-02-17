@@ -38,22 +38,6 @@ export const senioresEvents = [
 export const formacaoEvents = [
   {
     id: "formacao-1",
-    title: "Hóquei Clube PDL vs Caldeiras HC",
-    date: "15/02/2026",
-    time: "10:00",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Sub 13",
-  },
-  {
-    id: "formacao-2",
-    title: "Hóquei Clube PDL vs Caldeiras HC",
-    date: "15/02/2026",
-    time: "12:00",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Sub 17",
-  },
-  {
-    id: "formacao-3",
     title: "Caldeiras HC vs Hóquei Clube PDL",
     date: "22/02/2026",
     time: "11:30",
@@ -61,7 +45,7 @@ export const formacaoEvents = [
     type: "Sub 17",
   },
   {
-    id: "formacao-4",
+    id: "formacao-2",
     title: "Hóquei Clube PDL vs Candelária SC",
     date: "27/02/2026",
     time: "10:00",
@@ -69,7 +53,7 @@ export const formacaoEvents = [
     type: "Sub 13",
   },
   {
-    id: "formacao-5",
+    id: "formacao-3",
     title: "Candelária SC vs Hóquei Clube PDL",
     date: "28/02/2026",
     time: "10:00",
@@ -77,7 +61,7 @@ export const formacaoEvents = [
     type: "Sub 13",
   },
   {
-    id: "formacao-6",
+    id: "formacao-4",
     title: "Hóquei Clube PDL vs Caldeiras HC",
     date: "28/02/2026",
     time: "19:00",
@@ -85,7 +69,7 @@ export const formacaoEvents = [
     type: "Sub 13",
   },
   {
-    id: "formacao-7",
+    id: "formacao-5",
     title: "Caldeiras HC vs Hóquei Clube PDL",
     date: "01/03/2026",
     time: "10:00",
@@ -97,6 +81,13 @@ export const formacaoEvents = [
 export const comunicados = [
   {
     id: 1,
+    titulo: "VENCEDORES Sub-13",
+    data: "15/02/2026",
+    conteudo:
+      "O escalão de formação Sub-13 do Hóquei Clube PDL sagraram-se vencedores do Campeonato de São Miguel...",
+  },
+  {
+    id: 2,
     titulo: "VENCEDORES Sub-13 e Sub-17",
     data: "28/09/2025",
     conteudo:
@@ -113,7 +104,8 @@ export const galleryImages = [
   "/uploads/campeonatoregionalsub132425.png",
   "/uploads/campeonatoregionalsub152425.png",
   "/uploads/treinospdl2526.png",
-  "/uploads/TorneioCidadeRG_PDL_Campeao_Sub13_Sub17.jpeg"
+  "/uploads/TorneioCidadeRG_PDL_Campeao_Sub13_Sub17.jpeg",
+  "/uploads/CampeonatoSM_sub13_2025_26.jpeg"
 ];
 
 export const trainingSchedules = [
