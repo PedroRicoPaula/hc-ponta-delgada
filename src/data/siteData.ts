@@ -19,16 +19,40 @@ export const staff = [
 export const senioresEvents = [
   {
     id: "seniores-1",
-    title: "Hóquei Clube PDL vs HC Santiago",
-    date: "07/02/2026",
+    title: "Hóquei Clube PDL vs GD Sesimbra",
+    date: "28/02/2026",
     time: "16:00",
     location: "Pavilhão Sidónio Serpa",
     type: "Seniores",
   },
   {
     id: "seniores-2",
-    title: "Hóquei Clube PDL vs GD Sesimbra",
-    date: "28/02/2026",
+    title: "Hóquei Clube PDL vs AJ Salesiana",
+    date: "21/03/2026",
+    time: "15:00",
+    location: "Pavilhão Sidónio Serpa",
+    type: "Seniores",
+  },
+  {
+    id: "seniores-3",
+    title: "Hóquei Clube PDL vs HCP Grândola",
+    date: "11/04/2026",
+    time: "16:00",
+    location: "Pavilhão Sidónio Serpa",
+    type: "Seniores",
+  },
+  {
+    id: "seniores-4",
+    title: "Hóquei Clube PDL vs HC Sintra",
+    date: "02/05/2026",
+    time: "16:00",
+    location: "Pavilhão Sidónio Serpa",
+    type: "Seniores",
+  },
+  {
+    id: "seniores-5",
+    title: "Hóquei Clube PDL vs CD Boliqueime",
+    date: "23/05/2026",
     time: "16:00",
     location: "Pavilhão Sidónio Serpa",
     type: "Seniores",
@@ -36,14 +60,6 @@ export const senioresEvents = [
 ];
 
 export const formacaoEvents = [
-  {
-    id: "formacao-1",
-    title: "Caldeiras HC vs Hóquei Clube PDL",
-    date: "22/02/2026",
-    time: "11:30",
-    location: "CD Ribeira Grande",
-    type: "Sub 17",
-  },
   {
     id: "formacao-2",
     title: "Hóquei Clube PDL vs Candelária SC",
