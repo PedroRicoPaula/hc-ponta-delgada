@@ -92,6 +92,22 @@ export const formacaoEvents = [
     location: "Pavilhão Sidónio Serpa",
     type: "Sub 13",
   },
+  {
+    id: "formacao-6",
+    title: "Hóquei Clube PDL vs Caldeiras HC",
+    date: "21/03/2026",
+    time: "17:00",
+    location: "Pavilhão Sidónio Serpa",
+    type: "Sub 11",
+  },
+  {
+    id: "formacao-7",
+    title: "Hóquei Clube PDL vs Caldeiras HC",
+    date: "22/03/2026",
+    time: "10:00",
+    location: "Pavilhão Sidónio Serpa",
+    type: "Sub 13",
+  }
 ];
 
 export const comunicados = [
