@@ -19,14 +19,6 @@ export const staff = [
 export const senioresEvents = [
   {
     id: "seniores-1",
-    title: "Hóquei Clube PDL vs GD Sesimbra",
-    date: "28/02/2026",
-    time: "16:00",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Seniores",
-  },
-  {
-    id: "seniores-2",
     title: "Hóquei Clube PDL vs AJ Salesiana",
     date: "21/03/2026",
     time: "15:00",
@@ -34,7 +26,7 @@ export const senioresEvents = [
     type: "Seniores",
   },
   {
-    id: "seniores-3",
+    id: "seniores-2",
     title: "Hóquei Clube PDL vs HCP Grândola",
     date: "11/04/2026",
     time: "16:00",
@@ -42,7 +34,7 @@ export const senioresEvents = [
     type: "Seniores",
   },
   {
-    id: "seniores-4",
+    id: "seniores-3",
     title: "Hóquei Clube PDL vs HC Sintra",
     date: "02/05/2026",
     time: "16:00",
@@ -50,7 +42,7 @@ export const senioresEvents = [
     type: "Seniores",
   },
   {
-    id: "seniores-5",
+    id: "seniores-4",
     title: "Hóquei Clube PDL vs CD Boliqueime",
     date: "23/05/2026",
     time: "16:00",
@@ -61,39 +53,7 @@ export const senioresEvents = [
 
 export const formacaoEvents = [
   {
-    id: "formacao-2",
-    title: "Hóquei Clube PDL vs Candelária SC",
-    date: "27/02/2026",
-    time: "10:00",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Sub 13",
-  },
-  {
-    id: "formacao-3",
-    title: "Candelária SC vs Hóquei Clube PDL",
-    date: "28/02/2026",
-    time: "10:00",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Sub 13",
-  },
-  {
-    id: "formacao-4",
-    title: "Hóquei Clube PDL vs Caldeiras HC",
-    date: "28/02/2026",
-    time: "19:00",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Sub 13",
-  },
-  {
-    id: "formacao-5",
-    title: "Caldeiras HC vs Hóquei Clube PDL",
-    date: "01/03/2026",
-    time: "10:00",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Sub 13",
-  },
-  {
-    id: "formacao-6",
+    id: "formacao-1",
     title: "Hóquei Clube PDL vs Caldeiras HC",
     date: "21/03/2026",
     time: "17:00",
@@ -101,7 +61,7 @@ export const formacaoEvents = [
     type: "Sub 11",
   },
   {
-    id: "formacao-7",
+    id: "formacao-2",
     title: "Hóquei Clube PDL vs Caldeiras HC",
     date: "22/03/2026",
     time: "10:00",
@@ -114,12 +74,26 @@ export const comunicados = [
   {
     id: 1,
     titulo: "VENCEDORES Sub-13",
+    data: "01/03/2026",
+    conteudo:
+      "O escalão de formação Sub-13 do Hóquei Clube PDL sagraram-se Campeões Regionais...",
+  },
+  {
+    id: 2,
+    titulo: "VENCEDORES Sub-17",
+    data: "01/03/2026",
+    conteudo:
+      "O escalão de formação Sub-17 do Hóquei Clube PDL sagraram-se vencedores do Campeonato de São Miguel...",
+  },
+  {
+    id: 3,
+    titulo: "VENCEDORES Sub-13",
     data: "15/02/2026",
     conteudo:
       "O escalão de formação Sub-13 do Hóquei Clube PDL sagraram-se vencedores do Campeonato de São Miguel...",
   },
   {
-    id: 2,
+    id: 4,
     titulo: "VENCEDORES Sub-13 e Sub-17",
     data: "28/09/2025",
     conteudo:
