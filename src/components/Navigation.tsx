@@ -1,29 +1,37 @@
 
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { pathname } = useLocation();
+  const isHome = pathname === '/';
 
   const navItems = [
-    { name: "Sobre", href: "#about" },
-    { name: "Treinos", href: "#training" },
-    { name: "Jogos", href: "#events" },
-    { name: "Equipa", href: "#team" },
-    { name: "Galeria", href: "#gallery" },
-    { name: "Patrocinadores", href: "#sponsors" },
-    { name: "Contactos", href: "#contact" }
-  ];
+    { name: "Sobre", hash: "about" },
+    { name: "Treinos", hash: "training" },
+    { name: "Jogos", hash: "events" },
+    { name: "Equipa", hash: "team" },
+    { name: "Galeria", hash: "gallery" },
+    { name: "Patrocinadores", hash: "sponsors" },
+    { name: "Contactos", hash: "contact" }
+  ].map(item => ({
+    ...item,
+    href: isHome ? `#${item.hash}` : `/#${item.hash}`
+  }));
 
   return (
     <nav className="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <a
-            href="#root" // ou qualquer ID que tenhas no topo da página
+            href={isHome ? '#' : '/'}
             className="flex-shrink-0"
             onClick={(e) => {
-              e.preventDefault(); // Previne o comportamento padrão do link
-              window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll suave para o topo
+              if (isHome) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
             }}
           >
             <img

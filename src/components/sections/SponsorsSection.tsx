@@ -58,6 +58,25 @@ export const SponsorsSection = () => {
           ))}
         </div>
 
+        {/* CTA Button — temporariamente escondido até a página estar terminada */}
+        {/* <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true }}
+          className="flex justify-center mt-12 mb-2"
+        >
+          <Link
+            to="/patrocinadores"
+            className="group relative inline-flex items-center overflow-hidden border border-transparent hover:border-gray-950 px-7 py-4 rounded-2xl font-semibold transition-colors duration-300 shadow-lg"
+          >
+            <span className="absolute inset-0 bg-primary translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] origin-right" />
+            <span className="relative z-10 text-primary group-hover:text-gray-950 transition-colors duration-300">
+              Quero ser Patrocinador
+            </span>
+          </Link>
+        </motion.div> */}
+
         {/* Vista Mobile: Carrossel Animado */}
         <div className="md:hidden">
           <Carousel
