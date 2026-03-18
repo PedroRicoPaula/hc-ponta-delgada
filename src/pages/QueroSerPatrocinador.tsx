@@ -216,7 +216,7 @@ export default function QueroSerPatrocinador() {
               { value: 60, suffix: '+', label: 'Espectadores/jogo', icon: Users },
               { value: 2012, suffix: '', label: 'Ano de Fundação', icon: Trophy, noAnimate: true },
               { value: 4, suffix: '', label: 'Escalões de Formação', icon: Star },
-              { value: 12, suffix: '', label: 'Anos de Hóquei', icon: Heart },
+              { value: 14, suffix: '', label: 'Anos de Hóquei', icon: Heart },
             ].map(({ value, suffix, label, icon: Icon, noAnimate = false }) => (
               <motion.div key={label} variants={fadeUp}>
                 <div className="flex justify-center mb-2">
