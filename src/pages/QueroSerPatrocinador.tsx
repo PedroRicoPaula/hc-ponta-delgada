@@ -71,8 +71,8 @@ const formationZones = [
   { zone: 'Zona 2', location: 'Ombro Direito', price: 100, description: 'Visibilidade no ombro direito da camisola' },
   { zone: 'Zona 3', location: 'Peito — Principal', price: 300, description: 'Posição premium no centro do peito', highlight: true },
   { zone: 'Zona 4', location: 'Calções', price: 100, description: 'Visibilidade nos calções dos atletas' },
-  { zone: 'Zona 5', location: 'Costas Superior', price: 200, description: 'Área superior das costas da camisola' },
-  { zone: 'Zona 6', location: 'Costas Inferior', price: 200, description: 'Área inferior das costas da camisola' },
+  { zone: 'Zona 5', location: 'Costas Inferior', price: 200, description: 'Área inferior das costas da camisola' },
+  { zone: 'Zona 6', location: 'Trás Calções', price: 100, description: 'Parte traseira dos calções dos atletas' },
 ];
 
 const seniorZones = [
@@ -80,8 +80,8 @@ const seniorZones = [
   { zone: 'Zona 2', location: 'Ombro Direito', price: 350, description: 'Visibilidade no ombro direito da camisola' },
   { zone: 'Zona 3', location: 'Peito — Principal', price: 1250, description: 'Posição premium — visível em todos os jogos transmitidos', highlight: true },
   { zone: 'Zona 4', location: 'Calções', price: 400, description: 'Visibilidade nos calções dos atletas' },
-  { zone: 'Zona 5', location: 'Costas Superior', price: 600, description: 'Área superior das costas da camisola' },
-  { zone: 'Zona 6', location: 'Costas Inferior', price: 400, description: 'Área inferior das costas da camisola' },
+  { zone: 'Zona 5', location: 'Costas Inferior', price: 600, description: 'Área inferior das costas da camisola' },
+  { zone: 'Zona 6', location: 'Trás Calções', price: 400, description: 'Parte traseira dos calções dos atletas' },
 ];
 
 export default function QueroSerPatrocinador() {

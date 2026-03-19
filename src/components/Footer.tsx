@@ -11,7 +11,7 @@ export const Footer = ({ onOpenDonations }: FooterProps) => (
       <p className="mb-4">© 2025 Hóquei Clube Ponta Delgada. Todos os direitos reservados.</p>
       <Button
         variant="outline"
-        className="bg-transparent border-primary text-primary hover:bg-primary hover:text-white"
+        className="bg-transparent border-primary text-primary hover:bg-primary hover:text-gray-950"
         onClick={onOpenDonations}
       >
         <Heart className="mr-2 h-4 w-4" /> Fazer uma Doação

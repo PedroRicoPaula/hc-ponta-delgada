@@ -1,9 +1,12 @@
 
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Heart } from 'lucide-react';
+import { DonationsModal } from '@/components/DonationsModal';
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDonationsOpen, setIsDonationsOpen] = useState(false);
   const { pathname } = useLocation();
   const isHome = pathname === '/';
 
@@ -21,6 +24,7 @@ export const Navigation = () => {
   }));
 
   return (
+    <>
     <nav className="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -53,6 +57,13 @@ export const Navigation = () => {
                   {item.name}
                 </a>
               ))}
+              <button
+                onClick={() => setIsDonationsOpen(true)}
+                className="ml-4 flex items-center gap-1.5 bg-transparent border border-primary text-primary hover:bg-primary hover:text-gray-950 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300"
+              >
+                <Heart className="w-4 h-4" />
+                Doação
+              </button>
             </div>
           </div>
           {/* Mobile Menu Button - Animated Hamburger to X */}
@@ -90,7 +101,7 @@ export const Navigation = () => {
         </div>
       </div>
       <div className={`md:hidden fixed top-16 right-0 w-1/2 transition-all duration-700 ease-in-out transform ${isMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'}`}>
-        <div className="px-6 py-6 space-y-4 bg-white/95 backdrop-blur-sm shadow-lg border-l min-h-screen">
+        <div className="px-6 py-6 space-y-4 bg-white/95 backdrop-blur-sm shadow-lg border-l min-h-screen flex flex-col">
           {navItems.map((item) => (
             <a
               key={item.name}
@@ -101,8 +112,19 @@ export const Navigation = () => {
               {item.name}
             </a>
           ))}
+          <div className="mt-auto pt-4 border-t border-gray-200">
+            <button
+              onClick={() => { setIsDonationsOpen(true); setIsMenuOpen(false); }}
+              className="flex items-center gap-2 w-full bg-transparent border border-primary text-primary hover:bg-primary hover:text-gray-950 px-4 py-3 rounded-lg text-lg font-medium transition-colors duration-300"
+            >
+              <Heart className="w-5 h-5" />
+              Doação
+            </button>
+          </div>
         </div>
       </div>
     </nav>
+    <DonationsModal isOpen={isDonationsOpen} onClose={() => setIsDonationsOpen(false)} />
+    </>
   );
 };
