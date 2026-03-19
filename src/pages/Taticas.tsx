@@ -482,8 +482,8 @@ export default function Taticas() {
   const dragMovedRef = useRef(false)
 
   // Scale factors: virtual field → screen pixels
-  const scaleX = containerSize.w / FIELD_W
-  const scaleY = containerSize.h / FIELD_H
+  const scaleX = containerSize.w > 0 ? containerSize.w / FIELD_W : 1
+  const scaleY = containerSize.h > 0 ? containerSize.h / FIELD_H : 1
   // Since container is always exactly 5:3 (enforced by CSS), scaleX === scaleY
   const scale = Math.min(scaleX, scaleY)
 
@@ -661,7 +661,14 @@ export default function Taticas() {
         : 'video/webm'
     const ext = mimeType.startsWith('video/mp4') ? 'mp4' : 'webm'
 
-    const stream   = canvas.captureStream(FPS)
+    // Check captureStream support (not available on iOS Safari)
+    if (typeof (canvas as any).captureStream !== 'function') {
+      showNotification('Export de vídeo não suportado neste browser — usa Chrome ou Firefox no desktop')
+      setExportingVideo(false)
+      return
+    }
+
+    const stream   = (canvas as any).captureStream(FPS) as MediaStream
     const recorder = new MediaRecorder(stream, { mimeType: mimeType.split(';')[0] })
     const chunks: Blob[] = []
     recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data) }
@@ -701,23 +708,21 @@ export default function Taticas() {
         const frame     = state.frames[frameIndex]
         const nextFrame = state.frames[frameIndex + 1] ?? null
         const start     = performance.now()
-        let raf: number
+        let timer: ReturnType<typeof setTimeout>
 
         const tick = () => {
           const elapsed = performance.now() - start
           if (!nextFrame || elapsed < HOLD_MS) {
-            // Static hold
             canvasDrawField(ctx, EXP_W, EXP_H, logoImg)
             canvasDrawElements(ctx, state.elements, frame.positions, EXP_W, EXP_H)
           } else {
-            // Transition
             const t = Math.min((elapsed - HOLD_MS) / TRANSITION_MS, 1)
             renderInterpolated(frame.positions, nextFrame.positions, t)
           }
-          if (elapsed < FRAME_MS) { raf = requestAnimationFrame(tick) }
-          else { cancelAnimationFrame(raf); resolve() }
+          if (elapsed < FRAME_MS) { timer = setTimeout(tick, 16) }
+          else { resolve() }
         }
-        raf = requestAnimationFrame(tick)
+        tick()
       })
 
     for (let i = 0; i < state.frames.length; i++) await waitFrame(i)
@@ -877,8 +882,9 @@ export default function Taticas() {
           )}
           style={{
             aspectRatio: '5 / 3',
-            // Never taller than the available vertical space (flex parent minus padding)
-            maxWidth: 'min(100%, calc((100dvh - 170px) * 5 / 3))',
+            maxWidth: '100%',
+            maxHeight: '100%',
+            width: '100%',
           }}
           onClick={handleBoardClick}
           onTouchStart={handleTouchBoard}
