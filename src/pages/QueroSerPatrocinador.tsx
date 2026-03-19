@@ -86,7 +86,6 @@ const seniorZones = [
 
 export default function QueroSerPatrocinador() {
   const [activeTab, setActiveTab] = useState<'formacao' | 'senior'>('senior');
-  const [jerseyView, setJerseyView] = useState<'front' | 'back'>('front');
   const [isDonationsOpen, setIsDonationsOpen] = useState(false);
   const [showWhatsApp, setShowWhatsApp] = useState(false);
 
@@ -194,7 +193,8 @@ export default function QueroSerPatrocinador() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 cursor-pointer"
+          onClick={() => document.getElementById('stats')?.scrollIntoView({ behavior: 'smooth' })}
         >
           <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.6 }}>
             <ChevronDown className="w-8 h-8 text-primary/60" />
@@ -203,7 +203,7 @@ export default function QueroSerPatrocinador() {
       </section>
 
       {/* ─── STATS ────────────────────────────────────────────────── */}
-      <section className="py-6 md:py-16 bg-gray-900 border-y border-white/5">
+      <section id="stats" className="py-6 md:py-16 bg-gray-900 border-y border-white/5">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div
             variants={stagger}
@@ -522,227 +522,97 @@ export default function QueroSerPatrocinador() {
             </div>
           </div>
 
-          {/* Main grid */}
-          <div className="grid lg:grid-cols-2 gap-6 items-start">
+          {/* Single centered card */}
+          <motion.div
+            key={activeTab + '-card'}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: easing }}
+            className="max-w-3xl mx-auto bg-gray-800/50 rounded-2xl border border-white/10 p-5 sm:p-6 space-y-4"
+          >
+            <h3 className="text-base font-bold text-center text-gray-300">
+              Mapa de Zonas — {activeTab === 'senior' ? 'Equipa Sénior' : 'Formação'}
+            </h3>
 
-            {/* ── Left: Jersey diagram ── */}
-            <motion.div
-              key={activeTab + '-diagram'}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, ease: easing }}
-              className="bg-gray-800/50 rounded-2xl border border-white/10 p-5 sm:p-6"
-            >
-              <h3 className="text-base font-bold mb-4 text-center text-gray-300">
-                Mapa de Zonas — {activeTab === 'senior' ? 'Equipa Sénior' : 'Formação'}
-              </h3>
-
-              {/* Front / Back toggle */}
-              <div className="flex justify-center mb-5">
-                <div className="inline-flex bg-gray-900 rounded-lg p-0.5 border border-white/10 text-xs font-semibold">
-                  {(['front', 'back'] as const).map((view) => (
-                    <button
-                      key={view}
-                      onClick={() => setJerseyView(view)}
-                      className={cn(
-                        'px-4 py-2 rounded-md transition-all duration-250 flex items-center gap-1.5',
-                        jerseyView === view
-                          ? 'bg-primary text-gray-950'
-                          : 'text-gray-400 hover:text-white'
-                      )}
-                    >
-                      <Shirt className="w-3.5 h-3.5" />
-                      {view === 'front' ? 'Frente' : 'Costas'}
-                    </button>
-                  ))}
-                </div>
+            {/* Photo (left) + Zones (right) — side by side on desktop, stacked on mobile */}
+            <div className="flex flex-col md:flex-row gap-4 items-stretch">
+              {/* Jersey photo */}
+              <div className="rounded-xl overflow-hidden border border-white/10 bg-gray-900/50 md:w-5/12 flex-shrink-0">
+                <img
+                  src="/uploads/camisas_numeradas.PNG"
+                  alt="Camisola com zonas de patrocínio"
+                  className="w-full h-full object-contain max-h-64 md:max-h-none"
+                />
               </div>
 
-              {/* SVG Jersey */}
-              <motion.div
-                key={jerseyView}
-                initial={{ opacity: 0, rotateY: 90 }}
-                animate={{ opacity: 1, rotateY: 0 }}
-                transition={{ duration: 0.35 }}
-                className="w-full max-w-[280px] sm:max-w-[340px] mx-auto"
-              >
-                {jerseyView === 'front' ? (
-                  /* ── FRONT VIEW ── */
-                  <svg viewBox="0 0 300 370" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full drop-shadow-2xl">
-                    {/* Jersey body */}
-                    <path d="M105 52 L28 88 L8 88 L8 158 L52 152 L52 320 L248 320 L248 152 L292 158 L292 88 L272 88 L195 52 Q175 70 150 74 Q125 70 105 52Z"
-                      fill="#1e3560" stroke="#3b5fa0" strokeWidth="2.5" />
-                    {/* Collar */}
-                    <path d="M105 52 Q125 70 150 74 Q175 70 195 52 Q178 100 150 105 Q122 100 105 52Z"
-                      fill="#162548" stroke="#3b5fa0" strokeWidth="1.5" />
-                    {/* Jersey number area (decorative) */}
-                    <text x="150" y="230" textAnchor="middle" fill="#3b5fa0" fontSize="42" fontWeight="900" opacity="0.15">10</text>
-
-                    {/* Zone 3 — chest PREMIUM */}
-                    <rect x="82" y="112" width="136" height="76" rx="7"
-                      fill="#FFC800" fillOpacity="0.15" stroke="#FFC800" strokeWidth="2.5" strokeDasharray="0" />
-                    <text x="150" y="142" textAnchor="middle" fill="#FFC800" fontSize="11" fontWeight="800" letterSpacing="1">ZONA 3</text>
-                    <text x="150" y="158" textAnchor="middle" fill="#FFC800" fontSize="13" fontWeight="900">
-                      {activeTab === 'senior' ? '1.250€' : '300€'}
-                    </text>
-                    <text x="150" y="173" textAnchor="middle" fill="#FFC800" fontSize="8" opacity="0.8">★ PREMIUM</text>
-
-                    {/* Zone 1 — left sleeve */}
-                    <rect x="10" y="92" width="58" height="55" rx="5"
-                      fill="white" fillOpacity="0.07" stroke="white" strokeWidth="1.5" />
-                    <text x="39" y="113" textAnchor="middle" fill="white" fontSize="11" fontWeight="700">Z1</text>
-                    <text x="39" y="130" textAnchor="middle" fill="#9ca3af" fontSize="10">
-                      {activeTab === 'senior' ? '350€' : '100€'}
-                    </text>
-
-                    {/* Zone 2 — right sleeve */}
-                    <rect x="232" y="92" width="58" height="55" rx="5"
-                      fill="white" fillOpacity="0.07" stroke="white" strokeWidth="1.5" />
-                    <text x="261" y="113" textAnchor="middle" fill="white" fontSize="11" fontWeight="700">Z2</text>
-                    <text x="261" y="130" textAnchor="middle" fill="#9ca3af" fontSize="10">
-                      {activeTab === 'senior' ? '350€' : '100€'}
-                    </text>
-
-                    {/* Zone 4 — shorts (below jersey) */}
-                    <rect x="82" y="328" width="136" height="34" rx="6"
-                      fill="white" fillOpacity="0.06" stroke="white" strokeWidth="1.5" />
-                    <text x="150" y="342" textAnchor="middle" fill="white" fontSize="10" fontWeight="700">ZONA 4 — Calções</text>
-                    <text x="150" y="357" textAnchor="middle" fill="#9ca3af" fontSize="10">
-                      {activeTab === 'senior' ? '400€' : '100€'}
-                    </text>
-                  </svg>
-                ) : (
-                  /* ── BACK VIEW ── */
-                  <svg viewBox="0 0 300 370" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full drop-shadow-2xl">
-                    {/* Jersey body — back (collar at bottom of neck) */}
-                    <path d="M105 52 L28 88 L8 88 L8 158 L52 152 L52 320 L248 320 L248 152 L292 158 L292 88 L272 88 L195 52 Q175 42 150 40 Q125 42 105 52Z"
-                      fill="#1e3560" stroke="#3b5fa0" strokeWidth="2.5" />
-                    {/* Back collar (simple arch) */}
-                    <path d="M105 52 Q150 40 195 52 Q175 62 150 64 Q125 62 105 52Z"
-                      fill="#162548" stroke="#3b5fa0" strokeWidth="1.5" />
-                    {/* Jersey number (back) */}
-                    <text x="150" y="230" textAnchor="middle" fill="#3b5fa0" fontSize="42" fontWeight="900" opacity="0.15">10</text>
-
-                    {/* Zone 1 — left sleeve (back) */}
-                    <rect x="10" y="92" width="58" height="55" rx="5"
-                      fill="white" fillOpacity="0.07" stroke="white" strokeWidth="1.5" />
-                    <text x="39" y="113" textAnchor="middle" fill="white" fontSize="11" fontWeight="700">Z1</text>
-                    <text x="39" y="130" textAnchor="middle" fill="#9ca3af" fontSize="10">
-                      {activeTab === 'senior' ? '350€' : '100€'}
-                    </text>
-
-                    {/* Zone 2 — right sleeve (back) */}
-                    <rect x="232" y="92" width="58" height="55" rx="5"
-                      fill="white" fillOpacity="0.07" stroke="white" strokeWidth="1.5" />
-                    <text x="261" y="113" textAnchor="middle" fill="white" fontSize="11" fontWeight="700">Z2</text>
-                    <text x="261" y="130" textAnchor="middle" fill="#9ca3af" fontSize="10">
-                      {activeTab === 'senior' ? '350€' : '100€'}
-                    </text>
-
-                    {/* Zone 5 — upper back */}
-                    <rect x="82" y="108" width="136" height="72" rx="7"
-                      fill="white" fillOpacity="0.08" stroke="white" strokeWidth="2" />
-                    <text x="150" y="136" textAnchor="middle" fill="white" fontSize="11" fontWeight="800" letterSpacing="1">ZONA 5</text>
-                    <text x="150" y="152" textAnchor="middle" fill="#e5e7eb" fontSize="13" fontWeight="900">
-                      {activeTab === 'senior' ? '600€' : '200€'}
-                    </text>
-                    <text x="150" y="168" textAnchor="middle" fill="#9ca3af" fontSize="8">Costas Superior</text>
-
-                    {/* Zone 6 — lower back */}
-                    <rect x="82" y="192" width="136" height="72" rx="7"
-                      fill="white" fillOpacity="0.06" stroke="white" strokeWidth="1.5" />
-                    <text x="150" y="220" textAnchor="middle" fill="white" fontSize="11" fontWeight="800" letterSpacing="1">ZONA 6</text>
-                    <text x="150" y="236" textAnchor="middle" fill="#e5e7eb" fontSize="13" fontWeight="900">
-                      {activeTab === 'senior' ? '400€' : '200€'}
-                    </text>
-                    <text x="150" y="252" textAnchor="middle" fill="#9ca3af" fontSize="8">Costas Inferior</text>
-                  </svg>
-                )}
-              </motion.div>
-
-              {/* Extra items */}
-              <div className="mt-5 space-y-2.5">
-                <div className="flex items-center justify-between p-3 rounded-xl bg-gray-700/50 border border-white/10">
-                  <div className="flex items-center gap-2.5">
-                    <Package className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span className="text-sm">Autocolante c/ logo nos sticks</span>
-                  </div>
-                  <span className="font-bold text-primary">{activeTab === 'senior' ? '300€' : '150€'}</span>
-                </div>
-                {activeTab === 'senior' && (
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-gray-700/50 border border-white/10">
-                    <div className="flex items-center gap-2.5">
-                      <Shirt className="w-4 h-4 text-primary flex-shrink-0" />
-                      <span className="text-sm">Par de caneleiras G.R. c/ logo</span>
-                    </div>
-                    <span className="font-bold text-primary">300€</span>
-                  </div>
-                )}
-              </div>
-            </motion.div>
-
-            {/* ── Right: Zone price cards ── */}
-            <motion.div
-              key={activeTab + '-cards'}
-              variants={stagger}
-              initial="hidden"
-              animate="visible"
-              className="space-y-2"
-            >
-              {zones.map(({ zone, location, price, description, highlight }, i) => {
-                const isBackZone = i >= 4; // zones 5 and 6
-                const isActive =
-                  (jerseyView === 'front' && !isBackZone) ||
-                  (jerseyView === 'back' && (i < 2 || isBackZone));
-                return (
-                  <motion.div
+              {/* Zone list — 2 cols on mobile, 1 col on desktop */}
+              <div className="grid grid-cols-2 md:grid-cols-1 gap-2 md:flex-1 content-start">
+                {zones.map(({ zone, location, price, description, highlight }, i) => (
+                  <div
                     key={zone}
-                    variants={fadeUp}
-                    custom={i * 0.04}
-                    whileHover={{ x: 5, transition: { duration: 0.2 } }}
                     className={cn(
-                      'flex items-center justify-between p-3 rounded-xl border transition-all duration-300',
+                      'flex items-center justify-between px-3 py-2 rounded-xl border',
                       highlight
-                        ? 'bg-primary/10 border-primary/40 shadow-lg shadow-primary/10'
-                        : isActive
-                        ? 'bg-gray-700/60 border-white/20'
-                        : 'bg-gray-800/40 border-white/8 opacity-60'
+                        ? 'bg-primary/10 border-primary/40'
+                        : 'bg-gray-700/50 border-white/10'
                     )}
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 min-w-0">
                       <div className={cn(
-                        'w-9 h-9 rounded-lg flex items-center justify-center text-sm font-black flex-shrink-0',
-                        highlight ? 'bg-primary text-gray-950' : isActive ? 'bg-gray-600 text-white' : 'bg-gray-700/60 text-gray-500'
+                        'w-7 h-7 rounded-md flex items-center justify-center text-xs font-black flex-shrink-0',
+                        highlight ? 'bg-primary text-gray-950' : 'bg-gray-600 text-white'
                       )}>
                         {i + 1}
                       </div>
-                      <div>
-                        <div className="font-semibold text-sm flex items-center gap-2 flex-wrap">
+                      <div className="min-w-0">
+                        <div className={cn(
+                          'text-xs font-semibold truncate',
+                          highlight ? 'text-primary' : 'text-gray-200'
+                        )}>
                           {location}
-                          {highlight && (
-                            <span className="text-xs bg-primary/20 text-primary px-2 py-0.5 rounded-full">Premium</span>
-                          )}
-                          {isActive && !highlight && (
-                            <span className="text-xs bg-white/10 text-gray-400 px-2 py-0.5 rounded-full">
-                              {jerseyView === 'front' ? 'Frente' : 'Costas'}
-                            </span>
-                          )}
                         </div>
-                        <div className="text-xs text-gray-500 mt-0.5">{description}</div>
+                        <div className="text-xs text-gray-500 hidden md:block mt-0.5">{description}</div>
                       </div>
                     </div>
-                    <div className={cn(
-                      'text-lg font-black flex-shrink-0 ml-4',
-                      highlight ? 'text-primary' : isActive ? 'text-white' : 'text-gray-600'
+                    <span className={cn(
+                      'text-sm font-black flex-shrink-0 ml-2',
+                      highlight ? 'text-primary' : 'text-white'
                     )}>
                       {price.toLocaleString('pt-PT')}€
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-          </div>
+            {/* Sticks + Caneleiras photos */}
+            <div className={cn('grid gap-3', activeTab === 'senior' ? 'grid-cols-2' : 'grid-cols-1 max-w-xs mx-auto w-full')}>
+              <div className="rounded-xl overflow-hidden border border-white/10 bg-gray-900/50">
+                <img
+                  src="/uploads/stick_logos.PNG"
+                  alt="Sticks com logótipo"
+                  className="w-full object-contain max-h-36"
+                />
+                <div className="px-3 py-2 text-center border-t border-white/10">
+                  <div className="text-xs text-gray-400">Autocolante nos Sticks</div>
+                  <div className="text-sm font-black text-primary">{activeTab === 'senior' ? '300€' : '150€'}</div>
+                </div>
+              </div>
+              {activeTab === 'senior' && (
+                <div className="rounded-xl overflow-hidden border border-white/10 bg-gray-900/50">
+                  <img
+                    src="/uploads/caneleiras_grlogos.PNG"
+                    alt="Caneleiras GR com logótipo"
+                    className="w-full object-contain max-h-36"
+                  />
+                  <div className="px-3 py-2 text-center border-t border-white/10">
+                    <div className="text-xs text-gray-400">Caneleiras G.R.</div>
+                    <div className="text-sm font-black text-primary">300€</div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -814,9 +684,9 @@ export default function QueroSerPatrocinador() {
             >
               <div className="absolute inset-0 z-0">
                 <img
-                  src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&q=80"
-                  alt="Pavilhão"
-                  className="w-full h-full object-cover opacity-10"
+                  src="/uploads/pavilhao_lonas.PNG"
+                  alt="Pavilhão com lonas publicitárias"
+                  className="w-full h-full object-cover opacity-20"
                 />
               </div>
               <div className="relative z-10">

@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import TreinosFormacao from "./pages/TreinosFormacao";
 import PDLManagement from "./pages/PDLManagement";
 import QueroSerPatrocinador from "./pages/QueroSerPatrocinador";
+import Taticas from "./pages/Taticas";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
               <Route path="/treinosformacao" element={<TreinosFormacao />} />
               <Route path="/pdlmanagement" element={<PDLManagement />} />
               <Route path="/patrocinadores" element={<QueroSerPatrocinador />} />
+              <Route path="/taticas" element={<Taticas />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
