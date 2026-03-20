@@ -13,7 +13,13 @@ export const FloatingActionButtons = ({ onOpenGame, onOpenComunicados }: Floatin
       className="fixed right-4 top-[calc(35%-120px)] sm:top-[calc(50%-120px)] z-40 bg-blue-500 hover:bg-blue-600 text-white p-2 sm:p-3 rounded-l-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 group"
       aria-label="Ver comunicados"
     >
-      <Megaphone className="h-5 w-5 sm:h-6 sm:w-6 group-hover:animate-pulse" />
+      <div className="relative">
+        <Megaphone className="h-5 w-5 sm:h-6 sm:w-6 group-hover:animate-pulse" />
+        <span className="absolute -top-1 -right-1 flex h-3 w-3">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+        </span>
+      </div>
     </button>
     
     {/* Floating Game Button */}

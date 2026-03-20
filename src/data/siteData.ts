@@ -72,6 +72,21 @@ export const formacaoEvents = [
 
 export const comunicados = [
   {
+    id: 5,
+    titulo: "Comunicado – Eleições dos Órgãos Sociais 2026/2028",
+    data: "20/03/2026",
+    conteudo: `O Hóquei Clube PDL informa que está aberto o processo de apresentação de candidaturas para a eleição dos Órgãos Sociais relativos ao biénio 2026/2028.
+
+As listas candidatas devem incluir um número ímpar de elementos (3 ou 5) para cada órgão: Assembleia Geral, Direção e Conselho Fiscal, conforme os estatutos do clube.
+
+O prazo para submissão das candidaturas decorre até 24 de abril de 2026. Após validação, as listas e respetivos projetos serão divulgados no site oficial até 30 de abril de 2026.
+
+A eleição terá lugar no dia 7 de maio de 2026, em Assembleia Geral, sendo a tomada de posse realizada imediatamente após.
+
+As candidaturas devem ser enviadas por via digital para o email do clube.`,
+    pdfUrl: "/uploads/Comunicado Eleições OS.pdf"
+  },
+  {
     id: 1,
     titulo: "VENCEDORES Sub-13",
     data: "01/03/2026",

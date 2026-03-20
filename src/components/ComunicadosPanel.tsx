@@ -6,6 +6,7 @@ interface Comunicado {
   titulo: string;
   data: string;
   conteudo: string;
+  pdfUrl?: string;
 }
 
 interface ComunicadosPanelProps {
@@ -47,15 +48,25 @@ export const ComunicadosPanel = ({ isOpen, onClose, data }: ComunicadosPanelProp
             {data.map((comunicado) => (
               <div 
                 key={comunicado.id} 
-                className="p-4 border rounded-lg shadow-sm hover:shadow-md transition bg-gray-50"
+                className="p-4 border rounded-lg shadow-sm hover:shadow-md transition bg-gray-50 flex flex-col"
               >
                 <h3 className="text-lg font-semibold text-primary mb-1">
                   {comunicado.titulo}
                 </h3>
                 <p className="text-sm text-gray-500 mb-2">{comunicado.data}</p>
-                <p className="text-gray-700 text-sm leading-relaxed">
+                <p className="text-gray-700 text-sm leading-relaxed mb-3 whitespace-pre-wrap">
                   {comunicado.conteudo}
                 </p>
+                {comunicado.pdfUrl && (
+                  <a
+                    href={comunicado.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center mt-auto px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition text-sm font-medium"
+                  >
+                    Consultar PDF
+                  </a>
+                )}
               </div>
             ))}
           </div>
