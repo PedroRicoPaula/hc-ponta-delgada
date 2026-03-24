@@ -68,6 +68,7 @@ export const SponsorsSection = () => {
         >
           <Link
             to="/patrocinadores"
+            onClick={() => window.scrollTo(0, 0)}
             className="group relative inline-flex items-center overflow-hidden border border-transparent hover:border-2 hover:border-gray-950 px-7 py-4 rounded-2xl font-semibold transition-colors duration-300 shadow-[0_0_20px_4px_rgba(0,0,0,0.10),0_4px_16px_rgba(0,0,0,0.10)]"
           >
             <span className="absolute inset-0 bg-primary translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] origin-right" />
