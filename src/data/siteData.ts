@@ -19,22 +19,14 @@ export const staff = [
 export const senioresEvents = [
   {
     id: "seniores-1",
-    title: "Hóquei Clube PDL vs AJ Salesiana",
-    date: "21/03/2026",
-    time: "15:00",
+    title: "Hóquei Clube PDL vs HCP Grândola",
+    date: "25/04/2026",
+    time: "18:30",
     location: "Pavilhão Sidónio Serpa",
     type: "Seniores",
   },
   {
     id: "seniores-2",
-    title: "Hóquei Clube PDL vs HCP Grândola",
-    date: "11/04/2026",
-    time: "16:00",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Seniores",
-  },
-  {
-    id: "seniores-3",
     title: "Hóquei Clube PDL vs HC Sintra",
     date: "02/05/2026",
     time: "16:00",
@@ -42,7 +34,7 @@ export const senioresEvents = [
     type: "Seniores",
   },
   {
-    id: "seniores-4",
+    id: "seniores-3",
     title: "Hóquei Clube PDL vs CD Boliqueime",
     date: "23/05/2026",
     time: "16:00",
