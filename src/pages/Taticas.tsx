@@ -106,7 +106,7 @@ function PasswordGate({ children }: { children: React.ReactNode }) {
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type ElementType = 'player' | 'ball' | 'cone'
+type ElementType = 'player' | 'opponent' | 'ball' | 'cone'
 
 interface BoardElement {
   id: string
@@ -132,16 +132,32 @@ const FIELD_W = 1000
 const FIELD_H = 600
 
 const ELEMENT_COLORS: Record<ElementType, string> = {
-  player: '#3b82f6',
-  ball:   '#f59e0b',
-  cone:   '#ef4444',
+  player:   '#FFC800',
+  opponent: '#3b82f6',
+  ball:     '#f59e0b',
+  cone:     '#ef4444',
+}
+
+const ELEMENT_BORDER_COLORS: Record<ElementType, string> = {
+  player:   'rgba(0,0,0,0.85)',
+  opponent: 'rgba(255,255,255,0.9)',
+  ball:     'rgba(0,0,0,0.3)',
+  cone:     'rgba(0,0,0,0.3)',
+}
+
+const ELEMENT_LABEL_COLORS: Record<ElementType, string> = {
+  player:   '#111111',
+  opponent: '#ffffff',
+  ball:     '#ffffff',
+  cone:     '#ffffff',
 }
 
 // Radius in virtual space (1000×600). Scales proportionally with container.
 const ELEMENT_RADIUS: Record<ElementType, number> = {
-  player: 20,
-  ball:   13,
-  cone:   13,
+  player:   20,
+  opponent: 20,
+  ball:     13,
+  cone:     13,
 }
 
 // ─── State Management ─────────────────────────────────────────────────────────
@@ -191,13 +207,26 @@ function getNextPlayerLabel(elements: BoardElement[]): string {
   return String(n)
 }
 
+function getNextOpponentLabel(elements: BoardElement[]): string {
+  const letters = elements
+    .filter(e => e.type === 'opponent' && e.label)
+    .map(e => e.label ?? '')
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  for (const ch of alphabet) {
+    if (!letters.includes(ch)) return ch
+  }
+  return '?'
+}
+
 function boardReducer(state: BoardState, action: BoardAction): BoardState {
   switch (action.type) {
     case 'ADD_ELEMENT': {
       const id = crypto.randomUUID()
       const label = action.payload.elementType === 'player'
         ? getNextPlayerLabel(state.elements)
-        : undefined
+        : action.payload.elementType === 'opponent'
+          ? getNextOpponentLabel(state.elements)
+          : undefined
       const newElement: BoardElement = { id, type: action.payload.elementType, label }
       const updatedFrames = state.frames.map(frame => ({
         ...frame,
@@ -428,12 +457,15 @@ function canvasDrawElements(
     const r = ELEMENT_RADIUS[el.type] * rs
     const color = ELEMENT_COLORS[el.type]
 
+    const borderCol = ELEMENT_BORDER_COLORS[el.type]
+    const labelCol  = ELEMENT_LABEL_COLORS[el.type]
+
     ctx.save()
     ctx.shadowBlur = 4 * rs
     ctx.shadowColor = 'rgba(0,0,0,0.4)'
     ctx.fillStyle = color
-    ctx.strokeStyle = 'rgba(0,0,0,0.3)'
-    ctx.lineWidth = 2 * rs
+    ctx.strokeStyle = borderCol
+    ctx.lineWidth = 2.5 * rs
 
     ctx.beginPath()
     if (el.type === 'cone') {
@@ -456,7 +488,7 @@ function canvasDrawElements(
 
     if (el.label) {
       ctx.shadowBlur = 0
-      ctx.fillStyle = 'white'
+      ctx.fillStyle = labelCol
       ctx.font = `bold ${Math.round(r * 0.7)}px sans-serif`
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
@@ -734,9 +766,10 @@ export default function Taticas() {
   // ── UI helpers ───────────────────────────────────────────────────────────
   const activeIndex = state.isPlaying ? state.playbackFrameIndex : state.currentFrameIndex
   const toolItems: { type: ElementType; label: string; icon: React.ElementType }[] = [
-    { type: 'player', label: 'Jogador', icon: User },
-    { type: 'ball',   label: 'Bola',    icon: Circle },
-    { type: 'cone',   label: 'Cone',    icon: Triangle },
+    { type: 'player',   label: 'Jogador',    icon: User },
+    { type: 'opponent', label: 'Adversário', icon: User },
+    { type: 'ball',     label: 'Bola',       icon: Circle },
+    { type: 'cone',     label: 'Cone',       icon: Triangle },
   ]
 
   return (
@@ -860,7 +893,7 @@ export default function Taticas() {
         <div className="px-3 py-1 bg-primary/10 border-b border-primary/20 flex-shrink-0 flex items-center justify-center gap-2">
           <p className="text-xs text-primary">
             Toca/clica no campo para colocar{' '}
-            {state.pendingElementType === 'player' ? 'um jogador' : state.pendingElementType === 'ball' ? 'a bola' : 'um cone'}
+            {state.pendingElementType === 'player' ? 'um jogador' : state.pendingElementType === 'opponent' ? 'um adversário' : state.pendingElementType === 'ball' ? 'a bola' : 'um cone'}
           </p>
           <button onClick={() => dispatch({ type: 'SET_PENDING', payload: { elementType: null } })}
             className="text-primary/60 hover:text-primary">
@@ -902,6 +935,8 @@ export default function Taticas() {
             const px      = pos.x * scaleX
             const py      = pos.y * scaleY
             const color   = ELEMENT_COLORS[el.type]
+            const borderColor = ELEMENT_BORDER_COLORS[el.type]
+            const labelColor  = ELEMENT_LABEL_COLORS[el.type]
             const isDragging  = dragging?.id === el.id
             const isSelected  = selectedId === el.id
 
@@ -926,14 +961,14 @@ export default function Taticas() {
                   width: '100%', height: '100%',
                   borderRadius: el.type === 'cone' ? '20%' : '50%',
                   backgroundColor: color,
-                  border: `${Math.max(1.5, 2 * scale)}px solid ${isDragging ? 'rgba(0,0,0,0.6)' : 'rgba(0,0,0,0.25)'}`,
+                  border: `${Math.max(1.5, 2.5 * scale)}px solid ${borderColor}`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   boxShadow: isDragging ? '0 4px 16px rgba(0,0,0,0.5)' : '0 2px 6px rgba(0,0,0,0.35)',
                 }}>
                   {el.label && (
                     <span style={{
                       fontSize: Math.max(9, r * 0.65),
-                      color: 'white', fontWeight: 'bold', userSelect: 'none', lineHeight: 1,
+                      color: labelColor, fontWeight: 'bold', userSelect: 'none', lineHeight: 1,
                     }}>{el.label}</span>
                   )}
                 </div>
@@ -965,8 +1000,10 @@ export default function Taticas() {
             {state.isPlaying && playbackFrame && state.elements.map(el => {
               const pos = playbackFrame.positions[el.id]
               if (!pos) return null
-              const r     = ELEMENT_RADIUS[el.type] * scale
-              const color = ELEMENT_COLORS[el.type]
+              const r           = ELEMENT_RADIUS[el.type] * scale
+              const color       = ELEMENT_COLORS[el.type]
+              const borderColor = ELEMENT_BORDER_COLORS[el.type]
+              const labelColor  = ELEMENT_LABEL_COLORS[el.type]
               return (
                 <motion.div
                   key={el.id}
@@ -979,12 +1016,12 @@ export default function Taticas() {
                     width: '100%', height: '100%',
                     borderRadius: el.type === 'cone' ? '20%' : '50%',
                     backgroundColor: color,
-                    border: `${Math.max(1.5, 2 * scale)}px solid rgba(0,0,0,0.25)`,
+                    border: `${Math.max(1.5, 2.5 * scale)}px solid ${borderColor}`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     boxShadow: '0 0 10px rgba(0,0,0,0.5)',
                   }}>
                     {el.label && (
-                      <span style={{ fontSize: Math.max(9, r * 0.65), color: 'white', fontWeight: 'bold' }}>
+                      <span style={{ fontSize: Math.max(9, r * 0.65), color: labelColor, fontWeight: 'bold' }}>
                         {el.label}
                       </span>
                     )}
