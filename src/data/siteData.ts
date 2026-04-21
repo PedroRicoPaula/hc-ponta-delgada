@@ -59,6 +59,22 @@ export const formacaoEvents = [
     time: "12:00",
     location: "Complexo Desportivo da Ribeira Grande",
     type: "Sub 17",
+  },
+  {
+    id: "formacao-3",
+    title: "Maritimo SC vs Hóquei Clube PDL",
+    date: "17/05/2026",
+    time: "11:30",
+    location: "Pavilhão Carlos Silveira",
+    type: "Sub 17",
+  },
+  {
+    id: "formacao-3",
+    title: "Hóquei Clube PDL vs Caldeiras HC",
+    date: "24/05/2026",
+    time: "10:00",
+    location: "Pavilhão Sidónio Serpa",
+    type: "Sub 13",
   }
 ];
 
