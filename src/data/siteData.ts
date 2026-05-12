@@ -2,7 +2,7 @@
 
 export const playersByPosition = {
   "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro"],
-  "Defesa": ["Tiago Pimentel"],
+  "Defesa": ["Tiago Pimentel, Marco Resendes"],
   "Médio": ["Alexandre Resendes", "Alexandre Ornelas"],
   "Avançado": ["Miguel Pimentel", "Carlos Guimarães"],
   "Universal": ["Pedro Paula", "Francisco Freitas", "Vicente Correia"]
@@ -19,22 +19,6 @@ export const staff = [
 export const senioresEvents = [
   {
     id: "seniores-1",
-    title: "Hóquei Clube PDL vs HCP Grândola",
-    date: "25/04/2026",
-    time: "18:30",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Seniores",
-  },
-  {
-    id: "seniores-2",
-    title: "Hóquei Clube PDL vs HC Sintra",
-    date: "02/05/2026",
-    time: "16:00",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Seniores",
-  },
-  {
-    id: "seniores-3",
     title: "Hóquei Clube PDL vs CD Boliqueime",
     date: "23/05/2026",
     time: "18:30",
@@ -46,22 +30,6 @@ export const senioresEvents = [
 export const formacaoEvents = [
   {
     id: "formacao-1",
-    title: "Caldeiras HC vs Hóquei Clube PDL",
-    date: "01/05/2026",
-    time: "10:00",
-    location: "Complexo Desportivo da Ribeira Grande",
-    type: "Sub 11",
-  },
-  {
-    id: "formacao-2",
-    title: "Hóquei Clube PDL vs Maritimo SC",
-    date: "03/05/2026",
-    time: "12:00",
-    location: "Complexo Desportivo da Ribeira Grande",
-    type: "Sub 17",
-  },
-  {
-    id: "formacao-3",
     title: "Maritimo SC vs Hóquei Clube PDL",
     date: "17/05/2026",
     time: "11:30",
@@ -69,7 +37,7 @@ export const formacaoEvents = [
     type: "Sub 17",
   },
   {
-    id: "formacao-3",
+    id: "formacao-2",
     title: "Hóquei Clube PDL vs Caldeiras HC",
     date: "24/05/2026",
     time: "10:00",

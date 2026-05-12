@@ -19,18 +19,18 @@ const escalaoConfig: Record<Escalao, { color: string }> = {
 const allPlayersData = {
   "Seniores": {
     "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro"],
-    "Jogadores": ["Tiago Pimentel", "Alexandre Resendes", "Alexandre Ornelas", "Miguel Pimentel", "Carlos Guimarães", "Tiago Leite", "Pedro Paula", "Francisco Freitas", "Pedro Soares"]
+    "Jogadores": ["Tiago Pimentel", "Marco Resendes", "Alexandre Resendes", "Alexandre Ornelas", "Miguel Pimentel", "Carlos Guimarães", "Pedro Paula", "Francisco Freitas", "Vicente Correia"]
   },
   "Formação": {
     "Guarda-Redes": {
       'Sub 11': ["Jonas Oliveira", "José Vieira"],
-      'Sub 13': ["Santiago Sousa", "Pedro Pacheco"],
-      'Sub 17': ["Rafael Rocha", "João Albuquerque", "Gil Ribeiro", "Gonçalo Mendonça"],
+      'Sub 13': ["Santiago Sousa"],
+      'Sub 17': ["Rafael Rocha", "João Albuquerque", "Ana Benjamim", "Gonçalo Mendonça"],
     },
     "Jogadores": {
-      'Sub 11': ["Joana Lourenço", "João Barroso", "Nuno Massa", "Leandro Rodrigues", "Rafael Malheiro", "Tiago Pereira", "Vasco Lourenço"],
+      'Sub 11': ["Joana Lourenço", "João Barroso", "Nuno Massa", "Leandro Rodrigues", "Rafael Malheiro", "Tiago Pereira", "Vasco Lourenço", "Joaquim Pereira"],
       'Sub 13': ["Santiago Resendes", "Salvador Resendes", "Guilherme Tavares", "Núria Faria", "Simão Melo", "Lourenço Áspera"],
-      'Sub 17': ["Gustavo Cordeiro", "Benjamim Castanheira", "Martim Farias", "Miguel Silva", "Pedro Massa", "Gonçalo Cordovil", "Carolina Benjamim", "Kelly Silvestre", "David Oliveira", "Ana Benjamim", "Bernardo Medeiros", "Marco Pacheco", "Rodrigo Cachapa"],
+      'Sub 17': ["Gustavo Cordeiro", "Miguel Silva", "Pedro Massa", "Gonçalo Cordovil", "Carolina Benjamim", "Kelly Silvestre", "David Oliveira", "Marco Pacheco", "Rodrigo Cachapa"],
     }
   }
 };
