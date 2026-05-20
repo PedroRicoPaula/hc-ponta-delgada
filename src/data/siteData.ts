@@ -30,19 +30,43 @@ export const senioresEvents = [
 export const formacaoEvents = [
   {
     id: "formacao-1",
-    title: "Maritimo SC vs Hóquei Clube PDL",
-    date: "17/05/2026",
-    time: "11:30",
-    location: "Pavilhão Carlos Silveira",
-    type: "Sub 17",
-  },
-  {
-    id: "formacao-2",
     title: "Hóquei Clube PDL vs Caldeiras HC",
     date: "24/05/2026",
     time: "10:00",
     location: "Pavilhão Sidónio Serpa",
     type: "Sub 13",
+  },
+  {
+    id: "formacao-2",
+    title: "Maritimo SC vs Hóquei Clube PDL",
+    date: "30/05/2026",
+    time: "11:30",
+    location: "Pavilhão Carlos Silveira",
+    type: "Sub 17",
+  },
+  {
+    id: "formacao-3",
+    title: "Caldeiras HC vs Hóquei Clube PDL",
+    date: "04/06/2026",
+    time: "11:00",
+    location: "Complexo Desportivo Ribeira Grande",
+    type: "Sub 13",
+  },
+  {
+    id: "formacao-4",
+    title: "Hóquei Clube PDL vs Caldeiras HC",
+    date: "04/06/2026",
+    time: "11:00",
+    location: "Pavilhão Sidónio Serpa",
+    type: "Sub 17",
+  },
+  {
+    id: "formacao-5",
+    title: "Hóquei Clube PDL vs Caldeiras HC",
+    date: "10/06/2026",
+    time: "11:00",
+    location: "Pavilhão Sidónio Serpa",
+    type: "Sub 11",
   }
 ];
 
