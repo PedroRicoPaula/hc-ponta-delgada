@@ -45,8 +45,8 @@ export const ContactSection = () => {
               <p className="text-gray-700 mb-2">
                 <span className="font-semibold">Email:</span>
                 {" "}
-                <a href="mailto:hoqueiclube.pdl@gmail.com" className="text-primary hover:underline">
-                  hoqueiclube.pdl@gmail.com
+                <a href="mailto:hoquei.clube.pdl@gmail.com" className="text-primary hover:underline">
+                  hoquei.clube.pdl@gmail.com
                 </a>
               </p>
               <p className="text-gray-700 mb-2">
