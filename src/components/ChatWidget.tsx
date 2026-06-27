@@ -29,11 +29,7 @@ interface RateLimitData {
   lastResetDate: string; // ISO date string (YYYY-MM-DD)
 }
 
-interface ChatWidgetProps {
-  // This component is self-contained and manages its own open/close state
-}
-
-export const ChatWidget = ({}: ChatWidgetProps) => {
+export const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');

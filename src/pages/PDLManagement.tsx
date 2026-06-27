@@ -16,6 +16,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import type {
     Atleta,
+    Escalao,
     Socio,
     Material,
     Patrocinador,
@@ -87,7 +88,7 @@ const PDLManagement = () => {
             totalMateriais: materiais.length,
             totalSocios: socios.length,
             totalPatrocinadores: patrocinadores.length,
-            atletasPorEscalao: atletasPorEscalao as any,
+            atletasPorEscalao: atletasPorEscalao as Record<Escalao, number>,
             materiaisLivres,
             materiaisAtribuidos,
             totalPatrocinios,

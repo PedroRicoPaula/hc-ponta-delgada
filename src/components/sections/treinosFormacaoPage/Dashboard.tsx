@@ -4,7 +4,7 @@ import { CategoryItem, TrainingData, AttendanceData } from '@/lib/treinosFormaca
 
 interface DashboardProps {
     categories: CategoryItem[];
-    onSelectCategory: (id: any) => void;
+    onSelectCategory: (id: Category) => void;
     attendance: AttendanceData;
     trainings: TrainingData;
 }

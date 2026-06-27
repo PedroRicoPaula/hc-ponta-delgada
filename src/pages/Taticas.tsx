@@ -693,14 +693,15 @@ export default function Taticas() {
         : 'video/webm'
     const ext = mimeType.startsWith('video/mp4') ? 'mp4' : 'webm'
 
+    type CapturableCanvas = HTMLCanvasElement & { captureStream(fps?: number): MediaStream };
     // Check captureStream support (not available on iOS Safari)
-    if (typeof (canvas as any).captureStream !== 'function') {
+    if (typeof (canvas as CapturableCanvas).captureStream !== 'function') {
       showNotification('Export de vídeo não suportado neste browser — usa Chrome ou Firefox no desktop')
       setExportingVideo(false)
       return
     }
 
-    const stream   = (canvas as any).captureStream(FPS) as MediaStream
+    const stream   = (canvas as CapturableCanvas).captureStream(FPS)
     const recorder = new MediaRecorder(stream, { mimeType: mimeType.split(';')[0] })
     const chunks: Blob[] = []
     recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data) }
