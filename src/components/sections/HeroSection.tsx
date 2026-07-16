@@ -135,7 +135,7 @@ export const HeroSection = () => (
       >
         <img
           src="/uploads/PDL24-25V2.png"
-          alt="Equipa sénior do Hóquei Clube Ponta Delgada"
+          alt="Equipa sénior do Hóquei Clube PDL"
           className="w-full h-full object-cover object-center"
           style={{ clipPath: 'polygon(10% 0, 100% 0, 100% 100%, 0 100%)' }}
           loading="eager"

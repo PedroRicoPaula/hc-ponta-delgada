@@ -60,7 +60,7 @@ export const ContactSection = () => (
           >
             <span className="absolute right-2 bottom-2 text-6xl opacity-5 select-none">🏢</span>
             <p className="text-xs font-bold uppercase tracking-widest text-primary/60 mb-3">Sede do Clube</p>
-            <h3 className="font-heading text-xl uppercase text-gray-900 dark:text-white font-black mb-2">HC Ponta Delgada</h3>
+            <h3 className="font-heading text-xl uppercase text-gray-900 dark:text-white font-black mb-2">HC PDL</h3>
             <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4">
               R. Vítor Câmara Bloco 1 R/C Drt<br />
               9500-234 Ponta Delgada, Açores

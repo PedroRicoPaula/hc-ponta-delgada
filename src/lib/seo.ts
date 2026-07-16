@@ -60,7 +60,7 @@ export const generateEventsSchema = (seniores: Event[], formacao: Event[]) => {
       },
       "homeTeam": {
         "@type": "SportsTeam",
-        "name": "Hóquei Clube Ponta Delgada"
+        "name": "Hóquei Clube PDL"
       },
       "awayTeam": {
         "@type": "SportsTeam",
@@ -82,12 +82,12 @@ export const generateNewsSchema = (comunicados: Comunicado[]) => {
     "url": `https://hoqueiclubepdl.com/comunicados/${comunicado.slug}`,
     "author": {
       "@type": "Organization",
-      "name": "Hóquei Clube Ponta Delgada",
+      "name": "Hóquei Clube PDL",
       "url": "https://hoqueiclubepdl.com/"
     },
     "publisher": {
         "@type": "Organization",
-        "name": "Hóquei Clube Ponta Delgada",
+        "name": "Hóquei Clube PDL",
         "logo": {
             "@type": "ImageObject",
             "url": "https://hoqueiclubepdl.com/uploads/pdlLogo.png"

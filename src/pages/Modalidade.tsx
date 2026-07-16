@@ -73,7 +73,7 @@ const sections: Section[] = [
         <div>
           <h3 className="font-semibold text-gray-900 dark:text-white text-sm mb-1.5">O hóquei em patins nos Açores</h3>
           <p>
-            Nos Açores, a modalidade chegou décadas mais tarde. O <strong>Hóquei Clube Ponta Delgada</strong> foi fundado em 2012 com o objetivo de promover e desenvolver o hóquei em patins no arquipélago, da formação de base à competição sénior.
+            Nos Açores, a modalidade chegou décadas mais tarde. O <strong>Hóquei Clube PDL</strong> foi fundado em 2012 com o objetivo de promover e desenvolver o hóquei em patins no arquipélago, da formação de base à competição sénior.
           </p>
         </div>
       </div>
@@ -203,7 +203,7 @@ export default function Modalidade() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <Helmet>
         <title>A Modalidade — Hóquei em Patins | HC PDL</title>
-        <meta name="description" content="Tudo sobre o hóquei em patins: história, regras, posições, equipamento e glossário. Guia completo do Hóquei Clube Ponta Delgada." />
+        <meta name="description" content="Tudo sobre o hóquei em patins: história, regras, posições, equipamento e glossário. Guia completo do Hóquei Clube PDL." />
         <link rel="canonical" href="https://hoqueiclubepdl.com/modalidade" />
         <meta property="og:title" content="A Modalidade — Hóquei em Patins" />
         <meta property="og:description" content="Guia completo sobre hóquei em patins: história, regras, posições, equipamento e glossário." />
@@ -212,8 +212,8 @@ export default function Modalidade() {
           "@type": "Article",
           "headline": "Guia Completo de Hóquei em Patins",
           "description": "História, regras, posições, equipamento e glossário do hóquei em patins.",
-          "author": { "@type": "Organization", "name": "Hóquei Clube Ponta Delgada" },
-          "publisher": { "@type": "Organization", "name": "Hóquei Clube Ponta Delgada" },
+          "author": { "@type": "Organization", "name": "Hóquei Clube PDL" },
+          "publisher": { "@type": "Organization", "name": "Hóquei Clube PDL" },
           "url": "https://hoqueiclubepdl.com/modalidade"
         })}</script>
       </Helmet>

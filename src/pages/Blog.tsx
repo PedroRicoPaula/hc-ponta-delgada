@@ -50,17 +50,17 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Helmet>
-        <title>Blog — Hóquei Clube Ponta Delgada</title>
-        <meta name="description" content="Artigos, novidades e histórias sobre hóquei em patins do Hóquei Clube Ponta Delgada." />
+        <title>Blog — Hóquei Clube PDL</title>
+        <meta name="description" content="Artigos, novidades e histórias sobre hóquei em patins do Hóquei Clube PDL." />
         <link rel="canonical" href="https://hoqueiclubepdl.com/blog" />
-        <meta property="og:title" content="Blog — Hóquei Clube Ponta Delgada" />
+        <meta property="og:title" content="Blog — Hóquei Clube PDL" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Blog",
-          "name": "Blog do Hóquei Clube Ponta Delgada",
+          "name": "Blog do Hóquei Clube PDL",
           "url": "https://hoqueiclubepdl.com/blog",
-          "publisher": { "@type": "Organization", "name": "Hóquei Clube Ponta Delgada" }
+          "publisher": { "@type": "Organization", "name": "Hóquei Clube PDL" }
         })}</script>
       </Helmet>
 

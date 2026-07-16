@@ -32,7 +32,7 @@ export const AboutSection = () => (
 
       <div className="grid md:grid-cols-2 gap-14">
         <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg leading-relaxed">
-          Fundado em 2012, o Hóquei Clube Ponta Delgada é um símbolo de excelência desportiva nos Açores.
+          Fundado em 2012, o Hóquei Clube PDL é um símbolo de excelência desportiva nos Açores.
           O nosso compromisso com o desenvolvimento de jovens talentos e a promoção do hóquei na região tornou-nos
           um dos clubes mais respeitados em Portugal.
         </p>

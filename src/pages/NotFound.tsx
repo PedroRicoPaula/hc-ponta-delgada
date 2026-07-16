@@ -19,7 +19,7 @@ const NotFound = () => {
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-gray-950">
       <Helmet>
-        <title>Página não encontrada — Hóquei Clube Ponta Delgada</title>
+        <title>Página não encontrada — Hóquei Clube PDL</title>
         <meta name="robots" content="noindex, follow" />
       </Helmet>
 

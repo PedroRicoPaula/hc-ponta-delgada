@@ -61,17 +61,17 @@ export default function Comunicados() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Helmet>
-        <title>Comunicados — Hóquei Clube Ponta Delgada</title>
-        <meta name="description" content="Comunicados oficiais, resultados e novidades do Hóquei Clube Ponta Delgada." />
+        <title>Comunicados — Hóquei Clube PDL</title>
+        <meta name="description" content="Comunicados oficiais, resultados e novidades do Hóquei Clube PDL." />
         <link rel="canonical" href="https://hoqueiclubepdl.com/comunicados" />
-        <meta property="og:title" content="Comunicados — Hóquei Clube Ponta Delgada" />
+        <meta property="og:title" content="Comunicados — Hóquei Clube PDL" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "CollectionPage",
-          "name": "Comunicados do Hóquei Clube Ponta Delgada",
+          "name": "Comunicados do Hóquei Clube PDL",
           "url": "https://hoqueiclubepdl.com/comunicados",
-          "publisher": { "@type": "Organization", "name": "Hóquei Clube Ponta Delgada" }
+          "publisher": { "@type": "Organization", "name": "Hóquei Clube PDL" }
         })}</script>
       </Helmet>
 
@@ -90,7 +90,7 @@ export default function Comunicados() {
             </div>
             <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-3">Comunicados</h1>
             <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
-              Comunicados oficiais, resultados e novidades do Hóquei Clube Ponta Delgada.
+              Comunicados oficiais, resultados e novidades do Hóquei Clube PDL.
             </p>
           </motion.div>
 

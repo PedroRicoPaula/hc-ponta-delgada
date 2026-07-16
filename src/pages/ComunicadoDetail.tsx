@@ -23,10 +23,10 @@ export default function ComunicadoDetail() {
     "headline": comunicado.titulo,
     "datePublished": parseComunicadoDate(comunicado.data).toISOString(),
     "articleBody": comunicado.conteudo,
-    "author": { "@type": "Organization", "name": "Hóquei Clube Ponta Delgada" },
+    "author": { "@type": "Organization", "name": "Hóquei Clube PDL" },
     "publisher": {
       "@type": "Organization",
-      "name": "Hóquei Clube Ponta Delgada",
+      "name": "Hóquei Clube PDL",
       "logo": { "@type": "ImageObject", "url": "https://hoqueiclubepdl.com/uploads/pdlLogo.png" }
     },
     "url": `https://hoqueiclubepdl.com/comunicados/${comunicado.slug}`,

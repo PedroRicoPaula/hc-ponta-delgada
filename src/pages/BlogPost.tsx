@@ -64,7 +64,7 @@ export default function BlogPostPage() {
     "author": { "@type": "Organization", "name": post.author },
     "publisher": {
       "@type": "Organization",
-      "name": "Hóquei Clube Ponta Delgada",
+      "name": "Hóquei Clube PDL",
       "logo": { "@type": "ImageObject", "url": "https://hoqueiclubepdl.com/uploads/pdlLogo.svg" }
     },
     "url": `https://hoqueiclubepdl.com/blog/${post.slug}`,

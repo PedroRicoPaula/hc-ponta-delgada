@@ -79,7 +79,7 @@ export const Footer = () => {
                     <div className="pt-1 space-y-0.5">
                       <p className="text-primary text-xs font-bold tracking-wider leading-tight">Hóquei</p>
                       <p className="text-primary text-xs font-bold tracking-wider leading-tight">Clube</p>
-                      <p className="text-primary text-xs font-bold tracking-wider leading-tight">Ponta Delgada</p>
+                      <p className="text-primary text-xs font-bold tracking-wider leading-tight">PDL</p>
                     </div>
                   </div>
                 </div>
@@ -140,7 +140,7 @@ export const Footer = () => {
           </div>
 
           <div className="mt-10 pt-6 border-t border-gray-200 dark:border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-2">
-            <p className="text-gray-500 dark:text-gray-600 text-xs">© 2026 Hóquei Clube Ponta Delgada. Todos os direitos reservados.</p>
+            <p className="text-gray-500 dark:text-gray-600 text-xs">© 2026 Hóquei Clube PDL. Todos os direitos reservados.</p>
             <p className="text-gray-500 dark:text-gray-600 text-xs">
               Feito por{' '}
               <a

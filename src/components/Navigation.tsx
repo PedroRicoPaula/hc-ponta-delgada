@@ -43,7 +43,7 @@ export const Navigation = () => {
               <div className="bg-white rounded-xl p-1.5 inline-flex shadow-sm border border-gray-200 dark:border-transparent hover:scale-105 transition-transform">
                 <img
                   src="/uploads/pdlLogo.png"
-                  alt="Hóquei Clube Ponta Delgada"
+                  alt="Hóquei Clube PDL"
                   className="h-8 w-auto"
                   loading="lazy"
                 />

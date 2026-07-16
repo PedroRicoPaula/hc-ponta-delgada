@@ -81,7 +81,7 @@ Cards e containers (imagens, stat tiles, painéis) usam `rounded-lg`/`rounded-xl
 
 ```tsx
 <div className="bg-white rounded-xl p-1.5 inline-flex shadow-sm border border-gray-200 dark:border-transparent">
-  <img src="/uploads/pdlLogo.png" alt="Hóquei Clube Ponta Delgada" className="h-8 w-auto" loading="lazy" />
+  <img src="/uploads/pdlLogo.png" alt="Hóquei Clube PDL" className="h-8 w-auto" loading="lazy" />
 </div>
 ```
 
@@ -126,7 +126,7 @@ Em `src/components/ui/` — não editar directamente. Personalizar via `classNam
 import { Helmet } from 'react-helmet-async';
 
 <Helmet>
-  <title>Título da Página | HC Ponta Delgada</title>
+  <title>Título da Página | HC PDL</title>
   <meta name="description" content="..." />
 </Helmet>
 ```

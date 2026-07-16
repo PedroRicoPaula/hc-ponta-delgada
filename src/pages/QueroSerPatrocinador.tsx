@@ -87,10 +87,10 @@ export default function QueroSerPatrocinador() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-white overflow-x-hidden">
       <Helmet>
-        <title>Quero ser Patrocinador | Hóquei Clube Ponta Delgada</title>
+        <title>Quero ser Patrocinador | Hóquei Clube PDL</title>
         <meta
           name="description"
-          content="Torne-se parceiro do Hóquei Clube Ponta Delgada. Visibilidade para a sua marca, impacto social e benefícios fiscais reais. Época 2026/2027."
+          content="Torne-se parceiro do Hóquei Clube PDL. Visibilidade para a sua marca, impacto social e benefícios fiscais reais. Época 2026/2027."
         />
         <link rel="canonical" href="https://hoqueiclubepdl.com/patrocinadores" />
       </Helmet>
@@ -260,7 +260,7 @@ export default function QueroSerPatrocinador() {
               <div className="rounded-2xl overflow-hidden border border-gray-200 dark:border-white/10">
                 <img
                   src="/uploads/PDL24-25V2.png"
-                  alt="Hóquei Clube Ponta Delgada"
+                  alt="Hóquei Clube PDL"
                   className="w-full h-56 md:h-80 object-cover"
                 />
               </div>
@@ -953,7 +953,7 @@ export default function QueroSerPatrocinador() {
             </h2>
             <p className="text-gray-600 dark:text-gray-400 text-sm md:text-lg mb-7 md:mb-10 leading-relaxed max-w-xl mx-auto">
               Entre em contacto connosco e juntos encontramos a melhor forma de associar
-              a sua marca ao Hóquei Clube Ponta Delgada.
+              a sua marca ao Hóquei Clube PDL.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center">

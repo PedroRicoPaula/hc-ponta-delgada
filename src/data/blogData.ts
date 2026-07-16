@@ -26,7 +26,7 @@ export const blogPosts: BlogPost[] = [
 
 O hóquei em patins — também conhecido como rink hockey ou roller hockey — é uma modalidade coletiva praticada em patins de quatro rodas (patins de roda), em que dois equipas de cinco jogadores (incluindo o guarda-redes) se defrontam num pavilhão fechado, tentando introduzir uma bola na baliza adversária utilizando sticks curvos.
 
-Portugal é uma das maiores potências mundiais desta modalidade, com inúmeros títulos europeus e mundiais. Nos Açores, o Hóquei Clube Ponta Delgada é o embaixador desta tradição desportiva desde 2012.
+Portugal é uma das maiores potências mundiais desta modalidade, com inúmeros títulos europeus e mundiais. Nos Açores, o Hóquei Clube PDL é o embaixador desta tradição desportiva desde 2012.
 
 ---
 
@@ -90,7 +90,7 @@ Para os escalões de formação — como os que o HCPDL tem ao nível Sub-11, Su
 
 Numa era de crescente sedentarismo e isolamento digital, o hóquei em patins oferece o que poucas modalidades conseguem: velocidade, técnica, estratégia, contacto físico controlado e — sobretudo — uma comunidade unida por uma paixão comum.
 
-No Hóquei Clube Ponta Delgada, esta modalidade é praticada com orgulho desde 2012, formando atletas que representam os Açores em competições nacionais e contribuindo para o desenvolvimento desportivo da nossa ilha.
+No Hóquei Clube PDL, esta modalidade é praticada com orgulho desde 2012, formando atletas que representam os Açores em competições nacionais e contribuindo para o desenvolvimento desportivo da nossa ilha.
 
 **Se procuras uma atividade completa para ti ou para os teus filhos, o hóquei em patins é a resposta.** Vem treinar connosco!
 

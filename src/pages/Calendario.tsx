@@ -83,10 +83,10 @@ export default function Calendario() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Helmet>
-        <title>Calendário — Hóquei Clube Ponta Delgada</title>
-        <meta name="description" content="Calendário de jogos do Hóquei Clube Ponta Delgada — próximos jogos, transmissões e resultados." />
+        <title>Calendário — Hóquei Clube PDL</title>
+        <meta name="description" content="Calendário de jogos do Hóquei Clube PDL — próximos jogos, transmissões e resultados." />
         <link rel="canonical" href="https://hoqueiclubepdl.com/calendario" />
-        <meta property="og:title" content="Calendário — Hóquei Clube Ponta Delgada" />
+        <meta property="og:title" content="Calendário — Hóquei Clube PDL" />
         <meta property="og:type" content="website" />
       </Helmet>
 

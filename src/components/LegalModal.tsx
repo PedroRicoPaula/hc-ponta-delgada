@@ -7,16 +7,16 @@ interface LegalModalProps {
 
 const TERMS = `
 **1. Aceitação dos Termos**
-Ao aceder e utilizar o site do Hóquei Clube Ponta Delgada (hoqueiclubepdl.com), aceita os presentes termos e condições de utilização.
+Ao aceder e utilizar o site do Hóquei Clube PDL (hoqueiclubepdl.com), aceita os presentes termos e condições de utilização.
 
 **2. Utilização do Site**
 O conteúdo deste site destina-se exclusivamente a fins informativos sobre as atividades do clube. É proibida a reprodução ou utilização comercial de qualquer conteúdo sem autorização prévia.
 
 **3. Propriedade Intelectual**
-Todos os conteúdos (textos, imagens, logótipos, vídeos) são propriedade do Hóquei Clube Ponta Delgada ou utilizados com a devida autorização. A reprodução não autorizada é proibida.
+Todos os conteúdos (textos, imagens, logótipos, vídeos) são propriedade do Hóquei Clube PDL ou utilizados com a devida autorização. A reprodução não autorizada é proibida.
 
 **4. Responsabilidade**
-O Hóquei Clube Ponta Delgada não se responsabiliza por eventuais imprecisões nas informações publicadas, reservando-se o direito de as alterar sem aviso prévio.
+O Hóquei Clube PDL não se responsabiliza por eventuais imprecisões nas informações publicadas, reservando-se o direito de as alterar sem aviso prévio.
 
 **5. Links Externos**
 O site pode conter links para sites de terceiros. O clube não se responsabiliza pelo conteúdo desses sites.
@@ -30,7 +30,7 @@ Para questões relacionadas com estes termos, contacte-nos através de hoquei.cl
 
 const PRIVACY = `
 **1. Responsável pelo Tratamento**
-Hóquei Clube Ponta Delgada · hoquei.clube.pdl@gmail.com · +351 296 382 987
+Hóquei Clube PDL · hoquei.clube.pdl@gmail.com · +351 296 382 987
 
 **2. Dados Recolhidos**
 Recolhemos apenas os dados que nos fornece voluntariamente (ex: nome e email no formulário de contacto). Não recolhemos dados de navegação além de cookies técnicos essenciais.
