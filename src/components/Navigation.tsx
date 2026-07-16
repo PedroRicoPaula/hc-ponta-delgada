@@ -1,8 +1,9 @@
 
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Heart } from 'lucide-react';
 import { DonationsModal } from '@/components/DonationsModal';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,120 +12,110 @@ export const Navigation = () => {
   const isHome = pathname === '/';
 
   const navItems = [
-    { name: "Sobre", hash: "about" },
-    { name: "Treinos", hash: "training" },
-    { name: "Jogos", hash: "events" },
-    { name: "Equipa", hash: "team" },
-    { name: "Galeria", hash: "gallery" },
-    { name: "Patrocinadores", hash: "sponsors" },
-    { name: "Contactos", hash: "contact" }
-  ].map(item => ({
-    ...item,
-    href: isHome ? `#${item.hash}` : `/#${item.hash}`
-  }));
+    { name: "Modalidade", href: "/modalidade" },
+    { name: "Patrocinadores", href: "/patrocinadores" },
+    { name: "Blog", href: "/blog" },
+    { name: "Comunicados", href: "/comunicados" },
+    { name: "Contactos", href: "/#contact" },
+  ];
+
+  const linkClass =
+    "relative text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary px-3 py-2 text-sm font-medium transition-colors duration-200 after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-left after:transition-transform after:duration-300 hover:after:scale-x-100";
 
   return (
     <>
-    <nav className="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <a
-            href={isHome ? '#' : '/'}
-            className="flex-shrink-0"
-            onClick={(e) => {
-              if (isHome) {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }
-            }}
-          >
-            <img
-              src="/uploads/pdlLogo.png"
-              // ⭐ MELHORIA SEO: alt text mais descritivo
-              alt="Logótipo do Hóquei Clube Ponta Delgada"
-              className="h-12 w-auto hover:scale-105 transition-transform"
-              loading="lazy"
-            />
-          </a>
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
+      <nav className="fixed w-full bg-white/95 dark:bg-gray-950/95 backdrop-blur-md shadow-sm dark:shadow-gray-900/50 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+
+            {/* Logo */}
+            <Link
+              to="/"
+              className="flex-shrink-0 flex items-center gap-2"
+              onClick={(e) => {
+                if (isHome) {
+                  e.preventDefault();
+                  if (window.location.hash) window.history.replaceState(null, '', '/');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
+            >
+              <div className="bg-white rounded-xl p-1.5 inline-flex shadow-sm border border-gray-200 dark:border-transparent hover:scale-105 transition-transform">
+                <img
+                  src="/uploads/pdlLogo.png"
+                  alt="Hóquei Clube Ponta Delgada"
+                  className="h-8 w-auto"
+                  loading="lazy"
+                />
+              </div>
+              <span className="hidden lg:block font-heading font-black text-sm uppercase tracking-widest text-gray-900 dark:text-white">
+                HC PDL
+              </span>
+            </Link>
+
+            {/* Desktop nav */}
+            <div className="hidden md:flex items-center gap-1">
               {navItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="relative text-gray-800 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-left after:transition-transform after:duration-300 hover:after:scale-x-100"
-                >
-                  {item.name}
-                </a>
+                <Link key={item.name} to={item.href} className={linkClass}>{item.name}</Link>
               ))}
+            </div>
+
+            {/* Right actions */}
+            <div className="hidden md:flex items-center gap-2">
+              <ThemeToggle />
               <button
                 onClick={() => setIsDonationsOpen(true)}
-                className="ml-4 flex items-center gap-1.5 bg-transparent border border-primary text-primary hover:bg-primary hover:text-gray-950 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300"
+                className="flex items-center gap-1.5 bg-primary text-gray-950 hover:bg-primary/90 px-4 py-2 font-heading font-black text-xs uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5"
               >
-                <Heart className="w-4 h-4" />
+                <Heart className="w-3.5 h-3.5" />
                 Doação
               </button>
             </div>
-          </div>
-          {/* Mobile Menu Button - Animated Hamburger to X */}
-          <div className="md:hidden">
-            <button
-              className="text-gray-800 p-2 focus:outline-none"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
-              aria-expanded={isMenuOpen}
-              aria-controls="mobile-menu"
-            >
-              {/* Use relative positioning on the container */}
-              <div className="w-6 h-6 relative">
-                <span
-                  className={`block absolute w-6 h-0.5 bg-gray-800 transition-all duration-700 ease-in-out ${isMenuOpen
-                      ? "top-1/2 -translate-y-1/2 rotate-[135deg]" // Rotates 3 * 45deg
-                      : "top-1.5" // Position for hamburger
-                    }`}
-                ></span>
-                <span
-                  className={`block absolute w-6 h-0.5 bg-gray-800 transition-all duration-700 ease-in-out top-1/2 -translate-y-1/2 ${isMenuOpen
-                      ? "translate-x-12 opacity-0" // Slides 3rem (48px) to the right and fades out
-                      : "opacity-100" // Stays in place and is visible
-                    }`}
-                ></span>
-                <span
-                  className={`block absolute w-6 h-0.5 bg-gray-800 transition-all duration-700 ease-in-out ${isMenuOpen
-                      ? "top-1/2 -translate-y-1/2 rotate-[-495deg]" // Rotates -135deg + -360deg spin
-                      : "bottom-1.5" // Position for hamburger
-                    }`}
-                ></span>
-              </div>
-            </button>
+
+            {/* Mobile */}
+            <div className="md:hidden flex items-center gap-1">
+              <ThemeToggle />
+              <button
+                className="p-2 text-gray-700 dark:text-gray-300 focus:outline-none"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+                aria-expanded={isMenuOpen}
+              >
+                <div className="w-6 h-6 relative">
+                  <span className={`block absolute w-6 h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? 'top-1/2 -translate-y-1/2 rotate-45' : 'top-1'}`} />
+                  <span className={`block absolute w-6 h-0.5 bg-current transition-all duration-300 top-1/2 -translate-y-1/2 ${isMenuOpen ? 'opacity-0 translate-x-4' : 'opacity-100'}`} />
+                  <span className={`block absolute w-6 h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? 'top-1/2 -translate-y-1/2 -rotate-45' : 'bottom-1'}`} />
+                </div>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      <div className={`md:hidden fixed top-16 right-0 w-1/2 transition-all duration-700 ease-in-out transform ${isMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'}`}>
-        <div className="px-6 py-6 space-y-4 bg-white/95 backdrop-blur-sm shadow-lg border-l min-h-screen flex flex-col">
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="relative block text-gray-800 hover:text-primary px-4 py-3 rounded-lg text-lg font-medium transition-colors duration-300 hover:bg-gray-100 after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-left after:transition-transform after:duration-300 hover:after:scale-x-100"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {item.name}
-            </a>
-          ))}
-          <div className="mt-auto pt-4 border-t border-gray-200">
-            <button
-              onClick={() => { setIsDonationsOpen(true); setIsMenuOpen(false); }}
-              className="flex items-center gap-2 w-full bg-transparent border border-primary text-primary hover:bg-primary hover:text-gray-950 px-4 py-3 rounded-lg text-lg font-medium transition-colors duration-300"
-            >
-              <Heart className="w-5 h-5" />
-              Doação
-            </button>
+
+        {/* Mobile dropdown */}
+        <div className={`md:hidden fixed top-16 inset-x-0 transition-all duration-300 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none -translate-y-2'}`}>
+          <div className="bg-white/95 dark:bg-gray-950/95 backdrop-blur-md shadow-lg border-b border-gray-100 dark:border-gray-800 px-4 py-4 space-y-1">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className="block px-4 py-3 rounded-lg text-gray-800 dark:text-gray-200 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-900 font-medium text-base transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+            <div className="pt-3 border-t border-gray-100 dark:border-gray-800">
+              <button
+                onClick={() => { setIsDonationsOpen(true); setIsMenuOpen(false); }}
+                className="flex items-center gap-2 w-full bg-primary text-gray-950 px-4 py-3 font-heading font-black text-sm uppercase tracking-wider transition-all"
+              >
+                <Heart className="w-4 h-4" /> Doação
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
-    <DonationsModal isOpen={isDonationsOpen} onClose={() => setIsDonationsOpen(false)} />
+      </nav>
+      <DonationsModal isOpen={isDonationsOpen} onClose={() => setIsDonationsOpen(false)} />
     </>
   );
 };

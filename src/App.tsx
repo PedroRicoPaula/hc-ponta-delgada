@@ -4,37 +4,45 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
+import { ThemeProvider } from 'next-themes';
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import Index from "./pages/Index";
-import TreinosFormacao from "./pages/TreinosFormacao";
-import PDLManagement from "./pages/PDLManagement";
 import QueroSerPatrocinador from "./pages/QueroSerPatrocinador";
-import Taticas from "./pages/Taticas";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import Modalidade from "./pages/Modalidade";
+import Calendario from "./pages/Calendario";
+import Comunicados from "./pages/Comunicados";
+import ComunicadoDetail from "./pages/ComunicadoDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <ErrorBoundary>
-    <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/treinosformacao" element={<TreinosFormacao />} />
-              <Route path="/pdlmanagement" element={<PDLManagement />} />
-              <Route path="/patrocinadores" element={<QueroSerPatrocinador />} />
-              <Route path="/taticas" element={<Taticas />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </HelmetProvider>
-    </QueryClientProvider>
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+      <QueryClientProvider client={queryClient}>
+        <HelmetProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/patrocinadores" element={<QueroSerPatrocinador />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/modalidade" element={<Modalidade />} />
+                <Route path="/calendario" element={<Calendario />} />
+                <Route path="/comunicados" element={<Comunicados />} />
+                <Route path="/comunicados/:slug" element={<ComunicadoDetail />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </HelmetProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   </ErrorBoundary>
 );
 

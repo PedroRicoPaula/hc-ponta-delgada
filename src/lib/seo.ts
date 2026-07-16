@@ -10,6 +10,7 @@ interface Event {
 
 interface Comunicado {
   id: number;
+  slug: string;
   titulo: string;
   data: string;
   conteudo: string;
@@ -78,6 +79,7 @@ export const generateNewsSchema = (comunicados: Comunicado[]) => {
     "headline": comunicado.titulo,
     "datePublished": toISOString(comunicado.data),
     "articleBody": comunicado.conteudo,
+    "url": `https://hoqueiclubepdl.com/comunicados/${comunicado.slug}`,
     "author": {
       "@type": "Organization",
       "name": "Hóquei Clube Ponta Delgada",

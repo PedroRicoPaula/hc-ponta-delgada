@@ -30,3 +30,9 @@ MANAGEMENT_README.md
 .agents/
 .github/agents/
 AGENTS.md
+
+# Playwright MCP artifacts (screenshots/traces/snapshots — never commit these)
+.playwright-mcp/
+/*.png
+/*.jpg
+/*.jpeg

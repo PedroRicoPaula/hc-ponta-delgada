@@ -16,4 +16,22 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  optimizeDeps: {
+    include: [
+      "react",
+      "react-dom",
+      "react-router-dom",
+      "framer-motion",
+      "lucide-react",
+      "recharts",
+      "@tanstack/react-query",
+      "react-hook-form",
+      "@hookform/resolvers/zod",
+      "zod",
+      "clsx",
+      "tailwind-merge",
+      "class-variance-authority",
+      "react-helmet-async",
+    ],
+  },
 }));

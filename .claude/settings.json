@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc --noEmit)",
+      "Bash(node_modules/.bin/tsc --noEmit)",
+      "Bash(./node_modules/.bin/tsc --noEmit)",
+      "Bash(npm run lint)",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_console_messages",
+      "mcp__plugin_playwright_playwright__browser_wait_for",
+      "mcp__plugin_playwright_playwright__browser_resize",
+      "mcp__plugin_playwright_playwright__browser_snapshot"
+    ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Antes de terminar: verifica se as alterações feitas nesta sessão requerem actualização de documentação. Percorre mentalmente os ficheiros modificados e para cada categoria aplica:\n\n- Secção, componente ou feature adicionada/alterada/removida → docs/MODULES.md\n- Rota nova ou alterada em App.tsx → docs/MODULES.md\n- Padrão de dark mode, animação ou nova convenção de código → docs/CONVENTIONS.md\n- Alteração estrutural em siteData.ts ou blogData.ts → docs/ARCHITECTURE.md\n- Dependência adicionada ou removida → docs/ARCHITECTURE.md (tabela de stack)\n- Bug corrigido → mover para ✅ Resolvido em docs/ISSUES-BACKLOG.md\n- Bug novo encontrado → adicionar a 🔴 Bugs Activos em docs/ISSUES-BACKLOG.md\n- Código morto identificado (componente sem uso, ficheiro órfão, dep não usada) → docs/ISSUES-BACKLOG.md (secção Limpeza)\n- Regra crítica aprendida ou invariante quebrada → CLAUDE.md (secção Regras críticas)\n- Info de deploy alterada (porta, variável de ambiente, estratégia de build) → docs/DEPLOYMENT.md\n\nSe nada se aplicar, não faças nada. Nunca actualizes docs apenas para registar o que foi feito na sessão — só o que é permanentemente útil para sessões futuras."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -23,13 +23,48 @@
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 47 100% 50%;
     --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 224 10% 7%;
+    --foreground: 210 40% 96%;
+    --card: 224 10% 10%;
+    --card-foreground: 210 40% 96%;
+    --popover: 224 10% 10%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 47 100% 50%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 224 10% 16%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 224 10% 14%;
+    --muted-foreground: 215 20% 58%;
+    --accent: 224 10% 14%;
+    --accent-foreground: 210 40% 96%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 224 10% 18%;
+    --input: 224 10% 18%;
+    --ring: 47 100% 50%;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
     scrollbar-gutter: stable;
+  }
+
+  h1, h2, h3, .font-heading {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+  }
+
+  /* Smooth theme transitions — background/color only, not transform/opacity (framer-motion safe) */
+  *, *::before, *::after {
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
   }
 }
 

@@ -113,6 +113,13 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
     handleReset();
   }, [selectedCategory]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [isOpen, onClose]);
+
   const handleClose = () => {
     handleReset();
     onClose();
@@ -230,7 +237,13 @@ export const RollerHockeyGame: React.FC<RollerHockeyGameProps> = ({ isOpen, onCl
 
 
   return (
-    <div className={`fixed inset-y-0 right-0 z-50 bg-background shadow-2xl transition-transform duration-500 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'} w-full sm:w-[32rem] lg:w-[40rem] overflow-y-auto`}>
+    <div
+      className={`fixed inset-y-0 right-0 z-50 bg-background shadow-2xl transition-transform duration-500 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'} w-full sm:w-[32rem] lg:w-[40rem] overflow-y-auto`}
+      role="dialog"
+      aria-modal="true"
+      aria-hidden={!isOpen}
+      aria-label="Mini Jogo"
+    >
       <div className="relative h-full bg-gradient-to-br from-primary/5 via-background to-primary/10">
         <Button onClick={handleClose} variant="ghost" size="sm" className="absolute top-2 right-2 z-10 bg-background/80 hover:bg-background rounded-full p-1.5">
           <X className="h-4 w-4" />

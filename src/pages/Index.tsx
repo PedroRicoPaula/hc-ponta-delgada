@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 // Core Layout & UI Components
 import { Navigation } from "@/components/Navigation";
+import { CursorRing } from "@/components/CursorRing";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SocialIcons } from "@/components/SocialIcons";
 import { Footer } from '@/components/Footer';
@@ -12,7 +14,6 @@ import HolidayOverlay from "@/components/HolidayOverlay";
 
 // Overlay & Panel Components
 import { RollerHockeyGame } from "@/components/RollerHockeyGame";
-import { DonationsModal } from '@/components/DonationsModal';
 import { ComunicadosPanel } from '@/components/ComunicadosPanel';
 // import { ChatWidget } from '@/components/ChatWidget';
 
@@ -31,32 +32,13 @@ import { senioresEvents, formacaoEvents, comunicados } from '@/data/siteData';
 import { generateEventsSchema, generateNewsSchema } from '@/lib/seo';
 import { safeStorage } from '@/lib/safeStorage';
 
-const ScrollIndicator = () => (
-  <div className="flex justify-center py-8">
-    <div className="animate-bounce">
-      <svg 
-        className="w-8 h-12 text-primary opacity-70" 
-        fill="none" 
-        strokeLinecap="round" 
-        strokeLinejoin="round" 
-        strokeWidth="2" 
-        viewBox="0 0 32 48" 
-        stroke="currentColor"
-      >
-        <rect x="8" y="8" width="16" height="32" rx="8" ry="8" fill="none" stroke="currentColor"/>
-        <circle cx="16" cy="18" r="2" fill="currentColor" className="animate-pulse"/>
-        <path d="M16 22v6" stroke="currentColor" strokeWidth="1.5"/>
-      </svg>
-    </div>
-  </div>
-);
 
 const Index = () => {
   // --- STATE MANAGEMENT ---
   const [showCookieConsent, setShowCookieConsent] = useState(false);
   const [isGameOpen, setIsGameOpen] = useState(false);
-  const [isDonationsOpen, setIsDonationsOpen] = useState(false);
   const [isComunicadosOpen, setIsComunicadosOpen] = useState(false);
+  const location = useLocation();
 
   // --- EFFECTS ---
   useEffect(() => {
@@ -65,6 +47,17 @@ const Index = () => {
       setShowCookieConsent(true);
     }
   }, []);
+
+  // Scroll to the section named in the URL hash — needed because links to
+  // "/#contact" from other pages land here before the section exists in the
+  // DOM, so the browser's native hash-jump on page load silently does nothing.
+  useEffect(() => {
+    if (!location.hash) return;
+    const el = document.querySelector(location.hash);
+    if (el) {
+      requestAnimationFrame(() => el.scrollIntoView({ behavior: 'smooth' }));
+    }
+  }, [location.hash]);
 
   // --- HANDLERS ---
   const acceptCookies = () => {
@@ -84,7 +77,7 @@ const Index = () => {
   const newsSchema = generateNewsSchema(comunicados);
 
   return (
-    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
+    <div className="min-h-screen bg-white dark:bg-gray-950 overflow-x-hidden">
       {/* <HolidayOverlay /> */}
       <Helmet>
         <title>Hóquei Clube Ponta Delgada - Hóquei em Patins nos Açores</title>
@@ -97,6 +90,7 @@ const Index = () => {
       </Helmet>
 
       {/* Core Layout & UI */}
+      <CursorRing />
       <Navigation />
       <SocialIcons />
       <ScrollToTop />
@@ -108,7 +102,6 @@ const Index = () => {
       {/* Main Page Sections */}
       <main>
         <HeroSection />
-        <ScrollIndicator />
         <AboutSection />
         <TrainingSchedulesSection />
         <EventsSection />
@@ -118,11 +111,10 @@ const Index = () => {
         <ContactSection />
       </main>
       
-      <Footer onOpenDonations={() => setIsDonationsOpen(true)} />
+      <Footer />
 
       {/* Overlays, Modals, and Panels */}
       <RollerHockeyGame isOpen={isGameOpen} onClose={() => setIsGameOpen(false)} />
-      <DonationsModal isOpen={isDonationsOpen} onClose={() => setIsDonationsOpen(false)} />
       <ComunicadosPanel isOpen={isComunicadosOpen} onClose={() => setIsComunicadosOpen(false)} data={comunicados} />
       {/* <ChatWidget /> */}
 
