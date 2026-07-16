@@ -19,11 +19,12 @@
 ## Estrutura de pastas
 
 ```
+scripts/
+└── prerender.js                # Pós-build: snapshot de cada rota + dist/sitemap.xml
 src/
 ├── components/
-│   ├── sections/               # Secções da homepage
-│   │   └── treinosFormacaoPage/  # Painel interno (sem rota activa — ver ISSUES-BACKLOG)
-│   └── ui/                     # shadcn/ui — NÃO editar directamente
+│   ├── sections/                # Secções da homepage
+│   └── ui/                      # shadcn/ui — NÃO editar directamente
 ├── data/
 │   ├── siteData.ts             # Dados do clube (jogadores, treinos, galeria, etc.)
 │   └── blogData.ts             # Artigos do blog
@@ -33,11 +34,9 @@ src/
 │   └── useLocalStorage.ts
 ├── lib/
 │   ├── utils.ts                # Utilitários gerais (cn, etc.)
-│   ├── seo.ts                  # Helpers para meta tags
+│   ├── seo.ts                  # Helpers para meta tags (JSON-LD)
 │   ├── safeStorage.ts          # Wrapper localStorage com fallback
-│   ├── games.ts                # Estado dos jogos (live/countdown/ended), useNow()
-│   ├── managementTypes.ts      # Tipos para painel de gestão interno
-│   └── treinosFormacaoTypes.ts # Tipos para módulo de treinos
+│   └── games.ts                # Estado dos jogos (live/countdown/ended), useNow()
 ├── pages/                      # Uma página por rota
 └── index.css                   # CSS global + variáveis de tema + transições globais
 ```
@@ -96,4 +95,12 @@ Logos de patrocinadores: `public/uploads/patrocinadores/` — inclui logos activ
 
 ## SEO
 
-`react-helmet-async` via `src/lib/seo.ts`. Cada página define as suas próprias meta tags via Helmet.
+`react-helmet-async` via `src/lib/seo.ts`. Cada página define as suas próprias meta tags via Helmet (title, description, canonical, og:title, og:description, og:type, og:url).
+
+**Armadilha**: Helmet substitui `<title>` in-place mas só faz *append* de `<meta>`/`<link>` — não remove equivalentes estáticos já no `index.html`. Por isso `index.html` não define `description`/`canonical`/`og:*` (fica só `og:image`, `og:locale`, `twitter:*` como fallback comum a todas as páginas) — cada página é responsável por definir o resto via Helmet. Página nova sem esse bloco fica sem SEO próprio, silenciosamente.
+
+**Pré-renderização** (`scripts/prerender.js`, corre depois de `vite build`): SPA puro serve o mesmo HTML (da homepage) em qualquer rota — bots que não correm JS (crawlers, link-preview do WhatsApp/Slack/etc.) só viam sempre o conteúdo de `/`, daí `site:hoqueiclubepdl.com` no Google só mostrar a página principal. O script abre cada rota num browser real (Playwright chromium), espera o React montar, e grava o DOM final em `dist/<rota>/index.html` — hosts estáticos servem esse ficheiro real em vez do fallback de SPA. Lista de rotas vem de `blogPosts[]`/`comunicados[]` via `vite.ssrLoadModule`, nunca hard-coded (só rotas estáticas tipo `/modalidade` estão na array `STATIC_ROUTES` do script — rota estática nova tem de ser adicionada ali à mão). O mesmo script gera `dist/sitemap.xml` a partir da mesma lista de rotas.
+
+Se o Chromium do Playwright não estiver instalado (`npx playwright install chromium`), o passo de pré-renderização é saltado com aviso — build nunca falha por causa disto, só perde a pré-renderização.
+
+`src/main.tsx` usa `createRoot` (não `hydrateRoot`) mesmo com markup pré-renderizado presente — `whileInView` do framer-motion depende da posição de scroll/viewport no momento do mount, que é diferente entre o snapshot do prerender e o browser real de cada visitante; `hydrateRoot` trata isso como mismatch (React #418/#423). `createRoot` simplesmente substitui o markup pré-renderizado, sem reconciliação.

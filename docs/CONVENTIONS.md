@@ -132,8 +132,17 @@ import { Helmet } from 'react-helmet-async';
 <Helmet>
   <title>Título da Página | HC PDL</title>
   <meta name="description" content="..." />
+  <link rel="canonical" href="https://hoqueiclubepdl.com/rota" />
+  <meta property="og:title" content="Título da Página | HC PDL" />
+  <meta property="og:description" content="..." />
+  <meta property="og:type" content="website" /> {/* "article" em posts de blog/comunicados */}
+  <meta property="og:url" content="https://hoqueiclubepdl.com/rota" />
 </Helmet>
 ```
+
+**Armadilha conhecida (2026-07)**: Helmet substitui `<title>` in-place mas só faz *append* de `<meta>`/`<link>` — nunca remove um equivalente estático já existente no `index.html`. Por isso `index.html` **não** define `description`/`canonical`/`og:title`/`og:description`/`og:type`/`og:url` (só `og:image`/`og:locale`/`twitter:*`, comuns a todas as páginas) — cada página é 100% responsável pelo bloco acima via Helmet. Página nova sem este bloco fica sem SEO próprio, sem erro visível (só se nota inspeccionando o HTML gerado).
+
+Página nova com rota **estática** (não dinâmica tipo `:slug`) também tem de ser adicionada à array `STATIC_ROUTES` em `scripts/prerender.js`, senão fica sem HTML pré-renderizado próprio (crawlers continuam a ver a homepage nessa rota). Rotas dinâmicas (`/blog/:slug`, `/comunicados/:slug`) são descobertas automaticamente a partir de `blogPosts[]`/`comunicados[]` — não precisam de nada manual. Detalhe do mecanismo em `docs/ARCHITECTURE.md`, secção SEO.
 
 ## Dados vs. código
 
