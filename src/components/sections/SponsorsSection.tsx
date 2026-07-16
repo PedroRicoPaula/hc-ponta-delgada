@@ -2,111 +2,122 @@ import { motion } from 'framer-motion';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { useRef } from 'react';
-import { sponsors } from '@/data/siteData';
+import { sponsors, type Sponsor } from '@/data/siteData';
 import { Link } from 'react-router-dom';
-const sectionLeft = {
-  hidden: { opacity: 0, x: -40 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 2.0 }
-  }
-};
-export const SponsorsSection = () => {
-  const autoplay = useRef(
-    Autoplay({
-      delay: 2000,
-      stopOnInteraction: false,
-      stopOnMouseEnter: true,
-    })
-  );
 
-  // Desejamos uma lista longa para que o loop seja fluido no Embla
-  const duplicatedSponsors = [...sponsors, ...sponsors, ...sponsors, ...sponsors];
+function SponsorLink({ sponsor, className, children }: { sponsor: Sponsor; className: string; children: React.ReactNode }) {
+  if (!sponsor.url) {
+    return <div className={className}>{children}</div>;
+  }
+  return (
+    <a href={sponsor.url} target="_blank" rel="noopener noreferrer" className={`group ${className}`}>
+      {children}
+    </a>
+  );
+}
+
+export const SponsorsSection = () => {
+  const autoplay = useRef(Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: true }));
+  const featured = sponsors.find((s) => s.featured);
+  const others = sponsors.filter((s) => !s.featured);
+  const duplicatedOthers = [...others, ...others, ...others, ...others];
+  const tickerOthers = [...others, ...others]; // exactamente 2x — o keyframe "ticker" percorre -50%, um ciclo completo
 
   return (
     <motion.section
       id="sponsors"
-      className="py-16 bg-gray-50 overflow-hidden"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      variants={sectionLeft}
+      className="py-20 bg-white dark:bg-gray-900 overflow-hidden"
+      initial={{ opacity: 0, y: 40, rotateX: 3 }}
+      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+      style={{ transformPerspective: 1200 }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-12">Patrocinadores</h2>
+        <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary/70 mb-3">
+          <span className="w-5 h-px bg-primary/50" />
+          06 — Parceiros
+        </p>
+        <h2 className="font-heading text-5xl md:text-6xl uppercase leading-none mb-10 text-gray-900 dark:text-white">
+          Patrocinadores
+        </h2>
 
-        {/* Vista Desktop: Estática em linha */}
-        <div className="hidden md:flex flex-wrap items-center justify-center gap-4 lg:gap-8">
-          {sponsors.map((sponsor) => (
-            <a
-              key={sponsor.name}
-              href={sponsor.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center justify-center p-4 transition-all duration-300"
-            >
-              <div className="h-20 w-32 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+        {/* Featured sponsor */}
+        {featured && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex justify-center mb-10"
+          >
+            <SponsorLink sponsor={featured} className="flex items-center justify-center p-4 transition-all duration-300">
+              <div className="h-24 w-44 sm:h-32 sm:w-60 flex items-center justify-center transform group-hover:scale-105 transition-transform duration-300">
                 <img
-                  src={sponsor.logo}
-                  alt={`Logótipo do patrocinador ${sponsor.name}`}
-                  className="max-h-full max-w-full object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                  src={featured.logo}
+                  alt={`Patrocinador ${featured.name}`}
+                  className="max-h-full max-w-full object-contain dark:brightness-200"
                   loading="lazy"
                 />
               </div>
-            </a>
-          ))}
-        </div>
+            </SponsorLink>
+          </motion.div>
+        )}
 
+        {/* Others — desktop ticker, smaller. Infinito esquerda→direita (ticker keyframe invertido), pausa no hover */}
+        <div className="hidden md:block overflow-hidden">
+          <div className="flex w-max items-center gap-10 lg:gap-14 animate-ticker [animation-direction:reverse] hover:[animation-play-state:paused]">
+            {tickerOthers.map((sponsor, index) => (
+              <SponsorLink
+                key={`${sponsor.name}-${index}`}
+                sponsor={sponsor}
+                className="flex flex-shrink-0 items-center justify-center p-4 transition-all duration-300"
+              >
+                <div className="h-16 w-28 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                  <img
+                    src={sponsor.logo}
+                    alt={`Patrocinador ${sponsor.name}`}
+                    className="max-h-full max-w-full object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-400 dark:brightness-200"
+                    loading="lazy"
+                  />
+                </div>
+              </SponsorLink>
+            ))}
+          </div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true }}
-          className="flex justify-center mt-12 mb-2"
+          className="flex justify-center mt-10 mb-2"
         >
           <Link
             to="/patrocinadores"
             onClick={() => window.scrollTo(0, 0)}
-            className="group relative inline-flex items-center overflow-hidden border border-transparent hover:border-2 hover:border-gray-950 px-7 py-4 rounded-2xl font-semibold transition-colors duration-300 shadow-[0_0_20px_4px_rgba(0,0,0,0.10),0_4px_16px_rgba(0,0,0,0.10)]"
+            className="inline-flex items-center gap-2 border border-primary text-primary hover:bg-primary hover:text-gray-950 px-6 py-3 font-heading font-black text-sm uppercase tracking-widest transition-all duration-200"
           >
-            <span className="absolute inset-0 bg-primary translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] origin-right" />
-            <span className="relative z-10 text-primary group-hover:text-gray-950 transition-colors duration-300">
-              Quero ser Patrocinador
-            </span>
+            Quero ser Patrocinador
           </Link>
         </motion.div>
 
-        {/* Vista Mobile: Carrossel Animado */}
-        <div className="md:hidden">
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-              dragFree: true,
-            }}
-            plugins={[autoplay.current]}
-            className="w-full"
-          >
+        {/* Others — mobile carousel, smaller */}
+        <div className="md:hidden mt-4">
+          <Carousel opts={{ align: 'start', loop: true, dragFree: true }} plugins={[autoplay.current]} className="w-full">
             <CarouselContent className="-ml-4 flex items-center">
-              {duplicatedSponsors.map((sponsor, index) => (
-                <CarouselItem key={index} className="pl-4 basis-1/2">
-                  <a
-                    href={sponsor.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center p-4"
-                  >
-                    <div className="h-20 w-32 flex items-center justify-center">
+              {duplicatedOthers.map((sponsor, index) => (
+                <CarouselItem key={index} className="pl-4 basis-1/3">
+                  <SponsorLink sponsor={sponsor} className="flex items-center justify-center p-2">
+                    <div className="h-14 w-24 flex items-center justify-center">
                       <img
                         src={sponsor.logo}
-                        alt={`Logótipo do patrocinador ${sponsor.name}`}
-                        className="max-h-full max-w-full object-contain grayscale opacity-60 active:grayscale-0 active:opacity-100 transition-all duration-500"
+                        alt={`Patrocinador ${sponsor.name}`}
+                        className="max-h-full max-w-full object-contain grayscale opacity-50 active:grayscale-0 active:opacity-100 transition-all dark:brightness-200"
                         loading="lazy"
                       />
                     </div>
-                  </a>
+                  </SponsorLink>
                 </CarouselItem>
               ))}
             </CarouselContent>
@@ -115,4 +126,4 @@ export const SponsorsSection = () => {
       </div>
     </motion.section>
   );
-}
+};
