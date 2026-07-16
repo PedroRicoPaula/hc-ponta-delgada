@@ -87,6 +87,10 @@ Cards e containers (imagens, stat tiles, painéis) usam `rounded-lg`/`rounded-xl
 
 Aplica em **Navigation.tsx** e **Footer.tsx** — sempre os dois.
 
+## Nome do clube
+
+Forma curta em toda a UI e metadados: **"Hóquei Clube PDL"** (ou **"HC PDL"**). Nunca escrever por extenso "Hóquei Clube Ponta Delgada", "Hóquei Clube de Ponta Delgada" ou "HC Ponta Delgada" — foram normalizados em 2026-07-16 (títulos de página, meta tags, JSON-LD, manifest, footer, copy). Ao escrever conteúdo novo (artigos, comunicados, meta descriptions), usar sempre a forma curta.
+
 ## Ícones — lucide-react, não emoji
 
 Emoji como ícone de UI (secções, cards, listas) foi removido da página `Modalidade` em 2026-07-16 a pedido — lia-se como pouco profissional e inconsistente entre plataformas/temas. Preferir `lucide-react` (já é dependência do projecto, usado em `Navigation`, `TeamSection`, `SponsorsSection`, etc.): ícone `w-4 h-4`/`w-5 h-5`, cor `text-primary` ou herdada do texto. Onde não houver um ícone lucide que faça sentido (ex: tipos de equipamento), preferir tipografia forte (título a negrito) a forçar uma metáfora visual fraca. Emoji dentro de conteúdo de dados (não UI) — ex.: bandeiras de nacionalidade em `TeamSection` (`nationalityFlags`) — não está abrangido por esta regra, é conteúdo, não ícone de interface.
