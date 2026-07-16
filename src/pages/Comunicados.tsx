@@ -65,7 +65,9 @@ export default function Comunicados() {
         <meta name="description" content="Comunicados oficiais, resultados e novidades do Hóquei Clube PDL." />
         <link rel="canonical" href="https://hoqueiclubepdl.com/comunicados" />
         <meta property="og:title" content="Comunicados — Hóquei Clube PDL" />
+        <meta property="og:description" content="Comunicados oficiais, resultados e novidades do Hóquei Clube PDL." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://hoqueiclubepdl.com/comunicados" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "CollectionPage",

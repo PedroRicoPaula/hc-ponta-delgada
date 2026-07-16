@@ -16,9 +16,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <!--
+      description / canonical / og:title / og:description / og:type / og:url are
+      intentionally NOT set here — every page sets its own via <Helmet>, and
+      scripts/prerender.js snapshots the post-Helmet DOM into dist/<route>/index.html.
+      Helmet replaces <title> in place (kept below, safe as a fallback), but only
+      APPENDS <meta>/<link data-rh> tags rather than removing pre-existing static
+      ones — a static fallback for those would end up duplicated (and wrong) alongside
+      each page's real one in every prerendered file. og:image / og:locale / twitter:*
+      stay below since no page overrides them.
+    -->
     <title>Hóquei Clube PDL - Paixão, Orgulho e Excelência desde 2012</title>
-    <meta name="description" content="Fundado em 2012, o Hóquei Clube PDL tem sido um símbolo de excelência desportiva nos Açores, na Ilha de São Miguel. O nosso compromisso com o desenvolvimento de jovens talentos e a promoção do hóquei na região autónoma dos Açores tornou-nos um dos clubes mais respeitados em Portugal." />
-    <meta name="keywords" content="hóquei em patins, hóquei patins, ilha, Ponta Delgada, Açores, desporto, clube, formação, seniores, treinos, patins, HCPDL, HoqueiClubePDL, São Miguel, campeonato nacional, resultados hóquei, plantel hcpdl, pavilhão sidónio serpa" />    <link rel="canonical" href="https://hoqueiclubepdl.com/" />
+    <meta name="keywords" content="hóquei em patins, hóquei patins, ilha, Ponta Delgada, Açores, desporto, clube, formação, seniores, treinos, patins, HCPDL, HoqueiClubePDL, São Miguel, campeonato nacional, resultados hóquei, plantel hcpdl, pavilhão sidónio serpa" />
     <link rel="icon" href="/uploads/pdlLogo.png" type="image/png" sizes="512x512" />
     <link rel="icon" href="/uploads/favicon.ico" sizes="32x32" type="image/x-icon" />
     <link rel="apple-touch-icon" sizes="180x180" href="/uploads/pdlLogo.png" />
@@ -30,10 +39,6 @@
     <meta name="author" content="Hóquei Clube PDL" />
     <meta name="robots" content="index, follow" />
 
-    <meta property="og:title" content="Hóquei Clube PDL" />
-    <meta property="og:description" content="Fundado em 2012, o Hóquei Clube PDL tem sido um símbolo de excelência desportiva nos Açores, na Ilha de São Miguel. O nosso compromisso com o desenvolvimento de jovens talentos e a promoção do hóquei na região autónoma dos Açores tornou-nos um dos clubes mais respeitados em Portugal." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://hoqueiclubepdl.com/" />
     <meta property="og:image" content="https://hoqueiclubepdl.com/uploads/pdlLogo.png" />
     <meta property="og:locale" content="pt_PT" />
 

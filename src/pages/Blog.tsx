@@ -54,7 +54,9 @@ export default function Blog() {
         <meta name="description" content="Artigos, novidades e histórias sobre hóquei em patins do Hóquei Clube PDL." />
         <link rel="canonical" href="https://hoqueiclubepdl.com/blog" />
         <meta property="og:title" content="Blog — Hóquei Clube PDL" />
+        <meta property="og:description" content="Artigos, novidades e histórias sobre hóquei em patins do Hóquei Clube PDL." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://hoqueiclubepdl.com/blog" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Blog",

@@ -85,6 +85,10 @@ const Index = () => {
         <meta name="keywords" content="hóquei em patins, Ponta Delgada, Açores..." />
         <link rel="preload" fetchPriority="high" as="image" href="/uploads/PDL24-25V2.png" type="image/png" />
         <link rel="canonical" href="https://hoqueiclubepdl.com/" />
+        <meta property="og:title" content="Hóquei Clube PDL" />
+        <meta property="og:description" content="Site oficial do Hóquei Clube PDL..." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://hoqueiclubepdl.com/" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(newsSchema) }} />
       </Helmet>

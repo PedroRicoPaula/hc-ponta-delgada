@@ -87,7 +87,9 @@ export default function Calendario() {
         <meta name="description" content="Calendário de jogos do Hóquei Clube PDL — próximos jogos, transmissões e resultados." />
         <link rel="canonical" href="https://hoqueiclubepdl.com/calendario" />
         <meta property="og:title" content="Calendário — Hóquei Clube PDL" />
+        <meta property="og:description" content="Calendário de jogos do Hóquei Clube PDL — próximos jogos, transmissões e resultados." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://hoqueiclubepdl.com/calendario" />
       </Helmet>
 
       <Navigation />

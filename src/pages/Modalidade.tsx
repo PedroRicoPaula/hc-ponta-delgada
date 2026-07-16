@@ -207,6 +207,8 @@ export default function Modalidade() {
         <link rel="canonical" href="https://hoqueiclubepdl.com/modalidade" />
         <meta property="og:title" content="A Modalidade — Hóquei em Patins" />
         <meta property="og:description" content="Guia completo sobre hóquei em patins: história, regras, posições, equipamento e glossário." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://hoqueiclubepdl.com/modalidade" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Article",

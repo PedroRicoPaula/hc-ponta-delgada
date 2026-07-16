@@ -93,6 +93,10 @@ export default function QueroSerPatrocinador() {
           content="Torne-se parceiro do Hóquei Clube PDL. Visibilidade para a sua marca, impacto social e benefícios fiscais reais. Época 2026/2027."
         />
         <link rel="canonical" href="https://hoqueiclubepdl.com/patrocinadores" />
+        <meta property="og:title" content="Quero ser Patrocinador | Hóquei Clube PDL" />
+        <meta property="og:description" content="Torne-se parceiro do Hóquei Clube PDL. Visibilidade para a sua marca, impacto social e benefícios fiscais reais. Época 2026/2027." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://hoqueiclubepdl.com/patrocinadores" />
       </Helmet>
 
       <Navigation />
