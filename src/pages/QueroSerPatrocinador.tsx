@@ -4,16 +4,13 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
-import { DonationsModal } from '@/components/DonationsModal';
 import {
   Eye, TrendingUp, BadgePercent, Users,
   Star, Package, ArrowRight, Check, ChevronDown,
   Shirt, MapPin, Megaphone, Trophy, Heart, House, Apple, X
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-// WhatsApp icon (brand icon not available in lucide)
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +19,6 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-// Animated counter hook
 function AnimatedCounter({ target, suffix = '' }: { target: number; suffix?: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
@@ -48,7 +44,6 @@ function AnimatedCounter({ target, suffix = '' }: { target: number; suffix?: str
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
-// Animation variants
 const easing = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 const fadeUp = {
@@ -65,7 +60,6 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.1 } }
 };
 
-// Zone data
 const formationZones = [
   { zone: 'Zona 1', location: 'Ombro Esquerdo', price: 100, description: 'Visibilidade no ombro esquerdo da camisola' },
   { zone: 'Zona 2', location: 'Ombro Direito', price: 100, description: 'Visibilidade no ombro direito da camisola' },
@@ -86,13 +80,12 @@ const seniorZones = [
 
 export default function QueroSerPatrocinador() {
   const [activeTab, setActiveTab] = useState<'formacao' | 'senior'>('senior');
-  const [isDonationsOpen, setIsDonationsOpen] = useState(false);
   const [showWhatsApp, setShowWhatsApp] = useState(false);
 
   const zones = activeTab === 'formacao' ? formationZones : seniorZones;
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white overflow-x-hidden">
+    <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-white overflow-x-hidden">
       <Helmet>
         <title>Quero ser Patrocinador | Hóquei Clube Ponta Delgada</title>
         <meta
@@ -104,7 +97,7 @@ export default function QueroSerPatrocinador() {
 
       <Navigation />
 
-      {/* ─── HERO ─────────────────────────────────────────────────── */}
+      {/* ─── HERO — always dark (background photo) ─────────────────── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
@@ -115,7 +108,6 @@ export default function QueroSerPatrocinador() {
           <div className="absolute inset-0 bg-gradient-to-b from-gray-950/75 via-gray-950/85 to-gray-950" />
         </div>
 
-        {/* Animated ambient glow */}
         <motion.div
           animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.25, 0.15] }}
           transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
@@ -137,7 +129,7 @@ export default function QueroSerPatrocinador() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.15, ease: easing }}
-            className="text-4xl sm:text-6xl md:text-7xl font-black mb-4 leading-tight tracking-tight"
+            className="text-4xl sm:text-6xl md:text-7xl font-black mb-4 leading-tight tracking-tight text-white"
           >
             Seja Parceiro do{' '}
             <span className="text-primary relative inline-block">
@@ -167,28 +159,23 @@ export default function QueroSerPatrocinador() {
             transition={{ duration: 0.8, delay: 0.45 }}
             className="flex flex-col sm:flex-row gap-3 justify-center"
           >
-            <a href="#pacotes">
-              <Button
-                size="lg"
-                className="bg-primary text-gray-950 hover:bg-primary/90 font-bold text-base sm:text-lg px-7 sm:px-8 py-4 sm:py-6 rounded-xl group shadow-lg shadow-primary/20 w-full sm:w-auto"
-              >
-                Ver Pacotes
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </a>
-            <Button
-              size="lg"
-              variant="outline"
-              onClick={() => setShowWhatsApp(true)}
-              className="bg-white border-white text-gray-950 hover:bg-white/90 font-semibold text-base sm:text-lg px-7 sm:px-8 py-4 sm:py-6 rounded-xl w-full sm:w-auto"
+            <a
+              href="#pacotes"
+              className="group inline-flex items-center justify-center gap-2 bg-primary text-gray-950 hover:bg-primary/90 font-heading font-black text-sm sm:text-base uppercase tracking-wider px-7 sm:px-8 py-4 sm:py-5 shadow-lg shadow-primary/20 w-full sm:w-auto transition-colors"
             >
-              <WhatsAppIcon className="mr-2 w-5 h-5" />
+              Ver Pacotes
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </a>
+            <button
+              onClick={() => setShowWhatsApp(true)}
+              className="inline-flex items-center justify-center gap-2 bg-white hover:bg-white/90 text-gray-950 font-heading font-black text-sm sm:text-base uppercase tracking-wider px-7 sm:px-8 py-4 sm:py-5 w-full sm:w-auto transition-colors"
+            >
+              <WhatsAppIcon className="w-5 h-5" />
               Falar Connosco
-            </Button>
+            </button>
           </motion.div>
         </div>
 
-        {/* Scroll arrow */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -202,8 +189,8 @@ export default function QueroSerPatrocinador() {
         </motion.div>
       </section>
 
-      {/* ─── STATS ────────────────────────────────────────────────── */}
-      <section id="stats" className="py-6 md:py-16 bg-gray-900 border-y border-white/5">
+      {/* ─── STATS ─────────────────────────────────────────────────── */}
+      <section id="stats" className="py-6 md:py-16 bg-gray-50 dark:bg-gray-900 border-y border-gray-200 dark:border-white/5">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div
             variants={stagger}
@@ -227,14 +214,14 @@ export default function QueroSerPatrocinador() {
                 <div className="text-3xl md:text-4xl font-black text-primary mb-1">
                   {noAnimate ? <span>{value}{suffix}</span> : <AnimatedCounter target={value} suffix={suffix} />}
                 </div>
-                <div className="text-gray-400 text-sm">{label}</div>
+                <div className="text-gray-600 dark:text-gray-400 text-sm">{label}</div>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* ─── QUEM É O HC PDL ──────────────────────────────────────── */}
+      {/* ─── QUEM É O HC PDL ───────────────────────────────────────── */}
       <section className="py-8 md:py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -245,19 +232,19 @@ export default function QueroSerPatrocinador() {
               viewport={{ once: true }}
             >
               <span className="text-primary text-sm font-semibold uppercase tracking-widest">Sobre o Clube</span>
-              <h2 className="text-3xl md:text-5xl font-black mt-2 mb-4 leading-tight">
+              <h2 className="text-3xl md:text-5xl font-black mt-2 mb-4 leading-tight text-gray-900 dark:text-white">
                 Quem é o<br />
                 <span className="text-primary">H.C. PDL?</span>
               </h2>
-              <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-3">
+              <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base leading-relaxed mb-3">
                 Fundado em 2012 na sequência do encerramento da modalidade de hóquei em patins noutro clube,
                 o HC PDL nasceu da vontade de atletas e dirigentes que recusaram deixar morrer o desporto na ilha.
               </p>
-              <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-3">
+              <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base leading-relaxed mb-3">
                 Com foco exclusivo no hóquei em patins, o clube tem dado continuidade à formação de jovens
                 atletas e mantido viva a modalidade em São Miguel e nos Açores.
               </p>
-              <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+              <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base leading-relaxed">
                 Desde a sua fundação, o HC PDL depende do apoio de entidades parceiras para continuar
                 a crescer e a competir a nível nacional.
               </p>
@@ -270,7 +257,7 @@ export default function QueroSerPatrocinador() {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="rounded-2xl overflow-hidden border border-white/10">
+              <div className="rounded-2xl overflow-hidden border border-gray-200 dark:border-white/10">
                 <img
                   src="/uploads/PDL24-25V2.png"
                   alt="Hóquei Clube Ponta Delgada"
@@ -286,8 +273,8 @@ export default function QueroSerPatrocinador() {
         </div>
       </section>
 
-      {/* ─── 3 PILLARS ────────────────────────────────────────────── */}
-      <section className="py-8 md:py-20 px-4 bg-gray-900">
+      {/* ─── 3 PILLARS ─────────────────────────────────────────────── */}
+      <section className="py-8 md:py-20 px-4 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-6xl mx-auto">
           <motion.div
             variants={fadeUp}
@@ -297,8 +284,8 @@ export default function QueroSerPatrocinador() {
             className="text-center mb-6 md:mb-14"
           >
             <span className="text-primary text-sm font-semibold uppercase tracking-widest">Porquê investir</span>
-            <h2 className="text-3xl md:text-5xl font-black mt-2 mb-3">Razões para ser parceiro</h2>
-            <p className="text-gray-400 text-sm md:text-lg max-w-xl mx-auto">
+            <h2 className="text-3xl md:text-5xl font-black mt-2 mb-3 text-gray-900 dark:text-white">Razões para ser parceiro</h2>
+            <p className="text-gray-600 dark:text-gray-400 text-sm md:text-lg max-w-xl mx-auto">
               Três pilares que tornam esta parceria vantajosa para qualquer empresa ou particular.
             </p>
           </motion.div>
@@ -317,10 +304,9 @@ export default function QueroSerPatrocinador() {
                 gradient: 'from-yellow-500/15 to-yellow-600/0',
                 border: 'border-yellow-500/20',
                 iconBg: 'bg-yellow-500/15',
-                iconColor: 'text-yellow-400',
-                checkColor: 'text-yellow-400',
-                description:
-                  'A sua marca em destaque nos jogos, nas transmissões ao vivo e em todas as comunicações do clube.',
+                iconColor: 'text-yellow-500 dark:text-yellow-400',
+                checkColor: 'text-yellow-500 dark:text-yellow-400',
+                description: 'A sua marca em destaque nos jogos, nas transmissões ao vivo e em todas as comunicações do clube.',
                 points: [
                   'Jogos transmitidos no YouTube',
                   'Resumos na RTP Açores',
@@ -335,10 +321,9 @@ export default function QueroSerPatrocinador() {
                 gradient: 'from-blue-500/15 to-blue-600/0',
                 border: 'border-blue-500/20',
                 iconBg: 'bg-blue-500/15',
-                iconColor: 'text-blue-400',
-                checkColor: 'text-blue-400',
-                description:
-                  'O seu investimento transforma-se diretamente em melhores condições para atletas e treinadores.',
+                iconColor: 'text-blue-500 dark:text-blue-400',
+                checkColor: 'text-blue-500 dark:text-blue-400',
+                description: 'O seu investimento transforma-se diretamente em melhores condições para atletas e treinadores.',
                 points: [
                   'Apoio à formação jovem',
                   'Melhores condições de treino',
@@ -353,10 +338,9 @@ export default function QueroSerPatrocinador() {
                 gradient: 'from-green-500/15 to-green-600/0',
                 border: 'border-green-500/20',
                 iconBg: 'bg-green-500/15',
-                iconColor: 'text-green-400',
-                checkColor: 'text-green-400',
-                description:
-                  'Como Instituição de Utilidade Pública Desportiva, os donativos beneficiam de deduções fiscais.',
+                iconColor: 'text-green-600 dark:text-green-400',
+                checkColor: 'text-green-600 dark:text-green-400',
+                description: 'Como Instituição de Utilidade Pública Desportiva, os donativos beneficiam de deduções fiscais.',
                 points: [
                   'Majoração até 120% (IRC)',
                   'Dedução 25% em IRS',
@@ -383,12 +367,7 @@ export default function QueroSerPatrocinador() {
                     className="w-full h-full object-cover opacity-30 group-hover:opacity-50 group-hover:scale-105 transition-all duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-950/95" />
-                  <div
-                    className={cn(
-                      'absolute bottom-4 left-4 w-11 h-11 rounded-xl flex items-center justify-center border border-white/10',
-                      iconBg
-                    )}
-                  >
+                  <div className={cn('absolute bottom-4 left-4 w-11 h-11 rounded-xl flex items-center justify-center border border-white/10', iconBg)}>
                     <Icon className={cn('w-5 h-5', iconColor)} />
                   </div>
                 </div>
@@ -396,14 +375,14 @@ export default function QueroSerPatrocinador() {
                   <div className={cn('w-9 h-9 rounded-lg flex items-center justify-center border border-white/10', iconBg)}>
                     <Icon className={cn('w-5 h-5', iconColor)} />
                   </div>
-                  <h3 className="text-lg font-bold">{title}</h3>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">{title}</h3>
                 </div>
                 <div className="p-4 md:p-6">
-                  <h3 className="text-xl font-bold mb-2 hidden md:block">{title}</h3>
-                  <p className="text-gray-400 text-sm mb-3 md:mb-5 leading-relaxed">{description}</p>
+                  <h3 className="text-xl font-bold mb-2 hidden md:block text-gray-900 dark:text-white">{title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 md:mb-5 leading-relaxed">{description}</p>
                   <ul className="space-y-1.5">
                     {points.map((p) => (
-                      <li key={p} className="flex items-center gap-2 text-sm text-gray-300">
+                      <li key={p} className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                         <Check className={cn('w-4 h-4 flex-shrink-0', checkColor)} />
                         {p}
                       </li>
@@ -416,7 +395,7 @@ export default function QueroSerPatrocinador() {
         </div>
       </section>
 
-      {/* ─── VISIBILITY CHANNELS ──────────────────────────────────── */}
+      {/* ─── VISIBILITY CHANNELS ───────────────────────────────────── */}
       <section className="py-8 md:py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -427,8 +406,8 @@ export default function QueroSerPatrocinador() {
             className="text-center mb-6 md:mb-14"
           >
             <span className="text-primary text-sm font-semibold uppercase tracking-widest">Alcance</span>
-            <h2 className="text-3xl md:text-5xl font-black mt-2 mb-3">A sua marca em destaque</h2>
-            <p className="text-gray-400 text-sm md:text-lg max-w-xl mx-auto">
+            <h2 className="text-3xl md:text-5xl font-black mt-2 mb-3 text-gray-900 dark:text-white">A sua marca em destaque</h2>
+            <p className="text-gray-600 dark:text-gray-400 text-sm md:text-lg max-w-xl mx-auto">
               Múltiplos canais de visibilidade para maximizar o retorno do seu investimento.
             </p>
           </motion.div>
@@ -466,18 +445,18 @@ export default function QueroSerPatrocinador() {
                 key={title}
                 variants={fadeUp}
                 whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                className="rounded-2xl overflow-hidden bg-gray-800/50 border border-white/5 group"
+                className="rounded-2xl overflow-hidden bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-white/5 group shadow-sm dark:shadow-none"
               >
                 <div className="h-32 md:h-48 overflow-hidden">
                   <img
                     src={img}
                     alt={title}
-                    className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
+                    className="w-full h-full object-cover opacity-80 dark:opacity-60 group-hover:opacity-100 dark:group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
                   />
                 </div>
                 <div className="p-3 md:p-5">
-                  <h3 className="font-bold text-sm md:text-lg mb-1">{title}</h3>
-                  <p className="text-gray-400 text-xs md:text-sm leading-relaxed">{desc}</p>
+                  <h3 className="font-bold text-sm md:text-lg mb-1 text-gray-900 dark:text-white">{title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-xs md:text-sm leading-relaxed">{desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -485,11 +464,9 @@ export default function QueroSerPatrocinador() {
         </div>
       </section>
 
-      {/* ─── PACKAGES ─────────────────────────────────────────────── */}
-      <section id="pacotes" className="py-10 md:py-20 px-4 bg-gray-900">
+      {/* ─── PACKAGES ──────────────────────────────────────────────── */}
+      <section id="pacotes" className="py-10 md:py-20 px-4 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-6xl mx-auto">
-
-          {/* Header */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -498,22 +475,23 @@ export default function QueroSerPatrocinador() {
             className="text-center mb-6 md:mb-10"
           >
             <span className="text-primary text-sm font-semibold uppercase tracking-widest">Investimento</span>
-            <h2 className="text-3xl md:text-5xl font-black mt-2 mb-3">Pacotes de Patrocínio</h2>
-            <p className="text-gray-400 text-sm md:text-lg max-w-xl mx-auto">
+            <h2 className="text-3xl md:text-5xl font-black mt-2 mb-3 text-gray-900 dark:text-white">Pacotes de Patrocínio</h2>
+            <p className="text-gray-600 dark:text-gray-400 text-sm md:text-lg max-w-xl mx-auto">
               Escolha a zona de visibilidade no equipamento e o plantel que melhor se adapta à sua estratégia.
             </p>
           </motion.div>
 
-          {/* Plantel toggle */}
           <div className="flex justify-center mb-8">
-            <div className="inline-flex bg-gray-800 rounded-xl p-1 border border-white/10">
+            <div className="inline-flex bg-gray-200 dark:bg-gray-800 rounded-xl p-1 border border-gray-300 dark:border-white/10">
               {(['senior', 'formacao'] as const).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={cn(
                     'px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300',
-                    activeTab === tab ? 'bg-primary text-gray-950 shadow-md' : 'text-gray-400 hover:text-white'
+                    activeTab === tab
+                      ? 'bg-primary text-gray-950 shadow-md'
+                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
                   )}
                 >
                   {tab === 'senior' ? 'Plantel Sénior' : 'Formação'}
@@ -522,22 +500,19 @@ export default function QueroSerPatrocinador() {
             </div>
           </div>
 
-          {/* Single centered card */}
           <motion.div
             key={activeTab + '-card'}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: easing }}
-            className="max-w-3xl mx-auto bg-gray-800/50 rounded-2xl border border-white/10 p-5 sm:p-6 space-y-4"
+            className="max-w-3xl mx-auto bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-white/10 p-5 sm:p-6 space-y-4 shadow-sm dark:shadow-none"
           >
-            <h3 className="text-base font-bold text-center text-gray-300">
+            <h3 className="text-base font-bold text-center text-gray-700 dark:text-gray-300">
               Mapa de Zonas — {activeTab === 'senior' ? 'Equipa Sénior' : 'Formação'}
             </h3>
 
-            {/* Photo (left) + Zones (right) — side by side on desktop, stacked on mobile */}
             <div className="flex flex-col md:flex-row gap-4 items-stretch">
-              {/* Jersey photo */}
-              <div className="rounded-xl overflow-hidden border border-white/10 bg-gray-900/50 md:w-5/12 flex-shrink-0">
+              <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-gray-900/50 md:w-5/12 flex-shrink-0">
                 <img
                   src="/uploads/camisas_numeradas.PNG"
                   alt="Camisola com zonas de patrocínio"
@@ -545,8 +520,7 @@ export default function QueroSerPatrocinador() {
                 />
               </div>
 
-              {/* Zone list — 2 cols on mobile, 1 col on desktop */}
-              <div className="grid grid-cols-2 md:grid-cols-1 gap-2 md:flex-1 content-start">
+              <div className="grid grid-cols-1 gap-2 md:flex-1 content-start">
                 {zones.map(({ zone, location, price, description, highlight }, i) => (
                   <div
                     key={zone}
@@ -554,20 +528,20 @@ export default function QueroSerPatrocinador() {
                       'flex items-center justify-between px-3 py-2 rounded-xl border',
                       highlight
                         ? 'bg-primary/10 border-primary/40'
-                        : 'bg-gray-700/50 border-white/10'
+                        : 'bg-gray-100 dark:bg-gray-700/50 border-gray-200 dark:border-white/10'
                     )}
                   >
                     <div className="flex items-center gap-2 min-w-0">
                       <div className={cn(
                         'w-7 h-7 rounded-md flex items-center justify-center text-xs font-black flex-shrink-0',
-                        highlight ? 'bg-primary text-gray-950' : 'bg-gray-600 text-white'
+                        highlight ? 'bg-primary text-gray-950' : 'bg-gray-500 dark:bg-gray-600 text-white'
                       )}>
                         {i + 1}
                       </div>
                       <div className="min-w-0">
                         <div className={cn(
                           'text-xs font-semibold truncate',
-                          highlight ? 'text-primary' : 'text-gray-200'
+                          highlight ? 'text-primary' : 'text-gray-800 dark:text-gray-200'
                         )}>
                           {location}
                         </div>
@@ -576,7 +550,7 @@ export default function QueroSerPatrocinador() {
                     </div>
                     <span className={cn(
                       'text-sm font-black flex-shrink-0 ml-2',
-                      highlight ? 'text-primary' : 'text-white'
+                      highlight ? 'text-primary' : 'text-gray-900 dark:text-white'
                     )}>
                       {price.toLocaleString('pt-PT')}€
                     </span>
@@ -585,28 +559,27 @@ export default function QueroSerPatrocinador() {
               </div>
             </div>
 
-            {/* Sticks + Caneleiras photos */}
             <div className={cn('grid gap-3', activeTab === 'senior' ? 'grid-cols-2' : 'grid-cols-1 max-w-xs mx-auto w-full')}>
-              <div className="rounded-xl overflow-hidden border border-white/10 bg-gray-900/50">
+              <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-gray-900/50">
                 <img
                   src="/uploads/stick_logos.PNG"
                   alt="Sticks com logótipo"
                   className="w-full object-contain max-h-36"
                 />
-                <div className="px-3 py-2 text-center border-t border-white/10">
-                  <div className="text-xs text-gray-400">Autocolante nos Sticks</div>
+                <div className="px-3 py-2 text-center border-t border-gray-200 dark:border-white/10">
+                  <div className="text-xs text-gray-600 dark:text-gray-400">Autocolante nos Sticks</div>
                   <div className="text-sm font-black text-primary">{activeTab === 'senior' ? '300€' : '150€'}</div>
                 </div>
               </div>
               {activeTab === 'senior' && (
-                <div className="rounded-xl overflow-hidden border border-white/10 bg-gray-900/50">
+                <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-gray-900/50">
                   <img
                     src="/uploads/caneleiras_grlogos.PNG"
                     alt="Caneleiras GR com logótipo"
                     className="w-full object-contain max-h-36"
                   />
-                  <div className="px-3 py-2 text-center border-t border-white/10">
-                    <div className="text-xs text-gray-400">Caneleiras G.R.</div>
+                  <div className="px-3 py-2 text-center border-t border-gray-200 dark:border-white/10">
+                    <div className="text-xs text-gray-600 dark:text-gray-400">Caneleiras G.R.</div>
                     <div className="text-sm font-black text-primary">300€</div>
                   </div>
                 </div>
@@ -616,7 +589,7 @@ export default function QueroSerPatrocinador() {
         </div>
       </section>
 
-      {/* ─── NAMING RIGHTS + BANNERS ──────────────────────────────── */}
+      {/* ─── NAMING RIGHTS + BANNERS ───────────────────────────────── */}
       <section className="py-8 md:py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -627,7 +600,7 @@ export default function QueroSerPatrocinador() {
             className="text-center mb-6 md:mb-12"
           >
             <span className="text-primary text-sm font-semibold uppercase tracking-widest">Destaque Máximo</span>
-            <h2 className="text-3xl md:text-5xl font-black mt-2 mb-3">Pacotes Especiais</h2>
+            <h2 className="text-3xl md:text-5xl font-black mt-2 mb-3 text-gray-900 dark:text-white">Pacotes Especiais</h2>
           </motion.div>
 
           <motion.div
@@ -653,13 +626,13 @@ export default function QueroSerPatrocinador() {
                   <Star className="w-3.5 h-3.5" />
                   Patrocínio Premium
                 </div>
-                <h3 className="text-2xl md:text-3xl font-black mb-2 md:mb-3">Naming Rights</h3>
-                <p className="text-gray-300 text-sm leading-relaxed mb-4 md:mb-6">
+                <h3 className="text-2xl md:text-3xl font-black mb-2 md:mb-3 text-gray-900 dark:text-white">Naming Rights</h3>
+                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-4 md:mb-6">
                   Associe o nome da sua empresa ao clube. O HC PDL passa a ser identificado com a sua
                   marca em todas as comunicações, comunicados e presença digital.
                 </p>
                 <div className="text-4xl md:text-5xl font-black text-primary mb-1">2.000€</div>
-                <div className="text-gray-400 text-sm mb-4 md:mb-6">por época / anual</div>
+                <div className="text-gray-600 dark:text-gray-400 text-sm mb-4 md:mb-6">por época / anual</div>
                 <ul className="space-y-2">
                   {[
                     'Nome da marca associado ao clube',
@@ -667,7 +640,7 @@ export default function QueroSerPatrocinador() {
                     'Website, redes sociais e imprensa',
                     'Máxima visibilidade de marca',
                   ].map((p) => (
-                    <li key={p} className="flex items-center gap-2 text-sm text-gray-300">
+                    <li key={p} className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                       <Check className="w-4 h-4 text-primary flex-shrink-0" />
                       {p}
                     </li>
@@ -680,35 +653,35 @@ export default function QueroSerPatrocinador() {
             <motion.div
               variants={fadeUp}
               whileHover={{ y: -8, transition: { duration: 0.35 } }}
-              className="rounded-2xl border border-white/10 bg-gray-800/50 p-5 md:p-8 overflow-hidden relative"
+              className="rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-gray-800/50 p-5 md:p-8 overflow-hidden relative"
             >
               <div className="absolute inset-0 z-0">
                 <img
                   src="/uploads/pavilhao_lonas.PNG"
                   alt="Pavilhão com lonas publicitárias"
-                  className="w-full h-full object-cover opacity-20"
+                  className="w-full h-full object-cover opacity-10 dark:opacity-20"
                 />
               </div>
               <div className="relative z-10">
-                <div className="inline-flex items-center gap-2 bg-white/10 text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full mb-5">
+                <div className="inline-flex items-center gap-2 bg-gray-200 dark:bg-white/10 text-gray-700 dark:text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full mb-5">
                   <MapPin className="w-3.5 h-3.5" />
                   No Pavilhão
                 </div>
-                <h3 className="text-2xl md:text-3xl font-black mb-2 md:mb-3">Lonas Publicitárias</h3>
-                <p className="text-gray-300 text-sm leading-relaxed mb-4 md:mb-6">
+                <h3 className="text-2xl md:text-3xl font-black mb-2 md:mb-3 text-gray-900 dark:text-white">Lonas Publicitárias</h3>
+                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-4 md:mb-6">
                   O seu logótipo exibido em lonas no pavilhão durante todos os jogos em casa da
                   equipa sénior, visíveis por adeptos e nas transmissões YouTube.
                 </p>
-                <div className="text-4xl md:text-5xl font-black text-white mb-1">250€</div>
-                <div className="text-gray-400 text-sm mb-4 md:mb-6">por lona / época</div>
+                <div className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-1">250€</div>
+                <div className="text-gray-600 dark:text-gray-400 text-sm mb-4 md:mb-6">por lona / época</div>
                 <ul className="space-y-2">
                   {[
                     'Visível em todos os jogos em casa',
                     'Aparece nas transmissões YouTube',
                     'Alta visibilidade no pavilhão',
                   ].map((p) => (
-                    <li key={p} className="flex items-center gap-2 text-sm text-gray-300">
-                      <Check className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                    <li key={p} className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                      <Check className="w-4 h-4 text-gray-500 dark:text-gray-400 flex-shrink-0" />
                       {p}
                     </li>
                   ))}
@@ -719,8 +692,8 @@ export default function QueroSerPatrocinador() {
         </div>
       </section>
 
-      {/* ─── OTHER CONTRIBUTIONS ──────────────────────────────────── */}
-      <section className="py-8 md:py-20 px-4 bg-gray-900">
+      {/* ─── OTHER CONTRIBUTIONS ───────────────────────────────────── */}
+      <section className="py-8 md:py-20 px-4 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-6xl mx-auto">
           <motion.div
             variants={fadeUp}
@@ -730,8 +703,8 @@ export default function QueroSerPatrocinador() {
             className="text-center mb-6 md:mb-14"
           >
             <span className="text-primary text-sm font-semibold uppercase tracking-widest">Flexibilidade</span>
-            <h2 className="text-3xl md:text-5xl font-black mt-2 mb-3">Outras Formas de Contribuir</h2>
-            <p className="text-gray-400 text-sm md:text-lg max-w-xl mx-auto">
+            <h2 className="text-3xl md:text-5xl font-black mt-2 mb-3 text-gray-900 dark:text-white">Outras Formas de Contribuir</h2>
+            <p className="text-gray-600 dark:text-gray-400 text-sm md:text-lg max-w-xl mx-auto">
               O apoio não tem de ser apenas monetário — há múltiplas formas de fazer a diferença.
             </p>
           </motion.div>
@@ -744,73 +717,32 @@ export default function QueroSerPatrocinador() {
             className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6"
           >
             {[
-              {
-                icon: Shirt,
-                title: 'Material Têxtil',
-                desc: 'Equipamentos e material desportivo para treinos e competições dos atletas.',
-                color: 'text-yellow-400',
-                bg: 'bg-yellow-500/10',
-              },
-              {
-                icon: Apple,
-                title: 'Alimentação & Bebidas',
-                desc: 'Vouchers ou fornecimento direto para atletas e equipa técnica em dias de jogo.',
-                color: 'text-orange-400',
-                bg: 'bg-orange-500/10',
-              },
-              {
-                icon: Package,
-                title: 'Material Técnico',
-                desc: 'Material de primeiros socorros, cones, bolas e equipamento de treino.',
-                color: 'text-red-400',
-                bg: 'bg-red-500/10',
-              },
-              {
-                icon: House,
-                title: 'Apoio em Residência',
-                desc: 'Contribuição no pagamento de renda para atletas vindos de Portugal Continental.',
-                color: 'text-blue-400',
-                bg: 'bg-blue-500/10',
-              },
-              {
-                icon: Megaphone,
-                title: 'Vagas de Emprego',
-                desc: 'Oportunidades de emprego para atletas provenientes do continente.',
-                color: 'text-purple-400',
-                bg: 'bg-purple-500/10',
-              },
-              {
-                icon: Star,
-                title: 'Parceria Personalizada',
-                desc: 'Contacte-nos e em conjunto encontramos a forma ideal de parceria para a sua empresa.',
-                color: 'text-primary',
-                bg: 'bg-primary/10',
-              },
+              { icon: Shirt, title: 'Material Têxtil', desc: 'Equipamentos e material desportivo para treinos e competições dos atletas.', color: 'text-yellow-500 dark:text-yellow-400', bg: 'bg-yellow-500/10' },
+              { icon: Apple, title: 'Alimentação & Bebidas', desc: 'Vouchers ou fornecimento direto para atletas e equipa técnica em dias de jogo.', color: 'text-orange-500 dark:text-orange-400', bg: 'bg-orange-500/10' },
+              { icon: Package, title: 'Material Técnico', desc: 'Material de primeiros socorros, cones, bolas e equipamento de treino.', color: 'text-red-500 dark:text-red-400', bg: 'bg-red-500/10' },
+              { icon: House, title: 'Apoio em Residência', desc: 'Contribuição no pagamento de renda para atletas vindos de Portugal Continental.', color: 'text-blue-500 dark:text-blue-400', bg: 'bg-blue-500/10' },
+              { icon: Megaphone, title: 'Vagas de Emprego', desc: 'Oportunidades de emprego para atletas provenientes do continente.', color: 'text-purple-500 dark:text-purple-400', bg: 'bg-purple-500/10' },
+              { icon: Star, title: 'Parceria Personalizada', desc: 'Contacte-nos e em conjunto encontramos a forma ideal de parceria para a sua empresa.', color: 'text-primary', bg: 'bg-primary/10' },
             ].map(({ icon: Icon, title, desc, color, bg }, i) => (
               <motion.div
                 key={title}
                 variants={fadeUp}
                 custom={i * 0.04}
                 whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                className="bg-gray-800/50 border border-white/10 rounded-2xl p-4 md:p-6 hover:border-white/20 transition-colors group"
+                className="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-white/10 rounded-2xl p-4 md:p-6 hover:border-gray-300 dark:hover:border-white/20 group shadow-sm dark:shadow-none"
               >
-                <div
-                  className={cn(
-                    'w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-300',
-                    bg
-                  )}
-                >
+                <div className={cn('w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-300', bg)}>
                   <Icon className={cn('w-5 h-5 md:w-6 md:h-6', color)} />
                 </div>
-                <h3 className="font-bold text-sm md:text-lg mb-1">{title}</h3>
-                <p className="text-gray-400 text-xs md:text-sm leading-relaxed hidden sm:block">{desc}</p>
+                <h3 className="font-bold text-sm md:text-lg mb-1 text-gray-900 dark:text-white">{title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-xs md:text-sm leading-relaxed hidden sm:block">{desc}</p>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* ─── IMPACT ───────────────────────────────────────────────── */}
+      {/* ─── IMPACT ────────────────────────────────────────────────── */}
       <section className="py-8 md:py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -828,7 +760,7 @@ export default function QueroSerPatrocinador() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 to-transparent" />
               <div className="absolute bottom-6 left-6 right-6">
-                <div className="text-2xl font-black mb-1">Impacto Real</div>
+                <div className="text-2xl font-black mb-1 text-white">Impacto Real</div>
                 <div className="text-gray-300 text-sm">O seu investimento chega diretamente aos atletas.</div>
               </div>
             </motion.div>
@@ -841,7 +773,7 @@ export default function QueroSerPatrocinador() {
             >
               <motion.div variants={fadeUp}>
                 <span className="text-primary text-sm font-semibold uppercase tracking-widest">O seu contributo</span>
-                <h2 className="text-3xl md:text-4xl font-black mt-2 mb-6 md:mb-8">O impacto do seu patrocínio</h2>
+                <h2 className="text-3xl md:text-4xl font-black mt-2 mb-6 md:mb-8 text-gray-900 dark:text-white">O impacto do seu patrocínio</h2>
               </motion.div>
 
               {[
@@ -873,16 +805,12 @@ export default function QueroSerPatrocinador() {
                   color: 'border-l-green-400',
                 },
               ].map(({ title, items, color }) => (
-                <motion.div
-                  key={title}
-                  variants={fadeUp}
-                  className={cn('border-l-4 pl-4 mb-4 md:mb-6', color)}
-                >
-                  <h3 className="font-bold text-lg mb-2">{title}</h3>
+                <motion.div key={title} variants={fadeUp} className={cn('border-l-4 pl-4 mb-4 md:mb-6', color)}>
+                  <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">{title}</h3>
                   <ul className="space-y-1">
                     {items.map((item) => (
-                      <li key={item} className="text-gray-400 text-sm flex items-start gap-2">
-                        <span className="text-gray-600 mt-1.5">•</span>
+                      <li key={item} className="text-gray-600 dark:text-gray-400 text-sm flex items-start gap-2">
+                        <span className="text-gray-400 dark:text-gray-600 mt-1.5">•</span>
                         {item}
                       </li>
                     ))}
@@ -894,8 +822,8 @@ export default function QueroSerPatrocinador() {
         </div>
       </section>
 
-      {/* ─── FISCAL BENEFITS ──────────────────────────────────────── */}
-      <section className="py-8 md:py-20 px-4 bg-gray-900">
+      {/* ─── FISCAL BENEFITS ───────────────────────────────────────── */}
+      <section className="py-8 md:py-20 px-4 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-6xl mx-auto">
           <motion.div
             variants={fadeUp}
@@ -904,9 +832,9 @@ export default function QueroSerPatrocinador() {
             viewport={{ once: true }}
             className="text-center mb-6 md:mb-14"
           >
-            <span className="text-green-400 text-sm font-semibold uppercase tracking-widest">Mecenato Desportivo</span>
-            <h2 className="text-3xl md:text-5xl font-black mt-2 mb-3">Benefícios Fiscais</h2>
-            <p className="text-gray-400 text-sm md:text-lg max-w-xl mx-auto">
+            <span className="text-green-600 dark:text-green-400 text-sm font-semibold uppercase tracking-widest">Mecenato Desportivo</span>
+            <h2 className="text-3xl md:text-5xl font-black mt-2 mb-3 text-gray-900 dark:text-white">Benefícios Fiscais</h2>
+            <p className="text-gray-600 dark:text-gray-400 text-sm md:text-lg max-w-xl mx-auto">
               Como Instituição de Utilidade Pública Desportiva, os seus donativos têm benefícios fiscais reais e garantidos.
             </p>
           </motion.div>
@@ -918,7 +846,6 @@ export default function QueroSerPatrocinador() {
             viewport={{ once: true, amount: 0.2 }}
             className="grid md:grid-cols-2 gap-4 md:gap-8"
           >
-            {/* Companies */}
             <motion.div
               variants={fadeUp}
               whileHover={{ y: -8, transition: { duration: 0.35 } }}
@@ -926,36 +853,21 @@ export default function QueroSerPatrocinador() {
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6 text-green-400" />
+                  <TrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" />
                 </div>
-                <h3 className="text-xl md:text-2xl font-black">Para Empresas</h3>
+                <h3 className="text-xl md:text-2xl font-black text-gray-900 dark:text-white">Para Empresas</h3>
               </div>
               <ul className="space-y-3 md:space-y-4 mb-4 md:mb-6">
                 {[
-                  {
-                    label: 'Majoração fiscal até',
-                    value: '120%',
-                    desc: 'por cada donativo efetuado ao clube',
-                  },
-                  {
-                    label: 'Benefícios para dedução de',
-                    value: 'IRC',
-                    desc: 'deduções diretas no imposto sobre rendimento',
-                  },
-                  {
-                    label: 'Apoio em espécie',
-                    value: 'Têxtil / Alimentos',
-                    desc: 'adquiridos diretamente pela empresa como patrocínio',
-                  },
+                  { label: 'Majoração fiscal até', value: '120%', desc: 'por cada donativo efetuado ao clube' },
+                  { label: 'Benefícios para dedução de', value: 'IRC', desc: 'deduções diretas no imposto sobre rendimento' },
+                  { label: 'Apoio em espécie', value: 'Têxtil / Alimentos', desc: 'adquiridos diretamente pela empresa como patrocínio' },
                 ].map(({ label, value, desc }) => (
-                  <li
-                    key={value}
-                    className="flex items-start gap-4 p-4 rounded-xl bg-green-500/5 border border-green-500/10"
-                  >
-                    <Check className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
+                  <li key={value} className="flex items-start gap-4 p-4 rounded-xl bg-green-500/5 border border-green-500/10">
+                    <Check className="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
                     <div>
-                      <span className="text-gray-300 text-sm">{label} </span>
-                      <span className="font-bold text-green-400">{value}</span>
+                      <span className="text-gray-700 dark:text-gray-300 text-sm">{label} </span>
+                      <span className="font-bold text-green-600 dark:text-green-400">{value}</span>
                       <div className="text-xs text-gray-500 mt-0.5">{desc}</div>
                     </div>
                   </li>
@@ -963,7 +875,6 @@ export default function QueroSerPatrocinador() {
               </ul>
             </motion.div>
 
-            {/* Individuals */}
             <motion.div
               variants={fadeUp}
               whileHover={{ y: -8, transition: { duration: 0.35 } }}
@@ -971,30 +882,29 @@ export default function QueroSerPatrocinador() {
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center">
-                  <Users className="w-6 h-6 text-blue-400" />
+                  <Users className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                 </div>
-                <h3 className="text-xl md:text-2xl font-black">Para Particulares</h3>
+                <h3 className="text-xl md:text-2xl font-black text-gray-900 dark:text-white">Para Particulares</h3>
               </div>
-              <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-6 leading-relaxed">
                 Qualquer particular pode apoiar financeiramente o clube e beneficiar de deduções em IRS,
                 até ao limite de 15% da coleta total.
               </p>
 
-              {/* Calculator */}
               <div className="bg-blue-500/5 border border-blue-500/15 rounded-xl p-6 mb-6">
                 <div className="text-xs text-gray-500 uppercase tracking-wider mb-5 font-semibold">
                   Exemplo de cálculo
                 </div>
                 <div className="space-y-4">
                   {[
-                    { label: 'Doação', value: '200€', color: 'text-white' },
-                    { label: 'Dedução IRS (25%)', value: '− 50€', color: 'text-blue-400' },
-                    { label: 'Custo efetivo', value: '150€', color: 'text-2xl text-white font-black' },
+                    { label: 'Doação', value: '200€', color: 'text-gray-900 dark:text-white' },
+                    { label: 'Dedução IRS (25%)', value: '− 50€', color: 'text-blue-500 dark:text-blue-400' },
+                    { label: 'Custo efetivo', value: '150€', color: 'text-2xl text-gray-900 dark:text-white font-black' },
                   ].map(({ label, value, color }, i) => (
                     <div key={label}>
-                      {i === 2 && <div className="h-px bg-white/10 mb-4" />}
+                      {i === 2 && <div className="h-px bg-gray-200 dark:bg-white/10 mb-4" />}
                       <div className="flex justify-between items-center">
-                        <span className="text-gray-300 text-sm">{label}</span>
+                        <span className="text-gray-700 dark:text-gray-300 text-sm">{label}</span>
                         <span className={cn('font-bold text-xl', color)}>{value}</span>
                       </div>
                     </div>
@@ -1010,7 +920,7 @@ export default function QueroSerPatrocinador() {
         </div>
       </section>
 
-      {/* ─── CTA ──────────────────────────────────────────────────── */}
+      {/* ─── CTA ───────────────────────────────────────────────────── */}
       <section id="contacto" className="py-10 md:py-24 px-4 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
@@ -1018,12 +928,11 @@ export default function QueroSerPatrocinador() {
             alt="CTA background"
             className="w-full h-full object-cover opacity-5"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/95 to-gray-950/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/95 to-white/80 dark:from-gray-950 dark:via-gray-950/95 dark:to-gray-950/80" />
         </div>
 
-        {/* Ambient glow */}
         <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.08, 0.16, 0.08] }}
           transition={{ repeat: Infinity, duration: 5 }}
           className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[100px] z-0 pointer-events-none"
         />
@@ -1038,46 +947,41 @@ export default function QueroSerPatrocinador() {
             <div className="w-14 h-14 md:w-20 md:h-20 rounded-2xl bg-primary/20 border border-primary/30 flex items-center justify-center mx-auto mb-5 md:mb-8">
               <Star className="w-7 h-7 md:w-10 md:h-10 text-primary" />
             </div>
-            <h2 className="text-3xl md:text-6xl font-black mb-4 leading-tight">
+            <h2 className="text-3xl md:text-6xl font-black mb-4 leading-tight text-gray-900 dark:text-white">
               Pronto para fazer{' '}
               <span className="text-primary">a diferença?</span>
             </h2>
-            <p className="text-gray-400 text-sm md:text-lg mb-7 md:mb-10 leading-relaxed max-w-xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-400 text-sm md:text-lg mb-7 md:mb-10 leading-relaxed max-w-xl mx-auto">
               Entre em contacto connosco e juntos encontramos a melhor forma de associar
               a sua marca ao Hóquei Clube Ponta Delgada.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button
-                size="lg"
+              <button
                 onClick={() => setShowWhatsApp(true)}
-                className="bg-primary text-gray-950 hover:bg-primary/90 font-bold text-base sm:text-lg px-8 sm:px-10 py-4 sm:py-6 rounded-xl shadow-lg shadow-primary/25 group w-full sm:w-auto"
+                className="group inline-flex items-center justify-center gap-2 bg-primary text-gray-950 hover:bg-primary/90 font-heading font-black text-sm sm:text-base uppercase tracking-wider px-8 sm:px-10 py-4 sm:py-5 shadow-lg shadow-primary/25 w-full sm:w-auto transition-colors"
               >
-                <WhatsAppIcon className="mr-2 w-5 h-5" />
+                <WhatsAppIcon className="w-5 h-5" />
                 Entrar em Contacto
-              </Button>
-              <Link to="/">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="bg-white border-white text-gray-950 hover:bg-white/90 font-semibold text-base sm:text-lg px-8 sm:px-10 py-4 sm:py-6 rounded-xl w-full sm:w-auto"
-                >
-                  Voltar ao Site
-                </Button>
+              </button>
+              <Link
+                to="/"
+                className="inline-flex items-center justify-center gap-2 border border-primary text-primary hover:bg-primary hover:text-gray-950 font-heading font-black text-sm sm:text-base uppercase tracking-wider px-8 sm:px-10 py-4 sm:py-5 w-full sm:w-auto transition-all duration-200"
+              >
+                Voltar ao Site
               </Link>
             </div>
 
-            <div className="mt-10 text-gray-600 text-sm">
+            <div className="mt-10 text-gray-500 dark:text-gray-600 text-sm">
               NIPC 510 378 242 · Instituição de Utilidade Pública Desportiva · Sem fins lucrativos
             </div>
           </motion.div>
         </div>
       </section>
 
-      <Footer onOpenDonations={() => setIsDonationsOpen(true)} />
-      <DonationsModal isOpen={isDonationsOpen} onClose={() => setIsDonationsOpen(false)} />
+      <Footer />
 
-      {/* ─── WHATSAPP MODAL ───────────────────────────────────────── */}
+      {/* ─── WHATSAPP MODAL ────────────────────────────────────────── */}
       {showWhatsApp && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -1091,34 +995,32 @@ export default function QueroSerPatrocinador() {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.85, opacity: 0, y: 20 }}
             transition={{ duration: 0.3, ease: easing }}
-            className="relative bg-gray-900 border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl"
+            className="relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close */}
             <button
               onClick={() => setShowWhatsApp(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors"
+              className="absolute top-4 right-4 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white"
             >
               <X className="w-5 h-5" />
             </button>
 
-            {/* Icon */}
             <div className="w-16 h-16 rounded-2xl bg-green-500/15 border border-green-500/20 flex items-center justify-center mx-auto mb-5">
-              <WhatsAppIcon className="w-8 h-8 text-green-400" />
+              <WhatsAppIcon className="w-8 h-8 text-green-500 dark:text-green-400" />
             </div>
 
-            <h3 className="text-xl font-black text-center mb-2">Contacto via WhatsApp</h3>
-            <p className="text-gray-400 text-sm text-center leading-relaxed mb-1">
+            <h3 className="text-xl font-black text-center mb-2 text-gray-900 dark:text-white">Contacto via WhatsApp</h3>
+            <p className="text-gray-600 dark:text-gray-400 text-sm text-center leading-relaxed mb-1">
               Será redirecionado para o WhatsApp com o número oficial do clube:
             </p>
-            <p className="text-white font-black text-center text-lg mb-6 tracking-wide">
+            <p className="text-gray-900 dark:text-white font-black text-center text-lg mb-6 tracking-wide">
               +351 910 413 531
             </p>
 
             <div className="flex gap-3">
               <button
                 onClick={() => setShowWhatsApp(false)}
-                className="flex-1 py-3 rounded-xl border border-white/15 text-gray-400 hover:text-white hover:border-white/30 transition-all text-sm font-semibold"
+                className="flex-1 py-3 border border-gray-200 dark:border-white/15 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:border-gray-400 dark:hover:border-white/30 font-heading font-black text-xs uppercase tracking-wider transition-colors"
               >
                 Cancelar
               </button>
@@ -1127,7 +1029,7 @@ export default function QueroSerPatrocinador() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setShowWhatsApp(false)}
-                className="flex-1 py-3 rounded-xl bg-green-500 hover:bg-green-400 text-white font-bold text-sm text-center transition-colors flex items-center justify-center gap-2"
+                className="flex-1 py-3 bg-green-500 hover:bg-green-400 text-white font-heading font-black text-xs uppercase tracking-wider text-center flex items-center justify-center gap-2 transition-colors"
               >
                 <WhatsAppIcon className="w-4 h-4" />
                 Abrir WhatsApp
