@@ -87,16 +87,33 @@ export default function QueroSerPatrocinador() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-white overflow-x-hidden">
       <Helmet>
-        <title>Quero ser Patrocinador | Hóquei Clube PDL</title>
+        <title>Patrocinar o Hóquei Clube PDL — Visibilidade, Impacto e Benefícios Fiscais</title>
         <meta
           name="description"
-          content="Torne-se parceiro do Hóquei Clube PDL. Visibilidade para a sua marca, impacto social e benefícios fiscais reais. Época 2026/2027."
+          content="Seja parceiro do Hóquei Clube PDL (Açores). Visibilidade nos jogos transmitidos na RTP Açores e YouTube, impacto social real e benefícios fiscais: dedução de 25% em IRS e majoração até 120% em IRC."
         />
         <link rel="canonical" href="https://hoqueiclubepdl.com/patrocinadores" />
-        <meta property="og:title" content="Quero ser Patrocinador | Hóquei Clube PDL" />
-        <meta property="og:description" content="Torne-se parceiro do Hóquei Clube PDL. Visibilidade para a sua marca, impacto social e benefícios fiscais reais. Época 2026/2027." />
+        <meta property="og:title" content="Patrocinar o HC PDL — Visibilidade, Impacto e Benefícios Fiscais" />
+        <meta property="og:description" content="Seja parceiro do Hóquei Clube PDL. Visibilidade nos jogos, impacto social real e benefícios fiscais em IRS/IRC. Época 2026/2027." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://hoqueiclubepdl.com/patrocinadores" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "Patrocinar o Hóquei Clube PDL",
+          "description": "Oportunidades de patrocínio e parceria com o Hóquei Clube PDL de Ponta Delgada, Açores. Benefícios de visibilidade e fiscais para empresas e particulares.",
+          "url": "https://hoqueiclubepdl.com/patrocinadores",
+          "inLanguage": "pt-PT",
+          "publisher": { "@type": "Organization", "name": "Hóquei Clube PDL", "url": "https://hoqueiclubepdl.com/" }
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://hoqueiclubepdl.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Patrocinadores", "item": "https://hoqueiclubepdl.com/patrocinadores" }
+          ]
+        })}</script>
       </Helmet>
 
       <Navigation />

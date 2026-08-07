@@ -51,36 +51,101 @@
     <meta name="twitter:description" content="Fundado em 2012, o Hóquei Clube PDL tem sido um símbolo de excelência desportiva nos Açores, na Ilha de São Miguel. O nosso compromisso com o desenvolvimento de jovens talentos e a promoção do hóquei na região autónoma dos Açores tornou-nos um dos clubes mais respeitados em Portugal." />
     <meta name="twitter:image" content="https://hoqueiclubepdl.com/uploads/pdlLogo.png" />
 
+    <!-- WebSite schema: establishes entity identity for AI/search -->
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "SportsTeam",
-        "name": "Hóquei Clube PDL",
-        "alternateName": ["HCPDL", "HoqueiClubePDL"],
-        "sport": "Roller Hockey",
-        "foundingDate": "2012",
-        "location": {
-          "@type": "Place",
-          "name": "Pavilhão Sidónio Serpa",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Rua do Mercado, 31",
-            "addressLocality": "Ponta Delgada",
-            "postalCode": "9500-326",
-            "addressRegion": "Açores",
-            "addressCountry": "PT"
-          }
-        },
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "email": "hoqueiclube.pdl@gmail.com",
-          "telephone": "+351296382987",
-          "contactType": "Informações Gerais"
-        },
-        "url": "https://hoqueiclubepdl.com/",
-        "logo": "https://hoqueiclubepdl.com/uploads/pdlLogo.png"
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://hoqueiclubepdl.com/#website",
+      "name": "Hóquei Clube PDL",
+      "alternateName": ["HCPDL", "HC PDL", "HoqueiClubePDL"],
+      "url": "https://hoqueiclubepdl.com/",
+      "description": "Site oficial do Hóquei Clube PDL — clube de hóquei em patins fundado em 2012 em Ponta Delgada, Açores.",
+      "inLanguage": "pt-PT",
+      "publisher": {
+        "@id": "https://hoqueiclubepdl.com/#organization"
       }
-      </script>
+    }
+    </script>
+
+    <!-- SportsTeam / Organization schema: complete entity definition for AI citation -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": ["SportsTeam", "SportsOrganization"],
+      "@id": "https://hoqueiclubepdl.com/#organization",
+      "name": "Hóquei Clube PDL",
+      "alternateName": ["HCPDL", "HC PDL", "HoqueiClubePDL"],
+      "sport": "Hóquei em Patins",
+      "foundingDate": "2012",
+      "description": "O Hóquei Clube PDL é um clube de hóquei em patins fundado em 2012 em Ponta Delgada, Açores. Compete no Campeonato Nacional e tem escalões de formação Sub-11, Sub-13 e Sub-17. Representa os Açores no hóquei em patins nacional.",
+      "url": "https://hoqueiclubepdl.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://hoqueiclubepdl.com/uploads/pdlLogo.png",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://hoqueiclubepdl.com/uploads/PDL24-25V2.png",
+      "location": {
+        "@type": "Place",
+        "name": "Pavilhão Sidório Serpa",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Rua do Mercado, 31",
+          "addressLocality": "Ponta Delgada",
+          "postalCode": "9500-326",
+          "addressRegion": "Açores",
+          "addressCountry": "PT"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 37.7408,
+          "longitude": -25.6727
+        }
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "R. Vítor Câmara Bloco 1 R/C Drt",
+        "addressLocality": "Ponta Delgada",
+        "postalCode": "9500-234",
+        "addressRegion": "Açores",
+        "addressCountry": "PT"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "hoquei.clube.pdl@gmail.com",
+        "telephone": "+351296382987",
+        "contactType": "Informações Gerais"
+      },
+      "taxID": "510378242",
+      "sameAs": [
+        "https://www.facebook.com/HoqueiClubePDL",
+        "https://www.instagram.com/hoqueiclubepdl/",
+        "https://www.youtube.com/@HoqueiClubePDL"
+      ],
+      "knowsAbout": [
+        "Hóquei em Patins",
+        "Rink Hockey",
+        "Roller Hockey",
+        "Formação Desportiva",
+        "Campeonato Nacional de Hóquei em Patins",
+        "Açores",
+        "Ponta Delgada",
+        "São Miguel"
+      ],
+      "memberOf": {
+        "@type": "SportsOrganization",
+        "name": "Federação de Patinagem de Portugal",
+        "alternateName": "FPP",
+        "url": "https://fpp.pt/"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Açores, Portugal"
+      }
+    }
+    </script>
   </head>
 
   <body>

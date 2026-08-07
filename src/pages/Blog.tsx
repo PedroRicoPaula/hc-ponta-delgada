@@ -50,19 +50,29 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Helmet>
-        <title>Blog — Hóquei Clube PDL</title>
-        <meta name="description" content="Artigos, novidades e histórias sobre hóquei em patins do Hóquei Clube PDL." />
+        <title>Blog — Hóquei em Patins nos Açores | HC PDL</title>
+        <meta name="description" content="Artigos, guias e novidades sobre hóquei em patins do Hóquei Clube PDL de Ponta Delgada, Açores. Saúde, técnica, formação e resultados." />
         <link rel="canonical" href="https://hoqueiclubepdl.com/blog" />
-        <meta property="og:title" content="Blog — Hóquei Clube PDL" />
-        <meta property="og:description" content="Artigos, novidades e histórias sobre hóquei em patins do Hóquei Clube PDL." />
+        <meta property="og:title" content="Blog — Hóquei em Patins nos Açores | HC PDL" />
+        <meta property="og:description" content="Artigos, guias e novidades sobre hóquei em patins do Hóquei Clube PDL de Ponta Delgada, Açores." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://hoqueiclubepdl.com/blog" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Blog",
           "name": "Blog do Hóquei Clube PDL",
+          "description": "Artigos, guias e novidades sobre hóquei em patins do Hóquei Clube PDL de Ponta Delgada, Açores.",
           "url": "https://hoqueiclubepdl.com/blog",
-          "publisher": { "@type": "Organization", "name": "Hóquei Clube PDL" }
+          "inLanguage": "pt-PT",
+          "publisher": { "@type": "Organization", "name": "Hóquei Clube PDL", "url": "https://hoqueiclubepdl.com/" }
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://hoqueiclubepdl.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://hoqueiclubepdl.com/blog" }
+          ]
         })}</script>
       </Helmet>
 

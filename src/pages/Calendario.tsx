@@ -83,13 +83,51 @@ export default function Calendario() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Helmet>
-        <title>Calendário — Hóquei Clube PDL</title>
-        <meta name="description" content="Calendário de jogos do Hóquei Clube PDL — próximos jogos, transmissões e resultados." />
+        <title>Calendário de Jogos — Hóquei Clube PDL | Próximos Jogos e Resultados</title>
+        <meta name="description" content="Calendário completo de jogos do Hóquei Clube PDL (Açores) — próximos jogos, transmissões ao vivo no YouTube e resultados do Campeonato Nacional." />
         <link rel="canonical" href="https://hoqueiclubepdl.com/calendario" />
-        <meta property="og:title" content="Calendário — Hóquei Clube PDL" />
-        <meta property="og:description" content="Calendário de jogos do Hóquei Clube PDL — próximos jogos, transmissões e resultados." />
+        <meta property="og:title" content="Calendário de Jogos — Hóquei Clube PDL" />
+        <meta property="og:description" content="Calendário completo de jogos do Hóquei Clube PDL — próximos jogos, transmissões ao vivo e resultados do Campeonato Nacional de Hóquei em Patins." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://hoqueiclubepdl.com/calendario" />
+        <script type="application/ld+json">{JSON.stringify(
+          sorted.map(game => ({
+            "@context": "https://schema.org",
+            "@type": "SportsEvent",
+            "name": `HC PDL vs ${game.opponent}`,
+            "startDate": parseGameDateTime(game).toISOString(),
+            "location": {
+              "@type": "Place",
+              "name": game.location,
+              "address": game.isHome
+                ? { "@type": "PostalAddress", "streetAddress": "Rua do Mercado, 31", "addressLocality": "Ponta Delgada", "postalCode": "9500-326", "addressRegion": "Açores", "addressCountry": "PT" }
+                : { "@type": "PostalAddress", "addressCountry": "PT" }
+            },
+            "homeTeam": {
+              "@type": "SportsTeam",
+              "name": game.isHome ? "Hóquei Clube PDL" : game.opponent,
+              ...(game.isHome ? { "url": "https://hoqueiclubepdl.com/" } : {})
+            },
+            "awayTeam": {
+              "@type": "SportsTeam",
+              "name": game.isHome ? game.opponent : "Hóquei Clube PDL",
+              ...(!game.isHome ? { "url": "https://hoqueiclubepdl.com/" } : {})
+            },
+            "sport": "Hóquei em Patins",
+            "description": `Jogo do Campeonato Nacional — ${game.competition}. ${game.isHome ? "Jogo em casa no Pavilhão Sidório Serpa, Ponta Delgada." : `Jogo fora em ${game.location}.`}`,
+            "organizer": { "@type": "Organization", "name": "Federação de Patinagem de Portugal", "alternateName": "FPP" },
+            ...(game.result ? { "result": `HC PDL ${game.isHome ? game.result.home : game.result.away} - ${game.isHome ? game.result.away : game.result.home} ${game.opponent}` } : {}),
+            ...(game.youtubeUrl ? { "recordedIn": { "@type": "VideoObject", "name": `HC PDL vs ${game.opponent} — Ao Vivo`, "url": game.youtubeUrl } } : {})
+          }))
+        )}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://hoqueiclubepdl.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Calendário", "item": "https://hoqueiclubepdl.com/calendario" }
+          ]
+        })}</script>
       </Helmet>
 
       <Navigation />

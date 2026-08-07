@@ -50,7 +50,7 @@ export const AboutSection = () => (
             >
               <span className="text-xl flex-shrink-0 mt-0.5">{icon}</span>
               <div>
-                <h4 className="font-heading text-base uppercase tracking-wide text-gray-900 dark:text-white font-black">{title}</h4>
+                <h3 className="font-heading text-base uppercase tracking-wide text-gray-900 dark:text-white font-black">{title}</h3>
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 leading-relaxed">{desc}</p>
               </div>
             </motion.div>

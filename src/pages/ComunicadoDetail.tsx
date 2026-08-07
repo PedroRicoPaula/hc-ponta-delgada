@@ -22,14 +22,28 @@ export default function ComunicadoDetail() {
     "@type": "NewsArticle",
     "headline": comunicado.titulo,
     "datePublished": parseComunicadoDate(comunicado.data).toISOString(),
+    "dateModified": parseComunicadoDate(comunicado.data).toISOString(),
     "articleBody": comunicado.conteudo,
-    "author": { "@type": "Organization", "name": "Hóquei Clube PDL" },
+    "inLanguage": "pt-PT",
+    "author": { "@type": "Organization", "name": "Hóquei Clube PDL", "url": "https://hoqueiclubepdl.com/" },
     "publisher": {
       "@type": "Organization",
       "name": "Hóquei Clube PDL",
+      "url": "https://hoqueiclubepdl.com/",
       "logo": { "@type": "ImageObject", "url": "https://hoqueiclubepdl.com/uploads/pdlLogo.png" }
     },
     "url": `https://hoqueiclubepdl.com/comunicados/${comunicado.slug}`,
+    "mainEntityOfPage": { "@type": "WebPage", "@id": `https://hoqueiclubepdl.com/comunicados/${comunicado.slug}` }
+  };
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://hoqueiclubepdl.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Comunicados", "item": "https://hoqueiclubepdl.com/comunicados" },
+      { "@type": "ListItem", "position": 3, "name": comunicado.titulo, "item": `https://hoqueiclubepdl.com/comunicados/${comunicado.slug}` }
+    ]
   };
 
   return (
@@ -44,6 +58,7 @@ export default function ComunicadoDetail() {
         <meta property="og:url" content={`https://hoqueiclubepdl.com/comunicados/${comunicado.slug}`} />
         <meta name="twitter:card" content="summary" />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script>
       </Helmet>
 
       <Navigation />

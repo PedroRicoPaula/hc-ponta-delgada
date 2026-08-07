@@ -61,19 +61,29 @@ export default function Comunicados() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Helmet>
-        <title>Comunicados — Hóquei Clube PDL</title>
-        <meta name="description" content="Comunicados oficiais, resultados e novidades do Hóquei Clube PDL." />
+        <title>Comunicados Oficiais — Hóquei Clube PDL | Açores</title>
+        <meta name="description" content="Comunicados oficiais do Hóquei Clube PDL: resultados, eleições, conquistas e novidades do clube de hóquei em patins de Ponta Delgada, Açores." />
         <link rel="canonical" href="https://hoqueiclubepdl.com/comunicados" />
         <meta property="og:title" content="Comunicados — Hóquei Clube PDL" />
-        <meta property="og:description" content="Comunicados oficiais, resultados e novidades do Hóquei Clube PDL." />
+        <meta property="og:description" content="Comunicados oficiais do Hóquei Clube PDL: resultados, eleições, conquistas e novidades do clube de hóquei em patins dos Açores." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://hoqueiclubepdl.com/comunicados" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "CollectionPage",
           "name": "Comunicados do Hóquei Clube PDL",
+          "description": "Comunicados oficiais, resultados e novidades do Hóquei Clube PDL de Ponta Delgada, Açores.",
           "url": "https://hoqueiclubepdl.com/comunicados",
-          "publisher": { "@type": "Organization", "name": "Hóquei Clube PDL" }
+          "inLanguage": "pt-PT",
+          "publisher": { "@type": "Organization", "name": "Hóquei Clube PDL", "url": "https://hoqueiclubepdl.com/" }
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://hoqueiclubepdl.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Comunicados", "item": "https://hoqueiclubepdl.com/comunicados" }
+          ]
         })}</script>
       </Helmet>
 

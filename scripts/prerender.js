@@ -37,8 +37,32 @@ async function getRoutes() {
   }
 }
 
+// Priority and changefreq per route type
+function getSitemapMeta(route) {
+  if (route === '/') return { priority: '1.0', changefreq: 'weekly' };
+  if (route === '/modalidade') return { priority: '0.9', changefreq: 'monthly' };
+  if (route === '/calendario') return { priority: '0.9', changefreq: 'daily' };
+  if (route === '/comunicados') return { priority: '0.8', changefreq: 'weekly' };
+  if (route === '/blog') return { priority: '0.8', changefreq: 'weekly' };
+  if (route === '/patrocinadores') return { priority: '0.7', changefreq: 'monthly' };
+  if (route.startsWith('/comunicados/')) return { priority: '0.7', changefreq: 'monthly' };
+  if (route.startsWith('/blog/')) return { priority: '0.7', changefreq: 'monthly' };
+  return { priority: '0.5', changefreq: 'monthly' };
+}
+
 async function writeSitemap(routes) {
-  const urls = routes.map((route) => `  <url><loc>${SITE_URL}${route}</loc></url>`).join('\n');
+  const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+  const urls = routes.map((route) => {
+    const { priority, changefreq } = getSitemapMeta(route);
+    return [
+      '  <url>',
+      `    <loc>${SITE_URL}${route}</loc>`,
+      `    <lastmod>${today}</lastmod>`,
+      `    <changefreq>${changefreq}</changefreq>`,
+      `    <priority>${priority}</priority>`,
+      '  </url>',
+    ].join('\n');
+  }).join('\n');
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
   await writeFile(path.join(root, 'dist', 'sitemap.xml'), xml, 'utf-8');
 }

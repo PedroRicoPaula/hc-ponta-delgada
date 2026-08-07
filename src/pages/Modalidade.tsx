@@ -202,21 +202,87 @@ export default function Modalidade() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <Helmet>
-        <title>A Modalidade — Hóquei em Patins | HC PDL</title>
-        <meta name="description" content="Tudo sobre o hóquei em patins: história, regras, posições, equipamento e glossário. Guia completo do Hóquei Clube PDL." />
+        <title>Hóquei em Patins — Regras, História e Guia Completo | HC PDL</title>
+        <meta name="description" content="Guia completo sobre hóquei em patins: história desde 1878, regras básicas, posições, equipamento e glossário. Criado pelo Hóquei Clube PDL, Açores." />
         <link rel="canonical" href="https://hoqueiclubepdl.com/modalidade" />
-        <meta property="og:title" content="A Modalidade — Hóquei em Patins" />
-        <meta property="og:description" content="Guia completo sobre hóquei em patins: história, regras, posições, equipamento e glossário." />
-        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Hóquei em Patins — Guia Completo | HC PDL" />
+        <meta property="og:description" content="Tudo sobre hóquei em patins: história, regras, posições, equipamento e glossário. Guia completo do Hóquei Clube PDL, Açores." />
+        <meta property="og:type" content="article" />
         <meta property="og:url" content="https://hoqueiclubepdl.com/modalidade" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Article",
-          "headline": "Guia Completo de Hóquei em Patins",
-          "description": "História, regras, posições, equipamento e glossário do hóquei em patins.",
-          "author": { "@type": "Organization", "name": "Hóquei Clube PDL" },
-          "publisher": { "@type": "Organization", "name": "Hóquei Clube PDL" },
-          "url": "https://hoqueiclubepdl.com/modalidade"
+          "headline": "Guia Completo de Hóquei em Patins — Regras, História, Posições e Equipamento",
+          "description": "Tudo sobre o hóquei em patins: história desde 1878, regras básicas, posições em campo, equipamento necessário e glossário de termos.",
+          "author": { "@type": "Organization", "name": "Hóquei Clube PDL", "url": "https://hoqueiclubepdl.com/" },
+          "publisher": { "@type": "Organization", "name": "Hóquei Clube PDL", "logo": { "@type": "ImageObject", "url": "https://hoqueiclubepdl.com/uploads/pdlLogo.png" } },
+          "url": "https://hoqueiclubepdl.com/modalidade",
+          "datePublished": "2024-01-01",
+          "dateModified": "2026-07-01",
+          "inLanguage": "pt-PT",
+          "about": { "@type": "Thing", "name": "Hóquei em Patins" }
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "O que é o hóquei em patins?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "O hóquei em patins — também conhecido como rink hockey ou roller hockey — é uma modalidade desportiva coletiva disputada em patins de quatro rodas sobre um piso liso. Duas equipas de cinco jogadores cada (quatro de campo e um guarda-redes) tentam introduzir uma bola na baliza adversária com sticks curvos."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Quantos jogadores tem uma equipa de hóquei em patins?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Cada equipa tem 5 jogadores em campo: 4 jogadores de campo e 1 guarda-redes. Os bancos de suplentes têm normalmente 3 a 5 atletas adicionais."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Quanto tempo dura um jogo de hóquei em patins?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Um jogo de hóquei em patins tem dois períodos de 25 minutos ao mais alto nível (20 minutos na formação), com 10 minutos de intervalo. Em caso de empate em eliminatórias, há prolongamento e, se necessário, marcação de grandes penalidades."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Qual é o equipamento necessário para jogar hóquei em patins?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "O equipamento básico inclui: patins de rodas (quad) com quatro rodas, stick com lâmina curvada, capacete (obrigatório na formação), joelheiras, cotoveleiras e luvas. O guarda-redes usa proteção adicional: coquilha, peitoral, caneleiras reforçadas e máscara facial."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "O que é um cartão azul no hóquei em patins?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "O cartão azul no hóquei em patins significa uma exclusão temporária de 2 minutos por falta grave ou por travar um contra-ataque com clara possibilidade de golo. Durante esses 2 minutos, a equipa fica em inferioridade numérica (power play para o adversário)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Qual é a diferença entre grande penalidade e livre direto no hóquei em patins?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A grande penalidade (penalty) é marcada a 5,40 m da baliza em disputa 1x1. O livre direto é concedido a partir da 10ª falta de equipa no período, marcado a 7,40 m da baliza. O livre direto tem ângulo e distância diferentes do penalty."
+              }
+            }
+          ]
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://hoqueiclubepdl.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Modalidade", "item": "https://hoqueiclubepdl.com/modalidade" }
+          ]
         })}</script>
       </Helmet>
 

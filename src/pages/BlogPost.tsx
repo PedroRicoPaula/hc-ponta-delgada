@@ -61,14 +61,30 @@ export default function BlogPostPage() {
     "headline": post.title,
     "description": post.excerpt,
     "datePublished": post.date,
-    "author": { "@type": "Organization", "name": post.author },
+    "dateModified": post.date,
+    "wordCount": post.content.split(/\s+/).length,
+    "timeRequired": `PT${post.readTime}M`,
+    "inLanguage": "pt-PT",
+    "author": { "@type": "Organization", "name": post.author, "url": "https://hoqueiclubepdl.com/" },
     "publisher": {
       "@type": "Organization",
       "name": "Hóquei Clube PDL",
-      "logo": { "@type": "ImageObject", "url": "https://hoqueiclubepdl.com/uploads/pdlLogo.svg" }
+      "url": "https://hoqueiclubepdl.com/",
+      "logo": { "@type": "ImageObject", "url": "https://hoqueiclubepdl.com/uploads/pdlLogo.png" }
     },
     "url": `https://hoqueiclubepdl.com/blog/${post.slug}`,
-    ...(post.photo ? { "image": `https://hoqueiclubepdl.com${post.photo}` } : {})
+    "mainEntityOfPage": { "@type": "WebPage", "@id": `https://hoqueiclubepdl.com/blog/${post.slug}` },
+    ...(post.photo ? { "image": { "@type": "ImageObject", "url": `https://hoqueiclubepdl.com${post.photo}` } } : {})
+  };
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://hoqueiclubepdl.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://hoqueiclubepdl.com/blog" },
+      { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://hoqueiclubepdl.com/blog/${post.slug}` }
+    ]
   };
 
   return (
@@ -84,6 +100,7 @@ export default function BlogPostPage() {
         {post.photo && <meta property="og:image" content={`https://hoqueiclubepdl.com${post.photo}`} />}
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script>
       </Helmet>
 
       <Navigation />

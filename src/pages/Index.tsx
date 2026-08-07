@@ -71,26 +71,94 @@ const Index = () => {
   };
 
   // --- SEO DATA ---
-  // It's good practice to move schema generation logic to a utility file
-  // e.g., src/lib/seo.ts, but keeping it here is fine too.
   const eventsSchema = generateEventsSchema(senioresEvents, formacaoEvents);
   const newsSchema = generateNewsSchema(comunicados);
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "O que é o Hóquei Clube PDL?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O Hóquei Clube PDL (HCPDL) é um clube de hóquei em patins fundado em 2012 em Ponta Delgada, Açores. Compete no Campeonato Nacional e tem escalões de formação Sub-11, Sub-13 e Sub-17. É o único clube de hóquei em patins da ilha de São Miguel."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Onde treina o Hóquei Clube PDL?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O Hóquei Clube PDL treina e joga no Pavilhão Sidório Serpa, localizado na Rua do Mercado, 31, 9500-326 Ponta Delgada, Açores."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como posso inscrever o meu filho no Hóquei Clube PDL?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Para inscrições no Hóquei Clube PDL, pode contactar o clube por email em hoquei.clube.pdl@gmail.com ou por telefone para +351 296 382 987. O clube tem escalões de formação para Sub-11, Sub-13 e Sub-17."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Em que competições participa o Hóquei Clube PDL?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O Hóquei Clube PDL participa no Campeonato Nacional da 3ª Divisão organizado pela Federação de Patinagem de Portugal (FPP), bem como em competições regionais nos Açores com os escalões de formação."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como posso apoiar ou patrocinar o Hóquei Clube PDL?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pode apoiar o Hóquei Clube PDL através de patrocínio (com visibilidade na camisola, no pavilhão e nos canais digitais), donativos com benefícios fiscais (dedução de 25% em IRS para particulares e majoração até 120% em IRC para empresas), ou contactando o clube em hoquei.clube.pdl@gmail.com."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "O Hóquei Clube PDL transmite os jogos online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim, os jogos em casa da equipa sénior do Hóquei Clube PDL são transmitidos ao vivo no canal do YouTube @HoqueiClubePDL."
+        }
+      }
+    ]
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Início",
+        "item": "https://hoqueiclubepdl.com/"
+      }
+    ]
+  };
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950 overflow-x-hidden">
       {/* <HolidayOverlay /> */}
       <Helmet>
-        <title>Hóquei Clube PDL - Hóquei em Patins nos Açores</title>
-        <meta name="description" content="Site oficial do Hóquei Clube PDL..." />
-        <meta name="keywords" content="hóquei em patins, Ponta Delgada, Açores..." />
+        <title>Hóquei Clube PDL - Hóquei em Patins nos Açores desde 2012</title>
+        <meta name="description" content="Site oficial do Hóquei Clube PDL — clube de hóquei em patins fundado em 2012 em Ponta Delgada, Açores. Escalões Sub-11, Sub-13, Sub-17 e Seniores. Jogos transmitidos no YouTube." />
+        <meta name="keywords" content="hóquei em patins, Ponta Delgada, Açores, HCPDL, hóquei patins Açores, clube hóquei São Miguel, formação hóquei patins, campeonato nacional hóquei patins" />
         <link rel="preload" fetchPriority="high" as="image" href="/uploads/PDL24-25V2.png" type="image/png" />
         <link rel="canonical" href="https://hoqueiclubepdl.com/" />
-        <meta property="og:title" content="Hóquei Clube PDL" />
-        <meta property="og:description" content="Site oficial do Hóquei Clube PDL..." />
+        <meta property="og:title" content="Hóquei Clube PDL — Hóquei em Patins nos Açores" />
+        <meta property="og:description" content="Site oficial do Hóquei Clube PDL — clube de hóquei em patins fundado em 2012 em Ponta Delgada, Açores. Escalões Sub-11, Sub-13, Sub-17 e Seniores." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://hoqueiclubepdl.com/" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(newsSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       </Helmet>
 
       {/* Core Layout & UI */}

@@ -56,17 +56,32 @@ export const generateEventsSchema = (seniores: Event[], formacao: Event[]) => {
       "location": {
         "@type": "Place",
         "name": event.location,
-        "address": "Pavilhão Sidónio Serpa, Rua do Mercado, 31, 9500-326 Ponta Delgada"
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Rua do Mercado, 31",
+          "addressLocality": "Ponta Delgada",
+          "postalCode": "9500-326",
+          "addressRegion": "Açores",
+          "addressCountry": "PT"
+        }
       },
+      "sport": "Hóquei em Patins",
       "homeTeam": {
         "@type": "SportsTeam",
-        "name": "Hóquei Clube PDL"
+        "name": "Hóquei Clube PDL",
+        "url": "https://hoqueiclubepdl.com/"
       },
       "awayTeam": {
         "@type": "SportsTeam",
         "name": awayTeamName
       },
-      "description": `Jogo de hóquei em patins da categoria ${event.type} em Ponta Delgada, Açores.`   
+      "organizer": {
+        "@type": "Organization",
+        "name": "Federação de Patinagem de Portugal",
+        "alternateName": "FPP",
+        "url": "https://fpp.pt/"
+      },
+      "description": `Jogo de hóquei em patins da categoria ${event.type} em Ponta Delgada, Açores. Hóquei Clube PDL vs ${awayTeamName}.`
     };
   });
 };
@@ -78,20 +93,29 @@ export const generateNewsSchema = (comunicados: Comunicado[]) => {
     "@type": "NewsArticle",
     "headline": comunicado.titulo,
     "datePublished": toISOString(comunicado.data),
+    "dateModified": toISOString(comunicado.data),
     "articleBody": comunicado.conteudo,
+    "inLanguage": "pt-PT",
     "url": `https://hoqueiclubepdl.com/comunicados/${comunicado.slug}`,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://hoqueiclubepdl.com/comunicados/${comunicado.slug}`
+    },
     "author": {
       "@type": "Organization",
       "name": "Hóquei Clube PDL",
       "url": "https://hoqueiclubepdl.com/"
     },
     "publisher": {
-        "@type": "Organization",
-        "name": "Hóquei Clube PDL",
-        "logo": {
-            "@type": "ImageObject",
-            "url": "https://hoqueiclubepdl.com/uploads/pdlLogo.png"
-        }
+      "@type": "Organization",
+      "name": "Hóquei Clube PDL",
+      "url": "https://hoqueiclubepdl.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://hoqueiclubepdl.com/uploads/pdlLogo.png",
+        "width": 512,
+        "height": 512
+      }
     }
   }));
 };
