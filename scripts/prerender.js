@@ -8,9 +8,20 @@
 // Route list comes straight from the site's own data files via Vite's
 // ssrLoadModule — no hand-maintained route array to fall out of sync.
 //
-// Never fails the build: if Chromium isn't installed (`npx playwright install
-// chromium`), this step is skipped with a warning and `vite build`'s normal
-// SPA output still ships.
+// FAILS THE BUILD if Chromium is missing, on purpose.
+//
+// This used to skip silently, and that is exactly how production ended up
+// serving the homepage <title> for /modalidade and /calendario for weeks:
+// prerendering worked locally, the Cloudflare Pages build container has no
+// Chromium, the step skipped with a warning nobody reads, and the deploy
+// shipped a plain SPA. All the per-page meta and JSON-LD became invisible to
+// crawlers that do not run JavaScript.
+//
+// Cloudflare Pages build command has to install it first:
+//
+//     npx playwright install chromium && npm run build
+//
+// To deliberately ship without prerendering, set PRERENDER_OPTIONAL=1.
 
 import { createServer, preview } from 'vite';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -76,10 +87,30 @@ async function main() {
   try {
     const { chromium } = await import('playwright');
     browser = await chromium.launch();
-  } catch {
-    console.warn('[prerender] Chromium indisponível — pré-renderização de HTML por rota saltada.');
-    console.warn('[prerender] Corre `npx playwright install chromium` para ativar. Sitemap já foi gerado.');
-    return;
+  } catch (err) {
+    const message = [
+      '',
+      '  Chromium indisponível — as rotas NÃO foram pré-renderizadas.',
+      '',
+      '  Sem este passo, /modalidade, /calendario, /blog/* e /comunicados/* servem',
+      '  todos o <title> e a meta description da homepage, e os crawlers de IA',
+      '  (GPTBot, PerplexityBot, ClaudeBot) não veem nenhum dos schemas — não',
+      '  executam JavaScript.',
+      '',
+      '  Corrige com:   npx playwright install chromium',
+      '  No Cloudflare Pages, build command:',
+      '                 npx playwright install chromium && npm run build',
+      '',
+      `  Causa: ${err instanceof Error ? err.message.split('\n')[0] : String(err)}`,
+      '',
+    ].join('\n');
+
+    if (process.env.PRERENDER_OPTIONAL === '1') {
+      console.warn(`[prerender] AVISO${message}`);
+      return;
+    }
+    console.error(`[prerender] ERRO${message}`);
+    process.exit(1);
   }
 
   const previewServer = await preview({ root, preview: { port: 4173, strictPort: false } });

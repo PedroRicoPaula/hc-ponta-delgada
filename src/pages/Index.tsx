@@ -155,10 +155,19 @@ const Index = () => {
         <meta property="og:description" content="Site oficial do Hóquei Clube PDL — clube de hóquei em patins fundado em 2012 em Ponta Delgada, Açores. Escalões Sub-11, Sub-13, Sub-17 e Seniores." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://hoqueiclubepdl.com/" />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsSchema) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(newsSchema) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+        {/*
+          Inside <Helmet>, JSON-LD has to be passed as a string child.
+          react-helmet-async ignores dangerouslySetInnerHTML on <script> — it
+          reads children only, sees an empty tag, and drops it. These four
+          schemas were silently absent from the rendered HTML until this was
+          changed (verified against the prerendered output: 3 blocks present,
+          all four Helmet ones missing, while the title from the same Helmet
+          block came through fine).
+        */}
+        <script type="application/ld+json">{JSON.stringify(eventsSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(newsSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       </Helmet>
 
       {/* Core Layout & UI */}
