@@ -52,11 +52,11 @@ export default function Blog() {
       <Helmet>
         <title>Blog — Hóquei em Patins nos Açores | HC PDL</title>
         <meta name="description" content="Artigos, guias e novidades sobre hóquei em patins do Hóquei Clube PDL de Ponta Delgada, Açores. Saúde, técnica, formação e resultados." />
-        <link rel="canonical" href="https://hoqueiclubepdl.com/blog" />
+        <link rel="canonical" href="https://hoqueiclubepdl.com/blog/" />
         <meta property="og:title" content="Blog — Hóquei em Patins nos Açores | HC PDL" />
         <meta property="og:description" content="Artigos, guias e novidades sobre hóquei em patins do Hóquei Clube PDL de Ponta Delgada, Açores." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://hoqueiclubepdl.com/blog" />
+        <meta property="og:url" content="https://hoqueiclubepdl.com/blog/" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Blog",

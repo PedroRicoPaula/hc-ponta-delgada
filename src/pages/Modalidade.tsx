@@ -204,11 +204,11 @@ export default function Modalidade() {
       <Helmet>
         <title>Hóquei em Patins — Regras, História e Guia Completo | HC PDL</title>
         <meta name="description" content="Guia completo sobre hóquei em patins: história desde 1878, regras básicas, posições, equipamento e glossário. Criado pelo Hóquei Clube PDL, Açores." />
-        <link rel="canonical" href="https://hoqueiclubepdl.com/modalidade" />
+        <link rel="canonical" href="https://hoqueiclubepdl.com/modalidade/" />
         <meta property="og:title" content="Hóquei em Patins — Guia Completo | HC PDL" />
         <meta property="og:description" content="Tudo sobre hóquei em patins: história, regras, posições, equipamento e glossário. Guia completo do Hóquei Clube PDL, Açores." />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://hoqueiclubepdl.com/modalidade" />
+        <meta property="og:url" content="https://hoqueiclubepdl.com/modalidade/" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Article",

@@ -92,11 +92,11 @@ export default function QueroSerPatrocinador() {
           name="description"
           content="Seja parceiro do Hóquei Clube PDL (Açores). Visibilidade nos jogos transmitidos na RTP Açores e YouTube, impacto social real e benefícios fiscais: dedução de 25% em IRS e majoração até 120% em IRC."
         />
-        <link rel="canonical" href="https://hoqueiclubepdl.com/patrocinadores" />
+        <link rel="canonical" href="https://hoqueiclubepdl.com/patrocinadores/" />
         <meta property="og:title" content="Patrocinar o HC PDL — Visibilidade, Impacto e Benefícios Fiscais" />
         <meta property="og:description" content="Seja parceiro do Hóquei Clube PDL. Visibilidade nos jogos, impacto social real e benefícios fiscais em IRS/IRC. Época 2026/2027." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://hoqueiclubepdl.com/patrocinadores" />
+        <meta property="og:url" content="https://hoqueiclubepdl.com/patrocinadores/" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebPage",

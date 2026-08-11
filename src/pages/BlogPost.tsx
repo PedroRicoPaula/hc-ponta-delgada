@@ -72,8 +72,8 @@ export default function BlogPostPage() {
       "url": "https://hoqueiclubepdl.com/",
       "logo": { "@type": "ImageObject", "url": "https://hoqueiclubepdl.com/uploads/pdlLogo.png" }
     },
-    "url": `https://hoqueiclubepdl.com/blog/${post.slug}`,
-    "mainEntityOfPage": { "@type": "WebPage", "@id": `https://hoqueiclubepdl.com/blog/${post.slug}` },
+    "url": `https://hoqueiclubepdl.com/blog/${post.slug}/`,
+    "mainEntityOfPage": { "@type": "WebPage", "@id": `https://hoqueiclubepdl.com/blog/${post.slug}/` },
     ...(post.photo ? { "image": { "@type": "ImageObject", "url": `https://hoqueiclubepdl.com${post.photo}` } } : {})
   };
 
@@ -83,7 +83,7 @@ export default function BlogPostPage() {
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://hoqueiclubepdl.com/" },
       { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://hoqueiclubepdl.com/blog" },
-      { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://hoqueiclubepdl.com/blog/${post.slug}` }
+      { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://hoqueiclubepdl.com/blog/${post.slug}/` }
     ]
   };
 
@@ -92,11 +92,11 @@ export default function BlogPostPage() {
       <Helmet>
         <title>{post.title} — HC PDL Blog</title>
         <meta name="description" content={post.excerpt} />
-        <link rel="canonical" href={`https://hoqueiclubepdl.com/blog/${post.slug}`} />
+        <link rel="canonical" href={`https://hoqueiclubepdl.com/blog/${post.slug}/`} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://hoqueiclubepdl.com/blog/${post.slug}`} />
+        <meta property="og:url" content={`https://hoqueiclubepdl.com/blog/${post.slug}/`} />
         {post.photo && <meta property="og:image" content={`https://hoqueiclubepdl.com${post.photo}`} />}
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>

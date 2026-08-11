@@ -63,11 +63,11 @@ export default function Comunicados() {
       <Helmet>
         <title>Comunicados Oficiais — Hóquei Clube PDL | Açores</title>
         <meta name="description" content="Comunicados oficiais do Hóquei Clube PDL: resultados, eleições, conquistas e novidades do clube de hóquei em patins de Ponta Delgada, Açores." />
-        <link rel="canonical" href="https://hoqueiclubepdl.com/comunicados" />
+        <link rel="canonical" href="https://hoqueiclubepdl.com/comunicados/" />
         <meta property="og:title" content="Comunicados — Hóquei Clube PDL" />
         <meta property="og:description" content="Comunicados oficiais do Hóquei Clube PDL: resultados, eleições, conquistas e novidades do clube de hóquei em patins dos Açores." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://hoqueiclubepdl.com/comunicados" />
+        <meta property="og:url" content="https://hoqueiclubepdl.com/comunicados/" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "CollectionPage",

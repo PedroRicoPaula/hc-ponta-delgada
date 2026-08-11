@@ -85,11 +85,11 @@ export default function Calendario() {
       <Helmet>
         <title>Calendário de Jogos — Hóquei Clube PDL | Próximos Jogos e Resultados</title>
         <meta name="description" content="Calendário completo de jogos do Hóquei Clube PDL (Açores) — próximos jogos, transmissões ao vivo no YouTube e resultados do Campeonato Nacional." />
-        <link rel="canonical" href="https://hoqueiclubepdl.com/calendario" />
+        <link rel="canonical" href="https://hoqueiclubepdl.com/calendario/" />
         <meta property="og:title" content="Calendário de Jogos — Hóquei Clube PDL" />
         <meta property="og:description" content="Calendário completo de jogos do Hóquei Clube PDL — próximos jogos, transmissões ao vivo e resultados do Campeonato Nacional de Hóquei em Patins." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://hoqueiclubepdl.com/calendario" />
+        <meta property="og:url" content="https://hoqueiclubepdl.com/calendario/" />
         <script type="application/ld+json">{JSON.stringify(
           sorted.map(game => ({
             "@context": "https://schema.org",

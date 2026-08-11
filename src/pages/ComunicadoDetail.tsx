@@ -32,8 +32,8 @@ export default function ComunicadoDetail() {
       "url": "https://hoqueiclubepdl.com/",
       "logo": { "@type": "ImageObject", "url": "https://hoqueiclubepdl.com/uploads/pdlLogo.png" }
     },
-    "url": `https://hoqueiclubepdl.com/comunicados/${comunicado.slug}`,
-    "mainEntityOfPage": { "@type": "WebPage", "@id": `https://hoqueiclubepdl.com/comunicados/${comunicado.slug}` }
+    "url": `https://hoqueiclubepdl.com/comunicados/${comunicado.slug}/`,
+    "mainEntityOfPage": { "@type": "WebPage", "@id": `https://hoqueiclubepdl.com/comunicados/${comunicado.slug}/` }
   };
 
   const breadcrumbLd = {
@@ -42,7 +42,7 @@ export default function ComunicadoDetail() {
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://hoqueiclubepdl.com/" },
       { "@type": "ListItem", "position": 2, "name": "Comunicados", "item": "https://hoqueiclubepdl.com/comunicados" },
-      { "@type": "ListItem", "position": 3, "name": comunicado.titulo, "item": `https://hoqueiclubepdl.com/comunicados/${comunicado.slug}` }
+      { "@type": "ListItem", "position": 3, "name": comunicado.titulo, "item": `https://hoqueiclubepdl.com/comunicados/${comunicado.slug}/` }
     ]
   };
 
@@ -51,11 +51,11 @@ export default function ComunicadoDetail() {
       <Helmet>
         <title>{comunicado.titulo} — HC PDL Comunicados</title>
         <meta name="description" content={comunicado.conteudo.slice(0, 155)} />
-        <link rel="canonical" href={`https://hoqueiclubepdl.com/comunicados/${comunicado.slug}`} />
+        <link rel="canonical" href={`https://hoqueiclubepdl.com/comunicados/${comunicado.slug}/`} />
         <meta property="og:title" content={comunicado.titulo} />
         <meta property="og:description" content={comunicado.conteudo.slice(0, 155)} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://hoqueiclubepdl.com/comunicados/${comunicado.slug}`} />
+        <meta property="og:url" content={`https://hoqueiclubepdl.com/comunicados/${comunicado.slug}/`} />
         <meta name="twitter:card" content="summary" />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         <script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script>

@@ -61,13 +61,21 @@ function getSitemapMeta(route) {
   return { priority: '0.5', changefreq: 'monthly' };
 }
 
+// Cloudflare Pages serves dist/<rota>/index.html em "/<rota>/" e faz 308 da
+// forma sem barra. O sitemap tem de listar o URL que responde 200 — senão cada
+// entrada é um redirect e o canonical da página não bate certo com o URL por
+// onde foi alcançada.
+function canonicalPath(route) {
+  return route === '/' ? '/' : `${route}/`;
+}
+
 async function writeSitemap(routes) {
   const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
   const urls = routes.map((route) => {
     const { priority, changefreq } = getSitemapMeta(route);
     return [
       '  <url>',
-      `    <loc>${SITE_URL}${route}</loc>`,
+      `    <loc>${SITE_URL}${canonicalPath(route)}</loc>`,
       `    <lastmod>${today}</lastmod>`,
       `    <changefreq>${changefreq}</changefreq>`,
       `    <priority>${priority}</priority>`,
