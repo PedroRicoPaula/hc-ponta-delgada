@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
-import { games, parseGameDateTime } from '@/data/siteData';
+import { games, parseGameDateTime, formatGameTime } from '@/data/siteData';
 import { getNextGame, getGameStatus, useNow } from '@/lib/games';
 
 function NextGameCard() {
@@ -21,7 +21,7 @@ function NextGameCard() {
   const isLive = getGameStatus(nextGame, now) === 'live';
   const start = parseGameDateTime(nextGame);
   const date = start.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short' });
-  const time = start.toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' });
+  const time = formatGameTime(nextGame);
 
   return (
     <motion.div

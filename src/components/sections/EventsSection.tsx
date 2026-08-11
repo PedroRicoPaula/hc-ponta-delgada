@@ -11,7 +11,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from '@/components/ui/dialog';
-import { games, parseGameDateTime } from '@/data/siteData';
+import { games, parseGameDateTime, formatGameTime } from '@/data/siteData';
 import { getNextGame, getGameStatus, formatCountdown, useNow } from '@/lib/games';
 
 function NextGameFeature() {
@@ -30,7 +30,7 @@ function NextGameFeature() {
   const status = getGameStatus(nextGame, now);
   const start = parseGameDateTime(nextGame);
   const dateLabel = start.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long' });
-  const timeLabel = start.toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' });
+  const timeLabel = formatGameTime(nextGame);
   const canWatch = status === 'live' && nextGame.isHome && !!nextGame.youtubeUrl;
   const isLiveAway = status === 'live' && !nextGame.isHome;
 

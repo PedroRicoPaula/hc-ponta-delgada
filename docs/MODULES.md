@@ -9,7 +9,7 @@ Secções em ordem de renderização:
 | 1 | Hero | `HeroSection.tsx` | `#hero` | Painel de texto reactivo ao tema; painel da foto (desktop only) sempre dark + fade overlay + card "Próximo Jogo" flutuante com glow que segue o cursor. Lê `games[]` (mesma fonte que `EventsSection`/Calendário) — só mostra bolinha vermelha quando o jogo está `live`, sem interacção |
 | 2 | Treinos | `TrainingSchedulesSection.tsx` | `#training` | Horários por escalão — actualizar início de época |
 | 3 | Equipa | `TeamSection.tsx` | `#team` | Cards flip com stats (tiles quase quadrados); links para FPP. Stats dependem da posição — guarda-redes mostram "P"/"L" (penáltis/livres diretos defendidos) em vez de Golos/Assist.; nacionalidade mostra bandeira (`nationalityFlags` lookup) em vez de texto |
-| 4 | Eventos | `EventsSection.tsx` | `#events` | Card "Próximo Jogo" grande (contagem decrescente 24h antes; botão "Ver Ao Vivo" nos jogos em casa, com diálogo de confirmação antes de abrir o YouTube; jogos fora só mostram bolinha "ao vivo" sem transmissão) + botão "Ver Calendário" → `/calendario`. Adversários já são reais (fonte FPP), datas ainda artificiais — ver `docs/ISSUES-BACKLOG.md` |
+| 4 | Eventos | `EventsSection.tsx` | `#events` | Card "Próximo Jogo" grande (contagem decrescente 24h antes; botão "Ver Ao Vivo" nos jogos em casa, com diálogo de confirmação antes de abrir o YouTube; jogos fora só mostram bolinha "ao vivo" sem transmissão) + botão "Ver Calendário" → `/calendario`. Calendário oficial 2026/27 da FPP (26 jornadas) — ver `docs/ISSUES-BACKLOG.md` |
 | 5 | Galeria | `GallerySection.tsx` | `#gallery` | Carousel + embed YouTube |
 | 6 | Contactos | `ContactSection.tsx` | `#contact` | Morada, email, telefone |
 | 7 | Patrocinadores | `SponsorsSection.tsx` | `#sponsors` | Um patrocinador com `featured: true` em `sponsors[]` aparece sozinho e maior por cima; os restantes em linha (desktop) ou carrossel (mobile) por baixo, mais pequenos |
@@ -92,7 +92,9 @@ Para adicionar comunicado: acrescentar entrada com `slug` único em `siteData.ts
 
 ## Calendário (`/calendario` → `src/pages/Calendario.tsx`)
 
-Grelha com todos os jogos da equipa sénior. Dados: `games[]` em `src/data/siteData.ts` (interface `Game`, helper `parseGameDateTime()`). Estado de cada jogo (`upcoming` / `countdown` / `live` / `ended`) calculado em `src/lib/games.ts` (`getGameStatus()`, `getNextGame()`, hook `useNow()` que actualiza a cada segundo).
+Grelha com todos os jogos da equipa sénior. Dados: `games[]` em `src/data/siteData.ts` (interface `Game`, helper `parseGameDateTime()`) — calendário oficial da FPP para 2026/27, 26 jornadas com o campo `jornada`. Estado de cada jogo (`upcoming` / `countdown` / `live` / `ended`) calculado em `src/lib/games.ts` (`getGameStatus()`, `getNextGame()`, hook `useNow()` que actualiza a cada segundo).
+
+**Jogos sem hora marcada:** `Game.time` é opcional, porque a FPP publica o calendário muito antes das horas. Mostrar sempre com `formatGameTime()` (devolve `"Horário a definir"`), nunca ler `game.time` directamente. `parseGameDateTime()` assume meia-noite nesses casos só para a ordenação ser estável — `getGameStatus()` trata-os à parte para o jogo não aparecer "em direto" às 00:00, e o `startDate` do schema sai só com a data, sem hora inventada.
 
 Jogos terminados (`ended`) ficam a cinzento/grayscale; mostram o resultado se `game.result` estiver preenchido, senão "Resultado brevemente" — resultados são sempre inseridos à mão em `siteData.ts`, não há cálculo automático. Só jogos em casa (`isHome: true`) têm `youtubeUrl`; jogos fora mostram o indicador "Ao Vivo" sem transmissão.
 

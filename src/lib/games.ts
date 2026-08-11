@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { parseGameDateTime, type Game } from '@/data/siteData';
+import { parseGameDateTime, hasKnownTime, type Game } from '@/data/siteData';
 
 export const GAME_DURATION_MINUTES = 150; // duração média de um jogo de hóquei em patins
 export const LIVE_COUNTDOWN_HOURS = 24;
@@ -12,6 +12,17 @@ export function getGameEnd(game: Game): Date {
 
 export function getGameStatus(game: Game, now: Date): GameStatus {
   const start = parseGameDateTime(game);
+
+  // Sem hora marcada, parseGameDateTime devolve meia-noite desse dia. Tratar
+  // isso como hora real poria o jogo "em direto" a partir das 00:00 e a fazer
+  // contagem decrescente no dia anterior. Enquanto a FPP não marcar a hora, o
+  // jogo fica 'upcoming' até ao fim do próprio dia e só depois 'ended'.
+  if (!hasKnownTime(game)) {
+    const endOfDay = new Date(start);
+    endOfDay.setHours(23, 59, 59, 999);
+    return now > endOfDay ? 'ended' : 'upcoming';
+  }
+
   if (now >= getGameEnd(game)) return 'ended';
   if (now >= start) return 'live';
   if (now.getTime() >= start.getTime() - LIVE_COUNTDOWN_HOURS * 3600000) return 'countdown';

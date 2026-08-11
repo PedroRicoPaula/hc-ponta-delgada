@@ -18,11 +18,14 @@ _(nenhum confirmado — última verificação: 2026-07-13)_
 
 ## 🟢 Backlog de Features
 
-### Calendário de jogos — adversários reais, datas ainda artificiais
+### ~~Calendário de jogos — adversários reais, datas ainda artificiais~~ ✅ RESOLVIDO 2026-08-11
 Implementado em 2026-07-13: card "Próximo Jogo" em `EventsSection` (contagem decrescente 24h antes, botão "Ver Ao Vivo" nos jogos em casa com diálogo de confirmação antes de sair para o YouTube) + página `/calendario` (`src/pages/Calendario.tsx`, grelha com todos os jogos, terminados a cinzento). Dados em `games[]` (`src/data/siteData.ts`), estado calculado em `src/lib/games.ts`.
-Actualizado em 2026-07-16: os 13 adversários dos 20 jogos passaram a ser os clubes reais da série do clube (fonte: `https://hp.fpp.pt/Classificacao/414` — "CN 3ª Divisão Sul B"), cada um usado 1-2 vezes (ida/volta). As **datas continuam artificiais** — a época está ancorada para começar "ontem" relativo à data em que os dados foram gerados, só para efeitos de demonstração dos estados ao vivo/contagem/terminado, não são as datas reais da FPP.
-**Quando**: FPP publicar o calendário oficial da época com datas/horas reais.
-**Como**: actualizar `date`/`time` de cada jogo em `games[]` com as datas reais (nomes dos adversários já estão correctos); `result` de cada jogo é sempre preenchido à mão depois do jogo terminar (não há cálculo automático).
+
+**Resolvido em 2026-08-11**: `games[]` passou a ser o calendário oficial da época 2026/27, extraído de `https://hp.fpp.pt/Competicao/501` (CN 3ª Divisão Sul B). 26 jornadas, 13 em casa e 13 fora, 14 equipas na série — sem bye. Cada jogo ganhou o campo `jornada`. As datas artificiais e os pavilhões inventados dos jogos fora desapareceram.
+
+**O que continua por preencher, e é normal:** a FPP só marcou hora para as jornadas 2, 11 e 26. Os restantes 23 jogos ficam com `time` ausente e a UI mostra "Horário a definir" (ver `formatGameTime()`). Os pavilhões dos jogos fora não constam da FPP — ficam `"A definir"` em vez de nomes inventados.
+**Como actualizar quando a FPP marcar horas**: acrescentar `time: "HH:mm"` ao jogo respectivo em `games[]`. Nada mais é preciso — a UI, o estado ao vivo e o schema adaptam-se sozinhos.
+**Resultados**: continuam a ser preenchidos à mão em `result` depois de cada jogo, não há cálculo automático.
 
 ### Galeria com fotos reais da época
 `GallerySection` usa YouTube embed + poucas imagens. Adicionar fotos de jogos, treinos e eventos da época 2026/2027.

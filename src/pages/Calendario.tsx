@@ -4,7 +4,25 @@ import { Calendar } from 'lucide-react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { SocialIcons } from '@/components/SocialIcons';
-import { games, parseGameDateTime, type Game } from '@/data/siteData';
+import { games, parseGameDateTime, formatGameTime, hasKnownTime, type Game } from '@/data/siteData';
+
+/** DD/MM/YYYY → YYYY-MM-DD, para startDate sem hora no schema.org. */
+const toIsoDate = (date: string) => date.split('/').reverse().join('-');
+
+/**
+ * startDate para o schema, como hora local do recinto (sem "Z" nem offset).
+ *
+ * Não usar `parseGameDateTime(game).toISOString()`: isso converte para UTC
+ * usando o fuso de quem corre o código, e este schema é gerado no build. A
+ * máquina de desenvolvimento está nos Açores (UTC−1 no inverno) e o container
+ * de build do Cloudflare corre em UTC, por isso o mesmo jogo saía com horas
+ * diferentes conforme onde o build corresse — 19:00 aqui, 18:00 lá.
+ *
+ * O schema.org aceita hora local sem offset e interpreta-a como hora do local
+ * do evento, que é exactamente o que a FPP publica.
+ */
+const toSchemaStartDate = (game: Game) =>
+  hasKnownTime(game) ? `${toIsoDate(game.date)}T${game.time}` : toIsoDate(game.date);
 import { getGameStatus, useNow } from '@/lib/games';
 
 function GameCard({ game, now, index }: { game: Game; now: Date; index: number }) {
@@ -13,7 +31,7 @@ function GameCard({ game, now, index }: { game: Game; now: Date; index: number }
   const isLive = status === 'live';
   const start = parseGameDateTime(game);
   const dateLabel = start.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short', year: 'numeric' });
-  const timeLabel = start.toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' });
+  const timeLabel = formatGameTime(game);
 
   return (
     <motion.article
@@ -95,7 +113,12 @@ export default function Calendario() {
             "@context": "https://schema.org",
             "@type": "SportsEvent",
             "name": `HC PDL vs ${game.opponent}`,
-            "startDate": parseGameDateTime(game).toISOString(),
+            // Sem hora marcada, schema.org aceita startDate só com a data. Publicar
+            // o fallback de meia-noite como se fosse hora oficial daria a entender
+            // que o jogo é às 00:00 — e é isso que apareceria em resultados de
+            // pesquisa e assistentes de IA.
+            "startDate": toSchemaStartDate(game),
+            "eventStatus": "https://schema.org/EventScheduled",
             "location": {
               "@type": "Place",
               "name": game.location,
