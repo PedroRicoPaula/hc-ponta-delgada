@@ -96,6 +96,8 @@ Grelha com todos os jogos da equipa sénior. Dados: `games[]` em `src/data/siteD
 
 **Jogos sem hora marcada:** `Game.time` é opcional, porque a FPP publica o calendário muito antes das horas. Mostrar sempre com `formatGameTime()` (devolve `"Horário a definir"`), nunca ler `game.time` directamente. `parseGameDateTime()` assume meia-noite nesses casos só para a ordenação ser estável — `getGameStatus()` trata-os à parte para o jogo não aparecer "em direto" às 00:00, e o `startDate` do schema sai só com a data, sem hora inventada.
 
+**Ordem dos nomes:** usar sempre `getMatchupNames(game)` → `{ home, away }`, nunca escrever `"HC PDL"` à mão à esquerda. A equipa da casa fica à esquerda, por isso lê-se `HC PDL vs X` em casa e `X vs HC PDL` fora — o utilizador percebe o local sem depender do badge. Isto também mantém o placar alinhado: `result.home`/`result.away` referem-se às equipas reais, por isso com PDL fixo à esquerda um jogo fora mostrava o número do adversário debaixo do nome do PDL.
+
 Jogos terminados (`ended`) ficam a cinzento/grayscale; mostram o resultado se `game.result` estiver preenchido, senão "Resultado brevemente" — resultados são sempre inseridos à mão em `siteData.ts`, não há cálculo automático. Só jogos em casa (`isHome: true`) têm `youtubeUrl`; jogos fora mostram o indicador "Ao Vivo" sem transmissão.
 
 Sem link na nav principal — acedida via botão "Ver Calendário" na `EventsSection` da homepage.
