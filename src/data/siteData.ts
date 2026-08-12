@@ -171,7 +171,30 @@ const YOUTUBE_LIVE_URL = 'https://www.youtube.com/@HoqueiClubePDL/live';
 const PAVILHAO_PDL = 'Pavilhão Sidónio Serpa';
 
 const COMPETITION = "Campeonato Nacional da 3ª Divisão — Série Sul B";
-const LOCAL_A_DEFINIR = 'A definir';
+
+/**
+ * Recintos dos adversários. Definidos uma vez e referenciados nos dois jogos
+ * (ida e volta) para não poderem divergir.
+ *
+ * Formas curtas do nome oficial — o cartão do calendário mostra isto numa
+ * linha de `text-xs` e nomes muito longos partem em três linhas no telemóvel.
+ * Ex.: "Pavilhão Gimnodesportivo de Paço de Arcos" → "Pavilhão de Paço de Arcos".
+ */
+const PAV = {
+  boliqueime: 'Pavilhão Municipal de Boliqueime',
+  pacoArcos: 'Pavilhão de Paço de Arcos',
+  sintra: 'Pavilhão de Monte Santos',
+  vascoGama: 'Pavilhão Municipal de Sines',
+  aeFisica: 'Pavilhão da AE Física, Torres Vedras',
+  massama: 'Pavilhão Prof. João Campelo',
+  sesimbra: 'Pavilhão de Sesimbra',
+  cascais: 'Pavilhão Guilherme Pinto Basto',
+  azeitonense: 'Pavilhão de Santa Sofia',
+  vilafranquense: 'Pavilhão da UD Vilafranquense',
+  santiago: 'Pavilhão de Santiago do Cacém',
+  corujas: 'Pavilhão Municipal de Coruche',
+  alenquer: 'Pavilhão Municipal de Alenquer',
+} as const;
 
 // Calendário oficial 2026/27, CN 3ª Divisão Sul B.
 // Fonte: https://hp.fpp.pt/Competicao/501 — extraído 2026-08-11.
@@ -182,30 +205,30 @@ const LOCAL_A_DEFINIR = 'A definir';
 // nomes inventados.
 export const games: Game[] = [
   { id: "jornada-1", jornada: 1, opponent: "HC Vasco da Gama/J.Ascenção", isHome: true, date: "25/10/2026", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
-  { id: "jornada-2", jornada: 2, opponent: "CD Boliqueime", isHome: false, date: "31/10/2026", time: "19:00", location: LOCAL_A_DEFINIR, competition: COMPETITION },
+  { id: "jornada-2", jornada: 2, opponent: "CD Boliqueime", isHome: false, date: "31/10/2026", time: "19:00", location: PAV.boliqueime, competition: COMPETITION },
   { id: "jornada-3", jornada: 3, opponent: "HC Sintra / Planta Livre", isHome: true, date: "08/11/2026", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
-  { id: "jornada-4", jornada: 4, opponent: "AE Física D \"B\"", isHome: false, date: "15/11/2026", location: LOCAL_A_DEFINIR, competition: COMPETITION },
-  { id: "jornada-5", jornada: 5, opponent: "CD Paço de Arcos \"B\"", isHome: false, date: "22/11/2026", location: LOCAL_A_DEFINIR, competition: COMPETITION },
+  { id: "jornada-4", jornada: 4, opponent: "AE Física D \"B\"", isHome: false, date: "15/11/2026", location: PAV.aeFisica, competition: COMPETITION },
+  { id: "jornada-5", jornada: 5, opponent: "CD Paço de Arcos \"B\"", isHome: false, date: "22/11/2026", location: PAV.pacoArcos, competition: COMPETITION },
   { id: "jornada-6", jornada: 6, opponent: "A Stuart HC Massamá", isHome: true, date: "06/12/2026", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
-  { id: "jornada-7", jornada: 7, opponent: "GD Sesimbra", isHome: false, date: "08/12/2026", location: LOCAL_A_DEFINIR, competition: COMPETITION },
+  { id: "jornada-7", jornada: 7, opponent: "GD Sesimbra", isHome: false, date: "08/12/2026", location: PAV.sesimbra, competition: COMPETITION },
   { id: "jornada-8", jornada: 8, opponent: "GDS Cascais", isHome: true, date: "13/12/2026", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
-  { id: "jornada-9", jornada: 9, opponent: "J. Azeitonense", isHome: false, date: "10/01/2027", location: LOCAL_A_DEFINIR, competition: COMPETITION },
+  { id: "jornada-9", jornada: 9, opponent: "J. Azeitonense", isHome: false, date: "10/01/2027", location: PAV.azeitonense, competition: COMPETITION },
   { id: "jornada-10", jornada: 10, opponent: "UD Vilafranquense", isHome: true, date: "24/01/2027", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
-  { id: "jornada-11", jornada: 11, opponent: "HC Santiago", isHome: false, date: "31/01/2027", time: "16:00", location: LOCAL_A_DEFINIR, competition: COMPETITION },
+  { id: "jornada-11", jornada: 11, opponent: "HC Santiago", isHome: false, date: "31/01/2027", time: "16:00", location: PAV.santiago, competition: COMPETITION },
   { id: "jornada-12", jornada: 12, opponent: "GCC \"Os Corujas\"", isHome: true, date: "07/02/2027", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
-  { id: "jornada-13", jornada: 13, opponent: "S Alenquer B \"B\"", isHome: false, date: "09/02/2027", location: LOCAL_A_DEFINIR, competition: COMPETITION },
-  { id: "jornada-14", jornada: 14, opponent: "HC Vasco da Gama/J.Ascenção", isHome: false, date: "21/02/2027", location: LOCAL_A_DEFINIR, competition: COMPETITION },
+  { id: "jornada-13", jornada: 13, opponent: "S Alenquer B \"B\"", isHome: false, date: "09/02/2027", location: PAV.alenquer, competition: COMPETITION },
+  { id: "jornada-14", jornada: 14, opponent: "HC Vasco da Gama/J.Ascenção", isHome: false, date: "21/02/2027", location: PAV.vascoGama, competition: COMPETITION },
   { id: "jornada-15", jornada: 15, opponent: "CD Boliqueime", isHome: true, date: "28/02/2027", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
-  { id: "jornada-16", jornada: 16, opponent: "HC Sintra / Planta Livre", isHome: false, date: "07/03/2027", location: LOCAL_A_DEFINIR, competition: COMPETITION },
+  { id: "jornada-16", jornada: 16, opponent: "HC Sintra / Planta Livre", isHome: false, date: "07/03/2027", location: PAV.sintra, competition: COMPETITION },
   { id: "jornada-17", jornada: 17, opponent: "AE Física D \"B\"", isHome: true, date: "21/03/2027", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
   { id: "jornada-18", jornada: 18, opponent: "CD Paço de Arcos \"B\"", isHome: true, date: "26/03/2027", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
-  { id: "jornada-19", jornada: 19, opponent: "A Stuart HC Massamá", isHome: false, date: "04/04/2027", location: LOCAL_A_DEFINIR, competition: COMPETITION },
+  { id: "jornada-19", jornada: 19, opponent: "A Stuart HC Massamá", isHome: false, date: "04/04/2027", location: PAV.massama, competition: COMPETITION },
   { id: "jornada-20", jornada: 20, opponent: "GD Sesimbra", isHome: true, date: "11/04/2027", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
-  { id: "jornada-21", jornada: 21, opponent: "GDS Cascais", isHome: false, date: "18/04/2027", location: LOCAL_A_DEFINIR, competition: COMPETITION },
+  { id: "jornada-21", jornada: 21, opponent: "GDS Cascais", isHome: false, date: "18/04/2027", location: PAV.cascais, competition: COMPETITION },
   { id: "jornada-22", jornada: 22, opponent: "J. Azeitonense", isHome: true, date: "25/04/2027", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
-  { id: "jornada-23", jornada: 23, opponent: "UD Vilafranquense", isHome: false, date: "09/05/2027", location: LOCAL_A_DEFINIR, competition: COMPETITION },
+  { id: "jornada-23", jornada: 23, opponent: "UD Vilafranquense", isHome: false, date: "09/05/2027", location: PAV.vilafranquense, competition: COMPETITION },
   { id: "jornada-24", jornada: 24, opponent: "HC Santiago", isHome: true, date: "16/05/2027", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
-  { id: "jornada-25", jornada: 25, opponent: "GCC \"Os Corujas\"", isHome: false, date: "23/05/2027", location: LOCAL_A_DEFINIR, competition: COMPETITION },
+  { id: "jornada-25", jornada: 25, opponent: "GCC \"Os Corujas\"", isHome: false, date: "23/05/2027", location: PAV.corujas, competition: COMPETITION },
   { id: "jornada-26", jornada: 26, opponent: "S Alenquer B \"B\"", isHome: true, date: "30/05/2027", time: "18:00", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
 ];
 
