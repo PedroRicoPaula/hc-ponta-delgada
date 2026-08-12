@@ -11,7 +11,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from '@/components/ui/dialog';
-import { games, parseGameDateTime, formatGameTime } from '@/data/siteData';
+import { games, parseGameDateTime, formatGameTime, getMatchupNames } from '@/data/siteData';
 import { getNextGame, getGameStatus, formatCountdown, useNow } from '@/lib/games';
 
 function NextGameFeature() {
@@ -31,6 +31,7 @@ function NextGameFeature() {
   const start = parseGameDateTime(nextGame);
   const dateLabel = start.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long' });
   const timeLabel = formatGameTime(nextGame);
+  const matchup = getMatchupNames(nextGame);
   const canWatch = status === 'live' && nextGame.isHome && !!nextGame.youtubeUrl;
   const isLiveAway = status === 'live' && !nextGame.isHome;
 
@@ -65,10 +66,10 @@ function NextGameFeature() {
             </div>
 
             <div className="flex flex-col items-center gap-2 mb-6 text-center">
-              <span className="font-heading font-black text-white text-2xl sm:text-3xl uppercase leading-tight break-words">HC PDL</span>
+              <span className="font-heading font-black text-white text-2xl sm:text-3xl uppercase leading-tight break-words">{matchup.home}</span>
               <span className="text-primary font-black text-xs uppercase tracking-widest">vs</span>
               <span className="font-heading font-black text-white text-2xl sm:text-3xl uppercase leading-tight break-words">
-                {nextGame.opponent}
+                {matchup.away}
               </span>
             </div>
 

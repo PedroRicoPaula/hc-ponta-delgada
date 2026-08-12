@@ -4,7 +4,8 @@ import { Calendar } from 'lucide-react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { SocialIcons } from '@/components/SocialIcons';
-import { games, parseGameDateTime, formatGameTime, hasKnownTime, type Game } from '@/data/siteData';
+import { games, parseGameDateTime, formatGameTime, hasKnownTime, getMatchupNames, type Game } from '@/data/siteData';
+import { getGameStatus, useNow } from '@/lib/games';
 
 /** DD/MM/YYYY → YYYY-MM-DD, para startDate sem hora no schema.org. */
 const toIsoDate = (date: string) => date.split('/').reverse().join('-');
@@ -23,7 +24,6 @@ const toIsoDate = (date: string) => date.split('/').reverse().join('-');
  */
 const toSchemaStartDate = (game: Game) =>
   hasKnownTime(game) ? `${toIsoDate(game.date)}T${game.time}` : toIsoDate(game.date);
-import { getGameStatus, useNow } from '@/lib/games';
 
 function GameCard({ game, now, index }: { game: Game; now: Date; index: number }) {
   const status = getGameStatus(game, now);
@@ -32,6 +32,7 @@ function GameCard({ game, now, index }: { game: Game; now: Date; index: number }
   const start = parseGameDateTime(game);
   const dateLabel = start.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short', year: 'numeric' });
   const timeLabel = formatGameTime(game);
+  const matchup = getMatchupNames(game);
 
   return (
     <motion.article
@@ -65,10 +66,12 @@ function GameCard({ game, now, index }: { game: Game; now: Date; index: number }
       </div>
 
       <div className="flex items-center justify-between gap-2 mb-3">
-        <span className="font-heading font-black text-gray-900 dark:text-white text-sm uppercase leading-tight">HC PDL</span>
+        <span className="font-heading font-black text-gray-900 dark:text-white text-sm uppercase leading-tight">
+          {matchup.home}
+        </span>
         <span className="text-primary font-black text-xs px-1 flex-shrink-0">VS</span>
         <span className="font-heading font-black text-gray-900 dark:text-white text-sm uppercase leading-tight text-right">
-          {game.opponent}
+          {matchup.away}
         </span>
       </div>
 
@@ -112,7 +115,7 @@ export default function Calendario() {
           sorted.map(game => ({
             "@context": "https://schema.org",
             "@type": "SportsEvent",
-            "name": `HC PDL vs ${game.opponent}`,
+            "name": `${getMatchupNames(game).home} vs ${getMatchupNames(game).away}`,
             // Sem hora marcada, schema.org aceita startDate só com a data. Publicar
             // o fallback de meia-noite como se fosse hora oficial daria a entender
             // que o jogo é às 00:00 — e é isso que apareceria em resultados de
@@ -139,8 +142,10 @@ export default function Calendario() {
             "sport": "Hóquei em Patins",
             "description": `Jogo do Campeonato Nacional — ${game.competition}. ${game.isHome ? "Jogo em casa no Pavilhão Sidório Serpa, Ponta Delgada." : `Jogo fora em ${game.location}.`}`,
             "organizer": { "@type": "Organization", "name": "Federação de Patinagem de Portugal", "alternateName": "FPP" },
-            ...(game.result ? { "result": `HC PDL ${game.isHome ? game.result.home : game.result.away} - ${game.isHome ? game.result.away : game.result.home} ${game.opponent}` } : {}),
-            ...(game.youtubeUrl ? { "recordedIn": { "@type": "VideoObject", "name": `HC PDL vs ${game.opponent} — Ao Vivo`, "url": game.youtubeUrl } } : {})
+            // Resultado e nome da transmissão pela mesma ordem casa-fora usada no
+            // cartão, para o placar bater certo com os nomes.
+            ...(game.result ? { "result": `${getMatchupNames(game).home} ${game.result.home} - ${game.result.away} ${getMatchupNames(game).away}` } : {}),
+            ...(game.youtubeUrl ? { "recordedIn": { "@type": "VideoObject", "name": `${getMatchupNames(game).home} vs ${getMatchupNames(game).away} — Ao Vivo`, "url": game.youtubeUrl } } : {})
           }))
         )}</script>
         <script type="application/ld+json">{JSON.stringify({

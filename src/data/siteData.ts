@@ -151,6 +151,22 @@ export function formatGameTime(game: Pick<Game, 'time'>): string {
   return game.time ?? TIME_TBD_LABEL;
 }
 
+/**
+ * Nomes do confronto pela ordem real: equipa da casa à esquerda, visitante à
+ * direita. Mostrar sempre "HC PDL" à esquerda escondia se o jogo era em casa ou
+ * fora, e desalinhava o resultado — o placar é gravado como `result.home` /
+ * `result.away` (equipas reais), por isso num jogo fora o número da esquerda é
+ * do adversário enquanto o nome da esquerda dizia HC PDL.
+ */
+export function getMatchupNames(
+  game: Pick<Game, 'isHome' | 'opponent'>,
+  pdlLabel = 'HC PDL',
+): { home: string; away: string } {
+  return game.isHome
+    ? { home: pdlLabel, away: game.opponent }
+    : { home: game.opponent, away: pdlLabel };
+}
+
 const YOUTUBE_LIVE_URL = 'https://www.youtube.com/@HoqueiClubePDL/live';
 const PAVILHAO_PDL = 'Pavilhão Sidónio Serpa';
 

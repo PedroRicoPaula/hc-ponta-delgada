@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
-import { games, parseGameDateTime, formatGameTime } from '@/data/siteData';
+import { games, parseGameDateTime, formatGameTime, getMatchupNames } from '@/data/siteData';
 import { getNextGame, getGameStatus, useNow } from '@/lib/games';
 
 function NextGameCard() {
@@ -22,6 +22,7 @@ function NextGameCard() {
   const start = parseGameDateTime(nextGame);
   const date = start.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short' });
   const time = formatGameTime(nextGame);
+  const matchup = getMatchupNames(nextGame);
 
   return (
     <motion.div
@@ -58,9 +59,9 @@ function NextGameCard() {
             )}
           </div>
           <div className="flex items-center justify-between gap-2 mb-3">
-            <span className="font-heading font-black text-white text-sm uppercase leading-tight">HC PDL</span>
+            <span className="font-heading font-black text-white text-sm uppercase leading-tight">{matchup.home}</span>
             <span className="text-primary font-black text-xs px-2">VS</span>
-            <span className="font-heading font-black text-white text-sm uppercase leading-tight text-right">{nextGame.opponent}</span>
+            <span className="font-heading font-black text-white text-sm uppercase leading-tight text-right">{matchup.away}</span>
           </div>
           <div className="border-t border-white/10 pt-2.5 space-y-1">
             <p className="text-gray-300 text-xs font-medium">{date} · {time}</p>
