@@ -71,6 +71,7 @@ Site 100% em PT. Possível futuro: EN para visibilidade internacional do clube.
 
 | Data | Issue |
 |------|-------|
+| 2026-08-12 | **`<link rel="icon">` de 32×32 apontava para `/uploads/favicon.ico`, ficheiro inexistente** — `index.html`, só não dava 404 visível porque o browser cai automaticamente para `/favicon.ico` na raiz. Corrigido para `/favicon.ico` (onde o ficheiro realmente está); aproveitado para regenerar esse `favicon.ico` a partir do logo do clube (`public/uploads/pdlLogo.png`, via Pillow, multi-tamanho 16–256px) — antes era o ícone default do template Vite/Lovable |
 | 2026-07 | **Logo invisível em dark mode** — wrappado em `bg-white rounded-xl` em Navigation e Footer |
 | 2026-07 | **Banners "em construção"** — removidos de TeamSection, EventsSection, TrainingSchedulesSection |
 | 2026-07 | **Dark mode incompleto** — todas as secções, páginas (Blog, BlogPost, Modalidade, Patrocinadores) e modais actualizados |
