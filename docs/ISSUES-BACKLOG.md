@@ -2,7 +2,14 @@
 
 ## 🔴 Bugs Activos
 
-_(nenhum confirmado — última verificação: 2026-07-13)_
+### [BUG-UI-001] Nome do adversário cortado no card "Próximo Jogo" do hero
+**Encontrado:** 2026-08-12, ao testar responsividade depois de actualizar o calendário. `HeroSection.tsx` — o botão flutuante "Mini Jogo" sobrepõe-se ao card e tapa o fim do nome da equipa da direita. Com a jornada 1 lê-se `HC ... GAMA/J.A` em vez de `HC VASCO DA GAMA/J.ASCENÇÃO`.
+
+**Não é regressão:** confirmado com `git stash` que já acontecia antes das alterações ao calendário. Só ficou mais visível porque o adversário da primeira jornada tem um nome comprido, e vários adversários desta série têm nomes longos (`HC Vasco da Gama/J.Ascenção`, `CD Paço de Arcos "B"`, `A Stuart HC Massamá`).
+
+**Onde não acontece:** cartões da página `/calendario` e card da `EventsSection` — só o hero tem o botão sobreposto.
+
+**Opções de correcção** (decisão de design por tomar): dar `padding-right` ao card para o texto nunca entrar por baixo do botão; encolher/reposicionar o botão "Mini Jogo"; ou empilhar os nomes verticalmente em vez de lado a lado, como já faz a `EventsSection`.
 
 ---
 
