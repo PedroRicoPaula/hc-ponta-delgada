@@ -124,7 +124,8 @@ export interface Game {
   time?: string;
   location: string;
   competition: string;
-  youtubeUrl?: string; // só jogos em casa têm transmissão
+  /** Transmissão no site. Casa: URL do canal. Fora: omitir, ou meter o live do adversário (`watch?v=` ou `/channel/UC…/live`). */
+  youtubeUrl?: string;
   result?: { home: number; away: number };
 }
 

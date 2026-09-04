@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { games, parseGameDateTime, formatGameTime, getMatchupNames } from '@/data/siteData';
-import { getNextGame, getGameStatus, useNow } from '@/lib/games';
+import { getNextGame, isMatchLive, useNow } from '@/lib/games';
 
 function NextGameCard() {
   const now = useNow(1000);
@@ -18,7 +18,7 @@ function NextGameCard() {
 
   if (!nextGame) return null;
 
-  const isLive = getGameStatus(nextGame, now) === 'live';
+  const isLive = isMatchLive(nextGame, now);
   const start = parseGameDateTime(nextGame);
   const date = start.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short' });
   const time = formatGameTime(nextGame);

@@ -5,7 +5,8 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { SocialIcons } from '@/components/SocialIcons';
 import { games, parseGameDateTime, formatGameTime, hasKnownTime, getMatchupNames, type Game } from '@/data/siteData';
-import { getGameStatus, useNow } from '@/lib/games';
+import { getGameStatus, isBroadcastWindow, isMatchLive, useNow } from '@/lib/games';
+import { LiveBroadcast } from '@/components/LiveBroadcast';
 
 /** DD/MM/YYYY → YYYY-MM-DD, para startDate sem hora no schema.org. */
 const toIsoDate = (date: string) => date.split('/').reverse().join('-');
@@ -28,7 +29,8 @@ const toSchemaStartDate = (game: Game) =>
 function GameCard({ game, now, index }: { game: Game; now: Date; index: number }) {
   const status = getGameStatus(game, now);
   const isEnded = status === 'ended';
-  const isLive = status === 'live';
+  const isLive = isMatchLive(game, now);
+  const canWatch = isBroadcastWindow(game, now);
   const start = parseGameDateTime(game);
   const dateLabel = start.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short', year: 'numeric' });
   const timeLabel = formatGameTime(game);
@@ -90,8 +92,11 @@ function GameCard({ game, now, index }: { game: Game; now: Date; index: number }
         <p className="text-gray-400 dark:text-gray-500 text-xs">{game.location}</p>
       </div>
 
-      {isLive && !game.isHome && (
+      {isLive && !game.youtubeUrl && (
         <p className="mt-2 text-[11px] text-gray-400 dark:text-gray-500 italic">Sem transmissão · jogo fora</p>
+      )}
+      {canWatch && (
+        <p className="mt-2 text-[11px] font-bold uppercase tracking-widest text-red-500">Transmissão acima</p>
       )}
     </motion.article>
   );
@@ -100,6 +105,7 @@ function GameCard({ game, now, index }: { game: Game; now: Date; index: number }
 export default function Calendario() {
   const now = useNow(1000);
   const sorted = [...games].sort((a, b) => parseGameDateTime(a).getTime() - parseGameDateTime(b).getTime());
+  const onAir = sorted.find((game) => isBroadcastWindow(game, now));
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -173,10 +179,19 @@ export default function Calendario() {
             </div>
             <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-3">Calendário</h1>
             <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
-              Todos os jogos da equipa sénior. Jogos em casa têm transmissão em direto no YouTube — assim que terminam,
-              o resultado é adicionado manualmente.
+              Todos os jogos da equipa sénior. Jogos em casa têm transmissão em direto no YouTube no site, um minuto antes
+              do início. Jogos fora só mostram o estado ao vivo, salvo se o adversário também transmitir.
             </p>
           </motion.div>
+
+          {onAir?.youtubeUrl && (
+            <div className="max-w-3xl mx-auto mb-12">
+              <LiveBroadcast
+                url={onAir.youtubeUrl}
+                title={`${getMatchupNames(onAir).home} vs ${getMatchupNames(onAir).away} — ao vivo`}
+              />
+            </div>
+          )}
 
           {sorted.length === 0 ? (
             <p className="text-center text-gray-400 py-16">Nenhum jogo agendado.</p>

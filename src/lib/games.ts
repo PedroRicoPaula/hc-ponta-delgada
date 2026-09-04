@@ -3,6 +3,8 @@ import { parseGameDateTime, hasKnownTime, type Game } from '@/data/siteData';
 
 export const GAME_DURATION_MINUTES = 150; // duração média de um jogo de hóquei em patins
 export const LIVE_COUNTDOWN_HOURS = 24;
+/** Player YouTube no site: 1 min antes do início (a live no canal costuma abrir ~5 min antes). */
+export const BROADCAST_LEAD_MINUTES = 1;
 
 export type GameStatus = 'upcoming' | 'countdown' | 'live' | 'ended';
 
@@ -27,6 +29,20 @@ export function getGameStatus(game: Game, now: Date): GameStatus {
   if (now >= start) return 'live';
   if (now.getTime() >= start.getTime() - LIVE_COUNTDOWN_HOURS * 3600000) return 'countdown';
   return 'upcoming';
+}
+
+/** Tem URL de transmissão e está na janela do player (1 min antes → fim estimado). Casa ou fora. */
+export function isBroadcastWindow(game: Game, now: Date): boolean {
+  if (!game.youtubeUrl || !hasKnownTime(game)) return false;
+  const start = parseGameDateTime(game).getTime();
+  const open = start - BROADCAST_LEAD_MINUTES * 60_000;
+  const t = now.getTime();
+  return t >= open && t < getGameEnd(game).getTime();
+}
+
+/** Badge “ao vivo”: janela de transmissão, ou relógio do jogo se não houver YouTube. */
+export function isMatchLive(game: Game, now: Date): boolean {
+  return isBroadcastWindow(game, now) || getGameStatus(game, now) === 'live';
 }
 
 export function getNextGame(games: Game[], now: Date): Game | undefined {
