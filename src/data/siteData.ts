@@ -361,6 +361,7 @@ export const sponsors: Sponsor[] = [
   { name: "Agri Tractores", logo: "/uploads/patrocinadores/agritatores_logo.png", url: "https://agritractores.pt/", featured: true },
   { name: "Catchawards", logo: "/uploads/patrocinadores/catchawards.png", url: "https://www.catchawardsportugal.pt/" },
   { name: "Junta de Freguesia de Santa Clara", logo: "/uploads/patrocinadores/logo_JFSantaClara.png", url: "https://www.freguesiadesantaclara.com/" },
+  { name: "Junta de Freguesia de São José", logo: "/uploads/patrocinadores/freguesiasaojose.jpeg", url: "https://juntafreguesiasaojose.pt/", lightPlate: true },
   { name: "Câmara Municipal de Ponta Delgada", logo: "/uploads/patrocinadores/logotipo_pontadelgadaV2.svg", url: "https://www.cm-pontadelgada.pt/" },
   { name: "Pérola da Ilha", logo: "/uploads/patrocinadores/logo_peroladailha.jpeg", url: "https://www.peroladailha.pt/" },
   { name: "AFISA", logo: "/uploads/patrocinadores/logo_afisa.png", url: "https://www.facebook.com/p/AFISA-100083180627789/" },
