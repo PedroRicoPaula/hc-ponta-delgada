@@ -6,12 +6,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from 'next-themes';
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import RouteScrollReset from "@/components/RouteScrollReset";
 import Index from "./pages/Index";
 import QueroSerPatrocinador from "./pages/QueroSerPatrocinador";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Modalidade from "./pages/Modalidade";
 import Calendario from "./pages/Calendario";
+import Merch from "./pages/Merch";
 import Comunicados from "./pages/Comunicados";
 import ComunicadoDetail from "./pages/ComunicadoDetail";
 import NotFound from "./pages/NotFound";
@@ -27,6 +29,7 @@ const App = () => (
             <Toaster />
             <Sonner />
             <BrowserRouter>
+              <RouteScrollReset />
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/patrocinadores" element={<QueroSerPatrocinador />} />
@@ -34,6 +37,7 @@ const App = () => (
                 <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route path="/modalidade" element={<Modalidade />} />
                 <Route path="/calendario" element={<Calendario />} />
+                <Route path="/merch" element={<Merch />} />
                 <Route path="/comunicados" element={<Comunicados />} />
                 <Route path="/comunicados/:slug" element={<ComunicadoDetail />} />
                 <Route path="*" element={<NotFound />} />

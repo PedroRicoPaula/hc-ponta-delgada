@@ -31,7 +31,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 const SITE_URL = 'https://hoqueiclubepdl.com';
-const STATIC_ROUTES = ['/', '/blog', '/modalidade', '/patrocinadores', '/comunicados', '/calendario'];
+const STATIC_ROUTES = ['/', '/blog', '/modalidade', '/patrocinadores', '/comunicados', '/calendario', '/merch'];
 
 async function getRoutes() {
   const vite = await createServer({ root, server: { middlewareMode: true }, appType: 'custom' });
@@ -56,6 +56,7 @@ function getSitemapMeta(route) {
   if (route === '/comunicados') return { priority: '0.8', changefreq: 'weekly' };
   if (route === '/blog') return { priority: '0.8', changefreq: 'weekly' };
   if (route === '/patrocinadores') return { priority: '0.7', changefreq: 'monthly' };
+  if (route === '/merch') return { priority: '0.8', changefreq: 'monthly' };
   if (route.startsWith('/comunicados/')) return { priority: '0.7', changefreq: 'monthly' };
   if (route.startsWith('/blog/')) return { priority: '0.7', changefreq: 'monthly' };
   return { priority: '0.5', changefreq: 'monthly' };

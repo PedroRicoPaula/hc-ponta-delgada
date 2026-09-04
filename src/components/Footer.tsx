@@ -115,6 +115,8 @@ export const Footer = () => {
                 <WaveLink to="/blog">Blog</WaveLink>
                 <WaveLink to="/patrocinadores">Patrocinadores</WaveLink>
                 <WaveLink to="/modalidade">Modalidade</WaveLink>
+                <WaveLink to="/calendario">Calendário</WaveLink>
+                <WaveLink to="/merch">Merch</WaveLink>
                 <WaveLink to="/comunicados">Comunicados</WaveLink>
               </nav>
             </div>

@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Heart } from 'lucide-react';
+import { Heart, Mail } from 'lucide-react';
 import { DonationsModal } from '@/components/DonationsModal';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
@@ -13,10 +13,11 @@ export const Navigation = () => {
 
   const navItems = [
     { name: "Modalidade", href: "/modalidade" },
+    { name: "Calendário", href: "/calendario" },
+    { name: "Merch", href: "/merch" },
     { name: "Patrocinadores", href: "/patrocinadores" },
     { name: "Blog", href: "/blog" },
     { name: "Comunicados", href: "/comunicados" },
-    { name: "Contactos", href: "/#contact" },
   ];
 
   const linkClass =
@@ -54,14 +55,14 @@ export const Navigation = () => {
             </Link>
 
             {/* Desktop nav */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => (
                 <Link key={item.name} to={item.href} className={linkClass}>{item.name}</Link>
               ))}
             </div>
 
             {/* Right actions */}
-            <div className="hidden md:flex items-center gap-2">
+            <div className="hidden lg:flex items-center gap-2">
               <ThemeToggle />
               <button
                 onClick={() => setIsDonationsOpen(true)}
@@ -70,10 +71,17 @@ export const Navigation = () => {
                 <Heart className="w-3.5 h-3.5" />
                 Doação
               </button>
+              <Link
+                to="/#contact"
+                aria-label="Contactos"
+                className="p-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+              >
+                <Mail className="w-5 h-5" />
+              </Link>
             </div>
 
             {/* Mobile */}
-            <div className="md:hidden flex items-center gap-1">
+            <div className="lg:hidden flex items-center gap-1">
               <ThemeToggle />
               <button
                 className="p-2 text-gray-700 dark:text-gray-300 focus:outline-none"
@@ -92,7 +100,7 @@ export const Navigation = () => {
         </div>
 
         {/* Mobile dropdown */}
-        <div className={`md:hidden fixed top-16 inset-x-0 transition-all duration-300 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none -translate-y-2'}`}>
+        <div className={`lg:hidden fixed top-16 inset-x-0 transition-all duration-300 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none -translate-y-2'}`}>
           <div className="bg-white/95 dark:bg-gray-950/95 backdrop-blur-md shadow-lg border-b border-gray-100 dark:border-gray-800 px-4 py-4 space-y-1">
             {navItems.map((item) => (
               <Link
@@ -105,12 +113,22 @@ export const Navigation = () => {
               </Link>
             ))}
             <div className="pt-3 border-t border-gray-100 dark:border-gray-800">
-              <button
-                onClick={() => { setIsDonationsOpen(true); setIsMenuOpen(false); }}
-                className="flex items-center gap-2 w-full bg-primary text-gray-950 px-4 py-3 font-heading font-black text-sm uppercase tracking-wider transition-all"
-              >
-                <Heart className="w-4 h-4" /> Doação
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => { setIsDonationsOpen(true); setIsMenuOpen(false); }}
+                  className="flex flex-1 items-center gap-2 bg-primary text-gray-950 px-4 py-3 font-heading font-black text-sm uppercase tracking-wider transition-all"
+                >
+                  <Heart className="w-4 h-4" /> Doação
+                </button>
+                <Link
+                  to="/#contact"
+                  aria-label="Contactos"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="p-3 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+                >
+                  <Mail className="w-5 h-5" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
