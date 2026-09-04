@@ -54,9 +54,10 @@ export const merchProducts: MerchProduct[] = [
   },
   {
     id: 'sweat',
-    name: 'Sweat com capuz',
+    name: 'Sweat',
     image: '/uploads/merch/sweat.jpeg',
     sizes: 'apparel',
+    variants: ['Com capuz', 'Sem capuz'],
     priceMember: 25,
     priceNonMember: 30,
   },
