@@ -355,11 +355,10 @@ export interface Sponsor {
   lightPlate?: boolean;
 }
 
-// Logos antigos não usados aqui (Auto Cordeiro, Crenku, Agência Funerária Lindo) continuam
-// em public/uploads/patrocinadores/ — mantidos de propósito, podem voltar a ser precisos.
+// Logos antigos não usados aqui (Auto Cordeiro, Crenku, Agência Funerária Lindo, Azemad)
+// continuam em public/uploads/patrocinadores/ — mantidos de propósito, podem voltar a ser precisos.
 export const sponsors: Sponsor[] = [
   { name: "Agri Tractores", logo: "/uploads/patrocinadores/agritatores_logo.png", url: "https://agritractores.pt/", featured: true },
-  { name: "Azemad", logo: "/uploads/patrocinadores/AzemadLogo.jpg", url: "https://azemad.com/" },
   { name: "Catchawards", logo: "/uploads/patrocinadores/catchawards.png", url: "https://www.catchawardsportugal.pt/" },
   { name: "Junta de Freguesia de Santa Clara", logo: "/uploads/patrocinadores/logo_JFSantaClara.png", url: "https://www.freguesiadesantaclara.com/" },
   { name: "Câmara Municipal de Ponta Delgada", logo: "/uploads/patrocinadores/logotipo_pontadelgadaV2.svg", url: "https://www.cm-pontadelgada.pt/" },
@@ -368,4 +367,8 @@ export const sponsors: Sponsor[] = [
   { name: "Lene Car", logo: "/uploads/patrocinadores/logo_lenecar.webp", url: "https://www.lenecarautomoveis.com/" },
   { name: "PMA Açores", logo: "/uploads/patrocinadores/pma-acores.jpeg", url: "https://www.pmasolutions.com/" },
   { name: "Residência Segura", logo: "/uploads/patrocinadores/residencia-segura.jpeg", url: "https://www.residenciasegura.pt/", lightPlate: true },
+  { name: "Talento", logo: "/uploads/patrocinadores/talento.jpeg", url: "https://centrostalento.pt/", lightPlate: true },
+  { name: "iServices", logo: "/uploads/patrocinadores/iservices.jpeg", url: "https://iservices.pt/", lightPlate: true },
+  { name: "Almério e Cordeiro", logo: "/uploads/patrocinadores/almerioecordeiro.jpeg", url: "https://almeriocordeiro.pt/", lightPlate: true },
+  { name: "Governo dos Açores", logo: "/uploads/patrocinadores/governoacores.jpeg", url: "https://portal.azores.gov.pt/", lightPlate: true },
 ];
