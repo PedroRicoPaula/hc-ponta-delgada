@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Heart, Mail } from 'lucide-react';
 import { DonationsModal } from '@/components/DonationsModal';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { NAV_LINKS } from '@/data/navLinks';
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,14 +12,6 @@ export const Navigation = () => {
   const { pathname } = useLocation();
   const isHome = pathname === '/';
 
-  const navItems = [
-    { name: "Modalidade", href: "/modalidade" },
-    { name: "Calendário", href: "/calendario" },
-    { name: "Merch", href: "/merch" },
-    { name: "Patrocinadores", href: "/patrocinadores" },
-    { name: "Blog", href: "/blog" },
-    { name: "Comunicados", href: "/comunicados" },
-  ];
 
   const linkClass =
     "relative text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary px-3 py-2 text-sm font-medium transition-colors duration-200 after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-left after:transition-transform after:duration-300 hover:after:scale-x-100";
@@ -56,7 +49,7 @@ export const Navigation = () => {
 
             {/* Desktop nav */}
             <div className="hidden lg:flex items-center gap-1">
-              {navItems.map((item) => (
+              {NAV_LINKS.map((item) => (
                 <Link key={item.name} to={item.href} className={linkClass}>{item.name}</Link>
               ))}
             </div>
@@ -102,7 +95,7 @@ export const Navigation = () => {
         {/* Mobile dropdown */}
         <div className={`lg:hidden fixed top-16 inset-x-0 transition-all duration-300 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none -translate-y-2'}`}>
           <div className="bg-white/95 dark:bg-gray-950/95 backdrop-blur-md shadow-lg border-b border-gray-100 dark:border-gray-800 px-4 py-4 space-y-1">
-            {navItems.map((item) => (
+            {NAV_LINKS.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}

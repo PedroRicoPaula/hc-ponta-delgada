@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Heart, Facebook, Instagram, Youtube } from 'lucide-react';
 import { LegalModal } from '@/components/LegalModal';
 import { DonationsModal } from '@/components/DonationsModal';
+import { NAV_LINKS } from '@/data/navLinks';
 
 const WaveText = ({ children, hovered }: { children: string; hovered: boolean }) => (
   <>
@@ -112,12 +113,9 @@ export const Footer = () => {
             <div>
               <p className="text-xs font-bold uppercase tracking-widest text-primary mb-5">Explorar</p>
               <nav className="space-y-2.5">
-                <WaveLink to="/blog">Blog</WaveLink>
-                <WaveLink to="/patrocinadores">Patrocinadores</WaveLink>
-                <WaveLink to="/modalidade">Modalidade</WaveLink>
-                <WaveLink to="/calendario">Calendário</WaveLink>
-                <WaveLink to="/merch">Merch</WaveLink>
-                <WaveLink to="/comunicados">Comunicados</WaveLink>
+                {NAV_LINKS.map((item) => (
+                  <WaveLink key={item.href} to={item.href}>{item.name}</WaveLink>
+                ))}
               </nav>
             </div>
 

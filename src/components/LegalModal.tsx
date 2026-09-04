@@ -6,86 +6,82 @@ interface LegalModalProps {
 }
 
 const TERMS = `
-**1. Aceitação dos Termos**
-Ao aceder e utilizar o site do Hóquei Clube PDL (hoqueiclubepdl.com), aceita os presentes termos e condições de utilização.
+**1. Aceitação**
+Ao usares o site do Hóquei Clube PDL (hoqueiclubepdl.com), aceitas estes termos.
 
-**2. Utilização do Site**
-O conteúdo deste site destina-se exclusivamente a fins informativos sobre as atividades do clube. É proibida a reprodução ou utilização comercial de qualquer conteúdo sem autorização prévia.
+**2. O que o site faz**
+O site apresenta o clube, treinos, calendário, comunicados, blog e merch. Há também transmissão ao vivo no YouTube quando há jogo em casa. Não é uma loja online com envios nem um serviço de pagamento. É proibida a reprodução comercial de conteúdos sem autorização.
 
-**3. Propriedade Intelectual**
-Todos os conteúdos (textos, imagens, logótipos, vídeos) são propriedade do Hóquei Clube PDL ou utilizados com a devida autorização. A reprodução não autorizada é proibida.
+**3. Propriedade intelectual**
+Textos, imagens, logótipos e vídeos são do Hóquei Clube PDL ou usados com autorização. Não copies para uso comercial sem pedir.
 
-**4. Responsabilidade**
-O Hóquei Clube PDL não se responsabiliza por eventuais imprecisões nas informações publicadas, reservando-se o direito de as alterar sem aviso prévio.
+**4. Exactidão**
+Esforçamo-nos por manter a informação correcta. Horários, resultados e preços podem mudar. O clube pode actualizar o site sem aviso prévio.
 
-**5. Links Externos**
-O site pode conter links para sites de terceiros. O clube não se responsabiliza pelo conteúdo desses sites.
+**5. Links e conteúdos de terceiros**
+Há ligações para a FPP, redes sociais, mapas e o YouTube. O clube não controla esses sites.
 
-**6. Alterações**
-Reservamo-nos o direito de alterar estes termos a qualquer momento. As alterações entram em vigor imediatamente após publicação.
+**6. Merch**
+Na página de merch reservas peças. Não há correio: levantas no Pavilhão Sidónio Serpa, em Ponta Delgada. Pagamento por transferência para o IBAN publicado (beneficiário Hóquei Clube PDL). O clube confirma valores e se o preço de sócio se aplica. O site não cobra nem envia o email da reserva. Tu envias a partir da tua conta de correio.
 
-**8. Merch**
-A página de merch é uma reserva, não uma loja com envios. O pagamento é por transferência para o IBAN publicado no site (beneficiário Hóquei Clube PDL). O levantamento faz-se no Pavilhão Sidónio Serpa, em Ponta Delgada. O clube confirma valores e qualidade de sócio. O site não processa pagamentos nem envia o email da reserva — o visitante envia a partir da sua conta de correio.
+**7. Alterações**
+Podemos alterar estes termos. A versão em vigor é a que está publicada neste diálogo.
 
-**9. Contacto**
-Para questões relacionadas com estes termos, contacte-nos através de hoquei.clube.pdl@gmail.com.
+**8. Contacto**
+Dúvidas: hoquei.clube.pdl@gmail.com.
 `.trim();
 
 const PRIVACY = `
-**1. Responsável pelo Tratamento**
-Hóquei Clube PDL · hoquei.clube.pdl@gmail.com · +351 296 382 987
+**1. Responsável**
+Hóquei Clube PDL. Email: hoquei.clube.pdl@gmail.com. Telefone: +351 296 382 987.
 
-**2. Dados Recolhidos**
-Recolhemos apenas os dados que nos fornece voluntariamente (ex: nome e email no formulário de contacto; nome e telemóvel na reserva de merch, enviados por si no seu email). Não recolhemos dados de navegação além de cookies técnicos essenciais.
+**2. O que recolhemos**
+Não há formulário de contacto no site. Na homepage falas connosco por email ou telefone.
 
-**3. Finalidade do Tratamento**
-Os dados são utilizados exclusivamente para responder a pedidos de contacto, gerir associados e comunicar informações sobre o clube.
+Na merch, o pedido sai do teu programa de correio. Nome, telefone, email e o que encomendaste chegam à caixa Gmail do clube. O site não guarda essa mensagem num servidor nosso.
 
-**4. Base Legal**
-O tratamento baseia-se no consentimento do titular (RGPD, Art.º 6.º, n.º 1, al. a)) ou na execução de contrato de associado.
+Não vendemos listas de emails. Não fazemos perfis publicitários.
 
-**5. Conservação**
-Os dados são conservados pelo período necessário à finalidade que motivou a recolha, ou pelo prazo legalmente exigido.
+**3. Para que servem**
+Responder a contactos, gerir reservas de merch, associados e comunicação do clube.
 
-**6. Partilha com Terceiros**
-Não vendemos nem partilhamos dados pessoais com terceiros para fins comerciais. Podemos partilhar com a Federação de Patinagem de Portugal (FPP) no âmbito da federação desportiva.
+**4. Base legal**
+Consentimento (quando nos escreves) ou relação de associado, quando se aplica. RGPD, Art.º 6.º, n.º 1.
 
-**7. Direitos do Titular**
-Tem direito de acesso, retificação, apagamento, portabilidade e oposição ao tratamento dos seus dados. Exerça estes direitos através de hoquei.clube.pdl@gmail.com.
+**5. Quanto tempo**
+O tempo necessário para tratar o pedido, ou o prazo que a lei exigir (por exemplo, contabilidade de uma venda).
 
-**8. Cookies**
-Utilizamos cookies técnicos essenciais para o funcionamento do site. Pode gerir as suas preferências no banner de cookies.
+**6. Partilha**
+Não vendemos dados. Podemos partilhar com a Federação de Patinagem de Portugal no âmbito desportivo, se for preciso.
 
-**9. Contacto DPO**
-Para questões de privacidade: hoquei.clube.pdl@gmail.com
+**7. Os teus direitos**
+Acesso, rectificação, apagamento, portabilidade e oposição. Escreve para hoquei.clube.pdl@gmail.com.
+
+**8. Armazenamento no teu dispositivo**
+O tema claro/escuro e a escolha do banner de cookies ficam no armazenamento local do navegador. Na merch há um intervalo curto entre envios de reserva (também local). Ver a política de cookies.
+
+**9. Privacidade**
+Questões: o mesmo email do clube. Não temos um DPO nomeado à parte.
 `.trim();
 
 const COOKIES = `
-**1. O que são Cookies?**
-Cookies são pequenos ficheiros de texto armazenados no seu dispositivo quando visita um website. Permitem que o site reconheça o seu dispositivo em visitas futuras e guarde preferências.
+**1. Cookies e armazenamento local**
+Cookies são ficheiros pequenos no teu dispositivo. Este site usa sobretudo armazenamento local (localStorage), não uma rede de cookies de marketing.
 
-**2. Cookies que Utilizamos**
+**2. Banner**
+O aviso de cookies aparece na página inicial. Recusar guarda a escolha e não liga rastreio nosso. O tema claro/escuro continua a funcionar: é uma preferência técnica, não publicidade.
 
-**Cookies Essenciais (sempre ativos)**
-Necessários para o funcionamento básico do site. Incluem: preferências de tema (modo claro/escuro), consentimento de cookies. Não podem ser desativados pois são indispensáveis ao funcionamento do site.
+**3. O que guardamos no navegador**
+Preferência de tema (next-themes). Escolha do banner (cookie-consent). Na merch, um carimbo de tempo para não reenviares o mesmo pedido de imediato.
 
-**Cookies de Preferências**
-Guardam as suas escolhas de personalização, como o tema visual preferido. Sem estes cookies, pode ter de redefinir as suas preferências em cada visita.
+**4. YouTube**
+Quando há vídeo incorporado (galeria, calendário ou jogo ao vivo), o YouTube pode instalar cookies próprios. Isso é da Google, segundo a política deles.
 
-**3. Cookies de Terceiros**
-Este site pode incluir conteúdos incorporados de terceiros (ex: vídeos do YouTube). Esses serviços podem instalar os seus próprios cookies, sujeitos às respetivas políticas de privacidade.
+**5. No navegador**
+Podes apagar dados do site nas definições. Sem tema guardado, voltas ao modo claro por omissão.
 
-**4. Como Gerir Cookies**
-Pode gerir ou eliminar cookies através das definições do seu navegador. Note que desativar certos cookies pode afetar a funcionalidade do site.
-
-**5. Duração**
-Os cookies de sessão são eliminados quando fecha o navegador. Os cookies persistentes (como preferências de tema) têm duração máxima de 12 meses.
-
-**6. Alterações**
-Esta política pode ser atualizada. A data da última revisão é indicada no rodapé do site.
-
-**7. Contacto**
-Para questões sobre cookies: hoquei.clube.pdl@gmail.com
+**6. Contacto**
+hoquei.clube.pdl@gmail.com.
 `.trim();
 
 function renderText(text: string) {

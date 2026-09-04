@@ -18,10 +18,10 @@ Secções em ordem de renderização:
 
 | Componente | Função |
 |-----------|--------|
-| `Navigation.tsx` | Navbar top: Modalidade/Patrocinadores/Blog/Contactos + ThemeToggle + botão Doação. Logo faz scroll-to-top e limpa hash da URL quando já em `/` |
-| `Footer.tsx` | Rodapé — Explorar (Blog/Patrocinadores/Modalidade/Comunicados), Informações (Termos/Privacidade/Cookies), DonationsModal interno |
+| `Navigation.tsx` | Navbar: Calendário, Comunicados, Modalidade, Blog, Merch, Patrocinadores (`NAV_LINKS`) + ThemeToggle + Doação + Mail. Logo faz scroll-to-top e limpa hash da URL quando já em `/` |
+| `Footer.tsx` | Rodapé. Explorar usa o mesmo `NAV_LINKS`. Informações: Termos/Privacidade/Cookies. DonationsModal interno |
 | `SocialIcons.tsx` | Ícones flutuantes laterais (Facebook, Instagram, YouTube) |
-| `CursorRing.tsx` | Cursor personalizado (só desktop) |
+| `CursorRing.tsx` | Anel amarelo no hover (só desktop, `hover: fine`). Uma instância em `App.tsx` |
 | `CookieConsent.tsx` | Banner RGPD |
 | `FloatingActionButtons.tsx` | FABs flutuantes (doação, whatsapp, etc.) |
 | `DonationsModal.tsx` | Modal de doação com IBAN |
