@@ -27,7 +27,8 @@ src/
 │   └── ui/                      # shadcn/ui — NÃO editar directamente
 ├── data/
 │   ├── siteData.ts             # Dados do clube (jogadores, treinos, galeria, etc.)
-│   └── blogData.ts             # Artigos do blog
+│   ├── blogData.ts             # Artigos do blog
+│   └── merchData.ts            # Catálogo da loja oficial
 ├── hooks/                      # Hooks custom
 │   ├── use-mobile.tsx
 │   ├── use-toast.ts
@@ -35,6 +36,7 @@ src/
 ├── lib/
 │   ├── utils.ts                # Utilitários gerais (cn, etc.)
 │   ├── seo.ts                  # Helpers para meta tags (JSON-LD)
+│   ├── merchReservation.ts     # Sanitização e mailto da reserva de merch
 │   ├── safeStorage.ts          # Wrapper localStorage com fallback
 │   └── games.ts                # Estado dos jogos (live/countdown/ended), useNow()
 ├── pages/                      # Uma página por rota
@@ -85,6 +87,10 @@ Exporta:
 
 Slug activo: `beneficios-hoquei-em-patins`
 
+### `src/data/merchData.ts`
+
+Exporta `merchProducts[]` (peças, preços sócio/não sócio, variantes) e `CLUB_IBAN`. A página `/merch` monta a reserva em `src/lib/merchReservation.ts`.
+
 ## Assets
 
 Todos em `public/uploads/`. Referenciados com paths absolutos (`/uploads/...`). Não importar com `import` — servidos como estáticos.
@@ -92,6 +98,8 @@ Todos em `public/uploads/`. Referenciados com paths absolutos (`/uploads/...`). 
 Fotos de jogadores: `public/uploads/jogadores/`
 
 Logos de patrocinadores: `public/uploads/patrocinadores/` — inclui logos activos (referenciados em `sponsors[]`) e logos de ex-patrocinadores mantidos de propósito (ver `docs/ISSUES-BACKLOG.md`, secção Limpeza).
+
+Fotos de merch: `public/uploads/merch/`
 
 ## SEO
 

@@ -46,7 +46,7 @@ O build de produção corre `scripts/prerender.js`, que precisa de um Chromium i
 src/
 ├── components/       — componentes React (secções, layout, ui/ do shadcn)
 ├── pages/             — páginas mapeadas nas rotas
-├── data/              — dados estáticos do site (siteData.ts, blogData.ts)
+├── data/              — dados estáticos do site (siteData.ts, blogData.ts, merchData.ts)
 ├── lib/                — utilitários, geração de schema.org (seo.ts)
 scripts/
 └── prerender.js       — pré-renderização estática + geração de sitemap
@@ -65,6 +65,7 @@ docs/
 | `/` | Homepage |
 | `/modalidade` | Guia de hóquei em patins |
 | `/calendario` | Calendário de jogos |
+| `/merch` | Loja oficial (reserva por email) |
 | `/comunicados` | Comunicados oficiais |
 | `/comunicados/:slug` | Detalhe de comunicado |
 | `/blog` | Blog |

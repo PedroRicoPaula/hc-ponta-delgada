@@ -100,5 +100,11 @@ Grelha com todos os jogos da equipa sénior. Dados: `games[]` em `src/data/siteD
 
 Jogos terminados (`ended`) ficam a cinzento/grayscale; mostram o resultado se `game.result` estiver preenchido, senão "Resultado brevemente" — resultados são sempre inseridos à mão em `siteData.ts`, não há cálculo automático. Só jogos em casa (`isHome: true`) têm `youtubeUrl`; jogos fora mostram o indicador "Ao Vivo" sem transmissão.
 
-Sem link na nav principal — acedida via botão "Ver Calendário" na `EventsSection` da homepage.
+Na nav principal (depois de Modalidade) e no footer.
+
+---
+
+## Merch (`/merch` → `src/pages/Merch.tsx`)
+
+Catálogo da loja oficial 2026/27. Dados: `src/data/merchData.ts`. Reserva por `mailto:` (`src/lib/merchReservation.ts`) — sem pagamento no site. Helmet: title, description, canonical `/merch/`, og:*, JSON-LD `CollectionPage` + `BreadcrumbList`. Rota em `STATIC_ROUTES` (`scripts/prerender.js`) para o sitemap e o HTML pré-renderizado.
 

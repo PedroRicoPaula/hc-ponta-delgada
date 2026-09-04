@@ -59,7 +59,7 @@ Não é necessário CDN actualmente — tudo servido do mesmo domínio.
 
 - [ ] `npm run build` sem erros TypeScript ou Vite
 - [ ] `npm run lint` sem erros ESLint
-- [ ] Testar dark/light mode em todas as páginas (`/`, `/blog`, `/blog/beneficios-hoquei-em-patins`, `/modalidade`, `/patrocinadores`)
+- [ ] Testar dark/light mode em todas as páginas (`/`, `/blog`, `/blog/beneficios-hoquei-em-patins`, `/modalidade`, `/patrocinadores`, `/calendario`, `/merch`)
 - [ ] Verificar logo visível em navbar (ambos os modos)
 - [ ] Testar responsividade: 390px, 768px, 1440px
 - [ ] Confirmar `public/manifest.json` e favicon actualizados

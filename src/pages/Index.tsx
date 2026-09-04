@@ -120,6 +120,14 @@ const Index = () => {
       },
       {
         "@type": "Question",
+        "name": "Como posso comprar merch oficial do Hóquei Clube PDL?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A merch oficial reserva-se em hoqueiclubepdl.com/merch. Escolhe as peças, envia o pedido por email para hoquei.clube.pdl@gmail.com e transfere o valor para o IBAN do clube, com comprovativo anexado. Não há pagamento no site. Há preços de sócio e não sócio."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "O Hóquei Clube PDL transmite os jogos online?",
         "acceptedAnswer": {
           "@type": "Answer",

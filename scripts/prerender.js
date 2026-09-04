@@ -101,7 +101,7 @@ async function main() {
       '',
       '  Chromium indisponível — as rotas NÃO foram pré-renderizadas.',
       '',
-      '  Sem este passo, /modalidade, /calendario, /blog/* e /comunicados/* servem',
+      '  Sem este passo, /modalidade, /calendario, /merch, /blog/* e /comunicados/* servem',
       '  todos o <title> e a meta description da homepage, e os crawlers de IA',
       '  (GPTBot, PerplexityBot, ClaudeBot) não veem nenhum dos schemas — não',
       '  executam JavaScript.',

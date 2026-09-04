@@ -202,7 +202,7 @@ export default function Merch() {
     '@type': 'CollectionPage',
     name: 'Merch — Hóquei Clube PDL',
     description: 'Loja oficial do Hóquei Clube PDL. Reserva de merch da época 2026/27 por email, com preços de sócio e não sócio.',
-    url: 'https://hoqueiclubepdl.com/merch',
+    url: 'https://hoqueiclubepdl.com/merch/',
     inLanguage: 'pt-PT',
     publisher: { '@type': 'Organization', name: 'Hóquei Clube PDL', url: 'https://hoqueiclubepdl.com/' },
     mainEntity: {
@@ -243,13 +243,14 @@ export default function Merch() {
         <meta property="og:description" content="Reserva merch oficial do Hóquei Clube PDL por email. Encomenda prévia com transferência para o IBAN do clube." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://hoqueiclubepdl.com/merch/" />
+        <meta property="og:image" content="https://hoqueiclubepdl.com/uploads/merch/jerseyplayer.jpeg" />
         <script type="application/ld+json">{JSON.stringify(collectionSchema)}</script>
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Início', item: 'https://hoqueiclubepdl.com/' },
-            { '@type': 'ListItem', position: 2, name: 'Merch', item: 'https://hoqueiclubepdl.com/merch' },
+            { '@type': 'ListItem', position: 2, name: 'Merch', item: 'https://hoqueiclubepdl.com/merch/' },
           ],
         })}</script>
       </Helmet>
