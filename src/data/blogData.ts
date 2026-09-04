@@ -13,90 +13,144 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "merch-oficial-15-anos",
+    title: "Merch oficial e 15 anos de Hóquei Clube PDL",
+    excerpt: "Já podes reservar a colecção 2026/27 no site: camisola dos 15 anos, equipamento de jogo e mais. Sem envios. O levantamento é no pavilhão.",
+    date: "2026-09-04",
+    author: "Hóquei Clube PDL",
+    category: "Clube",
+    readTime: 4,
+    photo: "/uploads/blog/camisola-15-anos.jpeg",
+    tags: ["merch", "15 anos", "loja oficial", "Ponta Delgada"],
+    content: `
+## Quinze anos em Ponta Delgada
+
+O Hóquei Clube PDL foi fundado a 12 de setembro de 2012, depois de o Clube União Micaelense ter encerrado a secção de hóquei em patins. Um grupo de antigos atletas e dirigentes quis manter a modalidade na cidade. Na época 2026/27 assinalamos esses 15 anos com uma camisola comemorativa, a peça de destaque desta colecção.
+
+Não somos o único clube de hóquei em patins em São Miguel. Na ilha há outros, como o Caldeiras Hóquei Clube (Ribeira Grande) e o Marítimo Sport Clube. A modalidade na ilha é organizada pela Associação de Patinagem de São Miguel, filiada na Federação de Patinagem de Portugal. O HC PDL compete, nos seniores, no Campeonato Nacional da 3.ª Divisão (Série Sul B).
+
+A merch não é uma loja com correio. É equipamento e recordação do clube, para quem treina, joga ou apoia.
+
+---
+
+## Página de merch no site
+
+Abrimos a [página de merch](/merch): catálogo com preços de sócio e de não sócio, tamanhos e reserva por email.
+
+Como funciona:
+
+- Escolhes as peças no site
+- Envias a reserva a partir do teu email (o site não cobra nem guarda o pedido)
+- Transferes para o IBAN do Hóquei Clube PDL e anexas o comprovativo
+- O clube confirma, incluindo se o preço de sócio se aplica
+- **Levantas no Pavilhão Sidónio Serpa.** Não fazemos envios.
+
+---
+
+## A camisola dos 15 anos
+
+É uma t-shirt da época, com o distintivo **15** ao peito. Preço: 23 € sócio, 27 € não sócio. Tamanhos do XS ao XXL.
+
+A foto deste artigo é um recorte da frente da peça, o mesmo modelo do catálogo.
+
+---
+
+## O resto da colecção 2026/27
+
+Na mesma página encontras, entre outras:
+
+- Camisola de jogo (principal ou alternativa) e guarda-redes
+- Equipamento de jogo (camisola reversível e calções pretos)
+- Sweat com ou sem capuz
+- Softshell, cachecol e boné
+
+Preços e variantes estão no catálogo. Qualquer dúvida, o email da reserva é [hoquei.clube.pdl@gmail.com](mailto:hoquei.clube.pdl@gmail.com).
+
+---
+
+## Reserva já
+
+[Abre a merch](/merch), escolhe a camisola dos 15 anos ou o que precisares, e envia o pedido. Quando o clube confirmar, vês-nos no pavilhão.
+
+*Treinos e contactos: [página inicial](/#contact).*
+    `.trim(),
+  },
+  {
     slug: "beneficios-hoquei-em-patins",
-    title: "Os Benefícios do Hóquei em Patins: Muito Mais do que um Desporto",
-    excerpt: "Descobre como a prática do hóquei em patins desenvolve não apenas o físico, mas também o carácter, a disciplina e o espírito de equipa — benefícios que duram uma vida inteira.",
+    title: "Os benefícios do hóquei em patins",
+    excerpt: "Uma modalidade rápida, colectiva e exigente: o que o hóquei em patins desenvolve no corpo, na cabeça e no grupo, no pavilhão e fora dele.",
     date: "2026-06-15",
     author: "Hóquei Clube PDL",
     category: "Modalidade",
     readTime: 6,
+    photo: "/uploads/blog/hoquei-em-patins.jpg",
     tags: ["hóquei em patins", "benefícios", "saúde", "desporto", "formação"],
     content: `
-## O que é o Hóquei em Patins?
+## O que é o hóquei em patins?
 
-O hóquei em patins — também conhecido como rink hockey ou roller hockey — é uma modalidade coletiva praticada em patins de quatro rodas (patins de roda), em que dois equipas de cinco jogadores (incluindo o guarda-redes) se defrontam num pavilhão fechado, tentando introduzir uma bola na baliza adversária utilizando sticks curvos.
+O hóquei em patins (também chamado rink hockey) joga-se em patins de quatro rodas, em pavilhão. Duas equipas de cinco jogadores, incluindo o guarda-redes, tentam meter a bola na baliza adversária com sticks curvos.
 
-Portugal é uma das maiores potências mundiais desta modalidade, com inúmeros títulos europeus e mundiais. Nos Açores, o Hóquei Clube PDL é o embaixador desta tradição desportiva desde 2012.
-
----
-
-## Benefícios Físicos
-
-### Cardiovascular e Resistência
-O hóquei em patins é uma atividade de alta intensidade que alterna sprints explosivos com períodos de recuperação ativa. Esta dinâmica desenvolve o sistema cardiovascular de forma eficaz, melhorando a capacidade aeróbica e anaeróbica. Estudos mostram que uma hora de jogo pode queimar entre 500 a 700 calorias, equivalente a uma sessão de corrida intensa.
-
-### Força e Potência Muscular
-A prática regular fortalece os músculos das pernas, glúteos e core de forma natural e funcional. O ato de patinar exige ativação constante dos músculos estabilizadores, enquanto os movimentos de passe e remate trabalham o tronco superior e os membros superiores.
-
-### Coordenação e Equilíbrio
-Patinar requer um equilíbrio dinâmico constante. Com o tempo, os praticantes desenvolvem uma consciência corporal excecional — a chamada propriocepção — que beneficia todas as outras atividades físicas do dia a dia. A coordenação olho-mão necessária para controlar o stick e a bola simultaneamente aguça os reflexos e a destreza motora.
-
-### Flexibilidade e Agilidade
-Os movimentos de mudança de direção, travagens e arranques rápidos exigem e desenvolvem flexibilidade nos quadris e tornozelos. Com treino regular, os atletas tornam-se significativamente mais ágeis e responsivos.
+Em Portugal a modalidade tem história longa e palmarés internacional. Nos Açores pratica-se em São Miguel desde 1947, segundo a Associação de Patinagem de São Miguel. Vários clubes passaram por essa história. O Hóquei Clube PDL surgiu em 2012, em Ponta Delgada, e hoje partilha a ilha com outros clubes de hóquei em patins.
 
 ---
 
-## Benefícios Cognitivos
+## Benefícios físicos
 
-### Pensamento Tático
-O hóquei em patins é um desporto de leitura permanente do jogo. Os jogadores precisam de antecipar movimentos adversários, identificar espaços livres e tomar decisões em frações de segundo. Esta exigência cognitiva treina o pensamento estratégico e a tomada de decisão sob pressão — competências valiosas fora do pavilhão.
+### Coração e resistência
+O jogo mistura sprints com recuperação activa. Exige o sistema cardiovascular de forma intensa, como outros desportos de pavilhão de alta intensidade.
 
-### Concentração e Foco
-A velocidade do jogo obriga a um estado de atenção elevado e sustentado. Os praticantes aprendem a filtrar distrações e a manter o foco num ambiente caótico — uma habilidade transferível para o estudo e a vida profissional.
+### Força e equilíbrio
+Patinar pede pernas, glúteos e tronco de forma contínua. O passe e o remate envolvem os braços e o core. O equilíbrio em movimento (a propriocepção) treina-se a cada sessão.
 
-### Memória Muscular
-A repetição de técnicas — o remate, o passe, a defesa — constrói memória muscular que permite executar movimentos complexos de forma automática. Este processo de aprendizagem motora otimiza a neuroplasticidade cerebral.
-
----
-
-## Benefícios Sociais e Emocionais
-
-### Espírito de Equipa
-O hóquei em patins é, acima de tudo, um desporto coletivo. Nenhum jogador ganha sozinho. A interdependência dentro de uma equipa ensina humildade, confiança nos colegas e a arte de colocar o grupo acima do individual — valores que formam cidadãos melhores.
-
-### Gestão de Emoções
-Aprender a lidar com a derrota, a frustração de um erro num momento decisivo ou a pressão de um jogo importante são experiências que desenvolvem a resiliência emocional. O desporto é, por isso, uma escola de vida incomparável.
-
-### Disciplina e Responsabilidade
-Chegar aos treinos com pontualidade, cumprir as orientações do treinador e manter os equipamentos em ordem são pequenos hábitos que constroem uma mentalidade disciplinada. Crianças que praticam desporto federado tendem a ter melhores resultados académicos e menos comportamentos de risco.
-
-### Integração Social
-O balneário cria laços únicos. A convivência entre atletas de diferentes idades, backgrounds e personalidades ensina tolerância, comunicação e empatia. Muitas das amizades mais duradouras da vida formam-se num pavilhão desportivo.
+### Agilidade
+Mudanças de direcção, travagens e arranques pedem quadris e tornozelos disponíveis. Com treino regular, a resposta no chão fica mais rápida.
 
 ---
 
-## Benefícios para as Crianças e Jovens
+## Benefícios cognitivos
 
-Para os escalões de formação — como os que o HCPDL tem ao nível Sub-11, Sub-13 e Sub-17 — os benefícios são ainda mais marcantes:
+### Leitura de jogo
+Há que antecipar o adversário, ver o espaço e decidir em pouco tempo. Isso treina o pensamento táctico e a decisão sob pressão.
 
-- **Desenvolvimento motor global**: a aprendizagem do patinar nesta fase potencia o desenvolvimento das capacidades motoras fundamentais
-- **Autoestima e confiança**: superar desafios físicos e técnicos constrói uma autoimagem positiva
-- **Rotinas saudáveis**: o treino regular afasta os jovens de comportamentos sedentários e do excesso de tempo em ecrãs
-- **Sentido de pertença**: fazer parte de um clube cria uma identidade comunitária positiva
+### Concentração
+A velocidade do jogo obriga a atenção sustentada. Filtrar o ruído do pavilhão é um hábito útil também na escola e no trabalho.
 
----
-
-## Porquê Escolher o Hóquei em Patins?
-
-Numa era de crescente sedentarismo e isolamento digital, o hóquei em patins oferece o que poucas modalidades conseguem: velocidade, técnica, estratégia, contacto físico controlado e — sobretudo — uma comunidade unida por uma paixão comum.
-
-No Hóquei Clube PDL, esta modalidade é praticada com orgulho desde 2012, formando atletas que representam os Açores em competições nacionais e contribuindo para o desenvolvimento desportivo da nossa ilha.
-
-**Se procuras uma atividade completa para ti ou para os teus filhos, o hóquei em patins é a resposta.** Vem treinar connosco!
+### Técnica
+Remate, passe e defesa repetidos constroem automatismos. Sem isso, o jogo não flui.
 
 ---
 
-*Tens dúvidas sobre como inscrever o teu filho ou sobre os nossos treinos? [Contacta-nos](/  #contact) — temos escalões para todas as idades.*
+## Benefícios sociais e emocionais
+
+### Espírito de equipa
+Ninguém ganha sozinho. Confiar no colega e pôr o grupo à frente do individual faz parte do desporto colectivo.
+
+### Gestão de emoções
+A derrota, o erro num lance decisivo e a pressão de um jogo oficial ensinam a lidar com frustração. O pavilhão é uma escola de resiliência.
+
+### Disciplina
+Pontualidade, indicação do treinador e cuidado com o equipamento são hábitos pequenos que se notam no resto da vida. O desporto federado, quando é bem acompanhado, ajuda a estruturar rotinas.
+
+### Integração
+O balneário junta idades e temperamentos diferentes. Muitas amizades duradouras começam aí.
+
+---
+
+## Crianças e jovens
+
+No HC PDL há formação em Sub-11, Sub-13 e Sub-17. Nesta fase o patinar ajuda o desenvolvimento motor, a confiança e o sentido de pertença a um clube. Também tira tempo ao ecrã, se a família acompanhar o ritmo de treinos.
+
+---
+
+## Porque escolher esta modalidade?
+
+Poucas modalidades juntam velocidade, técnica, táctica e contacto controlado no mesmo pavilhão. No Hóquei Clube PDL praticamos isto desde 2012, com seniores no Campeonato Nacional da 3.ª Divisão da FPP e formação a competir a nível regional e nacional.
+
+**Se queres experimentar, para ti ou para os teus filhos, fala connosco.**
+
+---
+
+*Inscrições e horários: [contactos](/#contact). Foto: treino de hóquei em patins, Wikimedia Commons (licença livre).*
     `.trim(),
   },
 ];

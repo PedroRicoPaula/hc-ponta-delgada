@@ -117,7 +117,7 @@ export default function BlogPostPage() {
             </Link>
 
             {post.photo ? (
-              <img src={post.photo} alt={post.title} className="w-full rounded-2xl mb-8 object-cover max-h-80" />
+              <img src={post.photo} alt={post.title} className="w-full rounded-2xl mb-8 object-contain max-h-96 bg-gray-100 dark:bg-gray-800" />
             ) : (
               <div className="w-full h-40 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-8">
                 <span className="text-6xl">🏒</span>

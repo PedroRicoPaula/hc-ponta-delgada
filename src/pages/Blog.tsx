@@ -22,7 +22,7 @@ function PostCard({ post, index }: { post: BlogPost; index: number }) {
       className="group bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow duration-300 flex flex-col"
     >
       {post.photo && (
-        <img src={post.photo} alt={post.title} className="w-full h-48 object-cover" />
+        <img src={post.photo} alt={post.title} className="w-full h-48 object-contain bg-gray-100 dark:bg-gray-900" />
       )}
       <div className="p-6 flex flex-col flex-1">
         <p className="text-xs text-gray-400 dark:text-gray-500 mb-3">{formatDate(post.date)}</p>
