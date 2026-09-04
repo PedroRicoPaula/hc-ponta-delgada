@@ -30,8 +30,8 @@ Implementado em 2026-07-13: card "Próximo Jogo" em `EventsSection` (contagem de
 
 **Resolvido em 2026-08-11**: `games[]` passou a ser o calendário oficial da época 2026/27, extraído de `https://hp.fpp.pt/Competicao/501` (CN 3ª Divisão Sul B). 26 jornadas, 13 em casa e 13 fora, 14 equipas na série — sem bye. Cada jogo ganhou o campo `jornada`. As datas artificiais e os pavilhões inventados dos jogos fora desapareceram.
 
-**O que continua por preencher, e é normal:** a FPP só marcou hora para as jornadas 2, 11 e 26. Os restantes 23 jogos ficam com `time` ausente e a UI mostra "Horário a definir" (ver `formatGameTime()`). Os pavilhões dos jogos fora não constam da FPP — ficam `"A definir"` em vez de nomes inventados.
-**Como actualizar quando a FPP marcar horas**: acrescentar `time: "HH:mm"` ao jogo respectivo em `games[]`. Nada mais é preciso — a UI, o estado ao vivo e o schema adaptam-se sozinhos.
+**Resolvido em 2026-09**: horas de todos os jogos preenchidas em `games[]` (`time: "HH:mm"`). Pavilhões dos jogos fora normalizados em `PAV` (`siteData.ts`).
+**Como actualizar horas ou resultados**: editar `time` ou `result` no jogo em `games[]` — a UI, o estado ao vivo e o schema adaptam-se sozinhos.
 **Resultados**: continuam a ser preenchidos à mão em `result` depois de cada jogo, não há cálculo automático.
 
 ### Galeria com fotos reais da época

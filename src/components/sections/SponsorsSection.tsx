@@ -16,6 +16,19 @@ function SponsorLink({ sponsor, className, children }: { sponsor: Sponsor; class
   );
 }
 
+function SponsorLogo({ sponsor, className }: { sponsor: Sponsor; className: string }) {
+  return (
+    <div className={`h-full w-full flex items-center justify-center${sponsor.lightPlate ? ' dark:bg-white dark:rounded-md dark:p-1' : ''}`}>
+      <img
+        src={sponsor.logo}
+        alt={`Patrocinador ${sponsor.name}`}
+        className={`${className}${sponsor.lightPlate ? ' dark:grayscale-0 dark:opacity-100' : ' dark:brightness-200'}`}
+        loading="lazy"
+      />
+    </div>
+  );
+}
+
 export const SponsorsSection = () => {
   const autoplay = useRef(Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: true }));
   const featured = sponsors.find((s) => s.featured);
@@ -53,11 +66,9 @@ export const SponsorsSection = () => {
           >
             <SponsorLink sponsor={featured} className="flex items-center justify-center p-4 transition-all duration-300">
               <div className="h-24 w-44 sm:h-32 sm:w-60 flex items-center justify-center transform group-hover:scale-105 transition-transform duration-300">
-                <img
-                  src={featured.logo}
-                  alt={`Patrocinador ${featured.name}`}
-                  className="max-h-full max-w-full object-contain dark:brightness-200"
-                  loading="lazy"
+                <SponsorLogo
+                  sponsor={featured}
+                  className="max-h-full max-w-full object-contain"
                 />
               </div>
             </SponsorLink>
@@ -74,11 +85,9 @@ export const SponsorsSection = () => {
                 className="flex flex-shrink-0 items-center justify-center p-4 transition-all duration-300"
               >
                 <div className="h-16 w-28 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                  <img
-                    src={sponsor.logo}
-                    alt={`Patrocinador ${sponsor.name}`}
-                    className="max-h-full max-w-full object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-400 dark:brightness-200"
-                    loading="lazy"
+                  <SponsorLogo
+                    sponsor={sponsor}
+                    className="max-h-full max-w-full object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-400"
                   />
                 </div>
               </SponsorLink>
@@ -110,11 +119,9 @@ export const SponsorsSection = () => {
                 <CarouselItem key={index} className="pl-4 basis-1/3">
                   <SponsorLink sponsor={sponsor} className="flex items-center justify-center p-2">
                     <div className="h-14 w-24 flex items-center justify-center">
-                      <img
-                        src={sponsor.logo}
-                        alt={`Patrocinador ${sponsor.name}`}
-                        className="max-h-full max-w-full object-contain grayscale opacity-50 active:grayscale-0 active:opacity-100 transition-all dark:brightness-200"
-                        loading="lazy"
+                      <SponsorLogo
+                        sponsor={sponsor}
+                        className="max-h-full max-w-full object-contain grayscale opacity-50 active:grayscale-0 active:opacity-100 transition-all"
                       />
                     </div>
                   </SponsorLink>
