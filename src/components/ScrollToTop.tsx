@@ -33,7 +33,9 @@ export const ScrollToTop = () => {
       {isVisible && (
         <Button
           onClick={scrollToTop}
-          className="fixed bottom-4 left-4 bg-primary hover:bg-primary/90 text-black z-50"
+          size="icon"
+          aria-label="Voltar ao topo"
+          className="fixed bottom-4 left-4 z-50 h-8 w-8 bg-primary hover:bg-primary/90 text-black hover:scale-125 transition-transform duration-200"
         >
           ↑
         </Button>

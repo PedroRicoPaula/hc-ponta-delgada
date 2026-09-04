@@ -14,7 +14,6 @@ import HolidayOverlay from "@/components/HolidayOverlay";
 
 // Overlay & Panel Components
 import { RollerHockeyGame } from "@/components/RollerHockeyGame";
-import { ComunicadosPanel } from '@/components/ComunicadosPanel';
 // import { ChatWidget } from '@/components/ChatWidget';
 
 // Section Components
@@ -37,7 +36,6 @@ const Index = () => {
   // --- STATE MANAGEMENT ---
   const [showCookieConsent, setShowCookieConsent] = useState(false);
   const [isGameOpen, setIsGameOpen] = useState(false);
-  const [isComunicadosOpen, setIsComunicadosOpen] = useState(false);
   const location = useLocation();
 
   // --- EFFECTS ---
@@ -183,9 +181,8 @@ const Index = () => {
       <Navigation />
       <SocialIcons />
       <ScrollToTop />
-      <FloatingActionButtons 
+      <FloatingActionButtons
         onOpenGame={() => setIsGameOpen(true)}
-        onOpenComunicados={() => setIsComunicadosOpen(true)}
       />
 
       {/* Main Page Sections */}
@@ -204,7 +201,6 @@ const Index = () => {
 
       {/* Overlays, Modals, and Panels */}
       <RollerHockeyGame isOpen={isGameOpen} onClose={() => setIsGameOpen(false)} />
-      <ComunicadosPanel isOpen={isComunicadosOpen} onClose={() => setIsComunicadosOpen(false)} data={comunicados} />
       {/* <ChatWidget /> */}
 
       {showCookieConsent && (

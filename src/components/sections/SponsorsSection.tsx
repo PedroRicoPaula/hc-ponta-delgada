@@ -75,9 +75,9 @@ export const SponsorsSection = () => {
           </motion.div>
         )}
 
-        {/* Others — desktop ticker, smaller. Infinito esquerda→direita (ticker keyframe invertido), pausa no hover */}
+        {/* Others — desktop ticker, direita→esquerda, pausa no hover */}
         <div className="hidden md:block overflow-hidden">
-          <div className="flex w-max items-center gap-10 lg:gap-14 animate-ticker [animation-direction:reverse] hover:[animation-play-state:paused]">
+          <div className="flex w-max items-center gap-10 lg:gap-14 animate-ticker hover:[animation-play-state:paused]">
             {tickerOthers.map((sponsor, index) => (
               <SponsorLink
                 key={`${sponsor.name}-${index}`}

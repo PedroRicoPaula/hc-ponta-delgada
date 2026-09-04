@@ -133,10 +133,10 @@ export const Footer = () => {
               <button
                 onClick={() => setIsDonationsOpen(true)}
                 aria-label="Fazer doação ao clube"
-                className="mt-6 inline-flex items-center gap-2 border border-primary text-primary hover:bg-primary hover:text-gray-950 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200"
+                className="mt-6 inline-flex items-center gap-1.5 bg-primary text-gray-950 hover:bg-primary/90 px-4 py-2 font-heading font-black text-xs uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5"
               >
-                <Heart className="w-4 h-4" />
-                Fazer Doação
+                <Heart className="w-3.5 h-3.5" />
+                Doação
               </button>
             </div>
           </div>
