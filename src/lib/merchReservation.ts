@@ -1,4 +1,4 @@
-import { CLUB_IBAN, merchProducts, type MerchProduct } from '@/data/merchData';
+import { CLUB_IBAN, MERCH_RULES, merchProducts, type MerchProduct } from '@/data/merchData';
 
 export const CLUB_EMAIL = 'hoquei.clube.pdl@gmail.com';
 
@@ -10,6 +10,7 @@ const MAX_NAME = 80;
 const MAX_PHONE = 20;
 const MAX_NOTE = 280;
 const MAX_LINES = 12;
+export const MAILTO_COOLDOWN_MS = 45_000;
 
 export interface ReservationLine {
   productId: string;
@@ -49,7 +50,7 @@ export function unitPrice(product: MerchProduct, member: boolean): number {
 }
 
 export function sanitizeName(raw: string): string {
-  return stripControls(raw).replace(/[<>]/g, '').slice(0, MAX_NAME);
+  return stripControls(raw).replace(/[<>]/g, '').replace(/\s+/g, ' ').slice(0, MAX_NAME);
 }
 
 export function sanitizePhone(raw: string): string {
@@ -156,9 +157,12 @@ export function buildReservationMessage(
     '',
     `IBAN HC PDL: ${CLUB_IBAN}`,
     'Anexar comprovativo de transferência neste email.',
+    '',
+    'Condições:',
+    ...MERCH_RULES.map((r) => `- ${r}`),
   ];
   if (note) parts.push('', `Nota: ${note}`);
-  parts.push('', 'Encomenda prévia — não é pagamento no site.');
+  parts.push('', 'Encomenda prévia — não é pagamento no site. O clube confirma valores e qualidade de sócio antes de disponibilizar o levantamento.');
   return parts.join('\n');
 }
 

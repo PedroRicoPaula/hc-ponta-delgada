@@ -94,3 +94,17 @@ export const merchProducts: MerchProduct[] = [
 ];
 
 export const CLUB_IBAN = 'PT50 0010 0000 48649200001 07';
+
+export const MERCH_PICKUP = 'Pavilhão Sidónio Serpa, Ponta Delgada';
+
+/** Texto partilhado na página e no email da reserva. */
+export const MERCH_RULES = [
+  `O clube não faz envios. O levantamento é só no pavilhão (${MERCH_PICKUP}).`,
+  'Reserva por email, transferência para o IBAN do Hóquei Clube PDL, comprovativo no mesmo email, levantamento no pavilhão quando o clube confirmar a encomenda.',
+  'O preço de sócio é confirmado pelo clube. Se não fores sócio, aplica-se o preço de não sócio.',
+  'O site não envia emails automaticamente: abres o teu programa de correio e és tu que envias.',
+] as const;
+
+export function ibanCompact(iban: string): string {
+  return iban.replace(/\s/g, '');
+}

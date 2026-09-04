@@ -24,7 +24,10 @@ O site pode conter links para sites de terceiros. O clube não se responsabiliza
 **6. Alterações**
 Reservamo-nos o direito de alterar estes termos a qualquer momento. As alterações entram em vigor imediatamente após publicação.
 
-**7. Contacto**
+**8. Merch**
+A página de merch é uma reserva, não uma loja com envios. O pagamento é por transferência para o IBAN publicado no site (beneficiário Hóquei Clube PDL). O levantamento faz-se no Pavilhão Sidónio Serpa, em Ponta Delgada. O clube confirma valores e qualidade de sócio. O site não processa pagamentos nem envia o email da reserva — o visitante envia a partir da sua conta de correio.
+
+**9. Contacto**
 Para questões relacionadas com estes termos, contacte-nos através de hoquei.clube.pdl@gmail.com.
 `.trim();
 
@@ -33,7 +36,7 @@ const PRIVACY = `
 Hóquei Clube PDL · hoquei.clube.pdl@gmail.com · +351 296 382 987
 
 **2. Dados Recolhidos**
-Recolhemos apenas os dados que nos fornece voluntariamente (ex: nome e email no formulário de contacto). Não recolhemos dados de navegação além de cookies técnicos essenciais.
+Recolhemos apenas os dados que nos fornece voluntariamente (ex: nome e email no formulário de contacto; nome e telemóvel na reserva de merch, enviados por si no seu email). Não recolhemos dados de navegação além de cookies técnicos essenciais.
 
 **3. Finalidade do Tratamento**
 Os dados são utilizados exclusivamente para responder a pedidos de contacto, gerir associados e comunicar informações sobre o clube.

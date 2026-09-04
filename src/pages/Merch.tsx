@@ -1,11 +1,11 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type MouseEvent } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Mail, Minus, Plus, ShoppingBag, Trash2 } from 'lucide-react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { SocialIcons } from '@/components/SocialIcons';
-import { CLUB_IBAN, merchProducts, type MerchProduct } from '@/data/merchData';
+import { CLUB_IBAN, MERCH_RULES, merchProducts, type MerchProduct } from '@/data/merchData';
 import {
   addLine,
   buildReservationMessage,
@@ -14,6 +14,7 @@ import {
   isValidPhone,
   mailtoHref,
   MAX_QTY,
+  MAILTO_COOLDOWN_MS,
   reservationTotal,
   sanitizePhone,
   sizesFor,
@@ -21,6 +22,7 @@ import {
   CLUB_EMAIL,
   type ReservationLine,
 } from '@/lib/merchReservation';
+import { safeStorage } from '@/lib/safeStorage';
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -186,6 +188,18 @@ export default function Merch() {
   const [phone, setPhone] = useState('');
   const [note, setNote] = useState('');
   const [member, setMember] = useState<boolean | null>(null);
+  const [mailtoCooldown, setMailtoCooldown] = useState(false);
+
+  const onMailtoClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    const last = Number(safeStorage.getItem('merch-mailto-at') ?? '0');
+    if (Number.isFinite(last) && Date.now() - last < MAILTO_COOLDOWN_MS) {
+      e.preventDefault();
+      setMailtoCooldown(true);
+      return;
+    }
+    safeStorage.setItem('merch-mailto-at', String(Date.now()));
+    setMailtoCooldown(false);
+  };
 
   const message = useMemo(
     () => buildReservationMessage(lines, { name, phone, note, member }),
@@ -201,7 +215,7 @@ export default function Merch() {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: 'Merch — Hóquei Clube PDL',
-    description: 'Loja oficial do Hóquei Clube PDL. Reserva de merch da época 2026/27 por email, com preços de sócio e não sócio.',
+    description: 'Loja oficial do Hóquei Clube PDL. Reserva por email, pagamento por transferência, levantamento no pavilhão. Sem envios.',
     url: 'https://hoqueiclubepdl.com/merch/',
     inLanguage: 'pt-PT',
     publisher: { '@type': 'Organization', name: 'Hóquei Clube PDL', url: 'https://hoqueiclubepdl.com/' },
@@ -236,11 +250,11 @@ export default function Merch() {
         <title>Merch — Hóquei Clube PDL | Reserva de Loja Oficial</title>
         <meta
           name="description"
-          content="Merch oficial do Hóquei Clube PDL (Açores): camisolas, sweat, softshell, cachecóis e bonés. Reserva por email com preços de sócio e não sócio. Sem pagamento no site."
+          content="Merch oficial do Hóquei Clube PDL: reserva por email, pagamento por transferência e levantamento no pavilhão. Sem envios e sem pagamento no site."
         />
         <link rel="canonical" href="https://hoqueiclubepdl.com/merch/" />
         <meta property="og:title" content="Merch — Hóquei Clube PDL" />
-        <meta property="og:description" content="Reserva merch oficial do Hóquei Clube PDL por email. Encomenda prévia com transferência para o IBAN do clube." />
+        <meta property="og:description" content="Reserva merch do HC PDL por email. Sem envios: pagamento por IBAN e levantamento no pavilhão." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://hoqueiclubepdl.com/merch/" />
         <meta property="og:image" content="https://hoqueiclubepdl.com/uploads/merch/jerseyplayer.jpeg" />
@@ -272,9 +286,16 @@ export default function Merch() {
               Merch <span className="text-primary">oficial</span>
             </h1>
             <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
-              Colecção 2026/27. Escolhe as peças e envia a reserva por email.
-              Encomenda prévia: transfere o valor para o IBAN do clube e anexa o comprovativo na mensagem.
+              Colecção 2026/27. Reserva as peças, transfere para o IBAN do clube e levanta no pavilhão.
+              Não fazemos envios.
             </p>
+            <ul className="mt-6 max-w-xl mx-auto text-left text-sm text-gray-600 dark:text-gray-400 space-y-2 leading-relaxed">
+              {MERCH_RULES.map((rule) => (
+                <li key={rule} className="pl-4 relative before:absolute before:left-0 before:text-primary before:content-['·']">
+                  {rule}
+                </li>
+              ))}
+            </ul>
           </motion.div>
 
           <div className="lg:grid lg:grid-cols-12 lg:gap-10 lg:items-start">
@@ -391,7 +412,7 @@ export default function Merch() {
                       value={note}
                       onChange={(e) => setNote(e.target.value.replace(/[<>]/g, '').slice(0, 280))}
                       className={`${fieldClass} mt-1 resize-none`}
-                      placeholder="Ex: número na camisola, prazo de levantamento…"
+                      placeholder="Ex: número na camisola"
                     />
                   </label>
                 </div>
@@ -400,17 +421,19 @@ export default function Merch() {
                   <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-1">IBAN do clube</p>
                   <p className="font-mono text-xs sm:text-sm text-gray-900 dark:text-white break-all">{CLUB_IBAN}</p>
                   <p className="mt-2 text-[11px] leading-relaxed text-gray-500 dark:text-gray-400">
-                    Transfere o total e anexa o comprovativo no email da reserva.
+                    Beneficiário: Hóquei Clube PDL. Confirma o nome na transferência. O clube não pede outro IBAN por mensagem.
+                    Anexa o comprovativo no email. Levantamento no pavilhão — sem envios.
                   </p>
                 </div>
 
                 {canSubmit && message ? (
                   <a
                     href={mailtoHref(message)}
+                    onClick={onMailtoClick}
                     className="flex items-center justify-center gap-2 w-full bg-primary text-gray-950 hover:bg-primary/90 px-4 py-3 font-heading font-black text-xs uppercase tracking-wider"
                   >
                     <Mail className="w-4 h-4" />
-                    Enviar reserva por email
+                    Abrir email da reserva
                   </a>
                 ) : (
                   <div className="space-y-2">
@@ -420,7 +443,7 @@ export default function Merch() {
                       className="flex items-center justify-center gap-2 w-full bg-primary/40 text-gray-950/60 px-4 py-3 font-heading font-black text-xs uppercase tracking-wider cursor-not-allowed"
                     >
                       <Mail className="w-4 h-4" />
-                      Enviar reserva por email
+                      Abrir email da reserva
                     </button>
                     <p className="text-xs text-gray-500 dark:text-gray-400 text-center pt-1">
                       {submitHint}
@@ -428,9 +451,15 @@ export default function Merch() {
                   </div>
                 )}
 
+                {mailtoCooldown && (
+                  <p className="mt-2 text-xs text-center text-amber-700 dark:text-amber-400">
+                    Espera uns segundos antes de voltar a abrir o email. Isto só evita cliques repetidos neste botão — o envio é sempre no teu programa de correio.
+                  </p>
+                )}
+
                 <p className="mt-4 text-[11px] leading-relaxed text-gray-400 dark:text-gray-500">
-                  Os dados não ficam guardados neste site. São enviados por ti, no teu cliente de email,
-                  para {CLUB_EMAIL}.
+                  Os dados não ficam guardados neste site. O email sai da tua conta, para {CLUB_EMAIL}.
+                  Pedidos incompletos, com valor errado ou sem comprovativo não são tratados como reserva.
                 </p>
               </div>
             </aside>

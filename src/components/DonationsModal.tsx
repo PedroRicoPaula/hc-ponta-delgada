@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Heart, X, Copy } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { CLUB_IBAN, ibanCompact } from '@/data/merchData';
 
 interface DonationsModalProps {
   isOpen: boolean;
@@ -19,7 +20,7 @@ export const DonationsModal = ({ isOpen, onClose }: DonationsModalProps) => {
   }, [isOpen, onClose]);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText("PT50001000004864920000107");
+    navigator.clipboard.writeText(ibanCompact(CLUB_IBAN));
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -68,7 +69,7 @@ export const DonationsModal = ({ isOpen, onClose }: DonationsModalProps) => {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">IBAN</p>
-                    <p className="text-lg font-mono tracking-wider text-gray-900 dark:text-white">PT50 0010 0000 4864 9200 0010 7</p>
+                    <p className="text-lg font-mono tracking-wider text-gray-900 dark:text-white">{CLUB_IBAN}</p>
                   </div>
                   <Button
                     variant="ghost"

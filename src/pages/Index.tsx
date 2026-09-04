@@ -123,7 +123,7 @@ const Index = () => {
         "name": "Como posso comprar merch oficial do Hóquei Clube PDL?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "A merch oficial reserva-se em hoqueiclubepdl.com/merch. Escolhe as peças, envia o pedido por email para hoquei.clube.pdl@gmail.com e transfere o valor para o IBAN do clube, com comprovativo anexado. Não há pagamento no site. Há preços de sócio e não sócio."
+          "text": "A merch oficial reserva-se em hoqueiclubepdl.com/merch. Não há envios: escolhe as peças, envia o pedido por email, transfere para o IBAN do clube com comprovativo e levanta no Pavilhão Sidónio Serpa, em Ponta Delgada. Não há pagamento no site. O preço de sócio é confirmado pelo clube."
         }
       },
       {
