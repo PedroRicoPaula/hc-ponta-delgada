@@ -7,6 +7,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from 'next-themes';
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import RouteScrollReset from "@/components/RouteScrollReset";
+import { CursorRing } from "@/components/CursorRing";
 import Index from "./pages/Index";
 import QueroSerPatrocinador from "./pages/QueroSerPatrocinador";
 import Blog from "./pages/Blog";
@@ -30,6 +31,7 @@ const App = () => (
             <Sonner />
             <BrowserRouter>
               <RouteScrollReset />
+              <CursorRing />
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/patrocinadores" element={<QueroSerPatrocinador />} />

@@ -1,6 +1,6 @@
 # HC PDL — Hóquei Clube PDL
 
-Site institucional do [Hóquei Clube PDL](https://hoqueiclubepdl.com), clube de hóquei em patins fundado em 2012 em Ponta Delgada, Açores (Portugal). Único clube de hóquei em patins da ilha de São Miguel, com equipa sénior e escalões de formação (Sub-11, Sub-13, Sub-17) a competir no Campeonato Nacional da 3ª Divisão da Federação de Patinagem de Portugal (FPP).
+Site institucional do [Hóquei Clube PDL](https://hoqueiclubepdl.com), clube de hóquei em patins fundado em 2012 em Ponta Delgada, Açores (Portugal). Equipa sénior no Campeonato Nacional da 3.ª Divisão da Federação de Patinagem de Portugal (FPP) e formação Sub-11, Sub-13 e Sub-17.
 
 **Site em produção**: https://hoqueiclubepdl.com
 

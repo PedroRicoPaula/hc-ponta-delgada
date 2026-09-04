@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet-async';
 
 // Core Layout & UI Components
 import { Navigation } from "@/components/Navigation";
-import { CursorRing } from "@/components/CursorRing";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SocialIcons } from "@/components/SocialIcons";
 import { Footer } from '@/components/Footer';
@@ -81,7 +80,7 @@ const Index = () => {
         "name": "O que é o Hóquei Clube PDL?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "O Hóquei Clube PDL (HCPDL) é um clube de hóquei em patins fundado em 2012 em Ponta Delgada, Açores. Compete no Campeonato Nacional e tem escalões de formação Sub-11, Sub-13 e Sub-17. É o único clube de hóquei em patins da ilha de São Miguel."
+          "text": "O Hóquei Clube PDL (HCPDL) é um clube de hóquei em patins fundado em 2012 em Ponta Delgada, Açores. Compete no Campeonato Nacional da 3.ª Divisão da FPP e tem formação Sub-11, Sub-13 e Sub-17. Em São Miguel há outros clubes da modalidade, como o Caldeiras HC e o Marítimo SC."
         }
       },
       {
@@ -177,7 +176,6 @@ const Index = () => {
       </Helmet>
 
       {/* Core Layout & UI */}
-      <CursorRing />
       <Navigation />
       <SocialIcons />
       <ScrollToTop />
