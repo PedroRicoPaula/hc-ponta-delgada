@@ -110,5 +110,5 @@ Catálogo da loja oficial 2026/27. Dados: `src/data/merchData.ts`. Reserva por `
 
 ## Pagamentos (`/pagamentos` → `src/pages/Pagamentos.tsx`)
 
-Quotas 2026/27 e mensalidades de formação (Setembro a Junho). Dados: `src/data/paymentsData.ts`. Totais e mailto: `src/lib/clubPayments.ts`. Sem pagamento no site. Com atleta nomeado, quota a 15 €. IRS é um pedido ao clube, não uma garantia de mecenato. Rota em `STATIC_ROUTES`.
+Quotas 2026/27 e mensalidades de formação (Setembro a Junho). Out–Jun com os 9 meses: 105 € (2 meses de desconto); + Setembro 7,50 € = 112,50 €. Dados: `src/data/paymentsData.ts`. Totais e mailto: `src/lib/clubPayments.ts`. Sem pagamento no site. Com atleta nomeado, quota a 15 €. IRS é um pedido ao clube, não uma garantia de mecenato. Rota em `STATIC_ROUTES`.
 

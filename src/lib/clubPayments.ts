@@ -5,10 +5,11 @@ import {
   FEE_SEPTEMBER,
   MAX_ATHLETES,
   MAX_MEMBERS,
+  OCT_JUN_COUNT,
+  OCT_JUN_PACK_EUROS,
   PAYMENT_RULES,
   QUOTA_PAIS,
   QUOTA_RESTANTES,
-  SEASON_DISCOUNT,
   SEASON_MONTHS,
   type Escalão,
   type MonthId,
@@ -69,17 +70,25 @@ export function normalizeMonths(months: readonly string[]): MonthId[] {
   return SEASON_MONTHS.map((m) => m.id).filter((id) => seen.has(id));
 }
 
-export function athleteFeeCents(months: readonly string[]): { gross: number; net: number; fullSeason: boolean } {
-  const ids = normalizeMonths(months);
+export function athleteFeeCents(months: readonly string[]): { gross: number; net: number; octJunDiscount: boolean } {
+  const ids = new Set(normalizeMonths(months));
+  const octJun = SEASON_MONTHS.filter((m) => !m.september);
+  const sep = SEASON_MONTHS.find((m) => m.september);
+  const octJunSelected = octJun.filter((m) => ids.has(m.id)).length;
+  const octJunDiscount = octJunSelected === OCT_JUN_COUNT;
+
   let gross = 0;
-  for (const id of ids) {
-    const meta = SEASON_MONTHS.find((m) => m.id === id);
-    if (!meta) continue;
-    gross += toCents(meta.september ? FEE_SEPTEMBER : FEE_MONTH);
+  let net = 0;
+  if (sep && ids.has(sep.id)) {
+    const sepCents = toCents(FEE_SEPTEMBER);
+    gross += sepCents;
+    net += sepCents;
   }
-  const fullSeason = ids.length === SEASON_MONTHS.length;
-  const net = fullSeason ? Math.round(gross * (1 - SEASON_DISCOUNT)) : gross;
-  return { gross, net, fullSeason };
+  const octJunGross = octJunSelected * toCents(FEE_MONTH);
+  gross += octJunGross;
+  net += octJunDiscount ? toCents(OCT_JUN_PACK_EUROS) : octJunGross;
+
+  return { gross, net, octJunDiscount };
 }
 
 export function membersTotalCents(count: number, hasAthletes: boolean): number {
@@ -166,7 +175,7 @@ export function buildPaymentMessage(input: {
     for (const a of athletes) {
       const fee = athleteFeeCents(a.months);
       const monthLabels = SEASON_MONTHS.filter((m) => a.months.includes(m.id)).map((m) => m.label).join(', ');
-      const disc = fee.fullSeason ? ' (época toda, 20% desconto)' : '';
+      const disc = fee.octJunDiscount ? ' (Out–Jun: 2 meses de desconto, 105 €)' : '';
       lines.push(`- ${a.name} (${a.escalao}): ${monthLabels}${disc} = ${formatEuro(eurosFromCents(fee.net))}`);
     }
     lines.push(`Subtotal mensalidades: ${formatEuro(eurosFromCents(totals.mensalCents))}`, '');

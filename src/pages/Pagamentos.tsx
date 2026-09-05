@@ -205,7 +205,7 @@ export default function Pagamentos() {
                     <p className="text-[11px] font-bold uppercase tracking-widest text-primary/70">Formação</p>
                     <h2 className="font-heading font-black uppercase text-xl text-gray-900 dark:text-white">Mensalidades</h2>
                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                      Sub 11, Sub 13 e Sub 17. Setembro 7,50 €, outros meses 15 €. Época toda (Set–Jun): 20 % nesse atleta.
+                      Sub 11, Sub 13 e Sub 17. Setembro 7,50 €. Anuidade: desconto de dois meses (112,50 € no total).
                     </p>
                   </div>
                   <button
@@ -267,7 +267,7 @@ export default function Pagamentos() {
                               onClick={() => setAthletes((prev) => prev.map((row) => row.id === a.id ? { ...row, months: [...SEASON_MONTHS.map((m) => m.id)] } : row))}
                               className="text-xs font-semibold text-primary hover:underline"
                             >
-                              Época toda
+                              Época toda (anuidade)
                             </button>
                             <button
                               type="button"
@@ -279,7 +279,7 @@ export default function Pagamentos() {
                             {a.months.length > 0 && (
                               <span className="text-xs text-gray-500 dark:text-gray-400">
                                 {formatEuro(eurosFromCents(fee.net))}
-                                {fee.fullSeason ? ' com 20 %' : ''}
+                                {fee.octJunDiscount ? ' (2 meses de desconto)' : ''}
                               </span>
                             )}
                           </div>
