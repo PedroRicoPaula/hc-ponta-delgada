@@ -66,6 +66,7 @@ docs/
 | `/modalidade` | Guia de hóquei em patins |
 | `/calendario` | Calendário de jogos |
 | `/merch` | Loja oficial (reserva por email) |
+| `/pagamentos` | Quotas e mensalidades (email + IBAN) |
 | `/comunicados` | Comunicados oficiais |
 | `/comunicados/:slug` | Detalhe de comunicado |
 | `/blog` | Blog |

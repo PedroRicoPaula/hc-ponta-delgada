@@ -28,7 +28,9 @@ src/
 ├── data/
 │   ├── siteData.ts             # Dados do clube (jogadores, treinos, galeria, etc.)
 │   ├── blogData.ts             # Artigos do blog
-│   └── merchData.ts            # Catálogo da loja oficial
+│   ├── merchData.ts            # Catálogo da loja oficial
+│   ├── paymentsData.ts         # Quotas e meses da época
+│   └── navLinks.ts             # Ordem da nav e do footer
 ├── hooks/                      # Hooks custom
 │   ├── use-mobile.tsx
 │   ├── use-toast.ts
@@ -37,6 +39,7 @@ src/
 │   ├── utils.ts                # Utilitários gerais (cn, etc.)
 │   ├── seo.ts                  # Helpers para meta tags (JSON-LD)
 │   ├── merchReservation.ts     # Sanitização e mailto da reserva de merch
+│   ├── clubPayments.ts         # Totais e mailto de quotas/mensalidades
 │   ├── safeStorage.ts          # Wrapper localStorage com fallback
 │   └── games.ts                # Estado dos jogos (live/countdown/ended), useNow()
 ├── pages/                      # Uma página por rota
@@ -90,6 +93,10 @@ Slug activo: `beneficios-hoquei-em-patins`
 ### `src/data/merchData.ts`
 
 Exporta `merchProducts[]` (peças, preços sócio/não sócio, variantes) e `CLUB_IBAN`. A página `/merch` monta a reserva em `src/lib/merchReservation.ts`.
+
+### `src/data/paymentsData.ts`
+
+Preços de quota, meses Setembro 2026–Junho 2027 e escalões de formação. Totais e mailto em `src/lib/clubPayments.ts` (`/pagamentos`).
 
 ## Assets
 

@@ -31,7 +31,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 const SITE_URL = 'https://hoqueiclubepdl.com';
-const STATIC_ROUTES = ['/', '/blog', '/modalidade', '/patrocinadores', '/comunicados', '/calendario', '/merch'];
+const STATIC_ROUTES = ['/', '/blog', '/modalidade', '/patrocinadores', '/comunicados', '/calendario', '/merch', '/pagamentos'];
 
 async function getRoutes() {
   const vite = await createServer({ root, server: { middlewareMode: true }, appType: 'custom' });

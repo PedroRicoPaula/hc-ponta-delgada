@@ -15,6 +15,7 @@ import BlogPost from "./pages/BlogPost";
 import Modalidade from "./pages/Modalidade";
 import Calendario from "./pages/Calendario";
 import Merch from "./pages/Merch";
+import Pagamentos from "./pages/Pagamentos";
 import Comunicados from "./pages/Comunicados";
 import ComunicadoDetail from "./pages/ComunicadoDetail";
 import NotFound from "./pages/NotFound";
@@ -40,6 +41,7 @@ const App = () => (
                 <Route path="/modalidade" element={<Modalidade />} />
                 <Route path="/calendario" element={<Calendario />} />
                 <Route path="/merch" element={<Merch />} />
+                <Route path="/pagamentos" element={<Pagamentos />} />
                 <Route path="/comunicados" element={<Comunicados />} />
                 <Route path="/comunicados/:slug" element={<ComunicadoDetail />} />
                 <Route path="*" element={<NotFound />} />

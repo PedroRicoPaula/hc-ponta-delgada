@@ -10,7 +10,7 @@ const TERMS = `
 Ao usares o site do Hóquei Clube PDL (hoqueiclubepdl.com), aceitas estes termos.
 
 **2. O que o site faz**
-O site apresenta o clube, treinos, calendário, comunicados, blog e merch. Há também transmissão ao vivo no YouTube quando há jogo em casa. Não é uma loja online com envios nem um serviço de pagamento. É proibida a reprodução comercial de conteúdos sem autorização.
+O site apresenta o clube, treinos, calendário, comunicados, blog, merch e pagamentos de quotas/mensalidades. Há também transmissão ao vivo no YouTube quando há jogo em casa. Não é uma loja online com envios nem um serviço que cobra no cartão. É proibida a reprodução comercial de conteúdos sem autorização.
 
 **3. Propriedade intelectual**
 Textos, imagens, logótipos e vídeos são do Hóquei Clube PDL ou usados com autorização. Não copies para uso comercial sem pedir.
@@ -24,10 +24,13 @@ Há ligações para a FPP, redes sociais, mapas e o YouTube. O clube não contro
 **6. Merch**
 Na página de merch reservas peças. Não há correio: levantas no Pavilhão Sidónio Serpa, em Ponta Delgada. Pagamento por transferência para o IBAN publicado (beneficiário Hóquei Clube PDL). O clube confirma valores e se o preço de sócio se aplica. O site não cobra nem envia o email da reserva. Tu envias a partir da tua conta de correio.
 
-**7. Alterações**
+**7. Pagamentos**
+A página de pagamentos calcula quotas e mensalidades de formação. Não há débito no site. Transfere para o IBAN publicado e anexas o comprovativo no email que tu envias. O clube confirma valores, qualidade de sócio e escalão. Pedir declaração para IRS não garante que quotas ou mensalidades sejam tratadas como donativo de mecenato.
+
+**8. Alterações**
 Podemos alterar estes termos. A versão em vigor é a que está publicada neste diálogo.
 
-**8. Contacto**
+**9. Contacto**
 Dúvidas: hoquei.clube.pdl@gmail.com.
 `.trim();
 
@@ -38,12 +41,12 @@ Hóquei Clube PDL. Email: hoquei.clube.pdl@gmail.com. Telefone: +351 296 382 987
 **2. O que recolhemos**
 Não há formulário de contacto no site. Na homepage falas connosco por email ou telefone.
 
-Na merch, o pedido sai do teu programa de correio. Nome, telefone, email e o que encomendaste chegam à caixa Gmail do clube. O site não guarda essa mensagem num servidor nosso.
+Na merch e nos pagamentos, o pedido sai do teu programa de correio. Nome, telefone, NIF, nomes de atletas ou sócios e o que pediste chegam à caixa Gmail do clube. O site não guarda essa mensagem num servidor nosso.
 
 Não vendemos listas de emails. Não fazemos perfis publicitários.
 
 **3. Para que servem**
-Responder a contactos, gerir reservas de merch, associados e comunicação do clube.
+Responder a contactos, gerir reservas de merch, quotas, mensalidades, associados e comunicação do clube.
 
 **4. Base legal**
 Consentimento (quando nos escreves) ou relação de associado, quando se aplica. RGPD, Art.º 6.º, n.º 1.
@@ -58,7 +61,7 @@ Não vendemos dados. Podemos partilhar com a Federação de Patinagem de Portuga
 Acesso, rectificação, apagamento, portabilidade e oposição. Escreve para hoquei.clube.pdl@gmail.com.
 
 **8. Armazenamento no teu dispositivo**
-O tema claro/escuro e a escolha do banner de cookies ficam no armazenamento local do navegador. Na merch há um intervalo curto entre envios de reserva (também local). Ver a política de cookies.
+O tema claro/escuro e a escolha do banner de cookies ficam no armazenamento local do navegador. Na merch e nos pagamentos há um intervalo curto entre aberturas de email (também local). Ver a política de cookies.
 
 **9. Privacidade**
 Questões: o mesmo email do clube. Não temos um DPO nomeado à parte.
@@ -72,7 +75,7 @@ Cookies são ficheiros pequenos no teu dispositivo. Este site usa sobretudo arma
 O aviso de cookies aparece na página inicial. Recusar guarda a escolha e não liga rastreio nosso. O tema claro/escuro continua a funcionar: é uma preferência técnica, não publicidade.
 
 **3. O que guardamos no navegador**
-Preferência de tema (next-themes). Escolha do banner (cookie-consent). Na merch, um carimbo de tempo para não reenviares o mesmo pedido de imediato.
+Preferência de tema (next-themes). Escolha do banner (cookie-consent). Na merch e nos pagamentos, um carimbo de tempo para não reabrires o mesmo pedido de imediato.
 
 **4. YouTube**
 Quando há vídeo incorporado (galeria, calendário ou jogo ao vivo), o YouTube pode instalar cookies próprios. Isso é da Google, segundo a política deles.

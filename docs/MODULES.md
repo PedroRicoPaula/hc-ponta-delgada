@@ -18,7 +18,7 @@ Secções em ordem de renderização:
 
 | Componente | Função |
 |-----------|--------|
-| `Navigation.tsx` | Navbar: Calendário, Comunicados, Modalidade, Blog, Merch, Patrocinadores (`NAV_LINKS`) + ThemeToggle + Doação + Mail. Logo faz scroll-to-top e limpa hash da URL quando já em `/` |
+| `Navigation.tsx` | Navbar: Calendário, Comunicados, Modalidade, Blog, Merch, Pagamentos, Patrocinadores (`NAV_LINKS`) + ThemeToggle + Doação + Mail. Logo faz scroll-to-top e limpa hash da URL quando já em `/` |
 | `Footer.tsx` | Rodapé. Explorar usa o mesmo `NAV_LINKS`. Informações: Termos/Privacidade/Cookies. DonationsModal interno |
 | `SocialIcons.tsx` | Ícones flutuantes laterais (Facebook, Instagram, YouTube) |
 | `CursorRing.tsx` | Anel amarelo no hover (só desktop, `hover: fine`). Uma instância em `App.tsx` |
@@ -107,4 +107,8 @@ Na nav principal (depois de Modalidade) e no footer.
 ## Merch (`/merch` → `src/pages/Merch.tsx`)
 
 Catálogo da loja oficial 2026/27. Dados: `src/data/merchData.ts`. Reserva por `mailto:` (`src/lib/merchReservation.ts`) — sem pagamento no site. Helmet: title, description, canonical `/merch/`, og:*, JSON-LD `CollectionPage` + `BreadcrumbList`. Rota em `STATIC_ROUTES` (`scripts/prerender.js`) para o sitemap e o HTML pré-renderizado.
+
+## Pagamentos (`/pagamentos` → `src/pages/Pagamentos.tsx`)
+
+Quotas 2026/27 e mensalidades de formação (Setembro a Junho). Dados: `src/data/paymentsData.ts`. Totais e mailto: `src/lib/clubPayments.ts`. Sem pagamento no site. Com atleta nomeado, quota a 15 €. IRS é um pedido ao clube, não uma garantia de mecenato. Rota em `STATIC_ROUTES`.
 

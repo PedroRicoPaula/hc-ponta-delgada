@@ -125,6 +125,14 @@ const Index = () => {
       },
       {
         "@type": "Question",
+        "name": "Como pago quotas e mensalidades no site?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Em hoqueiclubepdl.com/pagamentos o site calcula quotas 2026/27 e mensalidades de formação (Setembro a Junho). Abres o email, transfere para o IBAN do clube e anexas o comprovativo. Não há pagamento no site. O clube confirma. Pedir declaração para IRS não garante que o valor seja donativo de mecenato."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "O Hóquei Clube PDL transmite os jogos online?",
         "acceptedAnswer": {
           "@type": "Answer",
