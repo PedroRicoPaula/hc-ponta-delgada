@@ -1,17 +1,18 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { LiveBroadcast } from '@/components/LiveBroadcast';
-import { games, parseGameDateTime, formatGameTime, getMatchupNames } from '@/data/siteData';
-import { getNextGame, getGameStatus, isBroadcastWindow, isMatchLive, formatCountdown, useNow } from '@/lib/games';
+import { GameCard } from '@/components/GameCard';
+import { FORMACAO_ESCALOES, games, parseGameDateTime, formatGameTime, getMatchupNames, playsAtHomePavilion, isNationalChampionship, type FormacaoEscalao } from '@/data/siteData';
+import { getNextGame, getGameStatus, isBroadcastWindow, isMatchLive, formatCountdown, senioresGames, formacaoGames, useNow } from '@/lib/games';
 
 function NextGameFeature() {
   const now = useNow(1000);
-  const nextGame = getNextGame(games, now);
+  const nextGame = getNextGame(senioresGames(games), now);
 
   if (!nextGame) {
     return (
       <div className="max-w-xl mx-auto text-center bg-gray-100 dark:bg-gray-800 rounded-2xl p-10">
-        <p className="text-gray-500 dark:text-gray-400">Sem jogos agendados de momento.</p>
+        <p className="text-gray-500 dark:text-gray-400">Sem jogos seniores agendados de momento.</p>
       </div>
     );
   }
@@ -41,7 +42,7 @@ function NextGameFeature() {
 
         <div className="relative">
           <div className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:justify-between mb-6">
-            <span className="text-xs font-bold uppercase tracking-widest text-primary/80">{nextGame.competition}</span>
+            <span className={`text-xs font-bold uppercase tracking-widest ${isNationalChampionship(nextGame) ? 'text-primary' : 'text-primary/80'}`}>{nextGame.competition}</span>
             {live ? (
               <span className="flex items-center gap-1.5 text-xs font-bold text-red-400 uppercase tracking-widest">
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
@@ -49,7 +50,7 @@ function NextGameFeature() {
               </span>
             ) : (
               <span className="text-xs font-bold uppercase tracking-widest text-gray-500">
-                {nextGame.isHome ? 'Em Casa' : 'Fora'}
+                {playsAtHomePavilion(nextGame) ? 'Em Casa' : 'Fora'}
               </span>
             )}
           </div>
@@ -93,35 +94,57 @@ function NextGameFeature() {
   );
 }
 
-export const EventsSection = () => (
-  <motion.section
-    id="events"
-    className="py-20 bg-white dark:bg-gray-900"
-    initial={{ opacity: 0, y: 40, rotateX: 3 }}
-    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-    viewport={{ once: true, amount: 0.1 }}
-    transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-    style={{ transformPerspective: 1200 }}
-  >
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary/70 mb-3">
-        <span className="w-5 h-px bg-primary/50" />
-        03 — Calendário
-      </p>
-      <h2 className="font-heading text-5xl md:text-6xl uppercase leading-none mb-10 text-gray-900 dark:text-white">
-        Próximos <span className="text-primary">Jogos</span>
-      </h2>
+function FormacaoEmptyCard({ escalao }: { escalao: FormacaoEscalao }) {
+  return (
+    <article className="rounded-2xl border border-dashed border-gray-200 dark:border-gray-700 p-3 bg-gray-50 dark:bg-gray-900/40">
+      <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-2">{escalao}</p>
+      <p className="text-xs text-gray-500 dark:text-gray-400">A anunciar</p>
+    </article>
+  );
+}
 
-      <NextGameFeature />
+export const EventsSection = () => {
+  const now = useNow(1000);
 
-      <div className="flex justify-center mt-10">
-        <Link
-          to="/calendario"
-          className="inline-flex items-center gap-2 bg-primary text-gray-950 hover:bg-primary/90 px-6 py-3 font-heading font-black text-xs uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5"
-        >
-          Ver Calendário
-        </Link>
+  return (
+    <motion.section
+      id="events"
+      className="py-20 bg-white dark:bg-gray-900"
+      initial={{ opacity: 0, y: 40, rotateX: 3 }}
+      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+      style={{ transformPerspective: 1200 }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary/70 mb-3">
+          <span className="w-5 h-px bg-primary/50" />
+          03 — Calendário
+        </p>
+        <h2 className="font-heading text-5xl md:text-6xl uppercase leading-none mb-10 text-gray-900 dark:text-white">
+          Próximos <span className="text-primary">Jogos</span>
+        </h2>
+
+        <NextGameFeature />
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-5xl mx-auto mt-8">
+          {FORMACAO_ESCALOES.map((escalao, i) => {
+            const next = getNextGame(formacaoGames(games, escalao), now);
+            return next
+              ? <GameCard key={escalao} game={next} now={now} index={i} compact />
+              : <FormacaoEmptyCard key={escalao} escalao={escalao} />;
+          })}
+        </div>
+
+        <div className="flex justify-center mt-10">
+          <Link
+            to="/calendario"
+            className="inline-flex items-center gap-2 bg-primary text-gray-950 hover:bg-primary/90 px-6 py-3 font-heading font-black text-xs uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5"
+          >
+            Ver Calendário
+          </Link>
+        </div>
       </div>
-    </div>
-  </motion.section>
-);
+    </motion.section>
+  );
+};

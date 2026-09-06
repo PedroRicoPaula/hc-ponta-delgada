@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { parseGameDateTime, hasKnownTime, type Game } from '@/data/siteData';
+import { parseGameDateTime, hasKnownTime, gameCategory, type Game, type FormacaoEscalao } from '@/data/siteData';
 
 export const GAME_DURATION_MINUTES = 150; // duração média de um jogo de hóquei em patins
 export const LIVE_COUNTDOWN_HOURS = 24;
@@ -45,10 +45,18 @@ export function isMatchLive(game: Game, now: Date): boolean {
   return isBroadcastWindow(game, now) || getGameStatus(game, now) === 'live';
 }
 
-export function getNextGame(games: Game[], now: Date): Game | undefined {
-  return [...games]
+export function getNextGame(list: Game[], now: Date): Game | undefined {
+  return [...list]
     .sort((a, b) => parseGameDateTime(a).getTime() - parseGameDateTime(b).getTime())
     .find((g) => getGameStatus(g, now) !== 'ended');
+}
+
+export function senioresGames(list: Game[]): Game[] {
+  return list.filter((g) => gameCategory(g) === 'seniores');
+}
+
+export function formacaoGames(list: Game[], escalao: FormacaoEscalao): Game[] {
+  return list.filter((g) => gameCategory(g) === 'formacao' && g.escalao === escalao);
 }
 
 export function formatCountdown(target: Date, now: Date): string {

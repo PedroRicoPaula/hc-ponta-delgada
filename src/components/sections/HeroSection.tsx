@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { games, parseGameDateTime, formatGameTime, getMatchupNames } from '@/data/siteData';
-import { getNextGame, isMatchLive, useNow } from '@/lib/games';
+import { getNextGame, isMatchLive, senioresGames, useNow } from '@/lib/games';
 
 function NextGameCard() {
   const now = useNow(1000);
-  const nextGame = getNextGame(games, now);
+  const nextGame = getNextGame(senioresGames(games), now);
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
