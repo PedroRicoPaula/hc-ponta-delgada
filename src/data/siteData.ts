@@ -2,12 +2,9 @@
 
 export interface PlayerStats {
   games: number;
-  goals: number;
-  assists: number;
+  goals?: number;
   age: number;
   nationality: string;
-  penaltySaves?: number;  // só guarda-redes — penáltis defendidos
-  freeHitSaves?: number;  // só guarda-redes — livres diretos defendidos
 }
 
 export interface Player {
@@ -19,26 +16,29 @@ export interface Player {
 }
 
 export const players: Player[] = [
-  { number: 1,  name: "Nuno Teixeira",      position: "Guarda-Redes", stats: { games: 18, goals: 0, assists: 0, age: 29, nationality: "PT", penaltySaves: 5, freeHitSaves: 9 } },
-  { number: 16, name: "Simão Loureiro",     position: "Guarda-Redes", photo: "/uploads/jogadores/simaoloureiro.jpeg",    stats: { games: 6,  goals: 0, assists: 0, age: 22, nationality: "PT", penaltySaves: 1, freeHitSaves: 3 } },
-  { number: 3,  name: "Tiago Pimentel",     position: "Defesa",       photo: "/uploads/jogadores/tiagopimentel.jpeg",    stats: { games: 20, goals: 2, assists: 4, age: 27, nationality: "PT" } },
-  { number: 8,  name: "Marco Resendes",     position: "Defesa",       photo: "/uploads/jogadores/marcoresendes.jpeg",    stats: { games: 17, goals: 1, assists: 3, age: 25, nationality: "PT" } },
-  { number: 7,  name: "Alexandre Resendes", position: "Médio",        photo: "/uploads/jogadores/alexandreresendes.jpeg",stats: { games: 22, goals: 5, assists: 7, age: 24, nationality: "PT" } },
-  { number: 11, name: "Alexandre Ornelas",  position: "Médio",        photo: "/uploads/jogadores/alexandreornelas.jpeg", stats: { games: 19, goals: 4, assists: 6, age: 23, nationality: "PT" } },
-  { number: 4,  name: "Tiago Leite",        position: "Avançado",     photo: "/uploads/jogadores/tiagoleite.jpeg",       stats: { games: 15, goals: 2, assists: 4, age: 24, nationality: "PT" } },
-  { number: 6,  name: "Miguel Pimentel",    position: "Avançado",     photo: "/uploads/jogadores/miguelpimentel.jpeg",   stats: { games: 21, goals: 12, assists: 5, age: 26, nationality: "PT" } },
-  { number: 10, name: "Carlos Guimarães",   position: "Avançado",     photo: "/uploads/jogadores/carlosguimaraes.jpeg",  stats: { games: 20, goals: 9, assists: 8, age: 34, nationality: "PT" } },
-  { number: 9,  name: "Pedro Paula",        position: "Universal",    photo: "/uploads/jogadores/pedropaula.jpeg",       stats: { games: 22, goals: 7, assists: 11, age: 28, nationality: "PT" } },
-  { number: 14, name: "Francisco Freitas",  position: "Universal",    stats: { games: 15, goals: 3, assists: 5, age: 21, nationality: "PT" } },
-  { number: 17, name: "Vicente Correia",    position: "Universal",    photo: "/uploads/jogadores/vicente.jpeg",          stats: { games: 18, goals: 6, assists: 9, age: 23, nationality: "PT" } },
+  { number: 1,  name: "Nuno Teixeira",      position: "Guarda-Redes", photo: "/uploads/jogadores/nunoteixeira.png",      stats: { games: 53, age: 29, nationality: "PT" } },
+  { number: 16, name: "Simão Loureiro",     position: "Guarda-Redes", photo: "/uploads/jogadores/simaoloureiro.jpeg",    stats: { games: 26, age: 35, nationality: "PT" } },
+  { number: 3,  name: "Tiago Pimentel",     position: "Defesa",       photo: "/uploads/jogadores/tiagopimentel.jpeg",    stats: { games: 83, goals: 0, age: 25, nationality: "PT" } },
+  { number: 8,  name: "Marco Resendes",     position: "Defesa",       photo: "/uploads/jogadores/marcoresendes.jpeg",    stats: { games: 7, goals: 0, age: 57, nationality: "PT" } },
+  { number: 5,  name: "David Reis",         position: "Médio",        photo: "/uploads/jogadores/davidreis.png",         stats: { games: 0, goals: 0, age: 0, nationality: "PT" } },
+  { number: 11, name: "Alexandre Resendes", position: "Médio",        photo: "/uploads/jogadores/alexandreresendes.jpeg",stats: { games: 23, goals: 10, age: 23, nationality: "PT" } },
+  { number: 4,  name: "Alexandre Ornelas",  position: "Médio",        photo: "/uploads/jogadores/alexandreornelas.jpeg", stats: { games: 22, goals: 1, age: 20, nationality: "PT" } },
+  { number: 9,  name: "Pedro Paula",        position: "Universal",    photo: "/uploads/jogadores/pedropaula.jpeg",       stats: { games: 118, goals: 19, age: 26, nationality: "PT" } },
+  { number: 66, name: "Francisco Freitas",  position: "Universal",    photo: "/uploads/jogadores/franciscofreitas.png",  stats: { games: 134, goals: 58, age: 22, nationality: "PT" } },
+  { number: 28, name: "Tiago Leite",        position: "Avançado",     photo: "/uploads/jogadores/tiagoleite.jpeg",       stats: { games: 55, goals: 57, age: 35, nationality: "PT" } },
+  { number: 44, name: "Miguel Pimentel",    position: "Avançado",     photo: "/uploads/jogadores/miguelpimentel.jpeg",   stats: { games: 90, goals: 18, age: 27, nationality: "PT" } },
+  { number: 7,  name: "Carlos Guimarães",   position: "Avançado",     photo: "/uploads/jogadores/carlosguimaraes.jpeg",  stats: { games: 125, goals: 167, age: 47, nationality: "PT" } },
+  { number: 6,  name: "Vicente Correia",    position: "Avançado",     photo: "/uploads/jogadores/vicente.jpeg",          stats: { games: 25, goals: 29, age: 20, nationality: "PT" } },
 ];
+
+export const POSITION_ORDER = ["Guarda-Redes", "Defesa", "Médio", "Universal", "Avançado"] as const;
 
 export const playersByPosition = {
   "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro"],
   "Defesa": ["Tiago Pimentel", "Marco Resendes"],
-  "Médio": ["Alexandre Resendes", "Alexandre Ornelas"],
-  "Avançado": ["Miguel Pimentel", "Carlos Guimarães"],
-  "Universal": ["Pedro Paula", "Francisco Freitas", "Vicente Correia"]
+  "Médio": ["David Reis", "Alexandre Resendes", "Alexandre Ornelas"],
+  "Universal": ["Pedro Paula", "Francisco Freitas"],
+  "Avançado": ["Tiago Leite", "Miguel Pimentel", "Carlos Guimarães", "Vicente Correia"],
 };
 
 export const staff = [
@@ -366,6 +366,7 @@ export const sponsors: Sponsor[] = [
   { name: "Pérola da Ilha", logo: "/uploads/patrocinadores/logo_peroladailha.jpeg", url: "https://www.peroladailha.pt/" },
   { name: "AFISA", logo: "/uploads/patrocinadores/logo_afisa.png", url: "https://www.facebook.com/p/AFISA-100083180627789/" },
   { name: "Lene Car", logo: "/uploads/patrocinadores/logo_lenecar.webp", url: "https://www.lenecarautomoveis.com/" },
+  { name: "Electrocar", logo: "/uploads/patrocinadores/eletrocar.jpeg", url: "https://www.electrocar-brunomedeiros.pt/" },
   { name: "PMA Açores", logo: "/uploads/patrocinadores/pma-acores.jpeg", url: "https://www.pmasolutions.com/" },
   { name: "Residência Segura", logo: "/uploads/patrocinadores/residencia-segura.jpeg", url: "https://www.residenciasegura.pt/", lightPlate: true },
   { name: "Talento", logo: "/uploads/patrocinadores/talento.jpeg", url: "https://centrostalento.pt/", lightPlate: true },

@@ -10,7 +10,7 @@ import {
   DialogFooter
 } from '@/components/ui/dialog';
 import { BarChart3, ExternalLink, Trophy, X } from 'lucide-react';
-import { players, Player } from '@/data/siteData';
+import { players, POSITION_ORDER, Player } from '@/data/siteData';
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 40, rotateX: 3 },
@@ -126,15 +126,12 @@ function PlayerCard({ player }: { player: Player }) {
               {(player.position === "Guarda-Redes"
                 ? [
                     { label: "J", value: player.stats.games },
-                    { label: "P", value: player.stats.penaltySaves ?? 0 },
-                    { label: "L", value: player.stats.freeHitSaves ?? 0 },
                     { label: "Idade", value: player.stats.age },
                     { label: "Nac.", value: nationalityFlags[player.stats.nationality] ?? player.stats.nationality },
                   ]
                 : [
                     { label: "J", value: player.stats.games },
-                    { label: "Golos", value: player.stats.goals },
-                    { label: "Assist.", value: player.stats.assists },
+                    { label: "Golos", value: player.stats.goals ?? 0 },
                     { label: "Idade", value: player.stats.age },
                     { label: "Nac.", value: nationalityFlags[player.stats.nationality] ?? player.stats.nationality },
                   ]
@@ -153,6 +150,14 @@ function PlayerCard({ player }: { player: Player }) {
 }
 
 export const TeamSection = () => {
+  const orderedPlayers = [...players].sort((a, b) => {
+    const ia = POSITION_ORDER.indexOf(a.position as (typeof POSITION_ORDER)[number]);
+    const ib = POSITION_ORDER.indexOf(b.position as (typeof POSITION_ORDER)[number]);
+    const pa = ia === -1 ? 99 : ia;
+    const pb = ib === -1 ? 99 : ib;
+    if (pa !== pb) return pa - pb;
+    return a.number - b.number;
+  });
   const [confirmationDetails, setConfirmationDetails] = useState<ConfirmationDetails>({
     isOpen: false, title: '', description: '', url: ''
   });
@@ -200,7 +205,7 @@ export const TeamSection = () => {
             className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3"
             variants={{ visible: { transition: { staggerChildren: 0.05 } } }}
           >
-            {players.map((player) => (
+            {orderedPlayers.map((player) => (
               <PlayerCard key={player.number} player={player} />
             ))}
           </motion.div>

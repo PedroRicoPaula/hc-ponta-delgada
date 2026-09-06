@@ -19,7 +19,7 @@ const escalaoConfig: Record<Escalao, { color: string }> = {
 const allPlayersData = {
   "Seniores": {
     "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro"],
-    "Jogadores": ["Tiago Pimentel", "Marco Resendes", "Alexandre Resendes", "Alexandre Ornelas", "Miguel Pimentel", "Carlos Guimarães", "Pedro Paula", "Francisco Freitas", "Vicente Correia"]
+    "Jogadores": ["Tiago Pimentel", "Marco Resendes", "David Reis", "Alexandre Resendes", "Alexandre Ornelas", "Pedro Paula", "Francisco Freitas", "Tiago Leite", "Miguel Pimentel", "Carlos Guimarães", "Vicente Correia"]
   },
   "Formação": {
     "Guarda-Redes": {

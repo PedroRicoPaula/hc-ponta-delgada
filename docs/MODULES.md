@@ -8,7 +8,7 @@ Secções em ordem de renderização:
 |---|--------|-----------|-----------|------|
 | 1 | Hero | `HeroSection.tsx` | `#hero` | Painel de texto reactivo ao tema; painel da foto (desktop only) sempre dark + fade overlay + card "Próximo Jogo" flutuante com glow que segue o cursor. Lê `games[]` (mesma fonte que `EventsSection`/Calendário) — só mostra bolinha vermelha quando o jogo está `live`, sem interacção |
 | 2 | Treinos | `TrainingSchedulesSection.tsx` | `#training` | Horários por escalão — actualizar início de época |
-| 3 | Equipa | `TeamSection.tsx` | `#team` | Cards flip com stats (tiles quase quadrados); links para FPP. Stats dependem da posição — guarda-redes mostram "P"/"L" (penáltis/livres diretos defendidos) em vez de Golos/Assist.; nacionalidade mostra bandeira (`nationalityFlags` lookup) em vez de texto |
+| 3 | Equipa | `TeamSection.tsx` | `#team` | Cards flip com stats (tiles quase quadrados); links para FPP. Campo: jogos e golos de carreira no clube (ZeroZero); GR só jogos, idade e nacionalidade. Bandeira via `nationalityFlags` |
 | 4 | Eventos | `EventsSection.tsx` | `#events` | Card "Próximo Jogo" grande (contagem decrescente 24h antes; botão "Ver Ao Vivo" nos jogos em casa, com diálogo de confirmação antes de abrir o YouTube; jogos fora só mostram bolinha "ao vivo" sem transmissão) + botão "Ver Calendário" → `/calendario`. Calendário oficial 2026/27 da FPP (26 jornadas) — ver `docs/ISSUES-BACKLOG.md` |
 | 5 | Galeria | `GallerySection.tsx` | `#gallery` | Carousel + embed YouTube |
 | 6 | Contactos | `ContactSection.tsx` | `#contact` | Morada, email, telefone |
