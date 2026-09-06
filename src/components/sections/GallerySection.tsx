@@ -58,6 +58,7 @@ export const GallerySection = () => {
                         alt={`HCPDL momento ${index + 1}`}
                         className="w-full h-56 object-contain bg-black hover:scale-105 transition-transform duration-300 cursor-pointer grayscale hover:grayscale-0"
                         loading="lazy"
+                        decoding="async"
                       />
                     </DialogTrigger>
                     <DialogContent className="max-w-[90vw] max-h-[90vh] p-0 border-0 bg-black/95 flex items-center justify-center [&>button]:absolute [&>button]:right-3 [&>button]:top-3 [&>button]:bg-black/50 [&>button]:text-white [&>button]:rounded-full [&>button]:p-2">

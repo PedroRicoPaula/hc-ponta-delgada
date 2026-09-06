@@ -280,9 +280,11 @@ export default function QueroSerPatrocinador() {
             >
               <div className="rounded-2xl overflow-hidden border border-gray-200 dark:border-white/10">
                 <img
-                  src="/uploads/PDL24-25V2.png"
+                  src="/uploads/PDL24-25V2.webp"
                   alt="Hóquei Clube PDL"
                   className="w-full h-56 md:h-80 object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="absolute -bottom-4 -left-4 bg-primary text-gray-950 rounded-xl p-4 font-black text-sm shadow-xl">

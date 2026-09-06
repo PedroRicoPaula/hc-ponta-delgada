@@ -135,11 +135,14 @@ export const HeroSection = () => (
         className="relative hidden md:block h-[100svh]"
       >
         <img
-          src="/uploads/PDL24-25V2.png"
+          src="/uploads/PDL24-25V2.webp"
           alt="Equipa sénior do Hóquei Clube PDL"
           className="w-full h-full object-cover object-center"
           style={{ clipPath: 'polygon(10% 0, 100% 0, 100% 100%, 0 100%)' }}
           loading="eager"
+          fetchPriority="high"
+          width={1920}
+          height={1436}
         />
         {/* Fade overlay — blends photo edge into the text panel's base colour per theme */}
         <div

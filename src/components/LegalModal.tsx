@@ -69,21 +69,24 @@ Questões: o mesmo email do clube. Não temos um DPO nomeado à parte.
 
 const COOKIES = `
 **1. Cookies e armazenamento local**
-Cookies são ficheiros pequenos no teu dispositivo. Este site usa sobretudo armazenamento local (localStorage), não uma rede de cookies de marketing.
+Cookies são ficheiros pequenos no teu dispositivo. Este site usa sobretudo armazenamento local (localStorage). O Google Analytics só corre depois de aceitares o aviso.
 
 **2. Banner**
-O aviso de cookies aparece na página inicial. Recusar guarda a escolha e não liga rastreio nosso. O tema claro/escuro continua a funcionar: é uma preferência técnica, não publicidade.
+O aviso de cookies aparece em todas as páginas. Recusar guarda a escolha e não carrega o Google Analytics. O tema claro/escuro continua a funcionar: é uma preferência técnica, não publicidade.
 
 **3. O que guardamos no navegador**
 Preferência de tema (next-themes). Escolha do banner (cookie-consent). Na merch e nos pagamentos, um carimbo de tempo para não reabrires o mesmo pedido de imediato.
 
-**4. YouTube**
+**4. Google Analytics**
+Se aceitares, carregamos o Google Analytics (G-JJMSCRMS87) para perceber visitas e páginas. Sem aceitar, esse script não corre. Não usamos Google AdSense.
+
+**5. YouTube**
 Quando há vídeo incorporado (galeria, calendário ou jogo ao vivo), o YouTube pode instalar cookies próprios. Isso é da Google, segundo a política deles.
 
-**5. No navegador**
+**6. No navegador**
 Podes apagar dados do site nas definições. Sem tema guardado, voltas ao modo claro por omissão.
 
-**6. Contacto**
+**7. Contacto**
 hoquei.clube.pdl@gmail.com.
 `.trim();
 

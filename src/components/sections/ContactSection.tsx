@@ -29,7 +29,7 @@ const localBusinessSchema = {
   },
   "hasMap": "https://www.google.com/maps/place/Pavilhão+Sidório+Serpa/@37.7408,-25.6727,17z",
   "logo": "https://hoqueiclubepdl.com/uploads/pdlLogo.png",
-  "image": "https://hoqueiclubepdl.com/uploads/PDL24-25V2.png",
+  "image": "https://hoqueiclubepdl.com/uploads/PDL24-25V2.webp",
   "foundingDate": "2012",
   "taxID": "510378242",
   "sameAs": [

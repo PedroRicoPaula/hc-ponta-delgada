@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { lazy, Suspense, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
@@ -7,13 +7,7 @@ import { Navigation } from "@/components/Navigation";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SocialIcons } from "@/components/SocialIcons";
 import { Footer } from '@/components/Footer';
-import { CookieConsent } from '@/components/CookieConsent';
 import { FloatingActionButtons } from '@/components/FloatingActionButtons';
-import HolidayOverlay from "@/components/HolidayOverlay";
-
-// Overlay & Panel Components
-import { RollerHockeyGame } from "@/components/RollerHockeyGame";
-// import { ChatWidget } from '@/components/ChatWidget';
 
 // Section Components
 import { HeroSection } from '@/components/sections/HeroSection';
@@ -28,26 +22,16 @@ import { ContactSection } from '@/components/sections/ContactSection';
 // Data
 import { senioresEvents, formacaoEvents, comunicados } from '@/data/siteData';
 import { generateEventsSchema, generateNewsSchema } from '@/lib/seo';
-import { safeStorage } from '@/lib/safeStorage';
+
+const RollerHockeyGame = lazy(() =>
+  import('@/components/RollerHockeyGame').then((m) => ({ default: m.RollerHockeyGame })),
+);
 
 
 const Index = () => {
-  // --- STATE MANAGEMENT ---
-  const [showCookieConsent, setShowCookieConsent] = useState(false);
   const [isGameOpen, setIsGameOpen] = useState(false);
   const location = useLocation();
 
-  // --- EFFECTS ---
-  useEffect(() => {
-    const cookieConsent = safeStorage.getItem('cookie-consent');
-    if (!cookieConsent) {
-      setShowCookieConsent(true);
-    }
-  }, []);
-
-  // Scroll to the section named in the URL hash — needed because links to
-  // "/#contact" from other pages land here before the section exists in the
-  // DOM, so the browser's native hash-jump on page load silently does nothing.
   useEffect(() => {
     if (!location.hash) return;
     const el = document.querySelector(location.hash);
@@ -56,18 +40,6 @@ const Index = () => {
     }
   }, [location.hash]);
 
-  // --- HANDLERS ---
-  const acceptCookies = () => {
-    safeStorage.setItem('cookie-consent', 'accepted');
-    setShowCookieConsent(false);
-  };
-
-  const rejectCookies = () => {
-    safeStorage.setItem('cookie-consent', 'rejected');
-    setShowCookieConsent(false);
-  };
-
-  // --- SEO DATA ---
   const eventsSchema = generateEventsSchema(senioresEvents, formacaoEvents);
   const newsSchema = generateNewsSchema(comunicados);
 
@@ -162,7 +134,7 @@ const Index = () => {
         <title>Hóquei Clube PDL - Hóquei em Patins nos Açores desde 2012</title>
         <meta name="description" content="Site oficial do Hóquei Clube PDL — clube de hóquei em patins fundado em 2012 em Ponta Delgada, Açores. Escalões Sub-11, Sub-13, Sub-17 e Seniores. Jogos transmitidos no YouTube." />
         <meta name="keywords" content="hóquei em patins, Ponta Delgada, Açores, HCPDL, hóquei patins Açores, clube hóquei São Miguel, formação hóquei patins, campeonato nacional hóquei patins" />
-        <link rel="preload" fetchPriority="high" as="image" href="/uploads/PDL24-25V2.png" type="image/png" />
+        <link rel="preload" fetchPriority="high" as="image" href="/uploads/PDL24-25V2.webp" type="image/webp" />
         <link rel="canonical" href="https://hoqueiclubepdl.com/" />
         <meta property="og:title" content="Hóquei Clube PDL — Hóquei em Patins nos Açores" />
         <meta property="og:description" content="Site oficial do Hóquei Clube PDL — clube de hóquei em patins fundado em 2012 em Ponta Delgada, Açores. Escalões Sub-11, Sub-13, Sub-17 e Seniores." />
@@ -206,11 +178,10 @@ const Index = () => {
       <Footer />
 
       {/* Overlays, Modals, and Panels */}
-      <RollerHockeyGame isOpen={isGameOpen} onClose={() => setIsGameOpen(false)} />
-      {/* <ChatWidget /> */}
-
-      {showCookieConsent && (
-        <CookieConsent onAccept={acceptCookies} onReject={rejectCookies} />
+      {isGameOpen && (
+        <Suspense fallback={null}>
+          <RollerHockeyGame isOpen={isGameOpen} onClose={() => setIsGameOpen(false)} />
+        </Suspense>
       )}
     </div>
   );

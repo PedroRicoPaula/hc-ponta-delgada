@@ -16,15 +16,15 @@ export interface Player {
 }
 
 export const players: Player[] = [
-  { number: 1,  name: "Nuno Teixeira",      position: "Guarda-Redes", photo: "/uploads/jogadores/nunoteixeira.png",      stats: { games: 53, age: 29, nationality: "PT" } },
+  { number: 1,  name: "Nuno Teixeira",      position: "Guarda-Redes", photo: "/uploads/jogadores/nunoteixeira.webp",      stats: { games: 53, age: 29, nationality: "PT" } },
   { number: 16, name: "Simão Loureiro",     position: "Guarda-Redes", photo: "/uploads/jogadores/simaoloureiro.jpeg",    stats: { games: 26, age: 35, nationality: "PT" } },
   { number: 3,  name: "Tiago Pimentel",     position: "Defesa",       photo: "/uploads/jogadores/tiagopimentel.jpeg",    stats: { games: 83, goals: 0, age: 25, nationality: "PT" } },
   { number: 8,  name: "Marco Resendes",     position: "Defesa",       photo: "/uploads/jogadores/marcoresendes.jpeg",    stats: { games: 7, goals: 0, age: 57, nationality: "PT" } },
-  { number: 5,  name: "David Reis",         position: "Médio",        photo: "/uploads/jogadores/davidreis.png",         stats: { games: 0, goals: 0, age: 0, nationality: "PT" } },
+  { number: 5,  name: "David Reis",         position: "Médio",        photo: "/uploads/jogadores/davidreis.webp",         stats: { games: 0, goals: 0, age: 0, nationality: "PT" } },
   { number: 11, name: "Alexandre Resendes", position: "Médio",        photo: "/uploads/jogadores/alexandreresendes.jpeg",stats: { games: 23, goals: 10, age: 23, nationality: "PT" } },
   { number: 4,  name: "Alexandre Ornelas",  position: "Médio",        photo: "/uploads/jogadores/alexandreornelas.jpeg", stats: { games: 22, goals: 1, age: 20, nationality: "PT" } },
   { number: 9,  name: "Pedro Paula",        position: "Universal",    photo: "/uploads/jogadores/pedropaula.jpeg",       stats: { games: 118, goals: 19, age: 26, nationality: "PT" } },
-  { number: 66, name: "Francisco Freitas",  position: "Universal",    photo: "/uploads/jogadores/franciscofreitas.png",  stats: { games: 134, goals: 58, age: 22, nationality: "PT" } },
+  { number: 66, name: "Francisco Freitas",  position: "Universal",    photo: "/uploads/jogadores/franciscofreitas.webp",  stats: { games: 134, goals: 58, age: 22, nationality: "PT" } },
   { number: 28, name: "Tiago Leite",        position: "Avançado",     photo: "/uploads/jogadores/tiagoleite.jpeg",       stats: { games: 55, goals: 57, age: 35, nationality: "PT" } },
   { number: 44, name: "Miguel Pimentel",    position: "Avançado",     photo: "/uploads/jogadores/miguelpimentel.jpeg",   stats: { games: 90, goals: 18, age: 27, nationality: "PT" } },
   { number: 7,  name: "Carlos Guimarães",   position: "Avançado",     photo: "/uploads/jogadores/carlosguimaraes.jpeg",  stats: { games: 125, goals: 167, age: 47, nationality: "PT" } },
@@ -406,14 +406,14 @@ export function getRecentComunicados(count = 3): Comunicado[] {
 }
 
 export const galleryImages = [
-  "/uploads/interregioes2425.png",
+  "/uploads/interregioes2425.webp",
   "/uploads/youtube.png",
   "/uploads/halloween2425.png",
   "/uploads/natal2425.png",
   "/uploads/pascoa2425.png",
-  "/uploads/campeonatoregionalsub132425.png",
-  "/uploads/campeonatoregionalsub152425.png",
-  "/uploads/treinospdl2526.png",
+  "/uploads/campeonatoregionalsub132425.webp",
+  "/uploads/campeonatoregionalsub152425.webp",
+  "/uploads/treinospdl2526.webp",
   "/uploads/TorneioCidadeRG_PDL_Campeao_Sub13_Sub17.jpeg",
   "/uploads/CampeonatoSM_sub13_2025_26.jpeg"
 ];
