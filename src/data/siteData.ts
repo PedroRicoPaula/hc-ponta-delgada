@@ -17,20 +17,20 @@ export interface Player {
 
 export const players: Player[] = [
   { number: 1,  name: "Nuno Teixeira",      position: "Guarda-Redes", photo: "/uploads/jogadores/nunoteixeira.webp",      stats: { games: 53, age: 29, nationality: "PT" } },
-  { number: 16, name: "Simão Loureiro",     position: "Guarda-Redes", photo: "/uploads/jogadores/simaoloureiro.jpeg",    stats: { games: 26, age: 35, nationality: "PT" } },
-  { number: 3,  name: "Tiago Pimentel",     position: "Defesa",       photo: "/uploads/jogadores/tiagopimentel.jpeg",    stats: { games: 83, goals: 0, age: 25, nationality: "PT" } },
-  { number: 8,  name: "Marco Resendes",     position: "Defesa",       photo: "/uploads/jogadores/marcoresendes.jpeg",    stats: { games: 7, goals: 0, age: 57, nationality: "PT" } },
+  { number: 16, name: "Simão Loureiro",     position: "Guarda-Redes", photo: "/uploads/jogadores/simaoloureiro.webp",    stats: { games: 26, age: 35, nationality: "PT" } },
+  { number: 3,  name: "Tiago Pimentel",     position: "Defesa",       photo: "/uploads/jogadores/tiagopimentel.webp",    stats: { games: 83, goals: 0, age: 25, nationality: "PT" } },
+  { number: 8,  name: "Marco Resendes",     position: "Defesa",       photo: "/uploads/jogadores/marcoresendes.webp",    stats: { games: 7, goals: 0, age: 57, nationality: "PT" } },
   { number: 5,  name: "David Reis",         position: "Médio",        photo: "/uploads/jogadores/davidreis.webp",         stats: { games: 0, goals: 0, age: 0, nationality: "PT" } },
-  { number: 11, name: "Alexandre Resendes", position: "Médio",        photo: "/uploads/jogadores/alexandreresendes.jpeg",stats: { games: 23, goals: 10, age: 23, nationality: "PT" } },
-  { number: 4,  name: "Alexandre Ornelas",  position: "Médio",        photo: "/uploads/jogadores/alexandreornelas.jpeg", stats: { games: 22, goals: 1, age: 20, nationality: "PT" } },
-  { number: 9,  name: "Pedro Paula",        position: "Universal",    photo: "/uploads/jogadores/pedropaula.jpeg",       stats: { games: 118, goals: 19, age: 26, nationality: "PT" } },
+  { number: 11, name: "Alexandre Resendes", position: "Médio",        photo: "/uploads/jogadores/alexandreresendes.webp",stats: { games: 23, goals: 10, age: 23, nationality: "PT" } },
+  { number: 4,  name: "Alexandre Ornelas",  position: "Médio",        photo: "/uploads/jogadores/alexandreornelas.webp", stats: { games: 22, goals: 1, age: 20, nationality: "PT" } },
+  { number: 9,  name: "Pedro Paula",        position: "Universal",    photo: "/uploads/jogadores/pedropaula.webp",       stats: { games: 118, goals: 19, age: 26, nationality: "PT" } },
   { number: 66, name: "Francisco Freitas",  position: "Universal",    photo: "/uploads/jogadores/franciscofreitas.webp",  stats: { games: 134, goals: 58, age: 22, nationality: "PT" } },
   { number: 23, name: "Mário Jesus",        position: "Defesa",       photo: "/uploads/jogadores/mariojesus.webp",        stats: { games: 14, goals: 1, age: 28, nationality: "PT" } },
   { number: 77, name: "Pedro Soares",       position: "Avançado",     photo: "/uploads/jogadores/pedrosoares.webp",       stats: { games: 54, goals: 98, age: 31, nationality: "PT" } },
-  { number: 28, name: "Tiago Leite",        position: "Avançado",     photo: "/uploads/jogadores/tiagoleite.jpeg",       stats: { games: 55, goals: 57, age: 35, nationality: "PT" } },
-  { number: 44, name: "Miguel Pimentel",    position: "Avançado",     photo: "/uploads/jogadores/miguelpimentel.jpeg",   stats: { games: 90, goals: 18, age: 27, nationality: "PT" } },
-  { number: 7,  name: "Carlos Guimarães",   position: "Avançado",     photo: "/uploads/jogadores/carlosguimaraes.jpeg",  stats: { games: 125, goals: 167, age: 47, nationality: "PT" } },
-  { number: 6,  name: "Vicente Correia",    position: "Avançado",     photo: "/uploads/jogadores/vicente.jpeg",          stats: { games: 25, goals: 29, age: 20, nationality: "PT" } },
+  { number: 28, name: "Tiago Leite",        position: "Avançado",     photo: "/uploads/jogadores/tiagoleite.webp",       stats: { games: 55, goals: 57, age: 35, nationality: "PT" } },
+  { number: 44, name: "Miguel Pimentel",    position: "Avançado",     photo: "/uploads/jogadores/miguelpimentel.webp",   stats: { games: 90, goals: 18, age: 27, nationality: "PT" } },
+  { number: 7,  name: "Carlos Guimarães",   position: "Avançado",     photo: "/uploads/jogadores/carlosguimaraes.webp",  stats: { games: 125, goals: 167, age: 47, nationality: "PT" } },
+  { number: 6,  name: "Vicente Correia",    position: "Avançado",     photo: "/uploads/jogadores/vicentecorreia.webp",   stats: { games: 25, goals: 29, age: 20, nationality: "PT" } },
 ];
 
 export const POSITION_ORDER = ["Guarda-Redes", "Defesa", "Médio", "Universal", "Avançado"] as const;

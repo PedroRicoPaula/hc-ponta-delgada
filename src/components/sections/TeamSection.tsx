@@ -81,7 +81,7 @@ function PlayerCard({ player }: { player: Player }) {
                 </span>
               </div>
             )}
-            <span className="absolute top-1.5 right-2 text-white/40 font-black leading-none select-none" style={{ fontSize: '2rem' }}>
+            <span className="absolute top-1.5 right-2 text-black font-black leading-none select-none" style={{ fontSize: '2rem' }}>
               {player.number}
             </span>
             <div className="absolute bottom-0 left-0 right-0 p-2.5">
