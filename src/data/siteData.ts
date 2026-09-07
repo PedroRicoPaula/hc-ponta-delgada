@@ -423,7 +423,7 @@ export const trainingSchedules = [
     type: "Sub 11",
     color: "bg-yellow-100 text-yellow-700 border-yellow-200",
     sessions: [
-      { day: "Terça", time: "19:00 - 20:30" },
+      { day: "Segunda", time: "19:00 - 20:00" },
       { day: "Sexta", time: "18:00 - 19:00" }
     ]
   },
@@ -431,8 +431,8 @@ export const trainingSchedules = [
     type: "Sub 13",
     color: "bg-green-100 text-green-700 border-green-200",
     sessions: [
-      { day: "Segunda", time: "19:00 - 20:00" },
-      { day: "Quarta", time: "18:30 - 19:30" },
+      { day: "Terça", time: "19:00 - 20:00" },
+      { day: "Quarta", time: "18:30 - 20:00" },
       { day: "Sexta", time: "19:00 - 20:30" }
     ]
   },
@@ -441,7 +441,7 @@ export const trainingSchedules = [
     color: "bg-purple-100 text-purple-700 border-purple-200",
     sessions: [
       { day: "Segunda", time: "20:00 - 21:30" },
-      { day: "Quarta", time: "19:30 - 21:00" },
+      { day: "Quarta", time: "20:00 - 21:30" },
       { day: "Sexta", time: "20:30 - 22:00" }
     ]
   }
