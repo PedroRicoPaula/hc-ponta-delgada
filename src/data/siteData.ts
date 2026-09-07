@@ -25,6 +25,8 @@ export const players: Player[] = [
   { number: 4,  name: "Alexandre Ornelas",  position: "Médio",        photo: "/uploads/jogadores/alexandreornelas.jpeg", stats: { games: 22, goals: 1, age: 20, nationality: "PT" } },
   { number: 9,  name: "Pedro Paula",        position: "Universal",    photo: "/uploads/jogadores/pedropaula.jpeg",       stats: { games: 118, goals: 19, age: 26, nationality: "PT" } },
   { number: 66, name: "Francisco Freitas",  position: "Universal",    photo: "/uploads/jogadores/franciscofreitas.webp",  stats: { games: 134, goals: 58, age: 22, nationality: "PT" } },
+  { number: 23, name: "Mário Jesus",        position: "Defesa",       photo: "/uploads/jogadores/mariojesus.webp",        stats: { games: 14, goals: 1, age: 28, nationality: "PT" } },
+  { number: 77, name: "Pedro Soares",       position: "Avançado",     photo: "/uploads/jogadores/pedrosoares.webp",       stats: { games: 54, goals: 98, age: 31, nationality: "PT" } },
   { number: 28, name: "Tiago Leite",        position: "Avançado",     photo: "/uploads/jogadores/tiagoleite.jpeg",       stats: { games: 55, goals: 57, age: 35, nationality: "PT" } },
   { number: 44, name: "Miguel Pimentel",    position: "Avançado",     photo: "/uploads/jogadores/miguelpimentel.jpeg",   stats: { games: 90, goals: 18, age: 27, nationality: "PT" } },
   { number: 7,  name: "Carlos Guimarães",   position: "Avançado",     photo: "/uploads/jogadores/carlosguimaraes.jpeg",  stats: { games: 125, goals: 167, age: 47, nationality: "PT" } },
@@ -35,10 +37,10 @@ export const POSITION_ORDER = ["Guarda-Redes", "Defesa", "Médio", "Universal", 
 
 export const playersByPosition = {
   "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro"],
-  "Defesa": ["Tiago Pimentel", "Marco Resendes"],
+  "Defesa": ["Tiago Pimentel", "Marco Resendes", "Mário Jesus"],
   "Médio": ["David Reis", "Alexandre Resendes", "Alexandre Ornelas"],
   "Universal": ["Pedro Paula", "Francisco Freitas"],
-  "Avançado": ["Tiago Leite", "Miguel Pimentel", "Carlos Guimarães", "Vicente Correia"],
+  "Avançado": ["Tiago Leite", "Miguel Pimentel", "Carlos Guimarães", "Vicente Correia", "Pedro Soares"],
 };
 
 export const staff = [

@@ -71,7 +71,7 @@ function PlayerCard({ player }: { player: Player }) {
           >
             {player.photo ? (
               <>
-                <img src={player.photo} alt={player.name} className="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
+                <img src={player.photo} alt={`${player.name}, ${player.position} do Hóquei Clube PDL`} className="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               </>
             ) : (
@@ -109,7 +109,7 @@ function PlayerCard({ player }: { player: Player }) {
             </button>
             <div className="flex items-center gap-2 mb-2">
               {player.photo ? (
-                <img src={player.photo} alt={player.name} className="w-10 h-10 rounded-full object-cover border-2 border-primary flex-shrink-0" loading="lazy" decoding="async" />
+                <img src={player.photo} alt="" className="w-10 h-10 rounded-full object-cover border-2 border-primary flex-shrink-0" loading="lazy" decoding="async" />
               ) : (
                 <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${grad} flex items-center justify-center text-white font-black text-base flex-shrink-0`}>
                   {player.number}
@@ -199,14 +199,14 @@ export const TeamSection = () => {
           <h2 className="font-heading text-5xl md:text-6xl uppercase leading-none mb-2 text-gray-900 dark:text-white">
             A Nossa <span className="text-primary">Equipa</span>
           </h2>
-          <p className="text-gray-400 text-sm mb-8">Clica em cada card para ver as estatísticas do atleta</p>
+          <p className="text-gray-400 text-sm mb-8">Clica em cada card para ver jogos e golos pelo Hóquei Clube PDL</p>
 
           <motion.div
             className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3"
             variants={{ visible: { transition: { staggerChildren: 0.05 } } }}
           >
             {orderedPlayers.map((player) => (
-              <PlayerCard key={player.number} player={player} />
+              <PlayerCard key={`${player.number}-${player.name}`} player={player} />
             ))}
           </motion.div>
 

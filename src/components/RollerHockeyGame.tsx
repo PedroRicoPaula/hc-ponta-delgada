@@ -71,6 +71,7 @@ const GOALKEEPERS: PlayerSelection[] = [
 const FIELD_PLAYERS: PlayerSelection[] = [
   { name: 'Tiago Pimentel', group: 'Seniores' },
   { name: 'Marco Resendes', group: 'Seniores' },
+  { name: 'Mário Jesus', group: 'Seniores' },
   { name: 'David Reis', group: 'Seniores' },
   { name: 'Alexandre Resendes', group: 'Seniores' },
   { name: 'Alexandre Ornelas', group: 'Seniores' },
@@ -80,6 +81,7 @@ const FIELD_PLAYERS: PlayerSelection[] = [
   { name: 'Miguel Pimentel', group: 'Seniores' },
   { name: 'Carlos Guimarães', group: 'Seniores' },
   { name: 'Vicente Correia', group: 'Seniores' },
+  { name: 'Pedro Soares', group: 'Seniores' },
   { name: 'Joana Lourenço', group: 'Sub 11', escalao: 'Sub 11' },
   { name: 'João Barroso', group: 'Sub 11', escalao: 'Sub 11' },
   { name: 'Nuno Massa', group: 'Sub 11', escalao: 'Sub 11' },
