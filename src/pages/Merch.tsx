@@ -49,7 +49,7 @@ function ProductCard({ product, onAdd }: { product: MerchProduct; onAdd: (line: 
       <div className="bg-gray-100 dark:bg-gray-900 aspect-[4/5] flex items-center justify-center p-3">
         <img
           src={photo}
-          alt={product.name}
+          alt={variant ? `${product.name}, ${variant}` : product.name}
           className="max-h-full max-w-full object-contain"
           loading="lazy"
         />
@@ -73,7 +73,7 @@ function ProductCard({ product, onAdd }: { product: MerchProduct; onAdd: (line: 
 
         {product.variants && (
           <label className="block">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">Modelo</span>
+            <span className="text-[11px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">Versão</span>
             <select className={`${fieldClass} mt-1`} value={variant} onChange={(e) => setVariant(e.target.value)}>
               {product.variants.map((v) => (
                 <option key={v} value={v}>{v}</option>
