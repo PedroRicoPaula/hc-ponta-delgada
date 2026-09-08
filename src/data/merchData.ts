@@ -77,7 +77,7 @@ export const merchProducts: MerchProduct[] = [
     name: 'Cachecol',
     image: '/uploads/merch/cachecois.jpeg',
     sizes: 'onesize',
-    variants: ['Branco', 'Preto 15 anos'],
+    note: 'Versão única: branco de um lado e preto do outro.',
     priceMember: 10,
     priceNonMember: 15,
   },
