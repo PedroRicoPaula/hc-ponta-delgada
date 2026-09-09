@@ -59,12 +59,13 @@ export default function Pagamentos() {
   const [payerPhone, setPayerPhone] = useState('');
   const [nif, setNif] = useState('');
   const [irsDeclaration, setIrsDeclaration] = useState(false);
+  const [parentOfAthlete, setParentOfAthlete] = useState(false);
   const [mailtoCooldown, setMailtoCooldown] = useState(false);
 
-  const totals = useMemo(() => paymentTotals(members, athletes), [members, athletes]);
+  const totals = useMemo(() => paymentTotals(members, athletes, parentOfAthlete), [members, athletes, parentOfAthlete]);
   const message = useMemo(
-    () => buildPaymentMessage({ members, athletes, payerName, payerPhone, nif, irsDeclaration }),
-    [members, athletes, payerName, payerPhone, nif, irsDeclaration],
+    () => buildPaymentMessage({ members, athletes, payerName, payerPhone, nif, irsDeclaration, parentOfAthlete }),
+    [members, athletes, payerName, payerPhone, nif, irsDeclaration, parentOfAthlete],
   );
 
   const phoneOk = isValidPhone(payerPhone);
@@ -72,6 +73,7 @@ export default function Pagamentos() {
   const nameOk = payerName.trim().length > 0;
   const canSubmit = message !== null;
   const quotaLabel = formatEuro(quotaUnitEuros(totals.hasAthletes));
+  const namedAthleteOnForm = athletes.some((a) => a.name.trim().length > 0);
 
   let submitHint = 'Adiciona pelo menos um sócio (com nome) ou um atleta com meses.';
   if (totals.memberCount + totals.athleteCount > 0 && (!nameOk || !phoneOk)) {
@@ -160,8 +162,8 @@ export default function Pagamentos() {
                     <h2 className="font-heading font-black uppercase text-xl text-gray-900 dark:text-white">Quota anual</h2>
                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
                       {totals.hasAthletes
-                        ? `Com atleta no pedido: ${quotaLabel} por sócio (pais de atletas).`
-                        : `Sem mensalidade: ${quotaLabel} por associado. Se adicionares atleta, passa a ${formatEuro(QUOTA_PAIS)}.`}
+                        ? `Pais de atletas: ${quotaLabel} por sócio.`
+                        : `${quotaLabel} por associado. Se fores pai/mãe de atleta, marca a opção em baixo.`}
                     </p>
                   </div>
                   <button
@@ -197,6 +199,18 @@ export default function Pagamentos() {
                     </li>
                   ))}
                 </ul>
+                <label className="mt-4 flex items-start gap-3 cursor-pointer text-sm text-gray-600 dark:text-gray-400 leading-snug">
+                  <input
+                    type="checkbox"
+                    className="mt-1 rounded border-gray-300"
+                    checked={parentOfAthlete || namedAthleteOnForm}
+                    disabled={namedAthleteOnForm}
+                    onChange={(e) => setParentOfAthlete(e.target.checked)}
+                  />
+                  <span>
+                    Sou pai/mãe ou encarregado de atleta do clube (quota {formatEuro(QUOTA_PAIS)}, mesmo sem mensalidade neste pedido).
+                  </span>
+                </label>
               </section>
 
               <section className="bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-700 p-5 md:p-6 shadow-sm">

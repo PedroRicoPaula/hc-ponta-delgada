@@ -27,7 +27,7 @@ export const SEASON_MONTHS = [
 export type MonthId = (typeof SEASON_MONTHS)[number]['id'];
 
 export const PAYMENT_RULES = [
-  'Quotas 2026/27: 15 € se o pedido incluir mensalidade de atleta; 20 € nos restantes associados.',
+  'Quotas 2026/27: 15 € para pais/encarregados de atletas do clube (mesmo se as mensalidades já tiverem sido pagas noutro pedido); 20 € nos restantes associados.',
   'Mensalidades (formação): 15 € por mês. Setembro é 7,50 €. Se pagares a anuidade, há desconto de dois meses: Outubro a Junho ficam 105 € em vez de 135 €, mais 7,50 € de Setembro, total 112,50 €.',
   'Com mensalidade, indica o encarregado de educação. Um NIF: quem faz a transferência.',
   'O site não cobra. Abres o email, transfere para o IBAN do clube e anexas o comprovativo. O clube confirma.',

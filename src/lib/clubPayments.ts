@@ -96,10 +96,10 @@ export function membersTotalCents(count: number, hasAthletes: boolean): number {
   return n * toCents(quotaUnitEuros(hasAthletes));
 }
 
-export function paymentTotals(members: MemberLine[], athletes: AthleteLine[]) {
+export function paymentTotals(members: MemberLine[], athletes: AthleteLine[], parentOfAthlete = false) {
   const namedAthletes = athletes.filter((a) => sanitizeName(a.name));
   const billedAthletes = namedAthletes.filter((a) => normalizeMonths(a.months).length > 0);
-  const hasAthletes = namedAthletes.length > 0;
+  const hasAthletes = namedAthletes.length > 0 || parentOfAthlete;
   const validMembers = members.filter((m) => sanitizeName(m.name));
   const quotas = membersTotalCents(validMembers.length, hasAthletes);
   let mensal = 0;
@@ -126,6 +126,7 @@ export function buildPaymentMessage(input: {
   payerPhone: string;
   nif: string;
   irsDeclaration: boolean;
+  parentOfAthlete?: boolean;
 }): string | null {
   const name = sanitizeName(input.payerName);
   const phone = sanitizePhone(input.payerPhone);
@@ -148,14 +149,15 @@ export function buildPaymentMessage(input: {
     .slice(0, MAX_ATHLETES);
 
   const athletes = namedAthletes.filter((a) => a.months.length > 0);
+  const parentOfAthlete = Boolean(input.parentOfAthlete) || namedAthletes.length > 0;
 
   if (members.length === 0 && athletes.length === 0) return null;
 
-  const totals = paymentTotals(members, namedAthletes);
+  const totals = paymentTotals(members, namedAthletes, parentOfAthlete);
   const lines: string[] = [
     'Pagamento quotas / mensalidades HC PDL 2026/27',
     '',
-    namedAthletes.length > 0 ? `Encarregado de educação: ${name}` : `Quem paga: ${name}`,
+    parentOfAthlete ? `Encarregado de educação: ${name}` : `Quem paga: ${name}`,
     `Contacto: ${phone}`,
     `NIF (quem transfere): ${nif}`,
     `Pedido de declaração IRS (mecenato): ${input.irsDeclaration ? 'Sim. O clube confirma se aplica.' : 'Não'}`,
@@ -166,6 +168,9 @@ export function buildPaymentMessage(input: {
     lines.push(`Sócios (quota ${formatEuro(totals.quotaUnit)} cada):`);
     for (const m of members) {
       lines.push(`- ${m.name}  ${formatEuro(totals.quotaUnit)}`);
+    }
+    if (parentOfAthlete && athletes.length === 0) {
+      lines.push('Quota de pai/mãe de atleta (mensalidades noutro pedido). O clube confirma.');
     }
     lines.push(`Subtotal sócios: ${formatEuro(eurosFromCents(totals.quotasCents))}`, '');
   }
