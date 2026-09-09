@@ -1,28 +1,28 @@
 import { useEffect, useState } from 'react';
 import { CookieConsent } from '@/components/CookieConsent';
-import { loadGoogleAnalytics } from '@/lib/analytics';
+import { disableGoogleAnalytics, loadGoogleAnalytics } from '@/lib/analytics';
 import { safeStorage } from '@/lib/safeStorage';
+
+const CONSENT_KEY = 'cookie-consent';
 
 export function AnalyticsConsent() {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    const consent = safeStorage.getItem('cookie-consent');
-    if (consent === 'accepted') {
-      loadGoogleAnalytics();
-      return;
-    }
+    const consent = safeStorage.getItem(CONSENT_KEY);
+    if (consent === 'rejected') return;
+    loadGoogleAnalytics();
     if (!consent) setShowBanner(true);
   }, []);
 
   const accept = () => {
-    safeStorage.setItem('cookie-consent', 'accepted');
+    safeStorage.setItem(CONSENT_KEY, 'accepted');
     setShowBanner(false);
-    loadGoogleAnalytics();
   };
 
   const reject = () => {
-    safeStorage.setItem('cookie-consent', 'rejected');
+    safeStorage.setItem(CONSENT_KEY, 'rejected');
+    disableGoogleAnalytics();
     setShowBanner(false);
   };
 

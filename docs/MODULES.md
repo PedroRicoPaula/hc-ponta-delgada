@@ -22,7 +22,7 @@ Secções em ordem de renderização:
 | `Footer.tsx` | Rodapé. Explorar usa o mesmo `NAV_LINKS`. Informações: Termos/Privacidade/Cookies. DonationsModal interno |
 | `SocialIcons.tsx` | Ícones flutuantes laterais (Facebook, Instagram, YouTube) |
 | `CursorRing.tsx` | Anel amarelo no hover (só desktop, `hover: fine`). Uma instância em `App.tsx` |
-| `CookieConsent.tsx` | Banner RGPD |
+| `CookieConsent.tsx` | Banner: Analytics ligado até recusares |
 | `FloatingActionButtons.tsx` | FABs flutuantes (doação, whatsapp, etc.) |
 | `DonationsModal.tsx` | Modal de doação com IBAN |
 | `HolidayOverlay.tsx` | Overlay sazonal ativado por data |

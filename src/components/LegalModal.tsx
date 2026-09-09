@@ -61,7 +61,7 @@ Não vendemos dados. Podemos partilhar com a Federação de Patinagem de Portuga
 Acesso, rectificação, apagamento, portabilidade e oposição. Escreve para hoquei.clube.pdl@gmail.com.
 
 **8. Armazenamento no teu dispositivo**
-O tema claro/escuro e a escolha do banner de cookies ficam no armazenamento local do navegador. Na merch e nos pagamentos há um intervalo curto entre aberturas de email (também local). Ver a política de cookies.
+O tema claro/escuro e a escolha do aviso de cookies ficam no armazenamento local do navegador. Na merch e nos pagamentos há um intervalo curto entre aberturas de email (também local). Ver a política de cookies.
 
 **9. Privacidade**
 Questões: o mesmo email do clube. Não temos um DPO nomeado à parte.
@@ -69,16 +69,16 @@ Questões: o mesmo email do clube. Não temos um DPO nomeado à parte.
 
 const COOKIES = `
 **1. Cookies e armazenamento local**
-Cookies são ficheiros pequenos no teu dispositivo. Este site usa sobretudo armazenamento local (localStorage). O Google Analytics só corre depois de aceitares o aviso.
+Cookies são ficheiros pequenos no teu dispositivo. Este site usa armazenamento local (localStorage) e o Google Analytics.
 
 **2. Banner**
-O aviso de cookies aparece em todas as páginas. Recusar guarda a escolha e não carrega o Google Analytics. O tema claro/escuro continua a funcionar: é uma preferência técnica, não publicidade.
+O aviso aparece na primeira visita. O Analytics começa ligado. Se recusares, essa escolha fica guardada e deixamos de medir as páginas seguintes (e as visitas futuras neste browser). Aceitar só esconde o aviso. O tema claro/escuro não depende disto.
 
 **3. O que guardamos no navegador**
-Preferência de tema (next-themes). Escolha do banner (cookie-consent). Na merch e nos pagamentos, um carimbo de tempo para não reabrires o mesmo pedido de imediato.
+Preferência de tema (next-themes). Escolha do aviso (cookie-consent). Na merch e nos pagamentos, um carimbo de tempo para não reabrires o mesmo pedido de imediato.
 
 **4. Google Analytics**
-Se aceitares, carregamos o Google Analytics (G-JJMSCRMS87) para perceber visitas e páginas. Sem aceitar, esse script não corre. Não usamos Google AdSense.
+Usamos o Google Analytics (G-JJMSCRMS87) para visitas e páginas, salvo se recusares no aviso. Não usamos Google AdSense.
 
 **5. YouTube**
 Quando há vídeo incorporado (galeria, calendário ou jogo ao vivo), o YouTube pode instalar cookies próprios. Isso é da Google, segundo a política deles.

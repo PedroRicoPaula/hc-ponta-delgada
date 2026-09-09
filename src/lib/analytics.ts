@@ -24,3 +24,12 @@ export function loadGoogleAnalytics() {
   script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
   document.head.appendChild(script);
 }
+
+export function disableGoogleAnalytics() {
+  if (typeof window === 'undefined') return;
+  window[`ga-disable-${GA_ID}`] = true;
+  window.gtag?.('consent', 'update', {
+    analytics_storage: 'denied',
+    ad_storage: 'denied',
+  });
+}
