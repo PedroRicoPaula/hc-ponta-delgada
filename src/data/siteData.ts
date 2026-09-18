@@ -20,7 +20,7 @@ export const players: Player[] = [
   { number: 16, name: "Simão Loureiro",     position: "Guarda-Redes", photo: "/uploads/jogadores/simaoloureiro.webp",    stats: { games: 26, age: 35, nationality: "PT" } },
   { number: 3,  name: "Tiago Pimentel",     position: "Defesa",       photo: "/uploads/jogadores/tiagopimentel.webp",    stats: { games: 83, goals: 0, age: 25, nationality: "PT" } },
   { number: 8,  name: "Marco Resendes",     position: "Defesa",       photo: "/uploads/jogadores/marcoresendes.webp",    stats: { games: 7, goals: 0, age: 57, nationality: "PT" } },
-  { number: 5,  name: "David Reis",         position: "Médio",        photo: "/uploads/jogadores/davidreis.webp",         stats: { games: 0, goals: 0, age: 26, nationality: "PT" } },
+  { number: 5,  name: "David Reis",         position: "Médio",        photo: "/uploads/jogadores/davidreis.webp",         stats: { games: 0, goals: 0, age: 23, nationality: "PT" } },
   { number: 11, name: "Alexandre Resendes", position: "Médio",        photo: "/uploads/jogadores/alexandreresendes.webp",stats: { games: 23, goals: 10, age: 23, nationality: "PT" } },
   { number: 4,  name: "Alexandre Ornelas",  position: "Médio",        photo: "/uploads/jogadores/alexandreornelas.webp", stats: { games: 22, goals: 1, age: 20, nationality: "PT" } },
   { number: 9,  name: "Pedro Paula",        position: "Universal",    photo: "/uploads/jogadores/pedropaula.webp",       stats: { games: 118, goals: 19, age: 26, nationality: "PT" } },
@@ -476,4 +476,5 @@ export const sponsors: Sponsor[] = [
   { name: "iServices", logo: "/uploads/patrocinadores/iservices.jpeg", url: "https://iservices.pt/", lightPlate: true },
   { name: "Almério e Cordeiro", logo: "/uploads/patrocinadores/almerioecordeiro.jpeg", url: "https://almeriocordeiro.pt/", lightPlate: true },
   { name: "Governo dos Açores", logo: "/uploads/patrocinadores/governoacores.jpeg", url: "https://portal.azores.gov.pt/", lightPlate: true },
+  { name: "Oliveira Pneus", logo: "/uploads/patrocinadores/oliveirapneus.png", url: "https://oliveirapneus.pt/", lightPlate: true },
 ];
