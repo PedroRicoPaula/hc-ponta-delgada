@@ -132,6 +132,27 @@
       }
     }
     </script>
+
+    <!--
+      Google Analytics (gtag.js) — estático de propósito.
+      Injectar este script a partir do React partia a medição: scripts/prerender.js
+      grava o DOM já com a tag injectada, e na visita real o guard "script já existe"
+      dava early-return, pelo que gtag()/config nunca corriam — o gtag.js carregava
+      sem configuração e o site não enviava um único pageview.
+      Política de consentimento: mede até recusarem no banner (ver AnalyticsConsent).
+    -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      try {
+        if (localStorage.getItem('cookie-consent') === 'rejected') {
+          window['ga-disable-G-JJMSCRMS87'] = true;
+        }
+      } catch (e) { /* storage bloqueado: mede na mesma */ }
+      gtag('js', new Date());
+      gtag('config', 'G-JJMSCRMS87');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJMSCRMS87"></script>
   </head>
 
   <body>

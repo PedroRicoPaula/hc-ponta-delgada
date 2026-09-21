@@ -126,6 +126,9 @@ async function main() {
   const base = previewServer.resolvedUrls.local[0];
 
   const page = await browser.newPage();
+  // O gtag.js é estático no index.html: sem isto cada build mandava um pageview
+  // por rota para o GA a partir do container de build.
+  await page.route(/googletagmanager\.com|google-analytics\.com/, (route) => route.abort());
   for (const route of routes) {
     const url = new URL(route, base).toString();
     await page.goto(url, { waitUntil: 'networkidle' });
