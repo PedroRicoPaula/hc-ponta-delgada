@@ -3,3 +3,4 @@ allowBuilds:
   esbuild: set this to true or false
 overrides:
   browserslist: ^4.28.7
+  js-yaml: ^4.3.2
