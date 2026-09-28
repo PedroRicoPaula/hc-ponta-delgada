@@ -237,8 +237,8 @@ const PAV = {
 // 26 jornadas, 13 em casa e 13 fora, 14 equipas na série (sem bye).
 // Pavilhões dos jogos fora: nomes curtos em `PAV` (ver comentário acima).
 export const games: Game[] = [
-  { id: "torneio-pdl-candelaria", opponent: "Candelária SC", isHome: true, date: "09/10/2026", time: "21:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_CIDADE_PDL },
-  { id: "torneio-pdl-madeira", opponent: "HC Madeira", isHome: true, date: "10/10/2026", time: "11:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_CIDADE_PDL },
+  { id: "torneio-pdl-madeira", opponent: "HC Madeira", isHome: true, date: "09/10/2026", time: "21:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_CIDADE_PDL },
+  { id: "torneio-pdl-candelaria", opponent: "Candelária SC", isHome: true, date: "10/10/2026", time: "11:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_CIDADE_PDL },
   { id: "torneio-pdl-estreito", opponent: "GD Estreito", isHome: false, date: "10/10/2026", time: "18:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_CIDADE_PDL },
   { id: "abertura-sen-caldeiras-fora", opponent: "Caldeiras HC", isHome: false, date: "19/10/2026", time: "20:30", location: PAV.ribeiraGrande, competition: TORNEIO_ABERTURA_SEN },
   { id: "abertura-sen-caldeiras-casa", opponent: "Caldeiras HC", isHome: true, date: "16/11/2026", time: "20:30", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SEN, youtubeUrl: YOUTUBE_LIVE_URL },
@@ -275,10 +275,10 @@ export const games: Game[] = [
   { id: "jornada-25", jornada: 25, opponent: "GCC \"Os Corujas\"", isHome: false, date: "23/05/2027", time:"16:00", location: PAV.corujas, competition: COMPETITION },
   { id: "jornada-26", jornada: 26, opponent: "S Alenquer B \"B\"", isHome: true, date: "30/05/2027", time: "18:00", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
 
-  { id: "rg-u17-caldeiras", category: "formacao", escalao: "Sub 17", opponent: "Caldeiras HC", isHome: true, date: "26/09/2026", time: "11:30", location: PAV.ribeiraGrande, competition: TORNEIO_CIDADE_RG },
-  { id: "rg-u17-maritimo", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: false, date: "26/09/2026", time: "18:30", location: PAV.ribeiraGrande, competition: TORNEIO_CIDADE_RG },
-  { id: "rg-u13-caldeiras-1", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: false, date: "26/09/2026", time: "10:00", location: PAV.ribeiraGrande, competition: TORNEIO_CIDADE_RG },
-  { id: "rg-u13-caldeiras-2", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: true, date: "26/09/2026", time: "17:00", location: PAV.ribeiraGrande, competition: TORNEIO_CIDADE_RG },
+  { id: "rg-u17-maritimo-1", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "26/09/2026", time: "11:30", location: PAV.ribeiraGrande, competition: TORNEIO_CIDADE_RG, result: { home: 0, away: 5 } },
+  { id: "rg-u17-maritimo-2", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: false, date: "26/09/2026", time: "18:30", location: PAV.ribeiraGrande, competition: TORNEIO_CIDADE_RG, result: { home: 3, away: 1 } },
+  { id: "rg-u13-caldeiras-1", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: false, date: "26/09/2026", time: "10:00", location: PAV.ribeiraGrande, competition: TORNEIO_CIDADE_RG, result: { home: 2, away: 5 } },
+  { id: "rg-u13-caldeiras-2", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: true, date: "26/09/2026", time: "17:00", location: PAV.ribeiraGrande, competition: TORNEIO_CIDADE_RG, result: { home: 1, away: 3 } },
 
   { id: "esc-caldeiras-1", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: false, date: "04/10/2026", time: "10:00", location: PAV.ribeiraGrande, competition: TORNEIO_ABERTURA_ESC },
   { id: "esc-caldeiras-2", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: true, date: "25/10/2026", time: "09:30", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_ESC },

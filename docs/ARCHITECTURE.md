@@ -76,7 +76,7 @@ Transições automáticas via selector `*` — exclui `transform` e `opacity` (f
 
 Exporta:
 - `players: Player[]` — plantel completo com stats, foto, posição
-- `games: Game[]` — jogos da equipa sénior (data/hora, casa ou fora, YouTube, resultado); estado ao vivo calculado em `src/lib/games.ts`
+- `games: Game[]` — seniores **e** formação (`category`/`escalao`): data/hora, casa ou fora, YouTube, `result`; estado ao vivo calculado em `src/lib/games.ts`. O `result` é sempre `{ home, away }` pelas equipas reais, não pela perspectiva do PDL — ver `getMatchupNames()`
 - `trainingSchedules: TrainingSchedule[]` — horários por escalão
 - `galleryItems` — momentos da galeria (imagens + YouTube)
 - `sponsors` — logos e nomes dos patrocinadores
