@@ -2,14 +2,21 @@
 
 ## 🔴 Bugs Activos
 
-### [BUG-UI-001] Nome do adversário cortado no card "Próximo Jogo" do hero
-**Encontrado:** 2026-08-12, ao testar responsividade depois de actualizar o calendário. `HeroSection.tsx` — o botão flutuante "Mini Jogo" sobrepõe-se ao card e tapa o fim do nome da equipa da direita. Com a jornada 1 lê-se `HC ... GAMA/J.A` em vez de `HC VASCO DA GAMA/J.ASCENÇÃO`.
+### [BUG-UI-001] Botão "Mini Jogo" tapa o fim do card "Próximo Jogo" abaixo de ~1230px
+**Confirmado em produção a 2026-10-06** (medido com Playwright, folga entre o fim do card e o início do botão):
 
-**Não é regressão:** confirmado com `git stash` que já acontecia antes das alterações ao calendário. Só ficou mais visível porque o adversário da primeira jornada tem um nome comprido, e vários adversários desta série têm nomes longos (`HC Vasco da Gama/J.Ascenção`, `CD Paço de Arcos "B"`, `A Stuart HC Massamá`).
+| Largura | 1536 | 1440 | 1366 | 1280 | 1230 | 1180 | 1100 | 1024 | 900 | 820 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Folga | +83 | +57 | +37 | +14 | 0 | **−13** | **−35** | **−56** | **−89** | **−111** |
 
-**Onde não acontece:** cartões da página `/calendario` e card da `EventsSection` — só o hero tem o botão sobreposto.
+Acima de ~1230px não há problema nenhum — por isso não se nota num portátil ou monitor normal. Abaixo disso o botão flutuante entra por cima do canto direito do card e corta o nome da equipa visitante: a 1024px lê-se `HC M` em vez de `HC MADEIRA`.
 
-**Opções de correcção** (decisão de design por tomar): dar `padding-right` ao card para o texto nunca entrar por baixo do botão; encolher/reposicionar o botão "Mini Jogo"; ou empilhar os nomes verticalmente em vez de lado a lado, como já faz a `EventsSection`.
+**Não depende do tamanho do nome:** o card tem largura fixa (`w-[240px]`) e os nomes compridos partem em duas linhas lá dentro, não transbordam. O que tapa é mesmo o botão.
+
+**Causa:** o card é posicionado em percentagem (`left-[46%]` dentro do painel da foto, `HeroSection.tsx`) e o botão é `fixed` à direita da janela. As duas âncoras aproximam-se à medida que a janela estreita.
+
+**Correcção de uma linha** (decisão de design por confirmar): travar a posição do card para nunca entrar na zona do botão —
+`left-[46%]` → `left-[min(46%,calc(100%-228px))]` (120px de meio-card + 92px do botão + 16px de folga). Mantém o aspecto actual acima de 1230px e desliza o card para a esquerda abaixo disso. Alternativas: esconder o botão nessas larguras, ou empilhar os nomes como faz a `EventsSection`.
 
 ---
 
