@@ -37,7 +37,7 @@ src/
 │   └── useLocalStorage.ts
 ├── lib/
 │   ├── utils.ts                # Utilitários gerais (cn, etc.)
-│   ├── seo.ts                  # Helpers para meta tags (JSON-LD)
+│   ├── seo.ts                  # JSON-LD: gameEventSchema/upcomingEventsSchema (de games[]), generateNewsSchema
 │   ├── merchReservation.ts     # Sanitização e mailto da reserva de merch
 │   ├── clubPayments.ts         # Totais e mailto de quotas/mensalidades
 │   ├── safeStorage.ts          # Wrapper localStorage com fallback
@@ -76,11 +76,13 @@ Transições automáticas via selector `*` — exclui `transform` e `opacity` (f
 
 Exporta:
 - `players: Player[]` — plantel completo com stats, foto, posição
-- `games: Game[]` — seniores **e** formação (`category`/`escalao`): data/hora, casa ou fora, YouTube, `result`; estado ao vivo calculado em `src/lib/games.ts`. O `result` é sempre `{ home, away }` pelas equipas reais, não pela perspectiva do PDL — ver `getMatchupNames()`
+- `games: Game[]` — seniores **e** formação (`category`/`escalao`): data/hora, casa ou fora, YouTube, `result`; estado ao vivo calculado em `src/lib/games.ts`. O `result` é sempre `{ home, away }` pelas equipas reais, não pela perspectiva do PDL — ver `getMatchupNames()`. Excepção: os encontros de Mini Hóquei têm `encontro: 1..9` e **não** têm `opponent` nem `result` (jogam todos os clubes) — o `GameCard` mostra "N.º Encontro" no lugar do confronto e "Realizado" no lugar do placar, e o schema do `/calendario` declara só o PDL como `competitor`
 - `trainingSchedules: TrainingSchedule[]` — horários por escalão
-- `galleryItems` — momentos da galeria (imagens + YouTube)
+- `galleryImages` — momentos da galeria (imagens + YouTube)
 - `sponsors` — logos e nomes dos patrocinadores
-- `contactInfo` — moradas, telefone, email
+- `comunicados: Comunicado[]` + `getComunicado()` / `parseComunicadoDate()`
+
+Os contactos **não** estão aqui — são literais na `ContactSection.tsx`.
 
 ### `src/data/blogData.ts`
 
@@ -111,6 +113,8 @@ Fotos de merch: `public/uploads/merch/`
 ## SEO
 
 `react-helmet-async` via `src/lib/seo.ts`. Cada página define as suas próprias meta tags via Helmet (title, description, canonical, og:title, og:description, og:type, og:url).
+
+O JSON-LD de jogos sai **sempre** de `games[]`, por `gameEventSchema()` em `src/lib/seo.ts` — homepage (`upcomingEventsSchema`, próximos 12) e `/calendario` (todos) usam o mesmo construtor. Nunca criar uma segunda lista de eventos para schema: já aconteceu e a homepage ficou meses a publicar jogos da época anterior (ver `docs/ISSUES-BACKLOG.md`).
 
 **Armadilha**: Helmet substitui `<title>` in-place mas só faz *append* de `<meta>`/`<link>` — não remove equivalentes estáticos já no `index.html`. Por isso `index.html` não define `description`/`canonical`/`og:*` (fica só `og:image`, `og:locale`, `twitter:*` como fallback comum a todas as páginas) — cada página é responsável por definir o resto via Helmet. Página nova sem esse bloco fica sem SEO próprio, silenciosamente.
 

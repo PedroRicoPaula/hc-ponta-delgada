@@ -64,6 +64,13 @@ export function GameCard({
         )}
       </div>
 
+      {game.encontro ? (
+        <div className="mb-3 text-center">
+          <span className={cn('font-heading font-black text-gray-900 dark:text-white uppercase leading-tight', compact ? 'text-xs' : 'text-sm')}>
+            {game.encontro}.º Encontro
+          </span>
+        </div>
+      ) : (
       <div className="flex items-center justify-between gap-2 mb-3">
         <span className={cn('font-heading font-black text-gray-900 dark:text-white uppercase leading-tight', compact ? 'text-xs' : 'text-sm')}>
           {matchup.home}
@@ -73,8 +80,15 @@ export function GameCard({
           {matchup.away}
         </span>
       </div>
+      )}
 
-      {isEnded && game.result ? (
+      {isEnded && game.encontro ? (
+        <div className="text-center py-2 mb-3 bg-gray-200/60 dark:bg-gray-800 rounded-lg">
+          <span className="font-heading font-black text-sm text-gray-700 dark:text-gray-300 uppercase tracking-widest">
+            Realizado
+          </span>
+        </div>
+      ) : isEnded && game.result ? (
         <div className="text-center py-2 mb-3 bg-gray-200/60 dark:bg-gray-800 rounded-lg">
           <span className="font-heading font-black text-xl text-gray-700 dark:text-gray-300 tabular-nums">
             {game.result.home} - {game.result.away}

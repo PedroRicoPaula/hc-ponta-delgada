@@ -35,84 +35,6 @@ export const players: Player[] = [
 
 export const POSITION_ORDER = ["Guarda-Redes", "Defesa", "Médio", "Universal", "Avançado"] as const;
 
-export const playersByPosition = {
-  "Guarda-Redes": ["Nuno Teixeira", "Simão Loureiro"],
-  "Defesa": ["Tiago Pimentel", "Marco Resendes", "Mário Jesus"],
-  "Médio": ["David Reis", "Alexandre Resendes", "Alexandre Ornelas"],
-  "Universal": ["Pedro Paula", "Francisco Freitas"],
-  "Avançado": ["Tiago Leite", "Miguel Pimentel", "Carlos Guimarães", "Vicente Correia", "Pedro Soares"],
-};
-
-export const staff = [
-  { name: "Carlos Guimarães", role: "Treinador" },
-  { name: "João Oliveira", role: "Diretor" },
-  { name: "Paulo Benjamim", role: "Diretor" },
-  { name: "Fernando Pimentel", role: "Diretor" },
-  { name: "Paulo Correia", role: "Preparador Físico" }
-];
-
-export const senioresEvents = [
-  {
-    id: "seniores-1",
-    title: "Hóquei Clube PDL vs CD Boliqueime",
-    date: "23/05/2026",
-    time: "18:30",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Seniores",
-  }
-];
-
-export const formacaoEvents = [
-  {
-    id: "formacao-1",
-    title: "Caldeiras HC vs Hóquei Clube PDL",
-    date: "06/06/2026",
-    time: "14:30",
-    location: "Complexo Desportivo Ribeira Grande",
-    type: "Sub 13",
-  },
-  {
-    id: "formacao-2",
-    title: "Hóquei Clube PDL vs Caldeiras HC",
-    date: "07/06/2026",
-    time: "11:00",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Sub 17",
-  },
-  {
-    id: "formacao-3",
-    title: "Hóquei Clube PDL vs Caldeiras HC",
-    date: "10/06/2026",
-    time: "11:00",
-    location: "Pavilhão Sidónio Serpa",
-    type: "Sub 11",
-  },
-  {
-    id: "formacao-4",
-    title: "Hóquei Clube PDL vs Zona Sul 4º Classificado",
-    date: "12/06/2026",
-    time: "18:30",
-    location: "Pavilhão Municipal de Valongo",
-    type: "Sub 13",
-  },
-  {
-    id: "formacao-5",
-    title: "Zona  Norte 4º Classificado vs Hóquei Clube PDL",
-    date: "13/06/2026",
-    time: "14:00",
-    location: "Pavilhão Municipal de Valongo",
-    type: "Sub 13",
-  },
-  {
-    id: "formacao-6",
-    title: "AP Madeira vs Hóquei Clube PDL",
-    date: "14/06/2026",
-    time: "11:30",
-    location: "Pavilhão Municipal de Valongo",
-    type: "Sub 13",
-  },
-];
-
 export type GameCategory = 'seniores' | 'formacao';
 export type FormacaoEscalao = 'Sub 17' | 'Sub 13' | 'Sub 11' | 'Mini Hóquei';
 
@@ -125,7 +47,14 @@ export interface Game {
   /** Omite-se nos seniores (é o default). */
   category?: GameCategory;
   escalao?: FormacaoEscalao;
-  opponent: string;
+  /** Ausente nos encontros de Mini Hóquei — jogam-se todos contra todos, não há adversário único. */
+  opponent?: string;
+  /**
+   * Número do encontro de Mini Hóquei (1 a 9). Estes não têm adversário nem
+   * resultado: o cartão mostra "N.º Encontro" no lugar do confronto e
+   * "Realizado" no lugar do placar.
+   */
+  encontro?: number;
   isHome: boolean;
   date: string; // DD/MM/YYYY
   /**
@@ -140,7 +69,7 @@ export interface Game {
   result?: { home: number; away: number };
 }
 
-export const TIME_TBD_LABEL = 'Horário a definir';
+const TIME_TBD_LABEL = 'Horário a definir';
 
 /**
  * Sem hora marcada assume-se meia-noite, só para o jogo ter uma posição estável
@@ -173,9 +102,12 @@ export function getMatchupNames(
   game: Pick<Game, 'isHome' | 'opponent'>,
   pdlLabel = 'HC PDL',
 ): { home: string; away: string } {
+  // Encontros de Mini Hóquei não têm adversário — o cartão mostra "N.º Encontro"
+  // e nunca chega aqui; o fallback só evita "undefined" se alguém chamar isto.
+  const opponent = game.opponent ?? 'Encontro';
   return game.isHome
-    ? { home: pdlLabel, away: game.opponent }
-    : { home: game.opponent, away: pdlLabel };
+    ? { home: pdlLabel, away: opponent }
+    : { home: opponent, away: pdlLabel };
 }
 
 export function gameCategory(game: Pick<Game, 'category'>): GameCategory {
@@ -206,6 +138,7 @@ const TORNEIO_MANUEL_FRANCISCO = 'Torneio Manuel Francisco';
 const CAMPEONATO_SAO_MIGUEL = 'Campeonato de São Miguel';
 const TACA_APSM = 'Taça APSM';
 const TORNEIO_ENCERRAMENTO = 'Torneio de Encerramento';
+const ENCONTROS_MINI = 'Encontros de Mini Hóquei';
 
 /**
  * Recintos dos adversários. Definidos uma vez e referenciados nos dois jogos
@@ -275,6 +208,7 @@ export const games: Game[] = [
   { id: "jornada-25", jornada: 25, opponent: "GCC \"Os Corujas\"", isHome: false, date: "23/05/2027", time:"16:00", location: PAV.corujas, competition: COMPETITION },
   { id: "jornada-26", jornada: 26, opponent: "S Alenquer B \"B\"", isHome: true, date: "30/05/2027", time: "18:00", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
 
+  // Torneio Cidade da Ribeira Grande — jogado a 26/09/2026.
   { id: "rg-u17-maritimo-1", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "26/09/2026", time: "11:30", location: PAV.ribeiraGrande, competition: TORNEIO_CIDADE_RG, result: { home: 0, away: 5 } },
   { id: "rg-u17-maritimo-2", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: false, date: "26/09/2026", time: "18:30", location: PAV.ribeiraGrande, competition: TORNEIO_CIDADE_RG, result: { home: 3, away: 1 } },
   { id: "rg-u13-caldeiras-1", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: false, date: "26/09/2026", time: "10:00", location: PAV.ribeiraGrande, competition: TORNEIO_CIDADE_RG, result: { home: 2, away: 5 } },
@@ -285,51 +219,60 @@ export const games: Game[] = [
   { id: "esc-caldeiras-3", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: false, date: "08/11/2026", time: "09:30", location: PAV.ribeiraGrande, competition: TORNEIO_ABERTURA_ESC },
   { id: "esc-caldeiras-4", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: true, date: "22/11/2026", time: "09:30", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_ESC },
 
-  { id: "ab-u13-1", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: true, date: "24/10/2026", time: "14:30", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB13 },
-  { id: "ab-u13-2", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: true, date: "15/11/2026", time: "10:00", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB13 },
-  { id: "ab-u13-3", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: false, date: "29/11/2026", time: "09:30", location: PAV.ribeiraGrande, competition: TORNEIO_ABERTURA_SUB13 },
-  { id: "ab-u13-4", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: false, date: "01/12/2026", time: "09:30", location: PAV.ribeiraGrande, competition: TORNEIO_ABERTURA_SUB13 },
+  { id: "ab-u13-1", category: "formacao", escalao: "Sub 13", opponent: "Marítimo SC", isHome: false, date: "18/10/2026", time: "09:30", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_ABERTURA_SUB13 },
+  { id: "ab-u13-2", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: true, date: "24/10/2026", time: "14:30", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB13 },
 
-  { id: "ab-u17-maritimo-casa", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "25/10/2026", time: "11:00", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB17 },
-  { id: "ab-u17-maritimo-fora", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: false, date: "01/11/2026", time: "10:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_ABERTURA_SUB17 },
-  { id: "ab-u17-caldeiras-casa", category: "formacao", escalao: "Sub 17", opponent: "Caldeiras HC", isHome: true, date: "22/11/2026", time: "11:00", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB17 },
-  { id: "ab-u17-caldeiras-fora", category: "formacao", escalao: "Sub 17", opponent: "Caldeiras HC", isHome: false, date: "01/12/2026", time: "11:30", location: PAV.ribeiraGrande, competition: TORNEIO_ABERTURA_SUB17 },
+  { id: "ab-u17-1", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "25/10/2026", time: "11:00", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB17 },
+  { id: "ab-u17-2", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: false, date: "01/11/2026", time: "10:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_ABERTURA_SUB17 },
+  { id: "ab-u17-3", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "22/11/2026", time: "11:00", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB17 },
 
   { id: "mf-u11-1", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: true, date: "06/12/2026", time: "10:00", location: PAVILHAO_PDL, competition: TORNEIO_MANUEL_FRANCISCO },
   { id: "mf-u11-2", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: false, date: "10/01/2027", time: "10:00", location: PAV.ribeiraGrande, competition: TORNEIO_MANUEL_FRANCISCO },
   { id: "mf-u11-3", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: true, date: "24/01/2027", time: "10:00", location: PAVILHAO_PDL, competition: TORNEIO_MANUEL_FRANCISCO },
   { id: "mf-u11-4", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: false, date: "07/02/2027", time: "10:00", location: PAV.ribeiraGrande, competition: TORNEIO_MANUEL_FRANCISCO },
-  { id: "mf-u13-1", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: true, date: "13/12/2026", time: "09:30", location: PAVILHAO_PDL, competition: TORNEIO_MANUEL_FRANCISCO },
-  { id: "mf-u13-2", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: false, date: "17/01/2027", time: "09:30", location: PAV.ribeiraGrande, competition: TORNEIO_MANUEL_FRANCISCO },
+  { id: "mf-u13-1", category: "formacao", escalao: "Sub 13", opponent: "Marítimo SC", isHome: true, date: "15/11/2026", time: "10:00", location: PAVILHAO_PDL, competition: TORNEIO_MANUEL_FRANCISCO },
+  { id: "mf-u13-2", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: false, date: "29/11/2026", time: "10:00", location: PAV.ribeiraGrande, competition: TORNEIO_MANUEL_FRANCISCO },
   { id: "mf-u17-1", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: false, date: "06/12/2026", time: "10:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_MANUEL_FRANCISCO },
-  { id: "mf-u17-2", category: "formacao", escalao: "Sub 17", opponent: "Caldeiras HC", isHome: true, date: "13/12/2026", time: "11:30", location: PAVILHAO_PDL, competition: TORNEIO_MANUEL_FRANCISCO },
-  { id: "mf-u17-3", category: "formacao", escalao: "Sub 17", opponent: "Caldeiras HC", isHome: false, date: "17/01/2027", time: "11:30", location: PAV.ribeiraGrande, competition: TORNEIO_MANUEL_FRANCISCO },
-  { id: "mf-u17-4", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "31/01/2027", time: "11:00", location: PAVILHAO_PDL, competition: TORNEIO_MANUEL_FRANCISCO },
+  { id: "mf-u17-2", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: false, date: "10/01/2027", time: "10:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_MANUEL_FRANCISCO },
+  { id: "mf-u17-3", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "31/01/2027", time: "11:00", location: PAVILHAO_PDL, competition: TORNEIO_MANUEL_FRANCISCO },
 
   { id: "csm-u11-1", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: false, date: "28/02/2027", time: "09:30", location: PAV.ribeiraGrande, competition: CAMPEONATO_SAO_MIGUEL },
   { id: "csm-u11-2", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: true, date: "14/03/2027", time: "09:30", location: PAVILHAO_PDL, competition: CAMPEONATO_SAO_MIGUEL },
   { id: "csm-u11-3", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: false, date: "11/04/2027", time: "09:30", location: PAV.ribeiraGrande, competition: CAMPEONATO_SAO_MIGUEL },
   { id: "csm-u11-4", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: true, date: "25/04/2027", time: "09:30", location: PAVILHAO_PDL, competition: CAMPEONATO_SAO_MIGUEL },
-  { id: "csm-u13-1", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: true, date: "31/01/2027", time: "09:30", location: PAVILHAO_PDL, competition: CAMPEONATO_SAO_MIGUEL },
-  { id: "csm-u13-2", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: false, date: "14/02/2027", time: "09:30", location: PAV.ribeiraGrande, competition: CAMPEONATO_SAO_MIGUEL },
-  { id: "csm-u17-1", category: "formacao", escalao: "Sub 17", opponent: "Caldeiras HC", isHome: false, date: "14/02/2027", time: "11:30", location: PAV.ribeiraGrande, competition: CAMPEONATO_SAO_MIGUEL },
+  { id: "csm-u13-1", category: "formacao", escalao: "Sub 13", opponent: "Marítimo SC", isHome: false, date: "13/12/2026", time: "10:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: CAMPEONATO_SAO_MIGUEL },
+  { id: "csm-u13-2", category: "formacao", escalao: "Sub 13", opponent: "Marítimo SC", isHome: true, date: "17/01/2027", time: "10:00", location: PAVILHAO_PDL, competition: CAMPEONATO_SAO_MIGUEL },
+  { id: "csm-u13-3", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: false, date: "23/01/2027", time: "14:30", location: PAV.ribeiraGrande, competition: CAMPEONATO_SAO_MIGUEL },
+  { id: "csm-u13-4", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: true, date: "31/01/2027", time: "09:30", location: PAVILHAO_PDL, competition: CAMPEONATO_SAO_MIGUEL },
+  { id: "csm-u17-1", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: false, date: "07/02/2027", time: "10:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: CAMPEONATO_SAO_MIGUEL },
   { id: "csm-u17-2", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "21/02/2027", time: "10:00", location: PAVILHAO_PDL, competition: CAMPEONATO_SAO_MIGUEL },
-  { id: "csm-u17-3", category: "formacao", escalao: "Sub 17", opponent: "Caldeiras HC", isHome: true, date: "14/03/2027", time: "11:30", location: PAVILHAO_PDL, competition: CAMPEONATO_SAO_MIGUEL },
-  { id: "csm-u17-4", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: false, date: "21/03/2027", time: "10:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: CAMPEONATO_SAO_MIGUEL },
+  { id: "csm-u17-3", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: false, date: "28/02/2027", time: "10:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: CAMPEONATO_SAO_MIGUEL },
+  { id: "csm-u17-4", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "07/03/2027", time: "11:30", location: PAVILHAO_PDL, competition: CAMPEONATO_SAO_MIGUEL },
 
   { id: "taca-u11-1", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: true, date: "09/05/2027", time: "09:30", location: PAVILHAO_PDL, competition: TACA_APSM },
   { id: "taca-u11-2", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: false, date: "23/05/2027", time: "09:30", location: PAV.ribeiraGrande, competition: TACA_APSM },
-  { id: "taca-u13-1", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: false, date: "21/03/2027", time: "10:00", location: PAV.ribeiraGrande, competition: TACA_APSM },
-  { id: "taca-u13-2", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: true, date: "17/04/2027", time: "16:00", location: PAVILHAO_PDL, competition: TACA_APSM },
+  { id: "taca-u13-1", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: true, date: "17/04/2027", time: "16:00", location: PAVILHAO_PDL, competition: TACA_APSM },
+  { id: "taca-u13-2", category: "formacao", escalao: "Sub 13", opponent: "Marítimo SC", isHome: false, date: "24/04/2027", time: "18:30", location: PAVILHAO_CARLOS_SILVEIRA, competition: TACA_APSM },
   { id: "taca-u17-1", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: false, date: "25/04/2027", time: "10:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TACA_APSM },
-  { id: "taca-u17-2", category: "formacao", escalao: "Sub 17", opponent: "Caldeiras HC", isHome: true, date: "09/05/2027", time: "11:30", location: PAVILHAO_PDL, competition: TACA_APSM },
+  { id: "taca-u17-2", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "09/05/2027", time: "11:30", location: PAVILHAO_PDL, competition: TACA_APSM },
 
   { id: "enc-u11-1", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: true, date: "06/06/2027", time: "10:00", location: PAVILHAO_PDL, competition: TORNEIO_ENCERRAMENTO },
   { id: "enc-u11-2", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: false, date: "20/06/2027", time: "11:00", location: PAV.ribeiraGrande, competition: TORNEIO_ENCERRAMENTO },
   { id: "enc-u13-1", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: false, date: "16/05/2027", time: "10:00", location: PAV.ribeiraGrande, competition: TORNEIO_ENCERRAMENTO },
-  { id: "enc-u13-2", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: true, date: "30/05/2027", time: "09:30", location: PAVILHAO_PDL, competition: TORNEIO_ENCERRAMENTO },
-  { id: "enc-u17-1", category: "formacao", escalao: "Sub 17", opponent: "Caldeiras HC", isHome: false, date: "23/05/2027", time: "11:30", location: PAV.ribeiraGrande, competition: TORNEIO_ENCERRAMENTO },
+  { id: "enc-u13-2", category: "formacao", escalao: "Sub 13", opponent: "Marítimo SC", isHome: true, date: "30/05/2027", time: "09:30", location: PAVILHAO_PDL, competition: TORNEIO_ENCERRAMENTO },
+  { id: "enc-u17-1", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: false, date: "16/05/2027", time: "10:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_ENCERRAMENTO },
   { id: "enc-u17-2", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "30/05/2027", time: "11:30", location: PAVILHAO_PDL, competition: TORNEIO_ENCERRAMENTO },
+
+  // Mini Hóquei: encontros entre todos os clubes, sem adversário único e sem resultado.
+  { id: "mini-1", category: "formacao", escalao: "Mini Hóquei", encontro: 1, isHome: true, date: "19/09/2026", time: "14:30", location: PAVILHAO_PDL, competition: ENCONTROS_MINI },
+  { id: "mini-2", category: "formacao", escalao: "Mini Hóquei", encontro: 2, isHome: false, date: "17/10/2026", time: "14:30", location: PAVILHAO_CARLOS_SILVEIRA, competition: ENCONTROS_MINI },
+  { id: "mini-3", category: "formacao", escalao: "Mini Hóquei", encontro: 3, isHome: false, date: "31/10/2026", time: "14:30", location: PAV.ribeiraGrande, competition: ENCONTROS_MINI },
+  { id: "mini-4", category: "formacao", escalao: "Mini Hóquei", encontro: 4, isHome: true, date: "16/01/2027", time: "14:30", location: PAVILHAO_PDL, competition: ENCONTROS_MINI },
+  { id: "mini-5", category: "formacao", escalao: "Mini Hóquei", encontro: 5, isHome: false, date: "06/02/2027", time: "14:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: ENCONTROS_MINI },
+  { id: "mini-6", category: "formacao", escalao: "Mini Hóquei", encontro: 6, isHome: false, date: "13/03/2027", time: "14:30", location: PAV.ribeiraGrande, competition: ENCONTROS_MINI },
+  { id: "mini-7", category: "formacao", escalao: "Mini Hóquei", encontro: 7, isHome: true, date: "17/04/2027", time: "14:30", location: PAVILHAO_PDL, competition: ENCONTROS_MINI },
+  { id: "mini-8", category: "formacao", escalao: "Mini Hóquei", encontro: 8, isHome: false, date: "08/05/2027", time: "14:30", location: PAVILHAO_CARLOS_SILVEIRA, competition: ENCONTROS_MINI },
+  { id: "mini-9", category: "formacao", escalao: "Mini Hóquei", encontro: 9, isHome: false, date: "20/06/2027", time: "09:30", location: PAV.ribeiraGrande, competition: ENCONTROS_MINI },
 ];
 
 export interface Comunicado {
@@ -399,12 +342,6 @@ export function getComunicado(slug: string): Comunicado | undefined {
 export function parseComunicadoDate(data: string): Date {
   const [day, month, year] = data.split('/').map(Number);
   return new Date(year, month - 1, day);
-}
-
-export function getRecentComunicados(count = 3): Comunicado[] {
-  return [...comunicados]
-    .sort((a, b) => parseComunicadoDate(b.data).getTime() - parseComunicadoDate(a.data).getTime())
-    .slice(0, count);
 }
 
 export const galleryImages = [

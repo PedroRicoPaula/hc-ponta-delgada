@@ -20,8 +20,8 @@ import { SponsorsSection } from '@/components/sections/SponsorsSection';
 import { ContactSection } from '@/components/sections/ContactSection';
 
 // Data
-import { senioresEvents, formacaoEvents, comunicados } from '@/data/siteData';
-import { generateEventsSchema, generateNewsSchema } from '@/lib/seo';
+import { games, comunicados } from '@/data/siteData';
+import { upcomingEventsSchema, generateNewsSchema } from '@/lib/seo';
 
 const RollerHockeyGame = lazy(() =>
   import('@/components/RollerHockeyGame').then((m) => ({ default: m.RollerHockeyGame })),
@@ -40,7 +40,7 @@ const Index = () => {
     }
   }, [location.hash]);
 
-  const eventsSchema = generateEventsSchema(senioresEvents, formacaoEvents);
+  const eventsSchema = upcomingEventsSchema(games);
   const newsSchema = generateNewsSchema(comunicados);
 
   const faqSchema = {

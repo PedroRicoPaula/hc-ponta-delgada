@@ -9,7 +9,6 @@ import { GameCard } from '@/components/GameCard';
 import {
   games,
   parseGameDateTime,
-  hasKnownTime,
   getMatchupNames,
   FORMACAO_ESCALOES,
   type Game,
@@ -17,13 +16,9 @@ import {
   type FormacaoEscalao,
 } from '@/data/siteData';
 import { isBroadcastWindow, senioresGames, formacaoGames, useNow } from '@/lib/games';
+import { gameEventSchema } from '@/lib/seo';
 import { LiveBroadcast } from '@/components/LiveBroadcast';
 import { cn } from '@/lib/utils';
-
-const toIsoDate = (date: string) => date.split('/').reverse().join('-');
-
-const toSchemaStartDate = (game: Game) =>
-  hasKnownTime(game) ? `${toIsoDate(game.date)}T${game.time}` : toIsoDate(game.date);
 
 function SwitchRow<T extends string>({
   options,
@@ -86,39 +81,7 @@ export default function Calendario() {
         <meta property="og:description" content="Calendário de jogos do Hóquei Clube PDL — seniores, formação, transmissões ao vivo e resultados." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://hoqueiclubepdl.com/calendario/" />
-        <script type="application/ld+json">{JSON.stringify(
-          schemaGames.map(game => ({
-            "@context": "https://schema.org",
-            "@type": "SportsEvent",
-            "name": `${getMatchupNames(game).home} vs ${getMatchupNames(game).away}`,
-            "startDate": toSchemaStartDate(game),
-            "eventStatus": "https://schema.org/EventScheduled",
-            "location": {
-              "@type": "Place",
-              "name": game.location,
-              "address": game.location === 'Pavilhão Sidónio Serpa'
-                ? { "@type": "PostalAddress", "streetAddress": "Rua do Mercado, 31", "addressLocality": "Ponta Delgada", "postalCode": "9500-326", "addressRegion": "Açores", "addressCountry": "PT" }
-                : game.location === 'Pavilhão Municipal Carlos Silveira'
-                ? { "@type": "PostalAddress", "addressLocality": "Ponta Delgada", "addressRegion": "Açores", "addressCountry": "PT" }
-                : { "@type": "PostalAddress", "addressCountry": "PT" }
-            },
-            "homeTeam": {
-              "@type": "SportsTeam",
-              "name": game.isHome ? "Hóquei Clube PDL" : game.opponent,
-              ...(game.isHome ? { "url": "https://hoqueiclubepdl.com/" } : {})
-            },
-            "awayTeam": {
-              "@type": "SportsTeam",
-              "name": game.isHome ? game.opponent : "Hóquei Clube PDL",
-              ...(!game.isHome ? { "url": "https://hoqueiclubepdl.com/" } : {})
-            },
-            "sport": "Hóquei em Patins",
-            "description": `${game.competition}. Jogo em ${game.location}.`,
-            "organizer": { "@type": "Organization", "name": game.competition.includes('Campeonato Nacional') ? "Federação de Patinagem de Portugal" : "Hóquei Clube PDL" },
-            ...(game.result ? { "result": `${getMatchupNames(game).home} ${game.result.home} - ${game.result.away} ${getMatchupNames(game).away}` } : {}),
-            ...(game.youtubeUrl ? { "recordedIn": { "@type": "VideoObject", "name": `${getMatchupNames(game).home} vs ${getMatchupNames(game).away} — Ao Vivo`, "url": game.youtubeUrl } } : {})
-          }))
-        )}</script>
+        <script type="application/ld+json">{JSON.stringify(schemaGames.map(gameEventSchema))}</script>
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",

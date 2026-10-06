@@ -92,11 +92,13 @@ Para adicionar comunicado: acrescentar entrada com `slug` único em `siteData.ts
 
 ## Calendário (`/calendario` → `src/pages/Calendario.tsx`)
 
-Grelha com todos os jogos da equipa sénior. Dados: `games[]` em `src/data/siteData.ts` (interface `Game`, helper `parseGameDateTime()`) — calendário oficial da FPP para 2026/27, 26 jornadas com o campo `jornada`. Estado de cada jogo (`upcoming` / `countdown` / `live` / `ended`) calculado em `src/lib/games.ts` (`getGameStatus()`, `getNextGame()`, hook `useNow()` que actualiza a cada segundo).
+Grelha com os jogos de seniores e de formação (selector de equipa + escalão). Dados: `games[]` em `src/data/siteData.ts` (interface `Game`, helper `parseGameDateTime()`) — calendário oficial da FPP para 2026/27, 26 jornadas com o campo `jornada`. Estado de cada jogo (`upcoming` / `countdown` / `live` / `ended`) calculado em `src/lib/games.ts` (`getGameStatus()`, `getNextGame()`, hook `useNow()` que actualiza a cada segundo).
 
 **Horas e pavilhões:** todos os jogos de 2026/27 têm `time` e recinto em `games[]`. Mostrar sempre com `formatGameTime()` (fallback `"Horário a definir"` se `time` faltar num jogo futuro), nunca ler `game.time` directamente na UI. `parseGameDateTime()` usa meia-noite só quando `time` está ausente — para ordenação estável; `getGameStatus()` trata esses casos à parte para o jogo não aparecer "em direto" às 00:00.
 
 **Ordem dos nomes:** usar sempre `getMatchupNames(game)` → `{ home, away }`, nunca escrever `"HC PDL"` à mão à esquerda. A equipa da casa fica à esquerda, por isso lê-se `HC PDL vs X` em casa e `X vs HC PDL` fora — o utilizador percebe o local sem depender do badge. Isto também mantém o placar alinhado: `result.home`/`result.away` referem-se às equipas reais, por isso com PDL fixo à esquerda um jogo fora mostrava o número do adversário debaixo do nome do PDL.
+
+**Mini Hóquei:** os encontros não são jogos — participam todos os clubes. Têm `encontro: 1..9` e nem `opponent` nem `result`: o `GameCard` mostra `N.º Encontro` no lugar do confronto e `Realizado` no lugar do placar, e o schema declara só o PDL como `competitor`. O badge Casa/Fora continua a vir do pavilhão (`playsAtHomePavilion()`).
 
 Jogos terminados (`ended`) ficam a cinzento/grayscale; mostram o resultado se `game.result` estiver preenchido, senão "Resultado brevemente" — resultados são sempre inseridos à mão em `siteData.ts`, não há cálculo automático. Só jogos em casa (`isHome: true`) têm `youtubeUrl`; jogos fora mostram o indicador "Ao Vivo" sem transmissão.
 
