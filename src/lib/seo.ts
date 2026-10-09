@@ -78,7 +78,7 @@ export const gameEventSchema = (game: Game) => ({
   }),
   "sport": "Hóquei em Patins",
   "description": `${game.competition}. Jogo em ${game.location}.`,
-  "organizer": { "@type": "Organization", "name": game.competition.includes('Campeonato Nacional') ? "Federação de Patinagem de Portugal" : "Hóquei Clube PDL" },
+  "organizer": { "@type": "Organization", "name": game.competition.includes('Campeonato Nacional') || game.competition.startsWith('Taça de Portugal') ? "Federação de Patinagem de Portugal" : "Hóquei Clube PDL" },
   ...(game.result ? { "result": `${getMatchupNames(game).home} ${game.result.home} - ${game.result.away} ${getMatchupNames(game).away}` } : {}),
   ...(game.youtubeUrl ? { "recordedIn": { "@type": "VideoObject", "name": `${getMatchupNames(game).home} vs ${getMatchupNames(game).away} — Ao Vivo`, "url": game.youtubeUrl } } : {})
 });

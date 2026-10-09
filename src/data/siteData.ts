@@ -147,6 +147,7 @@ const PAVILHAO_CARLOS_SILVEIRA = 'Pavilhão Municipal Carlos Silveira';
 
 const COMPETITION = "Campeonato Nacional da 3ª Divisão — Série Sul B";
 const TORNEIO_CIDADE_PDL = 'Torneio Cidade Ponta Delgada';
+const TACA_PORTUGAL = 'Taça de Portugal — Pré-eliminatória Sul';
 const TORNEIO_CIDADE_RG = 'Torneio Cidade da Ribeira Grande';
 const TORNEIO_ABERTURA_ESC = 'Torneio de Abertura Escolares';
 const TORNEIO_ABERTURA_SUB13 = 'Torneio de Abertura Sub 13';
@@ -188,7 +189,7 @@ const PAV = {
 // 26 jornadas, 13 em casa e 13 fora, 14 equipas na série (sem bye).
 // Pavilhões dos jogos fora: nomes curtos em `PAV` (ver comentário acima).
 export const games: Game[] = [
-  { id: "torneio-pdl-madeira", opponent: "HC Madeira", isHome: true, date: "09/10/2026", time: "21:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_CIDADE_PDL, youtubeUrl: YOUTUBE_LIVE_URL },
+  { id: "taca-portugal-madeira", opponent: "HC Madeira", isHome: true, date: "09/10/2026", time: "21:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TACA_PORTUGAL, youtubeUrl: YOUTUBE_LIVE_URL },
   { id: "torneio-pdl-candelaria", opponent: "Candelária SC", isHome: true, date: "10/10/2026", time: "11:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_CIDADE_PDL },
   { id: "torneio-pdl-estreito", opponent: "GD Estreito", isHome: false, date: "10/10/2026", time: "18:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_CIDADE_PDL },
   { id: "abertura-sen-caldeiras-fora", opponent: "Caldeiras HC", isHome: false, date: "19/10/2026", time: "20:30", location: PAV.ribeiraGrande, competition: TORNEIO_ABERTURA_SEN },
