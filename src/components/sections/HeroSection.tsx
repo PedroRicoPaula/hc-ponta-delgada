@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
-import { games, parseGameDateTime, formatGameTime, getMatchupNames } from '@/data/siteData';
+import { CLUB_TIME_ZONE, games, parseGameDateTime, formatGameTime, getMatchupNames } from '@/data/siteData';
 import { getNextGame, isMatchLive, senioresGames, useNow } from '@/lib/games';
 
 function NextGameCard() {
@@ -20,7 +20,7 @@ function NextGameCard() {
 
   const isLive = isMatchLive(nextGame, now);
   const start = parseGameDateTime(nextGame);
-  const date = start.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short' });
+  const date = start.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short', timeZone: CLUB_TIME_ZONE });
   const time = formatGameTime(nextGame);
   const matchup = getMatchupNames(nextGame);
 

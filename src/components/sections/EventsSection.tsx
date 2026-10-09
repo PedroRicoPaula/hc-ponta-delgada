@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { LiveBroadcast } from '@/components/LiveBroadcast';
 import { GameCard } from '@/components/GameCard';
-import { FORMACAO_ESCALOES, games, parseGameDateTime, formatGameTime, getMatchupNames, playsAtHomePavilion, isNationalChampionship, type FormacaoEscalao } from '@/data/siteData';
+import { CLUB_TIME_ZONE, FORMACAO_ESCALOES, games, parseGameDateTime, formatGameTime, getMatchupNames, playsAtHomePavilion, isNationalChampionship, type FormacaoEscalao } from '@/data/siteData';
 import { getNextGame, getGameStatus, isBroadcastWindow, isMatchLive, formatCountdown, senioresGames, formacaoGames, useNow } from '@/lib/games';
 
 function NextGameFeature() {
@@ -22,7 +22,7 @@ function NextGameFeature() {
   const canWatch = isBroadcastWindow(nextGame, now);
   const isLiveAway = live && !nextGame.youtubeUrl;
   const start = parseGameDateTime(nextGame);
-  const dateLabel = start.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long' });
+  const dateLabel = start.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', timeZone: CLUB_TIME_ZONE });
   const timeLabel = formatGameTime(nextGame);
   const matchup = getMatchupNames(nextGame);
 

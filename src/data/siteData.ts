@@ -72,6 +72,20 @@ export interface Game {
 const TIME_TBD_LABEL = 'Horário a definir';
 
 /**
+ * `date`/`time` dos jogos são hora dos Açores. Ler com `new Date(y, m, d, h, min)`
+ * dava a hora do browser: um adepto na Madeira/continente via a contagem e o
+ * player uma hora antes, e na diáspora (EUA/Canadá) o player nem aparecia durante
+ * o jogo. Labels de data com `toLocaleDateString` levam `timeZone: CLUB_TIME_ZONE`.
+ */
+export const CLUB_TIME_ZONE = 'Atlantic/Azores';
+
+const clubClock = new Intl.DateTimeFormat('en-US', {
+  timeZone: CLUB_TIME_ZONE,
+  hourCycle: 'h23',
+  year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',
+});
+
+/**
  * Sem hora marcada assume-se meia-noite, só para o jogo ter uma posição estável
  * na ordenação e no calendário. Não usar este valor para mostrar horas — ver
  * `formatGameTime()` — nem para decidir se um jogo está a decorrer, senão um
@@ -80,7 +94,11 @@ const TIME_TBD_LABEL = 'Horário a definir';
 export function parseGameDateTime(game: Pick<Game, 'date' | 'time'>): Date {
   const [day, month, year] = game.date.split('/').map(Number);
   const [hour, minute] = (game.time ?? '00:00').split(':').map(Number);
-  return new Date(year, month - 1, day, hour, minute);
+  const asUtc = Date.UTC(year, month - 1, day, hour, minute);
+  // Desvio dos Açores nesse instante (UTC-1 inverno, UTC+0 verão).
+  const p = Object.fromEntries(clubClock.formatToParts(asUtc).map(({ type, value }) => [type, Number(value)]));
+  const offset = Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute) - asUtc;
+  return new Date(asUtc - offset);
 }
 
 export function hasKnownTime(game: Pick<Game, 'time'>): boolean {
@@ -170,7 +188,7 @@ const PAV = {
 // 26 jornadas, 13 em casa e 13 fora, 14 equipas na série (sem bye).
 // Pavilhões dos jogos fora: nomes curtos em `PAV` (ver comentário acima).
 export const games: Game[] = [
-  { id: "torneio-pdl-madeira", opponent: "HC Madeira", isHome: true, date: "09/10/2026", time: "21:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_CIDADE_PDL },
+  { id: "torneio-pdl-madeira", opponent: "HC Madeira", isHome: true, date: "09/10/2026", time: "21:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_CIDADE_PDL, youtubeUrl: YOUTUBE_LIVE_URL },
   { id: "torneio-pdl-candelaria", opponent: "Candelária SC", isHome: true, date: "10/10/2026", time: "11:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_CIDADE_PDL },
   { id: "torneio-pdl-estreito", opponent: "GD Estreito", isHome: false, date: "10/10/2026", time: "18:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_CIDADE_PDL },
   { id: "abertura-sen-caldeiras-fora", opponent: "Caldeiras HC", isHome: false, date: "19/10/2026", time: "20:30", location: PAV.ribeiraGrande, competition: TORNEIO_ABERTURA_SEN },

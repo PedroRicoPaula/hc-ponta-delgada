@@ -20,9 +20,8 @@ export function getGameStatus(game: Game, now: Date): GameStatus {
   // contagem decrescente no dia anterior. Enquanto a FPP não marcar a hora, o
   // jogo fica 'upcoming' até ao fim do próprio dia e só depois 'ended'.
   if (!hasKnownTime(game)) {
-    const endOfDay = new Date(start);
-    endOfDay.setHours(23, 59, 59, 999);
-    return now > endOfDay ? 'ended' : 'upcoming';
+    const endOfDay = parseGameDateTime({ date: game.date, time: '23:59' }).getTime() + 59_999;
+    return now.getTime() > endOfDay ? 'ended' : 'upcoming';
   }
 
   if (now >= getGameEnd(game)) return 'ended';

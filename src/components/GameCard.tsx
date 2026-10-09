@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { parseGameDateTime, formatGameTime, getMatchupNames, playsAtHomePavilion, isNationalChampionship, type Game } from '@/data/siteData';
+import { CLUB_TIME_ZONE, parseGameDateTime, formatGameTime, getMatchupNames, playsAtHomePavilion, isNationalChampionship, type Game } from '@/data/siteData';
 import { getGameStatus, isBroadcastWindow, isMatchLive } from '@/lib/games';
 import { cn } from '@/lib/utils';
 
@@ -22,8 +22,8 @@ export function GameCard({
   const canWatch = isBroadcastWindow(game, now);
   const start = parseGameDateTime(game);
   const dateLabel = start.toLocaleDateString('pt-PT', compact
-    ? { day: 'numeric', month: 'short' }
-    : { day: 'numeric', month: 'short', year: 'numeric' });
+    ? { day: 'numeric', month: 'short', timeZone: CLUB_TIME_ZONE }
+    : { day: 'numeric', month: 'short', year: 'numeric', timeZone: CLUB_TIME_ZONE });
   const timeLabel = formatGameTime(game);
   const matchup = getMatchupNames(game);
   const atHome = playsAtHomePavilion(game);
