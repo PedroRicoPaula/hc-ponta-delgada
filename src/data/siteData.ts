@@ -192,6 +192,7 @@ export const games: Game[] = [
   { id: "taca-portugal-madeira", opponent: "HC Madeira", isHome: true, date: "09/10/2026", time: "21:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TACA_PORTUGAL, youtubeUrl: YOUTUBE_LIVE_URL, result: { home: 3, away: 4 } },
   { id: "torneio-pdl-candelaria", opponent: "Candelária SC", isHome: true, date: "10/10/2026", time: "11:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_CIDADE_PDL, result: { home: 1, away: 6 } },
   { id: "torneio-pdl-estreito", opponent: "GD Estreito", isHome: false, date: "10/10/2026", time: "18:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_CIDADE_PDL, result: { home: 8, away: 5 } },
+  { id: "torneio-pdl-estreito-2", opponent: "GD Estreito", isHome: false, date: "11/10/2026", time: "09:30", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_CIDADE_PDL, result: { home: 1, away: 3 } },
   { id: "abertura-sen-caldeiras-fora", opponent: "Caldeiras HC", isHome: false, date: "19/10/2026", time: "20:30", location: PAV.ribeiraGrande, competition: TORNEIO_ABERTURA_SEN },
   { id: "abertura-sen-caldeiras-casa", opponent: "Caldeiras HC", isHome: true, date: "16/11/2026", time: "20:30", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SEN, youtubeUrl: YOUTUBE_LIVE_URL },
   { id: "mf-sen-caldeiras-casa", opponent: "Caldeiras HC", isHome: true, date: "14/12/2026", time: "20:30", location: PAVILHAO_PDL, competition: TORNEIO_MANUEL_FRANCISCO, youtubeUrl: YOUTUBE_LIVE_URL },
