@@ -234,7 +234,7 @@ export const games: Game[] = [
   { id: "rg-u13-caldeiras-1", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: false, date: "26/09/2026", time: "10:00", location: PAV.ribeiraGrande, competition: TORNEIO_CIDADE_RG, result: { home: 2, away: 5 } },
   { id: "rg-u13-caldeiras-2", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: true, date: "26/09/2026", time: "17:00", location: PAV.ribeiraGrande, competition: TORNEIO_CIDADE_RG, result: { home: 1, away: 3 } },
 
-  { id: "esc-caldeiras-1", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: false, date: "04/10/2026", time: "10:00", location: PAV.ribeiraGrande, competition: TORNEIO_ABERTURA_ESC },
+  { id: "esc-caldeiras-1", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: false, date: "01/11/2026", time: "10:00", location: PAV.ribeiraGrande, competition: TORNEIO_ABERTURA_ESC },
   { id: "esc-caldeiras-2", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: true, date: "25/10/2026", time: "09:30", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_ESC },
   { id: "esc-caldeiras-3", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: false, date: "08/11/2026", time: "09:30", location: PAV.ribeiraGrande, competition: TORNEIO_ABERTURA_ESC },
   { id: "esc-caldeiras-4", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: true, date: "22/11/2026", time: "09:30", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_ESC },
