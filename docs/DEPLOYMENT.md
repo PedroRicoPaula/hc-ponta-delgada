@@ -16,6 +16,7 @@ npm run preview    # Preview do build estático em localhost
 
 `npm run build` corre `vite build` e depois `scripts/prerender.js`, que:
 - grava `dist/sitemap.xml` (rotas tiradas de `blogPosts[]`/`comunicados[]` + `STATIC_ROUTES` do script)
+- grava os calendários para subscrever `dist/calendario/{seniores,sub-17,sub-13,sub-11,mini-hoquei}.ics` (de `games[]`, via `src/lib/ics.ts`)
 - abre cada rota num Chromium real e grava o HTML final em `dist/<rota>/index.html` (SEO — ver `docs/ARCHITECTURE.md`)
 
 **Setup obrigatório** (local e Cloudflare Pages):

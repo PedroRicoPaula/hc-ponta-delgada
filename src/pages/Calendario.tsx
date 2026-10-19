@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Calendar } from 'lucide-react';
+import { Calendar, CalendarPlus } from 'lucide-react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { SocialIcons } from '@/components/SocialIcons';
@@ -17,6 +17,7 @@ import {
 } from '@/data/siteData';
 import { isBroadcastWindow, senioresGames, formacaoGames, useNow } from '@/lib/games';
 import { gameEventSchema } from '@/lib/seo';
+import { CALENDAR_FEEDS, feedPath } from '@/lib/ics';
 import { LiveBroadcast } from '@/components/LiveBroadcast';
 import { cn } from '@/lib/utils';
 
@@ -58,6 +59,42 @@ function SwitchRow<T extends string>({
   );
 }
 
+function SubscribeCalendar({ slug, label }: { slug: string; label: string }) {
+  // Em dev aponta para o próprio servidor (localhost ou IP da rede) para dar para
+  // testar no Mac/iPhone; no build fica sempre o domínio — o pré-render corre em
+  // localhost e gravava esse endereço no HTML.
+  const origin = import.meta.env.DEV ? window.location.origin : 'https://hoqueiclubepdl.com';
+  const webcal = `${origin}${feedPath(slug)}`.replace(/^https?:/, 'webcal:');
+
+  const btn =
+    'inline-flex items-center rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-2 text-xs font-semibold text-gray-700 dark:text-gray-200 hover:border-primary hover:text-gray-900 dark:hover:text-white transition-colors';
+
+  return (
+    <div className="mt-6 flex flex-col items-center gap-2">
+      <p className="flex items-center gap-1.5 text-sm font-semibold text-gray-700 dark:text-gray-300">
+        <CalendarPlus className="w-4 h-4 text-primary" aria-hidden />
+        Adicionar jogos de {label} ao calendário
+      </p>
+      <div className="flex flex-wrap justify-center gap-2">
+        <a
+          href={`https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={btn}
+        >
+          Google Calendar
+        </a>
+        <a href={webcal} className={btn}>
+          iPhone / Mac / Outlook
+        </a>
+      </div>
+      <p className="text-xs text-gray-400 dark:text-gray-500">
+        Subscrição única: mudanças de hora ou pavilhão aparecem sozinhas.
+      </p>
+    </div>
+  );
+}
+
 export default function Calendario() {
   const now = useNow(1000);
   const [category, setCategory] = useState<GameCategory>('seniores');
@@ -68,6 +105,7 @@ export default function Calendario() {
       ? senioresGames(games).sort((a, b) => parseGameDateTime(a).getTime() - parseGameDateTime(b).getTime())
       : formacaoGames(games, escalao).sort((a, b) => parseGameDateTime(a).getTime() - parseGameDateTime(b).getTime());
 
+  const feed = CALENDAR_FEEDS.find((f) => f.label === (category === 'seniores' ? 'Seniores' : escalao))!;
   const onAir = games.find((game) => isBroadcastWindow(game, now));
   const schemaGames = [...games].sort((a, b) => parseGameDateTime(a).getTime() - parseGameDateTime(b).getTime());
 
@@ -128,6 +166,7 @@ export default function Calendario() {
                 />
               )}
             </div>
+            <SubscribeCalendar slug={feed.slug} label={feed.label} />
           </motion.div>
 
           {onAir?.youtubeUrl && (

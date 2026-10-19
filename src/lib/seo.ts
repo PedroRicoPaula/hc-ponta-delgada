@@ -50,7 +50,8 @@ export const gameEventSchema = (game: Game) => ({
   "name": game.encontro
     ? `${game.encontro}.º Encontro de Mini Hóquei`
     : `${getMatchupNames(game).home} vs ${getMatchupNames(game).away}`,
-  "startDate": hasKnownTime(game) ? `${toIsoDate(game.date)}T${game.time}` : toIsoDate(game.date),
+  // Com fuso (UTC): "2026-10-24T18:00" sem offset era ambíguo para o Google.
+  "startDate": hasKnownTime(game) ? parseGameDateTime(game).toISOString() : toIsoDate(game.date),
   "eventStatus": "https://schema.org/EventScheduled",
   "location": {
     "@type": "Place",

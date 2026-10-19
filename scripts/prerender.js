@@ -3,7 +3,8 @@
 // correct per-page <title>/meta/canonical/content instead of the homepage's,
 // which is all a plain SPA can ever serve for /modalidade, /blog/:slug, etc.
 // Also generates dist/sitemap.xml from the same route list, so it can never
-// drift from the actual data (blogPosts[]/comunicados[]).
+// drift from the actual data (blogPosts[]/comunicados[]), and the subscribable
+// calendars dist/calendario/<escalão>.ics from games[] (src/lib/ics.ts).
 //
 // Route list comes straight from the site's own data files via Vite's
 // ssrLoadModule — no hand-maintained route array to fall out of sync.
@@ -33,16 +34,20 @@ const root = path.resolve(__dirname, '..');
 const SITE_URL = 'https://hoqueiclubepdl.com';
 const STATIC_ROUTES = ['/', '/blog', '/modalidade', '/patrocinadores', '/comunicados', '/calendario', '/merch', '/pagamentos'];
 
-async function getRoutes() {
+async function loadSiteData() {
   const vite = await createServer({ root, server: { middlewareMode: true }, appType: 'custom' });
   try {
     const { blogPosts } = await vite.ssrLoadModule('/src/data/blogData.ts');
     const { comunicados } = await vite.ssrLoadModule('/src/data/siteData.ts');
-    return [
-      ...STATIC_ROUTES,
-      ...blogPosts.map((p) => `/blog/${p.slug}`),
-      ...comunicados.map((c) => `/comunicados/${c.slug}`),
-    ];
+    const { CALENDAR_FEEDS, feedPath, renderFeed } = await vite.ssrLoadModule('/src/lib/ics.ts');
+    return {
+      routes: [
+        ...STATIC_ROUTES,
+        ...blogPosts.map((p) => `/blog/${p.slug}`),
+        ...comunicados.map((c) => `/comunicados/${c.slug}`),
+      ],
+      calendars: CALENDAR_FEEDS.map((f) => ({ file: feedPath(f.slug), body: renderFeed(f.slug) })),
+    };
   } finally {
     await vite.close();
   }
@@ -88,9 +93,15 @@ async function writeSitemap(routes) {
 }
 
 async function main() {
-  const routes = await getRoutes();
+  const { routes, calendars } = await loadSiteData();
   await writeSitemap(routes);
   console.log(`[prerender] sitemap.xml gerado com ${routes.length} rotas`);
+  for (const { file, body } of calendars) {
+    const out = path.join(root, 'dist', file);
+    await mkdir(path.dirname(out), { recursive: true });
+    await writeFile(out, body, 'utf-8');
+  }
+  console.log(`[prerender] ${calendars.length} calendários .ics: ${calendars.map((c) => c.file).join(', ')}`);
 
   let browser;
   try {
