@@ -18,6 +18,11 @@ Acima de ~1230px não há problema nenhum — por isso não se nota num portáti
 **Correcção de uma linha** (decisão de design por confirmar): travar a posição do card para nunca entrar na zona do botão —
 `left-[46%]` → `left-[min(46%,calc(100%-228px))]` (120px de meio-card + 92px do botão + 16px de folga). Mantém o aspecto actual acima de 1230px e desliza o card para a esquerda abaixo disso. Alternativas: esconder o botão nessas larguras, ou empilhar os nomes como faz a `EventsSection`.
 
+### [BUG-DATA-001] Hora dos jogos fora no continente — fuso por confirmar
+**Em aberto desde 2026-10-19, adiado pelo utilizador.** Todas as horas de `games[]` são lidas como hora dos Açores (`parseGameDateTime()` → `CLUB_TIME_ZONE`). As horas copiadas da FPP para jogos fora no continente (ex.: J2 em Boliqueime, 31/10 19:00) são, muito provavelmente, hora local do pavilhão — a FPP não indica o fuso. Se for o caso, nesses jogos a contagem, o badge "a decorrer" e os eventos dos calendários `.ics` subscritos ficam **1h atrasados** (19:00 continente = 18:00 Açores).
+
+**Correcção** (depois de confirmar): ler a hora no fuso do pavilhão — `Europe/Lisbon` para recintos fora dos Açores (`PAV.*` excepto `ribeiraGrande`) — em `parseGameDateTime()`; decidir se o cartão mostra só a hora da FPP ou também "(18:00 Açores)". Não mudar os `id` dos jogos (são o UID nos `.ics`).
+
 ---
 
 ## 🟡 Limpeza / Código Morto
