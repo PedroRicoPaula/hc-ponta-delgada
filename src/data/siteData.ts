@@ -240,7 +240,7 @@ export const games: Game[] = [
   { id: "esc-caldeiras-4", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: true, date: "22/11/2026", time: "09:30", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_ESC },
 
   { id: "ab-u13-1", category: "formacao", escalao: "Sub 13", opponent: "Marítimo SC", isHome: false, date: "18/10/2026", time: "09:30", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_ABERTURA_SUB13, result: { home: 5, away: 4 } },
-  { id: "ab-u13-2", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: true, date: "24/10/2026", time: "14:30", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB13 },
+  { id: "ab-u13-2", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: true, date: "24/10/2026", time: "18:00", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB13 },
 
   { id: "ab-u17-1", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "25/10/2026", time: "11:00", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB17 },
   { id: "ab-u17-2", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: false, date: "01/11/2026", time: "10:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_ABERTURA_SUB17 },
