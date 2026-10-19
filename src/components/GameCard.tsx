@@ -82,7 +82,8 @@ export function GameCard({
       </div>
       )}
 
-      {isEnded && game.encontro ? (
+      {/* Mini Hóquei e Sub 11 (escolares) não têm placar oficial. */}
+      {isEnded && (game.encontro || game.escalao === 'Sub 11') ? (
         <div className="text-center py-2 mb-3 bg-gray-200/60 dark:bg-gray-800 rounded-lg">
           <span className="font-heading font-black text-sm text-gray-700 dark:text-gray-300 uppercase tracking-widest">
             Realizado
