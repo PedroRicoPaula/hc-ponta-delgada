@@ -76,7 +76,8 @@ Transições automáticas via selector `*` — exclui `transform` e `opacity` (f
 
 Exporta:
 - `players: Player[]` — plantel completo com stats, foto, posição
-- `games: Game[]` — seniores **e** formação (`category`/`escalao`): data/hora, casa ou fora, YouTube, `result`; estado ao vivo calculado em `src/lib/games.ts`. O `result` é sempre `{ home, away }` pelas equipas reais, não pela perspectiva do PDL — ver `getMatchupNames()`. Excepção: os encontros de Mini Hóquei têm `encontro: 1..9` e **não** têm `opponent` nem `result` (jogam todos os clubes) — o `GameCard` mostra "N.º Encontro" no lugar do confronto e "Realizado" no lugar do placar, e o schema do `/calendario` declara só o PDL como `competitor`
+- `games: Game[]` — seniores **e** formação (`category`/`escalao`): data/hora, casa ou fora, YouTube, `result`; estado ao vivo calculado em `src/lib/games.ts`. O `result` é sempre `{ home, away }` pelas equipas reais, não pela perspectiva do PDL — ver `getMatchupNames()`. Excepção: os encontros de Mini Hóquei têm `encontro: 1..9` e **não** têm `opponent` nem `result` (jogam todos os clubes) — o `GameCard` mostra "N.º Encontro" no lugar do confronto e "Realizado" no lugar do placar, e o schema do `/calendario` declara só o PDL como `competitor`. Sub 11 (escolares) também não leva `result` — sem placar oficial, o `GameCard` mostra "Realizado"
+- `CLUB_TIME_ZONE` (`'Atlantic/Azores'`) + `parseGameDateTime()` — `date`/`time` dos jogos são hora dos Açores; `parseGameDateTime()` devolve o instante real nesse fuso (via `Intl`, com hora de verão), independente do fuso do browser. Toda a lógica de estado (`src/lib/games.ts`), ordenação e schema passa por aqui; labels de data usam `toLocaleDateString(..., { timeZone: CLUB_TIME_ZONE })`
 - `trainingSchedules: TrainingSchedule[]` — horários por escalão
 - `galleryImages` — momentos da galeria (imagens + YouTube)
 - `sponsors` — logos e nomes dos patrocinadores
