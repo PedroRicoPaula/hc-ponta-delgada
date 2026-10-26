@@ -18,6 +18,15 @@ Acima de ~1230px não há problema nenhum — por isso não se nota num portáti
 **Correcção de uma linha** (decisão de design por confirmar): travar a posição do card para nunca entrar na zona do botão —
 `left-[46%]` → `left-[min(46%,calc(100%-228px))]` (120px de meio-card + 92px do botão + 16px de folga). Mantém o aspecto actual acima de 1230px e desliza o card para a esquerda abaixo disso. Alternativas: esconder o botão nessas larguras, ou empilhar os nomes como faz a `EventsSection`.
 
+### [BUG-CAL-001] Botão "Google Calendar" do /calendario não funciona para os pais
+**Reportado 2026-10-26** (vários pais, telemóvel e PC); iPhone/Mac (`webcal://`) funcionam.
+- **Telemóvel: limitação do Google, sem correcção possível no site** — "Não pode subscrever um calendário na app Calendário Google para Android, iPhone ou iPad" ([ajuda Google](https://support.google.com/calendar/answer/37100)). Só no computador; depois sincroniza para o telemóvel.
+- **PC: suspeita no formato do link** — o botão usa `render?cid=` + `encodeURIComponent(webcal://…)`; o formato que se vê a funcionar noutros sites é o URL **não** codificado (`cid=webcal://hoqueiclubepdl.com/calendario/<escalão>.ics`). Por confirmar em produção (o Google não chega a localhost).
+- Contorno que funciona sempre: Google Calendar no PC → "Outros calendários" → + → "A partir de URL" → `https://hoqueiclubepdl.com/calendario/<escalão>.ics`. O Google demora horas a ir buscar o feed na primeira vez.
+
+### [BUG-DNS-001] `www.hoqueiclubepdl.com` não resolve
+**Encontrado 2026-10-26.** Não há registo DNS para `www` (só o domínio raiz) — quem escreve o endereço com "www" recebe "site não encontrado". Corrigir no painel Cloudflare: registo `www` (CNAME para `hoqueiclubepdl.com`, proxied) + Redirect Rule 301 `www` → raiz. Relacionado (não confirmado): uma mãe reportou que na rede do governo o site não abre — provável filtro web a bloquear domínio sem categoria (registado 2025-09); falta a página de bloqueio para saber o fabricante e pedir categorização "Desporto".
+
 ### [BUG-DATA-001] Hora dos jogos fora no continente — fuso por confirmar
 **Em aberto desde 2026-10-19, adiado pelo utilizador.** Todas as horas de `games[]` são lidas como hora dos Açores (`parseGameDateTime()` → `CLUB_TIME_ZONE`). As horas copiadas da FPP para jogos fora no continente (ex.: J2 em Boliqueime, 31/10 19:00) são, muito provavelmente, hora local do pavilhão — a FPP não indica o fuso. Se for o caso, nesses jogos a contagem, o badge "a decorrer" e os eventos dos calendários `.ics` subscritos ficam **1h atrasados** (19:00 continente = 18:00 Açores).
 
