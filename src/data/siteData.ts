@@ -201,7 +201,7 @@ export const games: Game[] = [
   { id: "csm-sen-caldeiras-casa", opponent: "Caldeiras HC", isHome: true, date: "22/02/2027", time: "20:30", location: PAVILHAO_PDL, competition: CAMPEONATO_SAO_MIGUEL, youtubeUrl: YOUTUBE_LIVE_URL },
   { id: "taca-sen-caldeiras-casa", opponent: "Caldeiras HC", isHome: true, date: "22/03/2027", time: "20:30", location: PAVILHAO_PDL, competition: TACA_APSM, youtubeUrl: YOUTUBE_LIVE_URL },
   { id: "taca-sen-caldeiras-fora", opponent: "Caldeiras HC", isHome: false, date: "26/04/2027", time: "20:30", location: PAV.ribeiraGrande, competition: TACA_APSM },
-  { id: "jornada-1", jornada: 1, opponent: "HC Vasco da Gama/J.Ascenção", isHome: true, date: "24/10/2026", time: "15:00", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
+  { id: "jornada-1", jornada: 1, opponent: "HC Vasco da Gama/J.Ascenção", isHome: true, date: "24/10/2026", time: "15:00", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL, result: { home: 5, away: 4 } },
   { id: "jornada-2", jornada: 2, opponent: "CD Boliqueime", isHome: false, date: "31/10/2026", time: "19:00", location: PAV.boliqueime, competition: COMPETITION },
   { id: "jornada-3", jornada: 3, opponent: "HC Sintra / Planta Livre", isHome: true, date: "07/11/2026", time: "16:00", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
   { id: "jornada-4", jornada: 4, opponent: "AE Física D \"B\"", isHome: false, date: "14/11/2026", time: "15:00", location: PAV.aeFisica, competition: COMPETITION },
@@ -240,9 +240,9 @@ export const games: Game[] = [
   { id: "esc-caldeiras-4", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: true, date: "22/11/2026", time: "09:30", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_ESC },
 
   { id: "ab-u13-1", category: "formacao", escalao: "Sub 13", opponent: "Marítimo SC", isHome: false, date: "18/10/2026", time: "09:30", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_ABERTURA_SUB13, result: { home: 5, away: 4 } },
-  { id: "ab-u13-2", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: true, date: "24/10/2026", time: "18:00", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB13 },
+  { id: "ab-u13-2", category: "formacao", escalao: "Sub 13", opponent: "Caldeiras HC", isHome: true, date: "24/10/2026", time: "18:00", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB13, result: { home: 4, away: 4 } },
 
-  { id: "ab-u17-1", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "25/10/2026", time: "11:00", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB17 },
+  { id: "ab-u17-1", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "25/10/2026", time: "11:00", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB17, result: { home: 3, away: 3 } },
   { id: "ab-u17-2", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: false, date: "01/11/2026", time: "10:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_ABERTURA_SUB17 },
   { id: "ab-u17-3", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "22/11/2026", time: "11:00", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB17 },
 
