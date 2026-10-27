@@ -76,11 +76,13 @@ function SubscribeCalendar({ slug, label }: { slug: string; label: string }) {
         Adicionar jogos de {label} ao calendário
       </p>
       <div className="flex flex-wrap justify-center gap-2">
+        {/* A app do Google Calendar não deixa subscrever por URL — só no computador.
+            cid com o webcal:// tal e qual, como noutros sites que funcionam (BUG-CAL-001). */}
         <a
-          href={`https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal)}`}
+          href={`https://calendar.google.com/calendar/render?cid=${webcal}`}
           target="_blank"
           rel="noopener noreferrer"
-          className={btn}
+          className={cn(btn, 'hidden md:inline-flex')}
         >
           Google Calendar
         </a>
@@ -90,6 +92,9 @@ function SubscribeCalendar({ slug, label }: { slug: string; label: string }) {
       </div>
       <p className="text-xs text-gray-400 dark:text-gray-500">
         Subscrição única: mudanças de hora ou pavilhão aparecem sozinhas.
+      </p>
+      <p className="md:hidden max-w-xs text-xs text-gray-400 dark:text-gray-500">
+        Android / Google Calendar: subscreva uma vez no computador. Depois os jogos aparecem também no telemóvel.
       </p>
     </div>
   );

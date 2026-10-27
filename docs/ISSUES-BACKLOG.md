@@ -22,6 +22,7 @@ Acima de ~1230px não há problema nenhum — por isso não se nota num portáti
 **Reportado 2026-10-26** (vários pais, telemóvel e PC); iPhone/Mac (`webcal://`) funcionam.
 - **Telemóvel: limitação do Google, sem correcção possível no site** — "Não pode subscrever um calendário na app Calendário Google para Android, iPhone ou iPad" ([ajuda Google](https://support.google.com/calendar/answer/37100)). Só no computador; depois sincroniza para o telemóvel.
 - **PC: suspeita no formato do link** — o botão usa `render?cid=` + `encodeURIComponent(webcal://…)`; o formato que se vê a funcionar noutros sites é o URL **não** codificado (`cid=webcal://hoqueiclubepdl.com/calendario/<escalão>.ics`). Por confirmar em produção (o Google não chega a localhost).
+- **2026-10-27:** link passou a `cid=webcal://…` não codificado e o botão do Google ficou escondido abaixo de `md` (nota para Android subscrever no PC). Falta um pai confirmar que no PC já funciona — se sim, mover para ✅ Resolvido.
 - Contorno que funciona sempre: Google Calendar no PC → "Outros calendários" → + → "A partir de URL" → `https://hoqueiclubepdl.com/calendario/<escalão>.ics`. O Google demora horas a ir buscar o feed na primeira vez.
 
 ### [BUG-DNS-001] `www.hoqueiclubepdl.com` não resolve
