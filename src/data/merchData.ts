@@ -34,20 +34,6 @@ export const merchProducts: MerchProduct[] = [
     priceNonMember: 27,
   },
   {
-    id: 'equipamento-jogo',
-    name: 'Equipamento de jogo',
-    image: '/uploads/merch/jerseyplayer.jpeg',
-    sizes: 'apparel',
-    variants: ['Jogador', 'Guarda-redes'],
-    variantImages: {
-      Jogador: '/uploads/merch/jerseyplayer.jpeg',
-      'Guarda-redes': '/uploads/merch/jerseygk.jpeg',
-    },
-    note: 'Camisolas reversíveis e calções pretos. Jogador: principal branca. Guarda-redes: principal roxa.',
-    priceMember: 45,
-    priceNonMember: 49,
-  },
-  {
     id: 't-shirt-15-anos',
     name: 'Camisola 15 anos',
     image: '/uploads/merch/t-shirt15anos.jpeg',
