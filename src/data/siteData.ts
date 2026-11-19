@@ -244,7 +244,7 @@ export const games: Game[] = [
 
   { id: "ab-u17-1", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "25/10/2026", time: "11:00", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB17, result: { home: 3, away: 3 } },
   { id: "ab-u17-2", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: false, date: "01/11/2026", time: "10:00", location: PAVILHAO_CARLOS_SILVEIRA, competition: TORNEIO_ABERTURA_SUB17, result: { home: 4, away: 1 } },
-  { id: "ab-u17-3", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "28/11/2026", time: "10:00", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB17 },
+  { id: "ab-u17-3", category: "formacao", escalao: "Sub 17", opponent: "Marítimo SC", isHome: true, date: "28/11/2026", time: "14:30", location: PAVILHAO_PDL, competition: TORNEIO_ABERTURA_SUB17 },
 
   { id: "mf-u11-1", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: true, date: "06/12/2026", time: "10:00", location: PAVILHAO_PDL, competition: TORNEIO_MANUEL_FRANCISCO },
   { id: "mf-u11-2", category: "formacao", escalao: "Sub 11", opponent: "Caldeiras HC", isHome: false, date: "10/01/2027", time: "10:00", location: PAV.ribeiraGrande, competition: TORNEIO_MANUEL_FRANCISCO },
