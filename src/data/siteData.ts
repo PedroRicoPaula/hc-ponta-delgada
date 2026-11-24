@@ -205,7 +205,7 @@ export const games: Game[] = [
   { id: "jornada-2", jornada: 2, opponent: "CD Boliqueime", isHome: false, date: "31/10/2026", time: "19:00", location: PAV.boliqueime, competition: COMPETITION, result: { home: 3, away: 3 } },
   { id: "jornada-3", jornada: 3, opponent: "HC Sintra / Planta Livre", isHome: true, date: "07/11/2026", time: "16:00", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL, result: { home: 4, away: 5 } },
   { id: "jornada-4", jornada: 4, opponent: "AE Física D \"B\"", isHome: false, date: "14/11/2026", time: "15:00", location: PAV.aeFisica, competition: COMPETITION, result: { home: 5, away: 7 } },
-  { id: "jornada-5", jornada: 5, opponent: "CD Paço de Arcos \"B\"", isHome: false, date: "22/11/2026", time: "16:00", location: PAV.pacoArcos, competition: COMPETITION },
+  { id: "jornada-5", jornada: 5, opponent: "CD Paço de Arcos \"B\"", isHome: false, date: "22/11/2026", time: "16:00", location: PAV.pacoArcos, competition: COMPETITION, result: { home: 7, away: 1 } },
   { id: "jornada-6", jornada: 6, opponent: "A Stuart HC Massamá", isHome: true, date: "05/12/2026", time: "15:00", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
   { id: "jornada-7", jornada: 7, opponent: "GD Sesimbra", isHome: false, date: "08/12/2026", time: "16:00", location: PAV.sesimbra, competition: COMPETITION },
   { id: "jornada-8", jornada: 8, opponent: "GDS Cascais", isHome: true, date: "12/12/2026", time: "16:00", location: PAVILHAO_PDL, competition: COMPETITION, youtubeUrl: YOUTUBE_LIVE_URL },
